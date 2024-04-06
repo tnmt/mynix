@@ -99,6 +99,9 @@
       tig
       obsidian
       vscode
+      docker
+      docker-compose
+      kubectl
     ];
   };
 
