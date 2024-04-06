@@ -98,6 +98,7 @@
       ruby_3_2
       tig
       obsidian
+      vscode
     ];
   };
 
