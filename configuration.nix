@@ -102,6 +102,10 @@
       docker-compose
       kubectl
       neofetch
+
+      # can comment?
+      discord
+      slack
     ];
   };
 
