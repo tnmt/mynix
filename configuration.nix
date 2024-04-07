@@ -82,7 +82,7 @@
   users.users.tnmt = {
     isNormalUser = true;
     description = "Shinya Tsunematsu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
       firefox
@@ -99,7 +99,6 @@
       tig
       obsidian
       vscode
-      docker
       docker-compose
       kubectl
       neofetch
@@ -119,9 +118,10 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-     zlib
-     gnumake
-     gcc
+    zlib
+    gnumake
+    gcc
+    docker
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -176,7 +176,7 @@
     enabled = "fcitx5";
     fcitx5.addons = [pkgs.fcitx5-mozc];
   };
-  
+
   fonts = {
     packages = with pkgs; [
       noto-fonts-cjk-serif
@@ -200,4 +200,5 @@
     "electron-25.9.0"
   ];
 
+  virtualisation.docker.enable = true;
 }
