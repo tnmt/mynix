@@ -102,6 +102,7 @@
       docker
       docker-compose
       kubectl
+      neofetch
     ];
   };
 
