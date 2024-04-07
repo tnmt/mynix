@@ -85,27 +85,39 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
-      firefox
+      # cui
       ghq
       peco
       direnv
       tmux
+      tig
+
+      # browser
       brave
-      _1password-gui
+
+      # lang
       python311Packages.pip
       python311Packages.pynvim
       nodejs_20
       ruby_3_2
-      tig
-      obsidian
-      vscode
-      docker-compose
-      kubectl
-      neofetch
 
-      # can comment?
+      # dev
+      vscode
+
+      # essential
+      obsidian
+      _1password-gui
+
+      # chat
       discord
       slack
+
+      # misc
+      neofetch
+
+      # container & virtualisation
+      docker-compose
+      kubectl
     ];
   };
 
