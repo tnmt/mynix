@@ -11,7 +11,7 @@
 		'';
 
   nix.buildMachines = [ {
-	  hostName = "maple";
+	  hostName = "192.168.122.30";
 	  system = "x86_64-linux";
     protocol = "ssh-ng";
 	  # if the builder supports building for multiple architectures,
@@ -33,5 +33,7 @@ builders-use-substitutes = true
   nix.settings.trusted-substituters = [
     "ssh-ng://maple"
     "ssh://maple"
+    "ssh-ng://192.168.122.30"
+    "ssh://192.168.122.30"
   ];
 }
