@@ -25,7 +25,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/sunflower
-          nixos-hardware.nixosModules.microsoft-surface-go
+          #nixos-hardware.nixosModules.microsoft-surface-go
         ];
       };
     };
