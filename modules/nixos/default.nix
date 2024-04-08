@@ -218,7 +218,7 @@
   services.openssh = {
     enable = true;
     settings = {
-      passwordAuthentication = true;
+      PasswordAuthentication = true;
     };
   };
 
