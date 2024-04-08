@@ -91,6 +91,8 @@
       direnv
       tmux
       tig
+      fzf
+      bat
 
       # browser
       brave
