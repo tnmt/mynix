@@ -8,10 +8,11 @@
   networking.extraHosts =
 		''
 192.168.122.30 maple
+52.195.170.108 builder
 		'';
 
   nix.buildMachines = [ {
-	  hostName = "maple";
+	  hostName = "builder";
 	  system = "x86_64-linux";
     protocol = "ssh-ng";
 	  # if the builder supports building for multiple architectures,
@@ -29,10 +30,13 @@ builders-use-substitutes = true
 	'';
 	nix.settings.trusted-public-keys = [
     "maple:KVfcU0ZeAioZ8RD+lNMS4NAdOVZe5C4opaayPV3205s="
+		"builder:4eb0FC0PXCXRJUjKzeStqmIKP7W3Eke201vDVzyLswg=:"
 	];
   nix.settings.trusted-substituters = [
     "ssh-ng://maple"
     "ssh://maple"
+    "ssh-ng://builder"
+    "ssh://builder"
     "ssh-ng://192.168.122.30"
     "ssh://192.168.122.30"
   ];
