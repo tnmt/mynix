@@ -5,9 +5,13 @@
   ];
 
   networking.hostName = "sunflower";
+  networking.extraHosts =
+		''
+			192.168.122.30 maple
+		'';
 
   nix.buildMachines = [ {
-	  hostName = "192.168.122.30";
+	  hostName = "maple";
 	  system = "x86_64-linux";
     protocol = "ssh-ng";
 	  # if the builder supports building for multiple architectures,
@@ -23,8 +27,11 @@
 	nix.extraOptions = ''
 	  builders-use-substitutes = true
 	'';
+	nix.settings.trusted-public-keys = [
+    maple:KVfcU0ZeAioZ8RD+lNMS4NAdOVZe5C4opaayPV3205s=%
+	];
   nix.settings.trusted-substituters = [
-    "ssh-ng://192.168.122.30"
-    "ssh://192.168.122.30"
+    "ssh-ng://maple"
+    "ssh://maple"
   ];
 }
