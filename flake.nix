@@ -2,12 +2,17 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-  { nixpkgs,
-    nixos-hardware,
-    ...
+  { nixpkgs
+  , nixos-hardware
+  , home-manager
+  , ...
   }@inputs: {
     nixosConfigurations = {
       maple = nixpkgs.lib.nixosSystem {
