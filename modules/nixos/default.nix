@@ -217,7 +217,9 @@
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = true;
+    settings = {
+      passwordAuthentication = true;
+    };
   };
 
   services.xrdp.enable = true;
