@@ -19,12 +19,6 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/maple
-          home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.tnmt = import ./home/linux;
-            }
         ];
       };
       sunflower = nixpkgs.lib.nixosSystem {
