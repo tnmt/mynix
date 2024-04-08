@@ -7,7 +7,7 @@
   networking.hostName = "sunflower";
   networking.extraHosts =
 		''
-			192.168.122.30 maple
+192.168.122.30 maple
 		'';
 
 #  nix.buildMachines = [ {
@@ -28,7 +28,7 @@
 builders-use-substitutes = true
 	'';
 	nix.settings.trusted-public-keys = [
-    "maple:KVfcU0ZeAioZ8RD+lNMS4NAdOVZe5C4opaayPV3205s=%"
+    "maple:KVfcU0ZeAioZ8RD+lNMS4NAdOVZe5C4opaayPV3205s="
 	];
   nix.settings.trusted-substituters = [
     "ssh-ng://maple"
