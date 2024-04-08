@@ -90,6 +90,7 @@
       tig
       fzf
       bat
+      hub
 
       # browser
       brave
