@@ -23,7 +23,7 @@
 	nix.extraOptions = ''
 	  builders-use-substitutes = true
 	'';
-  nix.trustedBinaryCaches = [
+  nix.settings.trusted-substituters = [
     "ssh-ng://192.168.122.30"
     "ssh://192.168.122.30"
   ];
