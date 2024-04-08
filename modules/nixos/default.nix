@@ -94,6 +94,7 @@
 
       # browser
       brave
+      chromium
 
       # lang
       python311Packages.pip
