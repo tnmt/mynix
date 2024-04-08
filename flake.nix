@@ -6,10 +6,10 @@
   , ...
   }@inputs: {
     nixosConfigurations = {
-      myNixOS = nixpkgs.lib.nixosSystem {
+      maple = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./hosts/maple
         ];
       };
       sunflower = nixpkgs.lib.nixosSystem {
