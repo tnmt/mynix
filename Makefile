@@ -3,7 +3,7 @@ HOST := $(shell hostname)
 
 # Define the apply target
 apply:
-    # Use the HOST variable to execute the nixos-rebuild command
-    sudo nixos-rebuild switch --flake .#${HOST}
+	@echo "Running nixos-rebuild switch --flake .#${HOST}"
+	@sudo nixos-rebuild switch --flake .#${HOST}
 
 .PHONY: apply
