@@ -1,5 +1,5 @@
 {
-  inputs = { nixpkgs.url = "nixpkgs/nixos-23.11"; };
+  inputs = { nixpkgs.url = "nixpkgs/nixos-unstable"; };
 
   outputs = inputs: {
     nixosConfigurations = {
