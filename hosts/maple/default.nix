@@ -7,6 +7,7 @@
 
   nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
   nix.settings.trusted-users = [
+    "root"
     "nixremote"
   ];
 
