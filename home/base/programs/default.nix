@@ -29,6 +29,10 @@
     tmux
     wget
 
+    # container
+    docker
+    kubectl
+
     # C
     cmake
 
