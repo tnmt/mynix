@@ -3,8 +3,7 @@
 }: {
   programs.git = {
     enable = true;
-    userName = "tnmt";
-    userEmail = "s@tnmt.info";
+
     extraConfig = {
       push = {
         # remoteに同じbranch名でpushする
@@ -28,7 +27,25 @@
         helper = "cache --timeout=604800";
       };
 
+      rebase = {
+        autosquash = true;
+        autostash = true;
+        stat = true;
+      };
+
+      "includeIf \"/gitdir:~/ghq/github.com/\"" = { path = "~/.gitconfig.github"; };
     };
+
+    ignores = [
+      "*~"
+      "*.swp"
+      ".DS_Store"
+      ".direnv"
+      ".env"
+      ".envrc"
+      ".ruby-version"
+      ".go-version"
+    ];
 
     includes = [
       { path = "~/.gitconfig.default"; }
@@ -42,6 +59,8 @@
       up = "pull --rebase";
     };
 
+    userName = "tnmt";
+    userEmail = "s@tnmt.info";
   };
 
   programs.gitui = {
