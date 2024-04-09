@@ -4,11 +4,6 @@
     ./hardware-configuration.nix
   ];
 
-  networking.extraHosts =
-               ''
-192.168.122.30 maple
-               '';
-
   nix.buildMachines = [ {
     hostName = "maple";
     system = "x86_64-linux";
