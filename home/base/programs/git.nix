@@ -33,7 +33,7 @@
         stat = true;
       };
 
-      "includeIf \"/gitdir:~/ghq/github.com/\"" = { path = "~/.gitconfig.github"; };
+      "includeIf \"gitdir:~/ghq/github.com/\"" = { path = "~/.gitconfig.github"; };
     };
 
     ignores = [
@@ -58,9 +58,6 @@
       st = "status";
       up = "pull --rebase";
     };
-
-    userName = "tnmt";
-    userEmail = "s@tnmt.info";
   };
 
   programs.gitui = {
