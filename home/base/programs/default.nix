@@ -11,6 +11,17 @@
   };
 
   home.packages = with pkgs; [
+    # cui
+    bat
+    direnv
+    fzf
+    gh
+    ghq
+    hub
+    peco
+    tig
+    tmux
+
     # C
     cmake
 
@@ -28,9 +39,6 @@
 
     # SSH
     openssh # provide ssh ssh-agent ssh-keygen ssh-add scp ssh-keyscan
-
-    # Api client
-    gh # github cli
 
     # TLS
     openssl

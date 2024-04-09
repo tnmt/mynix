@@ -82,16 +82,6 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
-      # cui
-      ghq
-      peco
-      direnv
-      tmux
-      tig
-      fzf
-      bat
-      hub
-
       # browser
       brave
 
