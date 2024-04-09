@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./git.nix
+    ./ssh.nix
   ];
 
   programs = {
