@@ -11,6 +11,7 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    xremap-flake.url = "github:xremap/nix-flake/5f3c5668c11d004b2b0d5f6bafdbd70da431b9a0";
   };
 
   outputs =
