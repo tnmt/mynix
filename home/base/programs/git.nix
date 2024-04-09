@@ -5,6 +5,10 @@
     enable = true;
 
     extraConfig = {
+      core = {
+        editor = "nvim";
+      };
+
       push = {
         # remoteに同じbranch名でpushする
         # upstreamの設定を要求しない
