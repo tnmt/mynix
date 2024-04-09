@@ -18,14 +18,18 @@
     gh
     ghq
     hub
+    nkf
     peco
+    sshuttle
     tig
     tmux
+    wget
 
     # C
     cmake
 
     # Provisioning
+    tfenv
     terraform
     terraform-ls
     tflint
