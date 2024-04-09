@@ -13,6 +13,7 @@
       yank
       resurrect
       pain-control
+      onedark-theme
     ];
 
     extraConfig = ''
