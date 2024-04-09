@@ -1,6 +1,11 @@
 {
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs-darwin.url = "nixpkgs/nixpkgs-23.11-darwin";
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -10,6 +15,7 @@
 
   outputs =
   { nixpkgs
+  , darwin
   , nixos-hardware
   , home-manager
   , ...
@@ -38,6 +44,20 @@
               home-manager.useUserPackages = true;
               home-manager.users.tnmt = import ./home/linux;
             }
+        ];
+      };
+    };
+    darwinConfigurations = {
+      work = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          ./hosts/work
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.ymgyt = import ./home/darwin;
+          }
         ];
       };
     };
