@@ -14,6 +14,7 @@
 
     initExtra = ''
       . ${./zsh/zshrc}
+      . ${./zsh/p10k.zsh}
       '';
   };
 }
