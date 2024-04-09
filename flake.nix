@@ -31,6 +31,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/sunflower
+          nixos-hardware.nixosModules.microsoft-surface-go
           home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -48,6 +49,7 @@
     auto-optimise-store = true;
 
     eval-cache = true;
+    require-sigs = false;
 
     substituters = [ "https://cache.nixos.org/" ];
     extra-substituters = [ "https://nix-community.cachix.org" ];
