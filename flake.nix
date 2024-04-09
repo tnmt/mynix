@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = "nixpkgs/nixos-23.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -25,7 +25,6 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/sunflower
-          nixos-hardware.nixosModules.microsoft-surface-go
         ];
       };
     };
