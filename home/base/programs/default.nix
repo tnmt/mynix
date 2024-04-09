@@ -29,7 +29,6 @@
     cmake
 
     # Provisioning
-    tfenv
     terraform
     terraform-ls
     tflint
