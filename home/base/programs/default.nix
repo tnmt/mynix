@@ -3,6 +3,7 @@
     ./git.nix
     ./ssh.nix
     ./tmux.nix
+    ./neovim.nix
   ];
 
   programs = {
