@@ -60,6 +60,18 @@
           }
         ];
       };
+      goldmoon = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          ./hosts/goldmoon
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tnmt = import ./home/darwin;
+          }
+        ];
+      };
     };
   };
 
