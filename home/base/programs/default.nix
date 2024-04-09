@@ -4,6 +4,7 @@
     ./ssh.nix
     ./tmux.nix
     ./neovim.nix
+    ./zsh.nix
   ];
 
   programs = {

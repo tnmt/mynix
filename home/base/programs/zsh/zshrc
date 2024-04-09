@@ -1,0 +1,218 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+### End of Zinit's installer chunk
+
+zinit ice wait lucid
+zinit light zsh-users/zsh-completions # 補完
+zinit ice wait lucid
+zinit light zsh-users/zsh-autosuggestions # 補完
+zinit ice wait lucid
+zinit light zsh-users/zsh-syntax-highlighting
+zinit ice wait lucid
+zinit light chrissicool/zsh-256color
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
+zinit light agkozak/zsh-z
+zinit light zdharma-continuum/history-search-multi-word
+zinit light mollifier/anyframe
+zinit light Dbz/kube-aliases
+
+# Ctrl+x -> b
+# peco でディレクトリの移動履歴を表示
+bindkey '^xb' anyframe-widget-cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+# Ctrl+x -> r
+# peco でコマンドの実行履歴を表示
+bindkey '^xr' anyframe-widget-execute-history
+# Ctrl+x -> Ctrl+b
+# peco でGitブランチを表示して切替え
+bindkey '^x^b' anyframe-widget-checkout-git-branch
+# Ctrl+x -> g
+# GHQでクローンしたGitリポジトリを表示
+bindkey '^]' anyframe-widget-cd-ghq-repository
+
+# Emacs style key binding
+bindkey -e
+
+# プロンプトのカラー表示を有効
+autoload -U colors
+colors
+
+# 先頭に半角スペースを入れた場合はhistoryに記録しない
+setopt hist_ignore_space
+
+# 履歴ファイルに時刻を記録
+setopt extended_history
+
+# 履歴の共有
+setopt share_history
+
+# historyコマンドをhistoryに含めない
+setopt hist_no_store
+
+# 直前と同じコマンドをhistoryに保存しない
+setopt hist_ignore_dups
+
+# 複数の zsh を同時に使う時など history ファイルに上書きせず追加
+setopt append_history
+
+# コマンドが入力されるとすぐに追加
+setopt inc_append_history
+
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+# historyy で前表示
+function historyy { history -E 1 }
+
+# ベルを鳴らさない。
+setopt no_beep
+
+# rm * を実行する前に確認される。
+setopt rmstar_wait
+
+# バックグラウンドジョブが終了したらすぐに知らせる。
+setopt no_tify
+
+# ヒストリを呼び出してから実行する間に一旦編集可能
+setopt hist_verify
+
+# コマンドの実行直後に右プロンプトが消える
+setopt transient_rprompt
+
+# C-s, C-qを無効にする
+setopt no_flow_control
+
+# alias
+case "${OSTYPE}" in
+darwin*)
+    alias ls="ls -G -w -F"
+    ;;
+linux*|cygwin)
+    alias ls="ls -G -F --color=auto"
+    ;;
+esac
+
+alias mv='mv -i'
+alias info="info --vi-keys"
+alias g="git"
+alias be="bundle exec"
+alias td="mkdir -p ~/tmp/$(date '+%Y%m%d-%H%M') && cd ~/tmp/$(date '+%Y%m%d-%H%M')"
+alias rcd='cd $(ghq list -p | peco)'
+alias j=zshz
+alias vi=nvim
+alias vim=nvim
+
+export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
+export GOPATH=$HOME/.go
+export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$GOPATH/bin:$HOME/bin:$HOME/.local/bin:$HOME/work/bin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:$PATH
+arch=`uname -m`
+if [ "$arch" = "x86_64" ]; then
+    export PATH="/usr/local/bin/brew:$PATH"
+else
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+export MANPATH=$MANPATH
+export PAGER=less
+export LESS='-R -X'
+
+
+# completions
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
+# *brew
+## pyenv
+if [ -d $HOME/.pyenv ]
+then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
+## plenv
+if [ -d $HOME/.plenv ]
+then
+    export PATH="$HOME/.plenv/bin:$HOME/.plenv/shims:$PATH"
+    eval "$(plenv init -)"
+fi
+
+## rbenv
+if [ -d $HOME/.rbenv ]
+then
+    export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+    eval "$(rbenv init -)"
+    if [ -f $HOME/.rbenv/completions/rbenv.zsh ]
+    then
+        source $HOME/.rbenv/completions/rbenv.zsh
+    fi
+fi
+
+## nodebrew
+if [ -d $HOME/.nodebrew ]
+then
+    export PATH=$HOME/.nodebrew/current/bin:$PATH
+fi
+
+eval "$(direnv hook zsh)"
+
+## goenv
+if [ -d $HOME/.goenv ]
+then
+    export GOENV_ROOT=$HOME/.goenv
+    export PATH="$GOENV_ROOT/bin:$GOENV_ROOT/shims:$PATH"
+    eval "$(goenv init -)"
+fi
+
+# p10k
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+# To customize prompt, run `p10k configure` or edit ~/.zsh/.p10k.zsh.
+[[ ! -f ~/.zsh/.p10k.zsh ]] || source ~/.zsh/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[ -f ~/.iterm2_shell_integration.zsh ] && source ~/.iterm2_shell_integration.zsh
+
+# 1password cli
+[ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f ~/.src/google-cloud-sdk/path.zsh.inc ]; then . ~/.src/google-cloud-sdk/path.zsh.inc; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f ~/.src/google-cloud-sdk/completion.zsh.inc ]; then . ~/.src/google-cloud-sdk/completion.zsh.inc; fi
