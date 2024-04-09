@@ -69,7 +69,6 @@
     auto-optimise-store = true;
 
     eval-cache = true;
-    require-sigs = false;
 
     substituters = [ "https://cache.nixos.org/" ];
     extra-substituters = [ "https://nix-community.cachix.org" ];
