@@ -39,6 +39,7 @@
         modules = [
           ./hosts/sunflower
           nixos-hardware.nixosModules.microsoft-surface-go
+          inputs.xremap-flake.nixosModules.default
           home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

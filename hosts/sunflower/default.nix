@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ inputs, pkgs, config, ... }: {
   imports = [
     ../../modules/nixos
     ./hardware-configuration.nix
@@ -35,6 +35,22 @@ builders-use-substitutes = true
   ];
 
   nix.settings.require-sigs = false;
+
+  services.xremap = {
+    userName = "tnmt";
+    serviceMode = "user";
+    config = {
+       modmap = [
+         {
+           # CapsLock to Ctrl
+           name = "CapsLock is dead";
+           remap = {
+             CapsLock = "Ctrl_L";
+           };
+         }
+       ];
+    };
+  };
 
   networking.hostName = "sunflower";
 }
