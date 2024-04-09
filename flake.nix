@@ -56,7 +56,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ymgyt = import ./home/darwin;
+            home-manager.users.tnmt = import ./home/darwin;
           }
         ];
       };
