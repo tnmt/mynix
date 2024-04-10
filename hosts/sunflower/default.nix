@@ -29,6 +29,11 @@ builders-use-substitutes = true
     "ssh://maple"
   ];
 
+  nix.settings.trusted-users = [
+    "root"
+    "tnmt"
+  ];
+
   nix.settings.require-sigs = false;
 
   services.xremap = {
