@@ -15,9 +15,13 @@
   };
 
   home.packages = with pkgs; [
+    # nix
+    cachix
+
     # cui
     bat
     direnv
+    envchain
     fzf
     gh
     ghq
@@ -29,6 +33,9 @@
     tmux
     wget
 
+    # paas
+    heroku
+
     # container
     docker
     kubectl
@@ -36,10 +43,14 @@
     # C
     cmake
 
+    # ssg
+    hugo
+
     # Provisioning
     terraform
     terraform-ls
     tflint
+    ansible
 
     # Secret management
     vault
