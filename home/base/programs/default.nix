@@ -27,6 +27,7 @@
     hub
     nkf
     peco
+    platinum-searcher
     sshuttle
     tig
     tmux
