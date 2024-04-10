@@ -3,8 +3,9 @@
 }: {
   programs.tmux = {
     enable = true;
-    keyMode = "vi";
     shortcut = "t";
+    keyMode = "vi";
+    clock24 = true;
     historyLimit = 10000;
 
     plugins = with pkgs.tmuxPlugins; [
