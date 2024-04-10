@@ -21,7 +21,6 @@
     # cui
     bat
     direnv
-    envchain
     fzf
     gh
     ghq
