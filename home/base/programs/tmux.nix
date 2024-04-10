@@ -14,7 +14,12 @@
       yank
       resurrect
       pain-control
-      onedark-theme
+      {
+        plugin = onedark-theme;
+        extraConfig = ''
+          set -g @onedark_date_format "%Y/%m/%d"
+          '';
+      }
     ];
 
     extraConfig = ''
