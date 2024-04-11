@@ -33,6 +33,11 @@
     tmux
     wget
 
+    # lang
+    python311
+    nodejs_20
+    ruby_3_2
+
     # paas
     heroku
 

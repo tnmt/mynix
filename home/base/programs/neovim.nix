@@ -1,6 +1,10 @@
 { pkgs
 , ...
 }: {
+  home.packages = with pkgs; [
+    python311Packages.pynvim
+  ];
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;

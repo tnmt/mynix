@@ -85,12 +85,6 @@
       # browser
       brave
 
-      # lang
-      python311Packages.pip
-      python311Packages.pynvim
-      nodejs_20
-      ruby_3_2
-
       # dev
       vscode
 
