@@ -53,15 +53,6 @@ set termguicolors
 " airblade/vim-gitgutter
 set updatetime=100
 
-" coc
-let g:coc_global_extensions = [
-      \  'coc-json'
-      \, 'coc-go'
-      \, 'coc-jedi '
-      \, 'coc-solargraph'
-      \, 'coc-ultisnips'
-      \, ]
-
 " nathanaelkane/vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
 " joshdick/onedark.vim
