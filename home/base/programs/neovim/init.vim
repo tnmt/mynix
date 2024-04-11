@@ -53,8 +53,6 @@ set termguicolors
 " airblade/vim-gitgutter
 set updatetime=100
 
-let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
-
 " nathanaelkane/vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
 " joshdick/onedark.vim
