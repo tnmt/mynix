@@ -27,6 +27,7 @@
       vim-gitgutter
       vim-indent-guides
       vim-puppet
+      vim-rooter
       vimwiki
       {
         plugin = vimwiki;

@@ -19,7 +19,6 @@ set fileformats=unix,dos,mac
 
 call plug#begin()
 Plug 'SirVer/ultisnips'
-Plug 'airblade/vim-rooter'
 Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'github/copilot.vim'
