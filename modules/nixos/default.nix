@@ -122,6 +122,7 @@
     gnumake
     gcc
     docker
+    gnome3.gnome-tweaks
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
