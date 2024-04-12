@@ -18,8 +18,42 @@
     withPython3 = true;
 
     plugins = with pkgs.vimPlugins; [
-      lightline-vim
-      onedark-nvim
+      onedark-vim
+      vim-gitgutter
+      vim-commentary
+      vim-endwise
+      vim-fugitive
+      {
+        plugin = vim-polyglot;
+        config = ''
+          let g:polyglot_disabled = ['csv']
+          '';
+      }
+      {
+       plugin = lightline-vim;
+       config = ''
+         let g:lightline = {'colorscheme': 'onedark'}
+         let g:lightline.component_expand = {
+           \   'linter_checking': 'lightline#ale#checking',
+           \   'linter_warnings': 'lightline#ale#warnings',
+           \   'linter_errors': 'lightline#ale#errors',
+           \   'linter_ok': 'lightline#ale#ok',
+           \ }
+         let g:lightline.component_type = {
+           \   'linter_checking': 'left',
+           \   'linter_warnings': 'warning',
+           \   'linter_errors': 'error',
+           \   'linter_ok': 'left',
+           \ }
+         let g:lightline.active = {
+           \   'left': [
+           \     ['mode', 'paste'],
+           \     ['readonly', 'filename', 'modified'],
+           \     ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+           \   ]
+           \ }
+         '';
+      }
     ];
 
     coc.enable = true;
