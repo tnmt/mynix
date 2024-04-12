@@ -57,8 +57,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 " scrooloose/nerdtree
 nmap <C-e> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
-" junegunn/fzf.vim
-nmap <C-p> :History<CR>
 
 " neoclide/coc.nvim
 inoremap <silent><expr> <TAB>

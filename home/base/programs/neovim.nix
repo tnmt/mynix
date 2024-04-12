@@ -30,6 +30,12 @@
       vim-puppet
       vimwiki
       {
+        plugin = fzf-vim;
+        config = ''
+          nmap <C-p> :History<CR>
+          '';
+      }
+      {
         plugin = vim-polyglot;
         config = ''
           let g:polyglot_disabled = ['csv']
