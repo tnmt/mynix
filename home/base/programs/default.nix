@@ -38,6 +38,8 @@
     nodejs_20
     ruby_3_2
     rubyPackages_3_2.solargraph
+    go
+    gopls
 
     # paas
     heroku
