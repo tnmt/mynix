@@ -2,6 +2,7 @@
   imports = [
     ../../modules/nixos
     ./hardware-configuration.nix
+    ./lanzaboote.nix
   ];
 
   nix.buildMachines = [ {

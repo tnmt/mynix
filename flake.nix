@@ -12,6 +12,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     xremap-flake.url = "github:xremap/nix-flake";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.3.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -19,6 +23,7 @@
   , darwin
   , nixos-hardware
   , home-manager
+  , lanzaboote
   , ...
   }@inputs: {
     nixosConfigurations = {
@@ -41,6 +46,7 @@
           nixos-hardware.nixosModules.microsoft-surface-go
           inputs.xremap-flake.nixosModules.default
           home-manager.nixosModules.home-manager
+          lanzaboote.nixosModules.lanzaboote
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
