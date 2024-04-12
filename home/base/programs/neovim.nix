@@ -20,6 +20,7 @@
     plugins = with pkgs.vimPlugins; [
       auto-pairs
       fzf-vim
+      nerdtree-git-plugin
       onedark-vim
       vim-better-whitespace
       vim-commentary
