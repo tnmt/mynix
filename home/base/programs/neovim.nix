@@ -5,8 +5,6 @@
     python311Packages.pynvim
   ];
 
-
-
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -27,11 +25,70 @@
       vim-endwise
       vim-fugitive
       vim-gitgutter
+      vim-go
       vim-indent-guides
       vim-puppet
       vim-rooter
       vim-snippets
       vimwiki
+      {
+        plugin = coc-nvim;
+        config = ''
+          inoremap <silent><expr> <TAB>
+                \ pumvisible() ? "\<C-n>" :
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ coc#refresh()
+          inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+          function! s:check_back_space() abort
+            let col = col('.') - 1
+            return !col || getline('.')[col - 1]  =~# '\s'
+          endfunction
+
+          inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+          nmap <silent> gd <Plug>(coc-definition)
+          nmap <silent> gy <Plug>(coc-type-definition)
+          nmap <silent> gi <Plug>(coc-implementation)
+          nmap <silent> gr <Plug>(coc-references)
+          nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+          function! s:show_documentation()
+            if (index(['vim','help'], &filetype) >= 0)
+              execute 'h '.expand('<cword>')
+            else
+              call CocAction('doHover')
+            endif
+          endfunction
+          '';
+      }
+      {
+        plugin = copilot-vim;
+        config = ''
+          let g:copilot_filetypes = {
+                \ '*': v:false,
+                \ 'python': v:true,
+                \ 'go': v:true,
+                \ 'vim': v:true,
+                \ 'ruby': v:true,
+                \ }
+          '';
+      }
+      {
+        plugin = ale;
+        config = ''
+          let g:ale_set_highlights = 0
+          let g:ale_linters = {'python': ['flake8']}
+          let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+          let g:ale_fixers = {
+            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \   'python': ['black'],
+            \ }
+          " let g:ale_fix_on_save = 1
+          nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+          nmap <silent> <C-j> <Plug>(ale_next_wrap)
+          '';
+      }
       {
         plugin = nerdtree;
         config = ''
@@ -153,8 +210,26 @@
     };
 
     extraConfig = ''
-      source ${pkgs.vimPlugins.vim-plug}/plug.vim
-      source ${./neovim/init.vim}
+      syntax on
+      set t_Co=256
+      set autoindent
+      set backspace=indent,eol,start
+      set backup
+      set backupdir=~/.vimbackup
+      set clipboard+=unnamedplus
+      set history=10000
+      set hlsearch
+      set ignorecase
+      set smartcase
+      set incsearch
+      set ruler
+      set encoding=utf-8
+      set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
+      set fileformats=unix,dos,mac
+      set number
+      set termguicolors
+      set updatetime=100
+      au UIEnter * set guifont=MesloLGS\ NF:h16
       '';
   };
 }
