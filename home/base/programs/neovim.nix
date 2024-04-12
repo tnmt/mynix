@@ -29,6 +29,16 @@
       vim-puppet
       vimwiki
       {
+        plugin = vimwiki;
+        config = ''
+          let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/',
+                                \ 'syntax': 'markdown', 'ext': '.md'},
+                                \ {'path': '~/Dropbox/vimwiki/zettelkasten/',
+                                \ 'syntax': 'markdown', 'ext': '.md'}]
+          let g:vimwiki_global_ext = 0
+          '';
+      }
+      {
         plugin = vim-zettel;
         config = ''
           let g:zettel_format="%Y%m%d%H%M%S"
