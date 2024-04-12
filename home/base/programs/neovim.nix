@@ -3,6 +3,13 @@
 }: {
   home.packages = with pkgs; [
     python311Packages.pynvim
+    rubyPackages_3_2.solargraph
+
+    nodePackages.coc-solargraph
+    nodePackages.coc-go
+    nodePackages.coc-ultisnips
+    nodePackages.coc-json
+    nodePackages.coc-pyright
   ];
 
   programs.neovim = {
@@ -17,6 +24,8 @@
 
     plugins = with pkgs.vimPlugins; [
       auto-pairs
+      coc-pyright
+      coc-solargraph
       fzf-vim
       nerdtree-git-plugin
       onedark-vim
@@ -195,12 +204,12 @@
     coc.enable = true;
     coc.settings = {
       "diagnostic.enable" =  false;
-      "jedi" = {
-        "enable" = true;
-        "startupMessage" = true;
-        "hover.enable" = true;
-      };
       "languageserver" = {
+        "python" = {
+          "command" = "pyright";
+          "trace.server" = "verbose";
+          "filetypes" = ["py"];
+        };
         "golang" = {
           "command" = "gopls";
           "rootPatterns" =  ["go.mod" ".vim/" ".git/" ".hg/"];
