@@ -5,4 +5,6 @@
     home = "/Users/tsunematsu";
     shell = "zsh";
   };
+
+  nix.settings.trusted-users = [ "tsunematsu" ];
 }

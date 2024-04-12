@@ -5,4 +5,6 @@
     home = "/Users/tnmt";
     shell = "zsh";
   };
+
+  nix.settings.trusted-users = [ "tnmt" ];
 }
