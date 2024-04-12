@@ -28,9 +28,7 @@ Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'github/copilot.vim'
 Plug 'honza/vim-snippets'
-Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'joshdick/onedark.vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
@@ -55,29 +53,6 @@ set updatetime=100
 
 " nathanaelkane/vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
-" joshdick/onedark.vim
-colorscheme onedark
-" itchyny/lightline.vim
-let g:lightline = {'colorscheme': 'onedark'}
-let g:lightline.component_expand = {
-  \   'linter_checking': 'lightline#ale#checking',
-  \   'linter_warnings': 'lightline#ale#warnings',
-  \   'linter_errors': 'lightline#ale#errors',
-  \   'linter_ok': 'lightline#ale#ok',
-  \ }
-let g:lightline.component_type = {
-  \   'linter_checking': 'left',
-  \   'linter_warnings': 'warning',
-  \   'linter_errors': 'error',
-  \   'linter_ok': 'left',
-  \ }
-let g:lightline.active = {
-  \   'left': [
-  \     ['mode', 'paste'],
-  \     ['readonly', 'filename', 'modified'],
-  \     ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
-  \   ]
-  \ }
 " SirVer/ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-n>"

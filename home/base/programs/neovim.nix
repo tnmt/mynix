@@ -17,6 +17,11 @@
     withNodeJs = true;
     withPython3 = true;
 
+    plugins = with pkgs.vimPlugins; [
+      lightline-vim
+      onedark-nvim
+    ];
+
     coc.enable = true;
     coc.settings = {
       "diagnostic.enable" =  false;
