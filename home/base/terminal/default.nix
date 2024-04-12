@@ -1,6 +1,5 @@
-{ pkgs, ... }: {
-  programs.alacritty = {
-    enable = true;
-
-  };
+{ ... }: {
+  imports = [
+    ./alacritty
+  ];
 }
