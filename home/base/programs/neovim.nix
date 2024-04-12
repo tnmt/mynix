@@ -19,7 +19,6 @@
 
     plugins = with pkgs.vimPlugins; [
       fzf-vim
-      neoterm
       onedark-vim
       vim-better-whitespace
       vim-commentary
@@ -29,6 +28,17 @@
       vim-indent-guides
       vim-puppet
       vimwiki
+      {
+        plugin = neoterm;
+        config = ''
+          let g:neoterm_default_mod='belowright'
+          let g:neoterm_size=10
+          let g:neoterm_autoscroll=1
+          tnoremap <silent> <C-w> <C-\><C-n><C-w>
+          nnoremap <silent> <C-n> :TREPLSendLine<CR>j0
+          vnoremap <silent> <C-n> V:TREPLSendSelection<CR>'>j0
+          '';
+      }
       {
         plugin = fzf-vim;
         config = ''
