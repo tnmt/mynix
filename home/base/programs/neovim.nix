@@ -18,11 +18,17 @@
     withPython3 = true;
 
     plugins = with pkgs.vimPlugins; [
+      fzf-vim
+      neoterm
       onedark-vim
-      vim-gitgutter
+      vim-better-whitespace
       vim-commentary
       vim-endwise
       vim-fugitive
+      vim-gitgutter
+      vim-indent-guides
+      vim-puppet
+      vimwiki
       {
         plugin = vim-polyglot;
         config = ''
