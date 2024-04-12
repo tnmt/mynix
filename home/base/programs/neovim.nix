@@ -28,7 +28,16 @@
       vim-indent-guides
       vim-puppet
       vim-rooter
+      vim-snippets
       vimwiki
+      {
+        plugin = ultisnips;
+        config = ''
+          let g:UltiSnipsExpandTrigger="<tab>"
+          let g:UltiSnipsJumpForwardTrigger="<c-n>"
+          let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+          '';
+      }
       {
         plugin = vimwiki;
         config = ''

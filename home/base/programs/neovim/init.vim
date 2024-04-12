@@ -18,11 +18,9 @@ set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp
 set fileformats=unix,dos,mac
 
 call plug#begin()
-Plug 'SirVer/ultisnips'
 Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'github/copilot.vim'
-Plug 'honza/vim-snippets'
 Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -32,11 +30,6 @@ call plug#end()
 set number
 set termguicolors
 set updatetime=100
-
-" SirVer/ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
 " dense-analysis/ale
 let g:ale_set_highlights = 0
