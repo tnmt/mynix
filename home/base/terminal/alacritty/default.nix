@@ -18,6 +18,9 @@
           style = "Bold";
         };
       };
+      scrolling.history = 100000;
+      selection.save_to_clipboard = true;
+      mouse.hide_when_typing = true;
     };
   };
 }
