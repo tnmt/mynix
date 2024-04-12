@@ -180,10 +180,11 @@
 
   fonts = {
     packages = with pkgs; [
-      noto-fonts-cjk-serif
-      noto-fonts-cjk-sans
-      noto-fonts-emoji
+      meslo-lgs-nf
       nerdfonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-emoji
     ];
     fontDir.enable = true;
     fontconfig = {
