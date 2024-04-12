@@ -23,10 +23,16 @@ builders-use-substitutes = true
     '';
   nix.settings.trusted-public-keys = [
   "maple:KVfcU0ZeAioZ8RD+lNMS4NAdOVZe5C4opaayPV3205s="
+  "tnmt.cachix.org-1:TWp26nryyjLq7Xzyz7Hx81W7htBNcIMcbfHw+BrxtF8="
     ];
   nix.settings.trusted-substituters = [
     "ssh-ng://maple"
     "ssh://maple"
+  ];
+
+  nix.settings.substituters = [
+    "https://cache.nixos.org"
+    "https://tnmt.cachix.org"
   ];
 
   nix.settings.trusted-users = [
