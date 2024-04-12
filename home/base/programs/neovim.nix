@@ -3,13 +3,9 @@
 }: {
   home.packages = with pkgs; [
     python311Packages.pynvim
-
-    # coc
-    nodePackages.coc-go
-    nodePackages.coc-json
-    nodePackages.coc-solargraph
-    nodePackages.coc-ultisnips
   ];
+
+
 
   programs.neovim = {
     enable = true;
