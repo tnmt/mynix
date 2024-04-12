@@ -5,6 +5,15 @@
     ./lanzaboote.nix
   ];
 
+  microsoft-surface.surface-control.enable = true;
+
+  users.users.tnmt.extraGroups = [
+    "networkmanager"
+    "wheel"
+    "docker"
+    "surface-control"
+  ];
+
   nix.buildMachines = [ {
     hostName = "maple";
     system = "x86_64-linux";
