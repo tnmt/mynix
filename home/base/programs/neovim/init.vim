@@ -35,8 +35,6 @@ set number
 set termguicolors
 set updatetime=100
 
-" nathanaelkane/vim-indent-guides
-let g:indent_guides_enable_on_vim_startup = 1
 " SirVer/ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-n>"
