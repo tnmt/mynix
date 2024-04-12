@@ -21,9 +21,7 @@ call plug#begin()
 Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'github/copilot.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'xuyuanp/nerdtree-git-plugin', { 'on': 'NERDTreeToggle' }
 call plug#end()
 
@@ -42,10 +40,6 @@ let g:ale_fixers = {
 " let g:ale_fix_on_save = 1
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-
-" scrooloose/nerdtree
-nmap <C-e> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
 
 " neoclide/coc.nvim
 inoremap <silent><expr> <TAB>

@@ -18,6 +18,7 @@
     withPython3 = true;
 
     plugins = with pkgs.vimPlugins; [
+      auto-pairs
       fzf-vim
       onedark-vim
       vim-better-whitespace
@@ -30,6 +31,13 @@
       vim-rooter
       vim-snippets
       vimwiki
+      {
+        plugin = nerdtree;
+        config = ''
+          nmap <C-e> :NERDTreeToggle<CR>
+          let NERDTreeShowHidden=1
+          '';
+      }
       {
         plugin = ultisnips;
         config = ''
