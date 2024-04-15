@@ -15,8 +15,6 @@
 
   # Define packages supported in only linux
   home.packages = with pkgs; [
-    # gcc
-    gcc
   ];
 
   programs.home-manager.enable = true;
