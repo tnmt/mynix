@@ -2,7 +2,7 @@
 
   imports = [
     ../base
-    ../desktop
+    ../desktop/terminal
   ];
 
   home.stateVersion = "23.11";
