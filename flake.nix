@@ -65,12 +65,12 @@
 	    system.stateVersion = "23.11";
 	    wsl.enable = true;
 	  }
-          #home-manager.nixosModules.home-manager
-          #{
-          #  home-manager.useGlobalPkgs = true;
-          #  home-manager.useUserPackages = true;
-          #  home-manager.users.tnmt = import ./home/linux;
-          #}
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tnmt = import ./home/server;
+          }
         ];
       };
     };

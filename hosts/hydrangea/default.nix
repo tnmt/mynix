@@ -1,5 +1,7 @@
-{ ... }: {
+{ pkgs, ... }: {
   boot.loader.grub.enable = false;
+
+  programs.zsh.enable = true;
 
   fileSystems."/" =
     { device = "/dev/sdd";
@@ -9,8 +11,9 @@
   users.users.tnmt = {
     isNormalUser = true;
     home = "/home/tnmt";
-    #shell = "zsh";
+    shell = pkgs.zsh;
     group = "users";
+    extraGroups = ["wheel"];
   };
 
   nix.settings.trusted-users = [ "tnmt" ];

@@ -42,6 +42,9 @@
     gopls
     nil
 
+    # k8s
+    kubectl
+
     # Data format
     jq
     yamlfmt
