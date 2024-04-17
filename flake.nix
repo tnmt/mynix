@@ -16,6 +16,7 @@
       url = "github:nix-community/lanzaboote/v0.3.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";    
   };
 
   outputs =
@@ -24,6 +25,7 @@
   , nixos-hardware
   , home-manager
   , lanzaboote
+  , nixos-wsl
   , ...
   }@inputs: {
     nixosConfigurations = {
@@ -52,6 +54,23 @@
               home-manager.useUserPackages = true;
               home-manager.users.tnmt = import ./home/linux;
             }
+        ];
+      };
+      hydrangea = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          #./hosts/hydrangea
+	  nixos-wsl.nixosModules.default
+	  {
+	    system.stateVersion = "23.11";
+	    wsl.enable = true;
+	  }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tnmt = import ./home/linux;
+          }
         ];
       };
     };
