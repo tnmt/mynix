@@ -25,6 +25,7 @@
     tmux
     wget
     gnumake
+    rsync
 
     # lang
     python311
