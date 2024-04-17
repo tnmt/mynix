@@ -71,7 +71,9 @@
             home-manager.useUserPackages = true;
             home-manager.users.tnmt = import ./home/server;
           }
-      vps02= nixpkgs.lib.nixosSystem {
+        ];
+      };
+      vps02 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./hosts/vps02
