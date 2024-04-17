@@ -215,6 +215,20 @@
           "rootPatterns" =  ["go.mod" ".vim/" ".git/" ".hg/"];
           "filetypes" = ["go"];
         };
+        "nix" = {
+          "enableLanguageServer" = true;
+          "serverPath" = "nil";
+          "serverSettings" = {
+            "nil" = {
+              "diagnostics" = {
+                "ignored" = ["unused_binding" "unused_with"];
+              };
+              "formatting" = {
+                "command" = ["nixpkgs-fmt"];
+              };
+            };
+          };
+        };
       };
     };
 

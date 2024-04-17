@@ -40,6 +40,7 @@
     rubyPackages_3_2.solargraph
     go
     gopls
+    nil
 
     # paas
     heroku
