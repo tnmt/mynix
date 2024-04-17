@@ -5,7 +5,7 @@
 { pkgs, ... }:
 
 {
-  import = [ ../base ];
+  imports = [ ../base ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
