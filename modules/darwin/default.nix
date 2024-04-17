@@ -1,10 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ];
-
-  nixpkgs.config.allowUnfree = true;
-
-  # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true;
+  imports = [ ./base ];
 
   # enable required by nix-darwin
   # error: The daemon is not enabled but this is a multi-user install, aborting activation
@@ -22,6 +17,4 @@
       meslo-lgs-nf
     ];
   };
-
-  time.timeZone = "Asia/Tokyo";
 }

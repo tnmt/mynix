@@ -24,6 +24,7 @@
     tig
     tmux
     wget
+    gnumake
 
     # lang
     python311

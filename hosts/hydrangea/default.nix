@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  imports = [ ../../modules/base ];
+
   boot.loader.grub.enable = false;
 
   programs.zsh.enable = true;
@@ -17,4 +19,6 @@
   };
 
   nix.settings.trusted-users = [ "tnmt" ];
+
+  networking.hostName = "hydrangea";
 }
