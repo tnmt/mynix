@@ -33,7 +33,7 @@
       vim-commentary
       vim-endwise
       vim-fugitive
-      vim-gitgutter
+      #vim-gitgutter
       vim-go
       vim-indent-guides
       vim-puppet
