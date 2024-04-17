@@ -217,14 +217,18 @@
         };
         "nix" = {
           "enableLanguageServer" = true;
-          "serverPath" = "nil";
+          "serverPath" = "nixd";
           "serverSettings" = {
-            "nil" = {
-              "diagnostics" = {
-                "ignored" = ["unused_binding" "unused_with"];
-              };
+            "nixd" = {
               "formatting" = {
                 "command" = ["nixpkgs-fmt"];
+              };
+              "options" = {
+                "enable" = true;
+                "target" = {
+                  "args" = [];
+                  "installable" = "<flakeref>#nixosConfigurations.<name>.options";
+                };
               };
             };
           };

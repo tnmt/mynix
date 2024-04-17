@@ -33,7 +33,7 @@
     rubyPackages_3_2.solargraph
     go
     gopls
-    nil
+    nixd
 
     # k8s
     kubectl
