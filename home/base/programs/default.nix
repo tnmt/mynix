@@ -7,19 +7,11 @@
     ./zsh.nix
   ];
 
-  programs = {
-    bat = {
-      enable = true;
-      config = { theme = "Monokai Extended Origin"; };
-    };
-  };
-
   home.packages = with pkgs; [
     # nix
     cachix
 
     # cui
-    bat
     direnv
     fzf
     gh
