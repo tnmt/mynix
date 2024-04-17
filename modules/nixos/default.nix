@@ -81,26 +81,6 @@
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
-      # browser
-      brave
-
-      # dev
-      vscode
-
-      # essential
-      obsidian
-      _1password-gui
-
-      # chat
-      discord
-      slack
-
-      # misc
-      neofetch
-
-      # container & virtualisation
-      docker-compose
-      kubectl
     ];
   };
 
