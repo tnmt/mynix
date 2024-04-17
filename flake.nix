@@ -40,7 +40,7 @@ in {
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.tnmt = import ./home/linux;
+              home-manager.users.tnmt = import ./home/desktop;
             }
         ];
       };
@@ -55,7 +55,7 @@ in {
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.tnmt = import ./home/linux;
+              home-manager.users.tnmt = import ./home/desktop;
             }
         ];
       };
