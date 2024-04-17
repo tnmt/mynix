@@ -42,28 +42,6 @@
     gopls
     nil
 
-    # paas
-    heroku
-
-    # container
-    docker
-    kubectl
-
-    # C
-    cmake
-
-    # ssg
-    hugo
-
-    # Provisioning
-    terraform
-    terraform-ls
-    tflint
-    ansible
-
-    # Secret management
-    vault
-
     # Data format
     jq
     yamlfmt
