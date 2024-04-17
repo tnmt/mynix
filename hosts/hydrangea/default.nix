@@ -4,6 +4,7 @@
   boot.loader.grub.enable = false;
 
   programs.zsh.enable = true;
+  programs.ssh.startAgent = true;
 
   fileSystems."/" =
     { device = "/dev/sdd";
