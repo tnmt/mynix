@@ -27,7 +27,10 @@
   , lanzaboote
   , nixos-wsl
   , ...
-  }@inputs: {
+}@inputs: let
+  system = "x86_64-linux";
+  pkgs = nixpkgs.legacyPackages.${system};
+in {
     nixosConfigurations = {
       maple = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -73,18 +76,6 @@
           }
         ];
       };
-      vps02 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/vps02
-          #home-manager.nixosModules.home-manager
-          #  {
-          #    home-manager.useGlobalPkgs = true;
-          #    home-manager.useUserPackages = true;
-          #    home-manager.users.tnmt = import ./home/linux;
-          #  }
-        ];
-      };
     };
     darwinConfigurations = {
       work = darwin.lib.darwinSystem {
@@ -110,6 +101,12 @@
             home-manager.users.tnmt = import ./home/darwin;
           }
         ];
+      };
+    };
+    homeConfigurations = {
+      tnmt = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home/server ];
       };
     };
   };
