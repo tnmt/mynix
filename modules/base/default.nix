@@ -3,7 +3,5 @@
 
   programs.zsh.enable = true;
 
-  programs.ssh.startAgent = true;
-
   time.timeZone = "Asia/Tokyo";
 }
