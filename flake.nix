@@ -37,11 +37,11 @@ in {
         modules = [
           ./hosts/maple
           home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.tnmt = import ./home/desktop;
-            }
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tnmt = import ./home/desktop;
+          }
         ];
       };
       sunflower = nixpkgs.lib.nixosSystem {
@@ -50,13 +50,13 @@ in {
           ./hosts/sunflower
           nixos-hardware.nixosModules.microsoft-surface-go
           inputs.xremap-flake.nixosModules.default
-          home-manager.nixosModules.home-manager
           lanzaboote.nixosModules.lanzaboote
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.tnmt = import ./home/desktop;
-            }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tnmt = import ./home/desktop;
+          }
         ];
       };
       hydrangea = nixpkgs.lib.nixosSystem {
