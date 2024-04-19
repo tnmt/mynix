@@ -48,7 +48,7 @@ in {
         system = "x86_64-linux";
         modules = [
           ./hosts/sunflower
-          #nixos-hardware.nixosModules.microsoft-surface-go
+          nixos-hardware.nixosModules.microsoft-surface-go
           inputs.xremap-flake.nixosModules.default
           lanzaboote.nixosModules.lanzaboote
           home-manager.nixosModules.home-manager
