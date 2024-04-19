@@ -15,7 +15,7 @@
   ];
 
   nix.buildMachines = [ {
-    hostName = "vps";
+    hostName = "maple";
     system = "x86_64-linux";
     protocol = "ssh-ng";
     # if the builder supports building for multiple architectures,
@@ -32,19 +32,19 @@
 builders-use-substitutes = true
     '';
   nix.settings.trusted-public-keys = [
-  "vps:IVuoJ9xuT7nqCtwo5C1WSZOFBRxwTG3GduKCEwz/sSE="
+  "maple:YJWnCaukPN2HZDuJtVUpyVq2szmcgkKwMEzl+fXt1DA="
   "tnmt.cachix.org-1:TWp26nryyjLq7Xzyz7Hx81W7htBNcIMcbfHw+BrxtF8="
     ];
   nix.settings.trusted-substituters = [
-    "ssh-ng://vps"
-    "ssh://vps"
+    "ssh-ng://maple"
+    "ssh://maple"
   ];
 
   nix.settings.substituters = [
     "https://cache.nixos.org"
     "https://tnmt.cachix.org"
-    "ssh-ng://vps"
-    "ssh://vps"
+    "ssh-ng://maple"
+    "ssh://maple"
   ];
 
   nix.settings.trusted-users = [
