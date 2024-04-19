@@ -5,13 +5,13 @@
     ./lanzaboote.nix
   ];
 
-  #microsoft-surface.surface-control.enable = true;
+  microsoft-surface.surface-control.enable = true;
 
   users.users.tnmt.extraGroups = [
     "networkmanager"
     "wheel"
     "docker"
-    #"surface-control"
+    "surface-control"
   ];
 
   nix.buildMachines = [ {
