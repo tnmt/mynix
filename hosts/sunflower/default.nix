@@ -52,8 +52,6 @@ builders-use-substitutes = true
     "tnmt"
   ];
 
-  nix.settings.require-sigs = false;
-
   services.xremap = {
     userName = "tnmt";
     serviceMode = "user";
