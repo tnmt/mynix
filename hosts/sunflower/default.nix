@@ -52,6 +52,8 @@ builders-use-substitutes = true
     "tnmt"
   ];
 
+  services.xserver.xkbOptions = "ctrl:nocaps, ";
+
   services.xremap = {
     userName = "tnmt";
     serviceMode = "user";
