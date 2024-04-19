@@ -5,13 +5,13 @@
     ./lanzaboote.nix
   ];
 
-  microsoft-surface.surface-control.enable = true;
+  #microsoft-surface.surface-control.enable = true;
 
   users.users.tnmt.extraGroups = [
     "networkmanager"
     "wheel"
     "docker"
-    "surface-control"
+    #"surface-control"
   ];
 
   nix.buildMachines = [ {
@@ -32,7 +32,7 @@
 builders-use-substitutes = true
     '';
   nix.settings.trusted-public-keys = [
-  "vps:AiANzEE59U+fyBesez56rQaVfDR2+M25BESOtJ+kDpI="
+  "vps:IVuoJ9xuT7nqCtwo5C1WSZOFBRxwTG3GduKCEwz/sSE="
   "tnmt.cachix.org-1:TWp26nryyjLq7Xzyz7Hx81W7htBNcIMcbfHw+BrxtF8="
     ];
   nix.settings.trusted-substituters = [
@@ -43,6 +43,8 @@ builders-use-substitutes = true
   nix.settings.substituters = [
     "https://cache.nixos.org"
     "https://tnmt.cachix.org"
+    "ssh-ng://vps"
+    "ssh://vps"
   ];
 
   nix.settings.trusted-users = [
