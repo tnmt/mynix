@@ -59,6 +59,18 @@ in {
           }
         ];
       };
+      vps03 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/vps03
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.tnmt = import ./home/server;
+          }
+        ];
+      };
       hydrangea = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
