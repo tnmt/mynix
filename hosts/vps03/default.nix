@@ -39,7 +39,6 @@
   };
 
   services.openssh.enable = true;
-  services.openssh.permitRootLogin = "yes";
 
   system.stateVersion = "23.11"; # Did you read the comment?
 
