@@ -16,15 +16,6 @@
 
   nix.buildMachines = [
     {
-      hostName = "vps03";
-      system = "x86_64-linux";
-      protocol = "ssh-ng";
-      maxJobs = 1;
-      speedFactor = 2;
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      mandatoryFeatures = [ ];
-    }
-    {
       hostName = "maple";
       system = "x86_64-linux";
       protocol = "ssh-ng";
