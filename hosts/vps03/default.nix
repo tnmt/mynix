@@ -38,7 +38,10 @@
     ];
   };
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    ports = [ 2222 ];
+  };
 
   system.stateVersion = "23.11"; # Did you read the comment?
 
