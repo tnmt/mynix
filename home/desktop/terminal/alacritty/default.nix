@@ -46,6 +46,9 @@
           white   = "#ffffff";
         };
       };
+      key_bindings = [
+        { key = "N"; mods = "Control|Shift"; action = "SpawnNewInstance"; }
+      ];
     };
   };
 }
