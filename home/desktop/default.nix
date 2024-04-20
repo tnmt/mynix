@@ -35,6 +35,9 @@
     # container & virtualisation
     docker-compose
     kubectl
+
+    # wine
+    wineWowPackages.stable
   ];
 
   programs.home-manager.enable = true;
