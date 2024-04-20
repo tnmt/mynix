@@ -4,7 +4,7 @@
 
     settings = {
       font = {
-        size = 12;
+        size = 16;
         normal = {
           family = "MesloLGS NF";
           style = "Regular";
