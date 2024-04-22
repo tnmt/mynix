@@ -145,13 +145,13 @@ export PAGER=less
 export LESS='-R -X'
 
 
-# completions
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-  autoload -Uz compinit
-  compinit
-fi
+## completions
+#if type brew &>/dev/null; then
+#  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+#
+#  autoload -Uz compinit
+#  compinit
+#fi
 
 # *brew
 ## pyenv
