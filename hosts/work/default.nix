@@ -12,6 +12,7 @@
       lima
       qemu
       sshuttle
+      openstackclient
     ];
   };
 
