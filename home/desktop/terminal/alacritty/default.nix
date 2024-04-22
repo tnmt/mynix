@@ -6,10 +6,6 @@
       env = {
         TERM = "xterm-256color";
       };
-      shell = {
-        program = "zsh";
-        args = ["-l" "-c" "tmux"];
-      };
       font = {
         size = 16;
         normal = {
