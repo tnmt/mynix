@@ -6,6 +6,7 @@
     shortcut = "t";
     keyMode = "vi";
     clock24 = true;
+    terminal = "tmux-256color";
     historyLimit = 10000;
 
     plugins = with pkgs.tmuxPlugins; [
@@ -23,7 +24,6 @@
     ];
 
     extraConfig = ''
-      set -g default-terminal "screen-256color"
       set-option -ga terminal-overrides ",$TERM:Tc"
 
       set-option -g renumber-windows on
