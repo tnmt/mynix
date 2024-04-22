@@ -5,7 +5,7 @@
     settings = {
       shell = {
         program = "zsh";
-        args = ["-l" "-c" "tmux a -t 0 || tmux"];
+        args = ["-l" "-c" "tmux"];
       };
       font = {
         size = 16;
