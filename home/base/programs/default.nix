@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   imports = [
     ./git.nix
+    ./neovim.nix
     ./ssh.nix
     ./tmux.nix
-    ./neovim.nix
     ./zsh.nix
   ];
 
