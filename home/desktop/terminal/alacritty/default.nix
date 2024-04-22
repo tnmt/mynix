@@ -3,6 +3,9 @@
     enable = true;
 
     settings = {
+      env = {
+        TERM = "xterm-256color";
+      };
       shell = {
         program = "zsh";
         args = ["-l" "-c" "tmux"];
