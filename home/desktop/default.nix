@@ -38,6 +38,7 @@
 
     # wine
     wineWowPackages.stable
+    winetricks
   ];
 
   programs.home-manager.enable = true;
