@@ -33,7 +33,16 @@
     extraGroups = ["wheel"];
   };
 
-  nix.settings.trusted-users = [ "tnmt" ];
+  services.openssh = {
+    enable = true;
+  };
+
+  nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
+  nix.settings.trusted-users = [
+    "root"
+    "nixremote"
+    "tnmt"
+  ];
 
   networking.hostName = "hydrangea";
 }
