@@ -17,6 +17,8 @@
   home.packages = with pkgs; [
     # browser
     brave
+    microsoft-edge
+    chromium
 
     # dev
     vscode
