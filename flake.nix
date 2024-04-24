@@ -17,6 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprsome.url = "github:sopa0/hyprsome";
   };
 
   outputs =

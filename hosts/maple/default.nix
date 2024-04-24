@@ -15,5 +15,9 @@
     "nixremote"
   ];
 
+  programs.hyprland = {
+    enable = true;
+  };
+
   networking.hostName = "maple";
 }
