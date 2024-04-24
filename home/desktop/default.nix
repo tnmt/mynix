@@ -5,6 +5,7 @@
   imports = [
     ../base
     ./terminal
+    ./hyprland
   ];
 
   home = {
