@@ -3,7 +3,7 @@
     ./git.nix
     ./neovim.nix
     ./ssh.nix
-    ./starship.nix
+    #./starship.nix
     ./tmux.nix
     ./zsh.nix
   ];
