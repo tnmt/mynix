@@ -1,4 +1,4 @@
-{ pkgs, lib, ... } : {
+{ pkgs, lib, inputs, ... } : {
   imports = [
     ./dunst.nix
     ./keybinds.nix
@@ -13,7 +13,7 @@
   };
 
   home.packages =
-    with pkgs; [
+    (with pkgs; [
       brightnessctl # screen brightness
       grimblast # screenshot
       hyprpicker # color picker
@@ -24,5 +24,8 @@
       wev # key event watcher
       wf-recorder # screen recorder
       wl-clipboard # clipboard manager
+    ])
+    ++ [
+      #inputs.hyprsome.packages.x86_64-linux.default # workspace manager
     ];
 }
