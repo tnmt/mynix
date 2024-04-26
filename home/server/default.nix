@@ -10,7 +10,7 @@
     username = "tnmt";
     homeDirectory = "/home/tnmt";
 
-    stateVersion = "23.11";
+    stateVersion = "22.11";
   };
 
   # Define packages supported in only linux
