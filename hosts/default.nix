@@ -69,10 +69,7 @@ in {
       hostname = "sunflower";
       username = "tnmt";
       modules = [
-        ./maple/nixos.nix
-        inputs.nixos-hardware.nixosModules.microsoft-surface-go
-        inputs.xremap-flake.nixosModules.default
-        inputs.lanzaboote.nixosModules.lanzaboote
+        ./sunflower/nixos.nix
       ];
     };
     vps03 = mkNixosSystem {
