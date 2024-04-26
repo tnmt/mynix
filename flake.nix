@@ -43,7 +43,6 @@
     formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt);
 
     nixosConfigurations = (import ./hosts inputs).nixos;
-    darwinConfigurations = (import ./hosts inputs).darwin;
     homeConfigurations = (import ./hosts inputs).home-manager;
 
     devShells = forAllSystems (system: let

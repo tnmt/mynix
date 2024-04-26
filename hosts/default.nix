@@ -12,19 +12,6 @@ inputs: let
       };
     };
 
-  mkDarwinSystem = {
-    system,
-    hostname,
-    username,
-    modules,
-  }:
-    inputs.darwin.lib.darwinSystem {
-      inherit system modules;
-      specialArgs = {
-        inherit inputs hostname username;
-      };
-    };
-
   mkHomeManagerConfiguration = {
     system,
     username,
@@ -59,7 +46,7 @@ inputs: let
           {
             home = {
               inherit username;
-              homeDirectory = "/home/${username}";
+              homeDirectory = if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
               stateVersion = "22.11";
             };
             programs.home-manager.enable = true;
@@ -111,16 +98,6 @@ in {
     };
   };
 
-  darwin = {
-    work = mkDarwinSystem {
-      system = "aarch64-darwin";
-      username = "tsunematsu";
-      modules = [
-        ./work/darwin.nix
-      ];
-    };
-  };
-
   home-manager = {
     "tnmt@maple" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
@@ -152,6 +129,14 @@ in {
       overlays = [];
       modules = [
         ./hydrangea/home-manager.nix
+      ];
+    };
+    "tsunematsu@work" = mkHomeManagerConfiguration {
+      system = "aarch64-darwin";
+      username = "tsunematsu";
+      overlays = [];
+      modules = [
+        ./work/home-manager.nix
       ];
     };
   };
