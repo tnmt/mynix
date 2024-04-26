@@ -1,8 +1,13 @@
-{ ... }: {
+{
+  inputs,
+  ...
+} : {
   imports = [
     ../../modules/nixos
     ./hardware-configuration.nix
     ./lanzaboote.nix
+    inputs.nixos-hardware.nixosModules.microsoft-surface-go
+    inputs.xremap-flake.nixosModules.default
   ];
 
   microsoft-surface.surface-control.enable = true;
