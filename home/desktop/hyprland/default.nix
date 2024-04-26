@@ -1,4 +1,7 @@
-{ pkgs, lib, inputs, ... } : {
+{ pkgs, lib, inputs, ... } :
+let
+  hypr-helper = pkgs.callPackage ./hypr-helper {};
+in {
   imports = [
     ./dunst.nix
     ./keybinds.nix
