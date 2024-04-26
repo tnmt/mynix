@@ -49,7 +49,7 @@
           white   = "#ffffff";
         };
       };
-      key_bindings = [
+      keyboard.bindings = [
         { key = "N"; mods = "Control|Shift"; action = "SpawnNewInstance"; }
       ];
     };
