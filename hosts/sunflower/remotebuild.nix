@@ -1,15 +1,6 @@
 {...} : {
   nix.buildMachines = [
     {
-      hostName = "hydrangea";
-      system = "x86_64-linux";
-      protocol = "ssh-ng";
-      maxJobs = 1;
-      speedFactor = 2;
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      mandatoryFeatures = [ ];
-    }
-    {
       hostName = "maple";
       system = "x86_64-linux";
       protocol = "ssh-ng";
@@ -19,6 +10,7 @@
       mandatoryFeatures = [ ];
     }
   ] ;
+
   nix.distributedBuilds = true;
   # optional, useful when the builder has a faster internet connection than yours
   nix.extraOptions = ''
@@ -31,21 +23,22 @@ builders-use-substitutes = true
   "tnmt.cachix.org-1:TWp26nryyjLq7Xzyz7Hx81W7htBNcIMcbfHw+BrxtF8="
     ];
   nix.settings.trusted-substituters = [
-    "ssh-ng://vps03"
     "ssh-ng://maple"
-    "ssh-ng://hydrangea"
+    #"ssh-ng://vps03"
+    #"ssh-ng://hydrangea"
   ];
 
   nix.settings.substituters = [
     "https://cache.nixos.org"
     "https://tnmt.cachix.org"
-    "ssh-ng://vps03"
     "ssh-ng://maple"
-    "ssh-ng://hydrangea"
+    #"ssh-ng://vps03"
+    #"ssh-ng://hydrangea"
   ];
 
   nix.settings.trusted-users = [
     "root"
     "tnmt"
   ];
+
 }

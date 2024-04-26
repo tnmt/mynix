@@ -6,6 +6,7 @@
     ../../modules/nixos
     ./hardware-configuration.nix
     ./lanzaboote.nix
+    ./remotebuild.nix
     #inputs.nixos-hardware.nixosModules.microsoft-surface-go
     inputs.xremap-flake.nixosModules.default
   ];
