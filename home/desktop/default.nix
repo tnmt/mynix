@@ -12,7 +12,7 @@
     username = "tnmt";
     homeDirectory = "/home/tnmt";
 
-    stateVersion = "23.11";
+    stateVersion = "22.11";
   };
 
   home.packages = with pkgs; [
