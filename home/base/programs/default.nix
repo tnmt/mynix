@@ -42,6 +42,7 @@
 
     # k8s
     kubectl
+    krew
 
     # Data format
     jq
