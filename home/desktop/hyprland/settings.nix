@@ -3,7 +3,6 @@
   ...
 }: {
   wayland.windowManager.hyprland.settings = {
-    monitor=",highres,auto,1.5";
     env = [
       #"GTK_IM_MODULE, fcitx"
       "QT_IM_MODULE, fcitx"
