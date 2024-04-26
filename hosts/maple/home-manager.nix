@@ -5,6 +5,9 @@
   ];
 
   wayland.windowManager.hyprland.settings = {
+    env = [
+      "GDK_SCALE,2"
+    ];
     monitor=",highres,auto,1.5";
     workspace = [
       "1,monitor:DP-1"

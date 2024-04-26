@@ -38,5 +38,9 @@
     };
   };
 
+  programs.hyprland = {
+    enable = true;
+  };
+
   networking.hostName = "sunflower";
 }

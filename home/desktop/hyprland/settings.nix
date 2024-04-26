@@ -7,7 +7,6 @@
       #"GTK_IM_MODULE, fcitx"
       "QT_IM_MODULE, fcitx"
       "XMODIFIERS, @im=fcitx"
-      "GDK_SCALE,2"
       "LANG, ja_JP.UTF-8"
     ];
     exec-once = [
