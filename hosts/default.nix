@@ -60,7 +60,7 @@ inputs: let
             home = {
               inherit username;
               homeDirectory = "/home/${username}";
-              stateVersion = "23.11";
+              stateVersion = "22.11";
             };
             programs.home-manager.enable = true;
             programs.git.enable = true;
@@ -125,6 +125,7 @@ in {
     "tnmt@maple" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
+      overlays = [];
       modules = [
         ./maple/home-manager.nix
       ];
@@ -132,6 +133,7 @@ in {
     "tnmt@sunflower" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
+      overlays = [];
       modules = [
         ./sunflower/home-manager.nix
       ];
@@ -139,6 +141,7 @@ in {
     "tnmt@vps03" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
+      overlays = [];
       modules = [
         ./vps03/home-manager.nix
       ];
@@ -146,6 +149,7 @@ in {
     "tnmt@hydrangea" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
+      overlays = [];
       modules = [
         ./hydrangea/home-manager.nix
       ];

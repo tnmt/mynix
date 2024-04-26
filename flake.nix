@@ -2,7 +2,8 @@
   description = "NixOS & homa-manager configurations of tnmt";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "nixpkgs/nixos-23.11";
     nixpkgs-darwin.url = "nixpkgs/nixpkgs-23.11-darwin";
 
     darwin = {
@@ -13,7 +14,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

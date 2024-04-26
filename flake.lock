@@ -323,16 +323,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1712386041,
-        "narHash": "sha256-dA82pOMQNnCJMAsPG7AXG35VmCSMZsJHTFlTHizpKWQ=",
+        "lastModified": 1714042918,
+        "narHash": "sha256-4AItZA3EQIiSNAxliuYEJumw/LaVfrMv84gYyrs0r3U=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d6bb9f934f2870e5cbc5b94c79e9db22246141ff",
+        "rev": "0c5704eceefcb7bb238a958f532a86e3b59d76db",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
-        "ref": "release-23.11",
         "repo": "home-manager",
         "type": "github"
       }
@@ -763,6 +762,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-stable_2": {
+      "locked": {
+        "lastModified": 1713995372,
+        "narHash": "sha256-fFE3M0vCoiSwCX02z8VF58jXFRj9enYUSTqjyHAjrds=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "dd37924974b9202f8226ed5d74a252a9785aedf8",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-23.11",
+        "type": "indirect"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1685498995,
@@ -797,16 +811,16 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1713564160,
-        "narHash": "sha256-YguPZpiejgzLEcO36/SZULjJQ55iWcjAmf3lYiyV1Fo=",
+        "lastModified": 1713895582,
+        "narHash": "sha256-cfh1hi+6muQMbi9acOlju3V1gl8BEaZBXBR9jQfQi4U=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bc194f70731cc5d2b046a6c1b3b15f170f05999c",
+        "rev": "572af610f6151fd41c212f897c71f7056e3fb518",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-23.11",
+        "ref": "nixos-unstable",
         "type": "indirect"
       }
     },
@@ -916,6 +930,7 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-darwin": "nixpkgs-darwin",
+        "nixpkgs-stable": "nixpkgs-stable_2",
         "xremap-flake": "xremap-flake"
       }
     },
