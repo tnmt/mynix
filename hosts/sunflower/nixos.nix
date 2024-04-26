@@ -7,17 +7,17 @@
     ./hardware-configuration.nix
     ./lanzaboote.nix
     ./remotebuild.nix
-    #inputs.nixos-hardware.nixosModules.microsoft-surface-go
+    inputs.nixos-hardware.nixosModules.microsoft-surface-go
     inputs.xremap-flake.nixosModules.default
   ];
 
-  #microsoft-surface.surface-control.enable = true;
+  microsoft-surface.surface-control.enable = true;
 
   users.users.tnmt.extraGroups = [
     "networkmanager"
     "wheel"
     "docker"
-    #"surface-control"
+    "surface-control"
   ];
 
   services.xserver.xkbOptions = "ctrl:nocaps, ";
