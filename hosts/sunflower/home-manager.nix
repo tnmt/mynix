@@ -5,7 +5,13 @@
   ];
 
   wayland.windowManager.hyprland.settings = {
-    monitor=",highres,auto,1.6";
+    env = [
+      "GDK_DPI_SCALE, 1.5"
+    ];
+    monitor=",highres,auto,1";
+    input = {
+      touchpad.natural_scroll = true;
+    };
     workspace = [
       "1,monitor:eDP-1"
       "2,monitor:eDP-1"
