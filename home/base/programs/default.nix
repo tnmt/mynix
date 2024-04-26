@@ -37,6 +37,9 @@
     gopls
     nixd
 
+    # archiver
+    unzip
+
     # k8s
     kubectl
 
