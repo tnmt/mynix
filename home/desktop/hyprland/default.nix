@@ -26,6 +26,6 @@
       wl-clipboard # clipboard manager
     ])
     ++ [
-      #inputs.hyprsome.packages.x86_64-linux.default # workspace manager
+      inputs.hyprsome.packages.x86_64-linux.default # workspace manager
     ];
 }
