@@ -17,4 +17,8 @@
       meslo-lgs-nf
     ];
   };
+
+  environment.systemPackages = with pkgs; [
+    home-manager
+  ];
 }
