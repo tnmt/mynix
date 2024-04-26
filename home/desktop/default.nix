@@ -20,6 +20,7 @@
     brave
     microsoft-edge
     chromium
+    firefox
 
     # dev
     vscode
