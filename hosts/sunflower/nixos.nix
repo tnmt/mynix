@@ -20,7 +20,7 @@
     "surface-control"
   ];
 
-  services.xserver.xkbOptions = "ctrl:nocaps, ";
+  services.xserver.xkb.options = "ctrl:nocaps, ";
 
   services.xremap = {
     userName = "tnmt";
