@@ -2,6 +2,7 @@
   imports = [
     ../../home/base
     ../../home/desktop
+    ../../home/desktop/hyprland
   ];
 
   wayland.windowManager.hyprland.settings = {

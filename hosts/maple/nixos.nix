@@ -6,6 +6,8 @@
 }: {
   imports = [
     ../../modules/nixos
+    ../../modules/hyprland
+
     ./hardware-configuration.nix
   ]
     ++ (with inputs.nixos-hardware.nixosModules; [
@@ -25,10 +27,6 @@
     "root"
     "nixremote"
   ];
-
-  programs.hyprland = {
-    enable = true;
-  };
 
   networking.hostName = "maple";
 }
