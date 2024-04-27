@@ -4,12 +4,12 @@
     "modules-right": ["tray", "cpu", "memory", "backlight", "network", "pulseaudio", "battery", "clock"],
     "tray": {
         // "icon-size": 21,
-        "spacing": 8
+        "spacing": 10
     },
     "clock": {
         "tooltip-format": "{:%Y-%m-%d | %H:%M}",
         "format-alt": "{:%Y-%m-%d}",
-        "format": "{󰥔 :%H:%M 󰃭 %m/%d}"
+        "format": "󰥔{:%H:%M 󰃭 %m/%d}"
     },
     "cpu": {
         "format": "　{usage}%"
