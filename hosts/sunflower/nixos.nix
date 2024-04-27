@@ -4,9 +4,12 @@
 } : {
   imports = [
     ../../modules/nixos
+    ../../modules/hyprland
+
     ./hardware-configuration.nix
     ./lanzaboote.nix
     ./remotebuild.nix
+
     inputs.nixos-hardware.nixosModules.microsoft-surface-go
     inputs.xremap-flake.nixosModules.default
   ];
@@ -36,10 +39,6 @@
          }
        ];
     };
-  };
-
-  programs.hyprland = {
-    enable = true;
   };
 
   networking.hostName = "sunflower";
