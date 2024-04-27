@@ -11,6 +11,7 @@
     ];
     exec-once = [
       "fcitx5 -D"
+      "waybar"
     ];
     windowrule = [
       "pseudo, noblur, class:(fcitx)"
