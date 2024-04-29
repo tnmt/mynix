@@ -1,8 +1,8 @@
 { ... }: {
   imports = [
-    ../../home/base
-    ../../home/desktop
-    ../../home/desktop/hyprland
+    ../../home-manager/base
+    ../../home-manager/desktop
+    ../../home-manager/desktop/hyprland
   ];
 
   wayland.windowManager.hyprland.settings = {
