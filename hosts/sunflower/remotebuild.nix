@@ -20,7 +20,6 @@ builders-use-substitutes = true
   "maple:YJWnCaukPN2HZDuJtVUpyVq2szmcgkKwMEzl+fXt1DA="
   "hydrangea:3aHkYRMqxgt9I9d8lp9ow/C0oPVTUp/0OFEObz2LRkU="
   "vps03:C/1SqKVBylqziAX2hRuiCzQrNBB0Agfd/E0tu2rlXA8="
-  "tnmt.cachix.org-1:TWp26nryyjLq7Xzyz7Hx81W7htBNcIMcbfHw+BrxtF8="
     ];
   nix.settings.trusted-substituters = [
     "ssh-ng://maple"
@@ -30,7 +29,6 @@ builders-use-substitutes = true
 
   nix.settings.substituters = [
     "https://cache.nixos.org"
-    "https://tnmt.cachix.org"
     "ssh-ng://maple"
     #"ssh-ng://vps03"
     #"ssh-ng://hydrangea"
