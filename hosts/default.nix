@@ -136,5 +136,13 @@ in {
         ./work/home-manager.nix
       ];
     };
+    "tnmt@goldmoon" = mkHomeManagerConfiguration {
+      system = "aarch64-darwin";
+      username = "tnmt";
+      overlays = [];
+      modules = [
+        ./goldmoon/home-manager.nix
+      ];
+    };
   };
 }
