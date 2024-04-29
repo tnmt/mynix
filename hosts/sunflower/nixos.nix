@@ -45,6 +45,4 @@
       "surface-control"
     ];
   };
-
-  services.xserver.xkb.options = "ctrl:nocaps, ";
 }
