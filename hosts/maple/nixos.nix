@@ -14,13 +14,28 @@
     ../../modules/programs/shell.nix
     ../../modules/programs/virtualisation.nix
     ../../modules/programs/xserver.nix
-    ../../modules/nixos
   ]
     ++ (with inputs.nixos-hardware.nixosModules; [
       common-cpu-intel
       common-gpu-intel
       common-pc-ssd
     ]);
+
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
+    extraModprobeConfig = ''
+      options iwlwifi disable_11ax=true
+    '';
+  };
+
+  time.hardwareClockInLocalTime = true;
+
+  # Don't touch this
+  system.stateVersion = "22.11";
 
   users.users."${username}" = {
     isNormalUser = true;
@@ -32,12 +47,6 @@
       "video"
     ];
   };
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.extraModprobeConfig = ''
-    options iwlwifi disable_11ax=true
-  '';
 
   nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
 }
