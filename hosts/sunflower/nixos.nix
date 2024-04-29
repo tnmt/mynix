@@ -6,7 +6,7 @@
     ../../modules/core
     ../../modules/nixos
     ../../modules/programs/shell.nix
-    ../../modules/hyprland
+    ../../modules/programs/hyprland.nix
 
     ./hardware-configuration.nix
     ./lanzaboote.nix
