@@ -12,6 +12,7 @@
     ../../modules/programs/hyprland.nix
     ../../modules/programs/openssh.nix
     ../../modules/programs/shell.nix
+    ../../modules/programs/virtualisation.nix
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-go
     inputs.xremap-flake.nixosModules.default
@@ -22,7 +23,6 @@
   users.users.tnmt.extraGroups = [
     "networkmanager"
     "wheel"
-    "docker"
     "surface-control"
   ];
 

@@ -72,7 +72,7 @@
   users.users.tnmt = {
     isNormalUser = true;
     description = "Shinya Tsunematsu";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
     ];
@@ -94,7 +94,6 @@
     zlib
     gnumake
     gcc
-    docker
     gnome3.gnome-tweaks
   ];
 
@@ -152,7 +151,4 @@
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-
-  virtualisation.docker.enable = true;
-
 }
