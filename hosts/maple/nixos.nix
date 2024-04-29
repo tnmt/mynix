@@ -11,6 +11,7 @@
     ../../modules/programs/hyprland.nix
     ../../modules/programs/openssh.nix
     ../../modules/programs/shell.nix
+    ../../modules/programs/virtualisation.nix
     ../../modules/nixos
   ]
     ++ (with inputs.nixos-hardware.nixosModules; [
