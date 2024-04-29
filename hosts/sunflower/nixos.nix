@@ -3,6 +3,7 @@
   ...
 } : {
   imports = [
+    ../../modules/core
     ../../modules/nixos
     ../../modules/hyprland
 
