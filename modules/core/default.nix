@@ -1,8 +1,8 @@
 {
   imports = [
     ./i18n.nix
-    #./network.nix
-    #./nix.nix
-    #./security.nix
+    ./network.nix
+    ./nix.nix
+    ./security.nix
   ];
 }
