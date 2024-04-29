@@ -5,12 +5,12 @@
   ...
 }: {
   imports = [
+    ./hardware-configuration.nix
+
     ../../modules/core
     ../../modules/programs/shell.nix
     ../../modules/programs/hyprland.nix
     ../../modules/nixos
-
-    ./hardware-configuration.nix
   ]
     ++ (with inputs.nixos-hardware.nixosModules; [
       common-cpu-intel
