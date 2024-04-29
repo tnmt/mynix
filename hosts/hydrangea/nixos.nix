@@ -1,5 +1,8 @@
 { pkgs, ... }: {
-  imports = [ ../../modules/base ];
+  imports = [
+    ../../modules/core
+    ../../modules/base
+  ];
 
   boot.loader.grub.enable = false;
 
@@ -43,6 +46,4 @@
     "nixremote"
     "tnmt"
   ];
-
-  networking.hostName = "hydrangea";
 }
