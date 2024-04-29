@@ -25,6 +25,4 @@
   environment.systemPackages = with pkgs; [
     home-manager
   ];
-
-  time.timeZone = "Asia/Tokyo";
 }
