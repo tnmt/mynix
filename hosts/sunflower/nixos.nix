@@ -11,7 +11,6 @@
 
     ../../modules/core
     ../../modules/desktop
-    ../../modules/nixos
     ../../modules/programs/hyprland.nix
     ../../modules/programs/openssh.nix
     ../../modules/programs/shell.nix
@@ -20,6 +19,18 @@
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-go
   ];
+
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
+
+  time.hardwareClockInLocalTime = true;
+
+  # Don't touch this
+  system.stateVersion = "22.11";
 
   microsoft-surface.surface-control.enable = true;
 
