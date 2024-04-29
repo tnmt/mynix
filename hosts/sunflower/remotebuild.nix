@@ -33,10 +33,4 @@ builders-use-substitutes = true
     #"ssh-ng://vps03"
     #"ssh-ng://hydrangea"
   ];
-
-  nix.settings.trusted-users = [
-    "root"
-    "tnmt"
-  ];
-
 }
