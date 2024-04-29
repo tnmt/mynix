@@ -2,6 +2,7 @@
   imports = [
     ../../modules/core
     ../../modules/programs/shell.nix
+    ../../modules/programs/openssh.nix
   ];
 
   boot.loader.grub.enable = false;
@@ -34,10 +35,6 @@
     shell = pkgs.zsh;
     group = "users";
     extraGroups = ["wheel"];
-  };
-
-  services.openssh = {
-    enable = true;
   };
 
   nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
