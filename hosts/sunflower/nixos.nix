@@ -8,6 +8,7 @@
     ./remotebuild.nix
 
     ../../modules/core
+    ../../modules/desktop
     ../../modules/nixos
     ../../modules/programs/hyprland.nix
     ../../modules/programs/openssh.nix
@@ -15,7 +16,6 @@
     ../../modules/programs/virtualisation.nix
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-go
-    inputs.xremap-flake.nixosModules.default
   ];
 
   microsoft-surface.surface-control.enable = true;
@@ -27,20 +27,4 @@
   ];
 
   services.xserver.xkb.options = "ctrl:nocaps, ";
-
-  services.xremap = {
-    userName = "tnmt";
-    serviceMode = "user";
-    config = {
-       modmap = [
-         {
-           # CapsLock to Ctrl
-           name = "CapsLock is dead";
-           remap = {
-             CapsLock = "Ctrl_L";
-           };
-         }
-       ];
-    };
-  };
 }
