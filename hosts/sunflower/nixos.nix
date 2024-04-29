@@ -6,13 +6,13 @@
 } : {
   imports = [
     ./hardware-configuration.nix
-    ./lanzaboote.nix
     ./remotebuild.nix
 
     ../../modules/core
     ../../modules/desktop
     ../../modules/programs/hyprland.nix
     ../../modules/programs/openssh.nix
+    ../../modules/programs/secureboot.nix
     ../../modules/programs/shell.nix
     ../../modules/programs/virtualisation.nix
     ../../modules/programs/xserver.nix
