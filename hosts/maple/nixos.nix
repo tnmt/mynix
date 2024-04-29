@@ -7,8 +7,8 @@
   imports = [
     ../../modules/core
     ../../modules/programs/shell.nix
+    ../../modules/programs/hyprland.nix
     ../../modules/nixos
-    ../../modules/hyprland
 
     ./hardware-configuration.nix
   ]
