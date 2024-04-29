@@ -14,6 +14,7 @@
     ../../modules/programs/openssh.nix
     ../../modules/programs/shell.nix
     ../../modules/programs/virtualisation.nix
+    ../../modules/programs/xserver.nix
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-go
   ];
