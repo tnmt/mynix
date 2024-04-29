@@ -1,14 +1,18 @@
-{ pkgs, username, ... }: {
+{
+  inputs,
+  pkgs,
+  username,
+  ...
+}: {
   imports = [
     ../../modules/core
     ../../modules/programs/shell.nix
     ../../modules/programs/openssh.nix
+
+    inputs.nixos-wsl.nixosModules.default
   ];
 
   boot.loader.grub.enable = false;
-
-  programs.zsh.enable = true;
-  programs.ssh.startAgent = true;
 
   fileSystems."/" =
     { device = "/dev/sdd";

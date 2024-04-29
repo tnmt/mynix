@@ -86,7 +86,6 @@ in {
       username = "tnmt";
       modules = [
         ./hydrangea/nixos.nix
-        inputs.nixos-wsl.nixosModules.default
 	{
 	  system.stateVersion = "23.11";
 	  wsl.enable = true;
