@@ -22,6 +22,17 @@
       common-pc-ssd
     ]);
 
+  users.users."${username}" = {
+    isNormalUser = true;
+    shell = pkgs.zsh;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "video"
+    ];
+  };
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.extraModprobeConfig = ''

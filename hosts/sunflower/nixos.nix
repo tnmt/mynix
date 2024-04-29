@@ -1,5 +1,7 @@
 {
   inputs,
+  username,
+  pkgs,
   ...
 } : {
   imports = [
@@ -21,11 +23,17 @@
 
   microsoft-surface.surface-control.enable = true;
 
-  users.users.tnmt.extraGroups = [
-    "networkmanager"
-    "wheel"
-    "surface-control"
-  ];
+  users.users."${username}" = {
+    isNormalUser = true;
+    shell = pkgs.zsh;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "video"
+      "surface-control"
+    ];
+  };
 
   services.xserver.xkb.options = "ctrl:nocaps, ";
 }
