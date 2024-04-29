@@ -18,30 +18,8 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "ja_JP.UTF-8";
-    LC_IDENTIFICATION = "ja_JP.UTF-8";
-    LC_MEASUREMENT = "ja_JP.UTF-8";
-    LC_MONETARY = "ja_JP.UTF-8";
-    LC_NAME = "ja_JP.UTF-8";
-    LC_NUMERIC = "ja_JP.UTF-8";
-    LC_PAPER = "ja_JP.UTF-8";
-    LC_TELEPHONE = "ja_JP.UTF-8";
-    LC_TIME = "ja_JP.UTF-8";
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.tnmt = {
-    isNormalUser = true;
-    description = "Shinya Tsunematsu";
-    extraGroups = [ "networkmanager" ];
-    shell = pkgs.zsh;
-    packages = with pkgs; [
-    ];
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
