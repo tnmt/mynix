@@ -5,6 +5,7 @@
   imports = [
     ../../modules/core
     ../../modules/nixos
+    ../../modules/programs/shell.nix
     ../../modules/hyprland
 
     ./hardware-configuration.nix

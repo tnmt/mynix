@@ -6,6 +6,7 @@
 }: {
   imports = [
     ../../modules/core
+    ../../modules/programs/shell.nix
     ../../modules/nixos
     ../../modules/hyprland
 
