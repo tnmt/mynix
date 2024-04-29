@@ -3,14 +3,14 @@
   ...
 } : {
   imports = [
+    ./hardware-configuration.nix
+    ./lanzaboote.nix
+    ./remotebuild.nix
+
     ../../modules/core
     ../../modules/nixos
     ../../modules/programs/shell.nix
     ../../modules/programs/hyprland.nix
-
-    ./hardware-configuration.nix
-    ./lanzaboote.nix
-    ./remotebuild.nix
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-go
     inputs.xremap-flake.nixosModules.default
