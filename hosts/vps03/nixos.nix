@@ -7,6 +7,7 @@
 
       ../../modules/core
       ../../modules/programs/shell.nix
+      ../../modules/programs/openssh.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -41,7 +42,6 @@
   };
 
   services.openssh = {
-    enable = true;
     ports = [ 2222 ];
   };
 
