@@ -41,6 +41,4 @@
        ];
     };
   };
-
-  networking.hostName = "sunflower";
 }
