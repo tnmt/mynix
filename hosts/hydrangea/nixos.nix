@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ../../modules/core
-    ../../modules/base
+    ../../modules/programs/shell.nix
   ];
 
   boot.loader.grub.enable = false;
