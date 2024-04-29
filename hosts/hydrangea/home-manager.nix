@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ../../home/base
-    ../../home/server
+    ../../home-manager/base
+    ../../home-manager/server
   ];
 }
