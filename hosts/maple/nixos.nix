@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
 
     ../../modules/core
+    ../../modules/desktop
     ../../modules/programs/hyprland.nix
     ../../modules/programs/openssh.nix
     ../../modules/programs/shell.nix
