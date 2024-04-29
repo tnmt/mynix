@@ -8,8 +8,9 @@
     ./hardware-configuration.nix
 
     ../../modules/core
-    ../../modules/programs/shell.nix
     ../../modules/programs/hyprland.nix
+    ../../modules/programs/openssh.nix
+    ../../modules/programs/shell.nix
     ../../modules/nixos
   ]
     ++ (with inputs.nixos-hardware.nixosModules; [

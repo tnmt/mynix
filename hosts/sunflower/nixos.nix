@@ -9,8 +9,9 @@
 
     ../../modules/core
     ../../modules/nixos
-    ../../modules/programs/shell.nix
     ../../modules/programs/hyprland.nix
+    ../../modules/programs/openssh.nix
+    ../../modules/programs/shell.nix
 
     inputs.nixos-hardware.nixosModules.microsoft-surface-go
     inputs.xremap-flake.nixosModules.default
