@@ -28,6 +28,4 @@
     "root"
     "nixremote"
   ];
-
-  networking.hostName = "maple";
 }
