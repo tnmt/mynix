@@ -18,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    xremap-flake.url = "github:xremap/nix-flake";
+    xremap.url = "github:xremap/nix-flake";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.3.0";
