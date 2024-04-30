@@ -23,6 +23,7 @@ in {
       brightnessctl # screen brightness
       grimblast # screenshot
       hyprpicker # color picker
+      pulseaudio # pulseaudio
       pamixer # pulseaudio mixer
       playerctl # media player control
       swww # wallpaper
