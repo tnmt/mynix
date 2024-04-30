@@ -1,19 +1,6 @@
 { pkgs
 , ...
 }: {
-
-  imports = [
-    ../base
-    ./terminal
-  ];
-
-  home = {
-    username = "tnmt";
-    homeDirectory = "/home/tnmt";
-
-    stateVersion = "22.11";
-  };
-
   home.packages = with pkgs; [
     # browser
     brave
@@ -43,6 +30,4 @@
     wineWowPackages.stable
     winetricks
   ];
-
-  programs.home-manager.enable = true;
 }
