@@ -27,7 +27,7 @@
     kubectl
 
     # wine
-    wineWowPackages.stable
+    wine-wayland
     winetricks
   ];
 }
