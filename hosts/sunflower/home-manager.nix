@@ -2,6 +2,7 @@
   imports = [
     ../../home-manager/base
     ../../home-manager/desktop
+    ../../home-manager/desktop/terminal
     ../../home-manager/desktop/hyprland
   ];
 
