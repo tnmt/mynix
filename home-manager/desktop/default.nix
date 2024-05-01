@@ -32,6 +32,11 @@
 
     # filer
     xfce.thunar
+    yazi
+    ranger
+
+    # cui image viewer
+    chafa
 
     # video player
     mpv
