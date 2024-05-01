@@ -7,9 +7,6 @@
   ];
 
   wayland.windowManager.hyprland.settings = {
-    env = [
-      "GDK_DPI_SCALE, 1.5"
-    ];
     monitor = [
       "eDP-1, 1920x1280, 0x0, 1"
       "DP-1, 2560x1440, 1920x0, 1"
