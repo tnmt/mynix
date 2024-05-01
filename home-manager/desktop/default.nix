@@ -33,7 +33,12 @@
     # filer
     xfce.thunar
 
-    # player
+    # video player
     mpv
+
+    # music player
+    mpc-cli
+    cantata
   ];
+
 }
