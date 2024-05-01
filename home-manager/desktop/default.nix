@@ -39,6 +39,8 @@
     # music player
     mpc-cli
     cantata
+    mmtc
+    ncmpcpp
   ];
 
 }
