@@ -11,5 +11,8 @@
     dconf.enable = true;
   };
 
-  xdg.portal.enable = true;
+  xdg.portal = {
+    enable = true;
+    config.common.default = "*";
+  };
 }
