@@ -9,6 +9,8 @@ in {
     ./swaylock.nix
     ./wofi.nix
     #./waybar.nix
+
+    inputs.hyprland.homeManagerModules.default
   ];
 
   wayland.windowManager.hyprland = {
