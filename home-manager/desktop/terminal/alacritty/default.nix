@@ -1,8 +1,11 @@
 {
+  pkgs,
   ...
 } :
   let
-
+    fontsize = if pkgs.stdenv.isLinux
+    then 12
+    else 16;
   in {
     programs.alacritty = {
       enable = true;
@@ -12,7 +15,7 @@
           TERM = "xterm-256color";
         };
         font = {
-          size = 16;
+          size = fontsize;
           normal = {
             family = "MesloLGS NF";
             style = "Regular";
