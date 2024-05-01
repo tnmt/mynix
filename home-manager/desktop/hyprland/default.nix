@@ -36,5 +36,6 @@ in {
     ])
     ++ [
       inputs.hyprsome.packages.x86_64-linux.default # workspace manager
+      hypr-helper
     ];
 }
