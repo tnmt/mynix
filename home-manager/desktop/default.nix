@@ -29,5 +29,8 @@
     # wine
     wine-wayland
     winetricks
+
+    # filer
+    xfce.thunar
   ];
 }
