@@ -14,6 +14,10 @@
         env = {
           TERM = "xterm-256color";
         };
+        window = {
+          opacity = 0.9;
+          blur = true;
+        };
         font = {
           size = fontsize;
           normal = {
