@@ -41,6 +41,13 @@
     cantata
     mmtc
     ncmpcpp
+
+    # misc
+    cava
+    tty-clock
+    cmatrix
+    htop
+    gotop
   ];
 
 }
