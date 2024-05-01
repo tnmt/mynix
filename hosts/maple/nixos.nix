@@ -9,6 +9,7 @@
 
     ../../modules/core
     ../../modules/desktop
+    ../../modules/programs/bluetooth.nix
     ../../modules/programs/hyprland.nix
     ../../modules/programs/openssh.nix
     ../../modules/programs/shell.nix
