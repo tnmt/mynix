@@ -11,6 +11,9 @@
       "eDP-1, 1920x1280, 0x0, 1"
       "DP-1, 2560x1440, 1920x0, 1"
     ];
+    env = [
+      "GDK_DPI_SCALE, 1.5"
+    ];
     input = {
       touchpad.natural_scroll = true;
     };
