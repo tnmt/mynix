@@ -26,7 +26,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_latest;
     extraModprobeConfig = ''
       options iwlwifi disable_11ax=true
     '';
