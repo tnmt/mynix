@@ -8,7 +8,7 @@ in {
     ./settings.nix
     ./swaylock.nix
     ./wofi.nix
-    ./waybar.nix
+    #./waybar.nix
   ];
 
   wayland.windowManager.hyprland = {
