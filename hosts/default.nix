@@ -72,14 +72,6 @@ in {
         ./sunflower/nixos.nix
       ];
     };
-    vps03 = mkNixosSystem {
-      system = "x86_64-linux";
-      hostname = "vps03";
-      username = "tnmt";
-      modules = [
-        ./vps03/nixos.nix
-      ];
-    };
     hydrangea = mkNixosSystem {
       system = "x86_64-linux";
       hostname = "hydrangea";
@@ -111,12 +103,12 @@ in {
         ./sunflower/home-manager.nix
       ];
     };
-    "tnmt@vps03" = mkHomeManagerConfiguration {
+    "tnmt@vps02" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
       overlays = [];
       modules = [
-        ./vps03/home-manager.nix
+        ./vps02/home-manager.nix
       ];
     };
     "tnmt@hydrangea" = mkHomeManagerConfiguration {
