@@ -32,5 +32,8 @@
 
     # filer
     xfce.thunar
+
+    # player
+    mpv
   ];
 }
