@@ -8,7 +8,7 @@
 
   wayland.windowManager.hyprland.settings = {
     monitor = [
-      "eDP-1, 1920x1280, 0x0, 1"
+      "eDP-1, 1920x1280, 0x0, 2"
       "DP-1, 3840x2160@60, 1920x0, 2"
     ];
     env = [
