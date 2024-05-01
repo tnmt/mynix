@@ -45,26 +45,8 @@
     nixosConfigurations = (import ./hosts inputs).nixos;
     homeConfigurations = (import ./hosts inputs).home-manager;
 
-    devShells = forAllSystems (system: let
-      pkgs = import inputs.nixpkgs {inherit system;};
-      scripts = with pkgs; [
-        (writeScriptBin "switch-home" ''
-          home-manager switch --flake ".#$@"
-        '')
-        (writeScriptBin "switch-nixos" ''
-          sudo nixos-rebuild switch --flake ".#$@"
-        '')
-        (writeScriptBin "switch-darwin" ''
-	  nix build .#darwinConfigurations.$@.system --extra-experimental-features 'nix-command flakes' --debug
-	  ./result/sw/bin/darwin-rebuild switch --flake ".#$@"
-        '')
-      ];
-      devPkgs = [
-      ];
-    in {
-      default = pkgs.mkShell {
-        packages = scripts ++ devPkgs;
-      };
-    });
+    devShells = forAllSystems (system:
+      let pkgs = import inputs.nixpkgs { inherit system; };
+      in { default = pkgs.mkShell { packages = with pkgs; [ nh ]; }; });
   };
 }
