@@ -12,10 +12,9 @@
       "DP-1, 3840x2160@60, 1920x0, 2"
     ];
     env = [
-      "GDK_SCALE, 2"
-    ];
-    env = [
-      "GDK_DPI_SCALE, 0.7"
+      #"GDK_DPI_SCALE, 1.0"
+      #"QT_SCALE_FACTOR, 1.0"
+      #"QT_AUTO_SCREEN_SCALE_FACTOR, 0"
     ];
     input = {
       touchpad.natural_scroll = true;
