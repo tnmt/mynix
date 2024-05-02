@@ -41,6 +41,12 @@
     # video player
     mpv
 
+    # sound control
+    qpwgraph
+
+    # audio tag editor
+    kid3
+
     # music player
     mpc-cli
     cantata
