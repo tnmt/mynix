@@ -28,7 +28,6 @@
       coc-solargraph
       fzf-vim
       nerdtree-git-plugin
-      onedark-vim
       vim-better-whitespace
       vim-commentary
       vim-endwise
@@ -171,7 +170,7 @@
       {
        plugin = lightline-vim;
        config = ''
-         let g:lightline = {'colorscheme': 'onedark'}
+         let g:lightline = {'colorscheme': 'tokyonight'}
          let g:lightline.component_expand = {
            \   'linter_checking': 'lightline#ale#checking',
            \   'linter_warnings': 'lightline#ale#warnings',
@@ -192,6 +191,13 @@
            \   ]
            \ }
          '';
+      }
+      {
+        plugin = tokyonight-nvim;
+        config = ''
+          syntax enable
+          colorscheme tokyonight
+        '';
       }
       {
         plugin = vim-indent-guides;
