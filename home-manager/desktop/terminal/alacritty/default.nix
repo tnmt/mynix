@@ -3,9 +3,7 @@
   ...
 } :
   let
-    fontsize = if pkgs.stdenv.isLinux
-    then 12
-    else 16;
+    fontsize = if pkgs.stdenv.isLinux then 12 else 16;
   in {
     programs.alacritty = {
       enable = true;
