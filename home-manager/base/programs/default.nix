@@ -11,6 +11,7 @@
   home.packages = with pkgs; [
     # nix
     cachix
+    nh
 
     # cui
     direnv
