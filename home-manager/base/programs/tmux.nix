@@ -16,9 +16,21 @@
       resurrect
       pain-control
       {
-        plugin = onedark-theme;
+        plugin = pkgs.tmuxPlugins.mkTmuxPlugin {
+          name = "tokyo-night-tmux";
+          pluginName = "tokyo-night-tmux";
+          rtpFilePath = "tokyo-night.tmux";
+          src = pkgs.fetchFromGitHub {
+            owner = "janoamaral";
+            repo = "tokyo-night-tmux";
+            rev = "v1.5";
+            sha256 = "sha256-yho2irPSwdRkNNwU7HZzN5dvspjDHWl75NlpS3uwz8M=";
+          };
+        };
         extraConfig = ''
-          set -g @onedark_date_format "%Y/%m/%d"
+          set -g @tokyo-night-tmux_window_id_style none
+          set -g @tokyo-night-tmux_date_format YMD
+          set -g @tokyo-night-tmux_time_format 24H
           '';
       }
     ];
