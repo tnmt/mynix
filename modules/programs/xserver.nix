@@ -8,7 +8,7 @@
       mouse.accelProfile = "flat";
     };
     displayManager = {
-      gdm.enable = true;
+      #gdm.enable = true;
     };
     xkb = {
       layout = "us";
