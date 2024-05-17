@@ -3,7 +3,7 @@
   ...
 } :
   let
-    fontsize = if pkgs.stdenv.isLinux then 12 else 16;
+    fontsize = if pkgs.stdenv.isDarwin then 16 else 12;
   in {
     programs.alacritty = {
       enable = true;
