@@ -28,7 +28,7 @@
           };
           italic = {
             family = "MesloLGS Nerd Font";
-            style = "Bold";
+            style = "Italic";
           };
         };
         scrolling.history = 100000;
