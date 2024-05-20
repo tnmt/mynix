@@ -27,8 +27,8 @@
     kubectl
 
     # wine
-    wine-wayland
-    winetricks
+    #wine-wayland
+    #winetricks
 
     # filer
     xfce.thunar
