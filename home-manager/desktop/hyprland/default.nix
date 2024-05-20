@@ -16,6 +16,9 @@
     xwayland.enable = true;
     systemd.enable = true;
     systemd.variables = [ "--all" ];
+    plugins = [
+      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
+    ];
   };
 
   home.packages =
@@ -33,7 +36,6 @@
       wl-clipboard # clipboard manager
     ])
     ++ [
-      inputs.hyprsome.packages.x86_64-linux.default # workspace manager
     ];
 
   home.file = {
