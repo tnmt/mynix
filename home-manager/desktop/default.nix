@@ -19,8 +19,6 @@
     discord
     slack
 
-    # misc
-    neofetch
 
     # container & virtualisation
     docker-compose
@@ -54,6 +52,7 @@
     ncmpcpp
 
     # misc
+    neofetch
     cava
     tty-clock
     cmatrix
