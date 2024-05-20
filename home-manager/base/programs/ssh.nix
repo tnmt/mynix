@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.ssh = {
     enable = true;
     controlMaster = "auto";
@@ -7,11 +8,11 @@
     serverAliveCountMax = 5;
     hashKnownHosts = true;
     forwardAgent = true;
-    extraConfig= ''
-            User tnmt
-            StrictHostKeyChecking no
-            AddKeysToAgent yes
-          '';
+    extraConfig = ''
+      User tnmt
+      StrictHostKeyChecking no
+      AddKeysToAgent yes
+    '';
 
     includes = [
       "conf.d/work.config"

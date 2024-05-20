@@ -1,6 +1,5 @@
-{ pkgs
-, ...
-}: {
+{ pkgs, ... }:
+{
   programs.tmux = {
     enable = true;
     shortcut = "t";
@@ -31,7 +30,7 @@
           set -g @tokyo-night-tmux_window_id_style none
           set -g @tokyo-night-tmux_date_format YMD
           set -g @tokyo-night-tmux_time_format 24H
-          '';
+        '';
       }
     ];
 
@@ -42,7 +41,6 @@
 
       bind e setw synchronize-panes on
       bind E setw synchronize-panes off
-      '';
+    '';
   };
-
 }

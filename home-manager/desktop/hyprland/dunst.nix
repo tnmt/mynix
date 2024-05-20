@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 {
   services.dunst = {
     enable = true;

@@ -1,7 +1,5 @@
+{ lib, ... }:
 {
-  lib,
-  ...
-}: {
   wayland.windowManager.hyprland.settings = {
     env = [
       #"GTK_IM_MODULE, fcitx"

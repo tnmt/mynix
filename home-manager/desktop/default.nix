@@ -1,6 +1,5 @@
-{ pkgs
-, ...
-}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # browser
     brave
@@ -18,7 +17,6 @@
     # chat
     discord
     slack
-
 
     # container & virtualisation
     docker-compose
@@ -59,5 +57,4 @@
     htop
     gotop
   ];
-
 }
