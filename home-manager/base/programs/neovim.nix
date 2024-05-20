@@ -1,6 +1,5 @@
-{ pkgs
-, ...
-}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     python311Packages.pynvim
     rubyPackages_3_2.solargraph
@@ -79,7 +78,7 @@
               call CocAction('doHover')
             endif
           endfunction
-          '';
+        '';
       }
       {
         plugin = copilot-vim;
@@ -91,7 +90,7 @@
                 \ 'vim': v:true,
                 \ 'ruby': v:true,
                 \ }
-          '';
+        '';
       }
       {
         plugin = ale;
@@ -106,14 +105,14 @@
           " let g:ale_fix_on_save = 1
           nmap <silent> <C-k> <Plug>(ale_previous_wrap)
           nmap <silent> <C-j> <Plug>(ale_next_wrap)
-          '';
+        '';
       }
       {
         plugin = nerdtree;
         config = ''
           nmap <C-e> :NERDTreeToggle<CR>
           let NERDTreeShowHidden=1
-          '';
+        '';
       }
       {
         plugin = ultisnips;
@@ -121,7 +120,7 @@
           let g:UltiSnipsExpandTrigger="<tab>"
           let g:UltiSnipsJumpForwardTrigger="<c-n>"
           let g:UltiSnipsJumpBackwardTrigger="<c-p>"
-          '';
+        '';
       }
       {
         plugin = vimwiki;
@@ -131,7 +130,7 @@
                                 \ {'path': '~/Dropbox/vimwiki/zettelkasten/',
                                 \ 'syntax': 'markdown', 'ext': '.md'}]
           let g:vimwiki_global_ext = 0
-          '';
+        '';
       }
       {
         plugin = vim-zettel;
@@ -153,44 +152,44 @@
                 \   ["publish", "false"]
                 \ ]
                 \}]
-          '';
+        '';
       }
       {
         plugin = fzf-vim;
         config = ''
           nmap <C-p> :History<CR>
-          '';
+        '';
       }
       {
         plugin = vim-polyglot;
         config = ''
           let g:polyglot_disabled = ['csv']
-          '';
+        '';
       }
       {
-       plugin = lightline-vim;
-       config = ''
-         let g:lightline = {'colorscheme': 'tokyonight'}
-         let g:lightline.component_expand = {
-           \   'linter_checking': 'lightline#ale#checking',
-           \   'linter_warnings': 'lightline#ale#warnings',
-           \   'linter_errors': 'lightline#ale#errors',
-           \   'linter_ok': 'lightline#ale#ok',
-           \ }
-         let g:lightline.component_type = {
-           \   'linter_checking': 'left',
-           \   'linter_warnings': 'warning',
-           \   'linter_errors': 'error',
-           \   'linter_ok': 'left',
-           \ }
-         let g:lightline.active = {
-           \   'left': [
-           \     ['mode', 'paste'],
-           \     ['readonly', 'filename', 'modified'],
-           \     ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
-           \   ]
-           \ }
-         '';
+        plugin = lightline-vim;
+        config = ''
+          let g:lightline = {'colorscheme': 'tokyonight'}
+          let g:lightline.component_expand = {
+            \   'linter_checking': 'lightline#ale#checking',
+            \   'linter_warnings': 'lightline#ale#warnings',
+            \   'linter_errors': 'lightline#ale#errors',
+            \   'linter_ok': 'lightline#ale#ok',
+            \ }
+          let g:lightline.component_type = {
+            \   'linter_checking': 'left',
+            \   'linter_warnings': 'warning',
+            \   'linter_errors': 'error',
+            \   'linter_ok': 'left',
+            \ }
+          let g:lightline.active = {
+            \   'left': [
+            \     ['mode', 'paste'],
+            \     ['readonly', 'filename', 'modified'],
+            \     ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+            \   ]
+            \ }
+        '';
       }
       {
         plugin = tokyonight-nvim;
@@ -203,23 +202,28 @@
         plugin = vim-indent-guides;
         config = ''
           let g:indent_guides_enable_on_vim_startup = 1
-          '';
+        '';
       }
     ];
 
     coc.enable = true;
     coc.settings = {
-      "diagnostic.enable" =  false;
+      "diagnostic.enable" = false;
       "languageserver" = {
         "python" = {
           "command" = "pyright";
           "trace.server" = "verbose";
-          "filetypes" = ["py"];
+          "filetypes" = [ "py" ];
         };
         "golang" = {
           "command" = "gopls";
-          "rootPatterns" =  ["go.mod" ".vim/" ".git/" ".hg/"];
-          "filetypes" = ["go"];
+          "rootPatterns" = [
+            "go.mod"
+            ".vim/"
+            ".git/"
+            ".hg/"
+          ];
+          "filetypes" = [ "go" ];
         };
         "nix" = {
           "enableLanguageServer" = true;
@@ -227,12 +231,12 @@
           "serverSettings" = {
             "nixd" = {
               "formatting" = {
-                "command" = ["nixpkgs-fmt"];
+                "command" = [ "nixpkgs-fmt" ];
               };
               "options" = {
                 "enable" = true;
                 "target" = {
-                  "args" = [];
+                  "args" = [ ];
                   "installable" = "<flakeref>#nixosConfigurations.<name>.options";
                 };
               };
@@ -263,6 +267,6 @@
       set termguicolors
       set updatetime=100
       au UIEnter * set guifont=MesloLGS\ NF:h16
-      '';
+    '';
   };
 }

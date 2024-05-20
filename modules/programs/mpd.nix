@@ -1,8 +1,5 @@
+{ config, username, ... }:
 {
-  config,
-  username,
-  ...
-} : {
   services.mpd = {
     enable = true;
     user = username;

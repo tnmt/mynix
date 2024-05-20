@@ -1,7 +1,5 @@
+{ username, ... }:
 {
-  username,
-  ...
-}: {
   nixpkgs.config.allowUnfree = true;
 
   nix = {
@@ -12,8 +10,16 @@
     };
     settings = {
       auto-optimise-store = true;
-      experimental-features = ["nix-command" "flakes"];
-      trusted-users = ["root" "@wheel" username "nixremote"];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      trusted-users = [
+        "root"
+        "@wheel"
+        username
+        "nixremote"
+      ];
       accept-flake-config = true;
 
       substituters = [
@@ -30,5 +36,4 @@
       ];
     };
   };
-
 }

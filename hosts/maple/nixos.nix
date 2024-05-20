@@ -3,20 +3,22 @@
   pkgs,
   username,
   ...
-}: {
-  imports = [
-    ./hardware-configuration.nix
+}:
+{
+  imports =
+    [
+      ./hardware-configuration.nix
 
-    ../../modules/core
-    ../../modules/desktop
-    ../../modules/programs/bluetooth.nix
-    ../../modules/programs/hyprland.nix
-    ../../modules/programs/mpd.nix
-    ../../modules/programs/openssh.nix
-    ../../modules/programs/shell.nix
-    ../../modules/programs/virtualisation.nix
-    ../../modules/programs/xserver.nix
-  ]
+      ../../modules/core
+      ../../modules/desktop
+      ../../modules/programs/bluetooth.nix
+      ../../modules/programs/hyprland.nix
+      ../../modules/programs/mpd.nix
+      ../../modules/programs/openssh.nix
+      ../../modules/programs/shell.nix
+      ../../modules/programs/virtualisation.nix
+      ../../modules/programs/xserver.nix
+    ]
     ++ (with inputs.nixos-hardware.nixosModules; [
       common-cpu-intel
       common-pc-ssd

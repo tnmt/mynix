@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [ ../../modules/darwin ];
 
   users.users.tnmt = {
