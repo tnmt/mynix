@@ -1,7 +1,5 @@
 { pkgs, lib, inputs, ... } :
-let
-  hypr-helper = pkgs.callPackage ./hypr-helper {};
-in {
+{
   imports = [
     ./dunst.nix
     ./keybinds.nix
@@ -36,7 +34,6 @@ in {
     ])
     ++ [
       inputs.hyprsome.packages.x86_64-linux.default # workspace manager
-      hypr-helper
     ];
 
   home.file = {

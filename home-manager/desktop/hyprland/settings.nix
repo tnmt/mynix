@@ -12,7 +12,6 @@
     exec-once = [
       "swww init && swww img ~/.config/hypr/wallpaper/abstract-black-background.jpg"
       "fcitx5 -D"
-      "hypr-helper start"
     ];
     windowrule = [
       "pseudo, noblur, class:(fcitx)"
