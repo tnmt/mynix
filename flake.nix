@@ -56,8 +56,6 @@
           pkgs = inputs.nixpkgs.legacyPackages.${system};
           formatters = with pkgs; [
             nixfmt-rfc-style
-            rustfmt
-            stylua
             taplo
           ];
           scripts = [
