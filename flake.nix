@@ -28,8 +28,8 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
     # Hyprland
-    hyprland.url = "github:hyprwm/Hyprland";
-    hyprsome.url = "github:sopa0/hyprsome";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprsome.url = "github:tnmt/hyprsome";
   };
 
   outputs = inputs: let
