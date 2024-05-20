@@ -1,7 +1,6 @@
-{ ... }: {
-  imports = [
-    ./programs
-  ];
+{ ... }:
+{
+  imports = [ ./programs ];
 
   home = {
     sessionVariables = {

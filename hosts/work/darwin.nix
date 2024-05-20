@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [ ../../modules/darwin ];
 
   users.users.tsunematsu = {

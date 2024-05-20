@@ -1,4 +1,9 @@
-{ pkgs, lib, inputs, ... } :
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 {
   imports = [
     ./dunst.nix
@@ -16,9 +21,7 @@
     xwayland.enable = true;
     systemd.enable = true;
     systemd.variables = [ "--all" ];
-    plugins = [
-      inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
-    ];
+    plugins = [ inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces ];
   };
 
   home.packages =
@@ -35,8 +38,7 @@
       wf-recorder # screen recorder
       wl-clipboard # clipboard manager
     ])
-    ++ [
-    ];
+    ++ [ ];
 
   home.file = {
     "abstract-purple-background.jpg" = {

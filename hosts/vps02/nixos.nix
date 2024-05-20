@@ -3,17 +3,17 @@
   lib,
   pkgs,
   username,
-  ... }:
+  ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
+  imports = [
+    ./hardware-configuration.nix
 
-      ../../modules/core
-      ../../modules/programs/shell.nix
-      ../../modules/programs/openssh.nix
-    ];
+    ../../modules/core
+    ../../modules/programs/shell.nix
+    ../../modules/programs/openssh.nix
+  ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -34,7 +34,5 @@
     ports = [ 2222 ];
   };
 
-
   nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
 }
-

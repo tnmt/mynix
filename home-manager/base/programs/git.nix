@@ -1,6 +1,5 @@
-{ pkgs
-, ...
-}: {
+{ pkgs, ... }:
+{
   programs.git = {
     enable = true;
 
@@ -37,7 +36,9 @@
         stat = true;
       };
 
-      "includeIf \"gitdir:~/ghq/github.com/\"" = { path = "~/.gitconfig.github"; };
+      "includeIf \"gitdir:~/ghq/github.com/\"" = {
+        path = "~/.gitconfig.github";
+      };
     };
 
     ignores = [
@@ -51,9 +52,7 @@
       ".go-version"
     ];
 
-    includes = [
-      { path = "~/.gitconfig.default"; }
-    ];
+    includes = [ { path = "~/.gitconfig.default"; } ];
 
     aliases = {
       co = "checkout";
@@ -68,7 +67,5 @@
     enable = true;
   };
 
-  home.packages = with pkgs; [
-    git-trim
-  ];
+  home.packages = with pkgs; [ git-trim ];
 }

@@ -3,7 +3,8 @@
   username,
   pkgs,
   ...
-} : {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./remotebuild.nix

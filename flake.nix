@@ -35,21 +35,52 @@
     };
   };
 
-  outputs = inputs: let
-    allSystems = [
-      "x86_64-linux" # 64-bit x86 Linux
-      "aarch64-darwin" # 64-bit ARM macOS
-    ];
-    forAllSystems = inputs.nixpkgs.lib.genAttrs allSystems;
-  in {
-    packages = forAllSystems (system: import ./pkgs inputs.nixpkgs.legacyPackages.${system});
-    formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt);
+  outputs =
+    inputs:
+    let
+      allSystems = [
+        "x86_64-linux" # 64-bit x86 Linux
+        "aarch64-darwin" # 64-bit ARM macOS
+      ];
+      forAllSystems = inputs.nixpkgs.lib.genAttrs allSystems;
+    in
+    {
+      packages = forAllSystems (system: import ./pkgs inputs.nixpkgs.legacyPackages.${system});
 
-    nixosConfigurations = (import ./hosts inputs).nixos;
-    homeConfigurations = (import ./hosts inputs).home-manager;
+      nixosConfigurations = (import ./hosts inputs).nixos;
+      homeConfigurations = (import ./hosts inputs).home-manager;
 
-    devShells = forAllSystems (system:
-      let pkgs = import inputs.nixpkgs { inherit system; };
-      in { default = pkgs.mkShell { packages = with pkgs; [ nh ]; }; });
-  };
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
+          formatters = with pkgs; [
+            nixfmt-rfc-style
+            rustfmt
+            stylua
+            taplo
+          ];
+          scripts = [
+            (pkgs.writeScriptBin "update-input" ''
+              nix flake lock --override-input "$1" "$2"
+            '')
+          ];
+        in
+        {
+          default = pkgs.mkShell { packages = ([ pkgs.nh ]) ++ formatters ++ scripts; };
+        }
+      );
+      formatter = forAllSystems (
+        system:
+        let
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
+          formatters = with pkgs; [ nixfmt-rfc-style ];
+          format = pkgs.writeScriptBin "format" ''
+            PATH=$PATH:${pkgs.lib.makeBinPath formatters}
+            ${pkgs.treefmt}/bin/treefmt --config-file ${./treefmt.toml}
+          '';
+        in
+        format
+      );
+    };
 }
