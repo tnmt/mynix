@@ -74,7 +74,10 @@
         system:
         let
           pkgs = inputs.nixpkgs.legacyPackages.${system};
-          formatters = with pkgs; [ nixfmt-rfc-style ];
+          formatters = with pkgs; [
+            nixfmt-rfc-style
+            taplo
+          ];
           format = pkgs.writeScriptBin "format" ''
             PATH=$PATH:${pkgs.lib.makeBinPath formatters}
             ${pkgs.treefmt}/bin/treefmt --config-file ${./treefmt.toml}
