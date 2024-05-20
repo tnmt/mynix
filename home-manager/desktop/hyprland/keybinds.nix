@@ -11,10 +11,6 @@
       "$mainMod SHIFT, F, togglefloating"
 
       # move focus
-      "$mainMod, left, exec, hypr-helper movefocus left"
-      "$mainMod, down, exec, hypr-helper movefocus down"
-      "$mainMod, up, exec, hypr-helper movefocus up"
-      "$mainMod, right, exec, hypr-helper movefocus right"
       "$mainMod, h, movefocus, l"
       "$mainMod, j, movefocus, d"
       "$mainMod, k, movefocus, u"
