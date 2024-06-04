@@ -5,7 +5,7 @@
     shortcut = "t";
     keyMode = "vi";
     clock24 = true;
-    terminal = "tmux-256color";
+    #terminal = "tmux-256color";
     historyLimit = 10000;
 
     plugins = with pkgs.tmuxPlugins; [
