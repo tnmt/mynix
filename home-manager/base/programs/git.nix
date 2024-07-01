@@ -3,6 +3,10 @@
   programs.git = {
     enable = true;
 
+    includes = [
+      { path = "~/.gitconfig.default"; }
+    ];
+
     extraConfig = {
       core = {
         editor = "nvim";
@@ -35,10 +39,6 @@
         autostash = true;
         stat = true;
       };
-
-      "includeIf \"gitdir:~/ghq/github.com/\"" = {
-        path = "~/.gitconfig.github";
-      };
     };
 
     ignores = [
@@ -52,7 +52,6 @@
       ".go-version"
     ];
 
-    includes = [ { path = "~/.gitconfig.default"; } ];
 
     aliases = {
       co = "checkout";
