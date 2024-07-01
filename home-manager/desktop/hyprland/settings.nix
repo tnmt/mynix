@@ -57,9 +57,6 @@
     misc = {
       disable_hyprland_logo = true;
     };
-    master = {
-      new_is_master = true;
-    };
     xwayland = {
       force_zero_scaling = true;
     };
