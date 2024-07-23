@@ -80,6 +80,18 @@ in
         }
       ];
     };
+    dahlia = mkNixosSystem {
+      system = "x86_64-linux";
+      hostname = "dahlia";
+      username = "tnmt";
+      modules = [
+        ./hydrangea/nixos.nix
+        {
+          system.stateVersion = "23.11";
+          wsl.enable = true;
+        }
+      ];
+    };
   };
 
   home-manager = {
@@ -102,6 +114,12 @@ in
       modules = [ ./vps02/home-manager.nix ];
     };
     "tnmt@hydrangea" = mkHomeManagerConfiguration {
+      system = "x86_64-linux";
+      username = "tnmt";
+      overlays = [ ];
+      modules = [ ./hydrangea/home-manager.nix ];
+    };
+    "tnmt@dahlia" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
       overlays = [ ];
