@@ -35,8 +35,6 @@
   # Don't touch this
   system.stateVersion = "22.11";
 
-  microsoft-surface.surface-control.enable = true;
-
   users.users."${username}" = {
     isNormalUser = true;
     shell = pkgs.zsh;
