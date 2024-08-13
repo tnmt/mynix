@@ -7,10 +7,10 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./remotebuild.nix
 
     ../../modules/core
     ../../modules/desktop
+    ../../modules/remotebuild
     ../../modules/programs/bluetooth.nix
     ../../modules/programs/hyprland.nix
     ../../modules/programs/mpd.nix
