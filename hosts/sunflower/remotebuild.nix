@@ -2,20 +2,6 @@
 {
   nix.buildMachines = [
     {
-      hostName = "maple";
-      system = "x86_64-linux";
-      protocol = "ssh-ng";
-      maxJobs = 1;
-      speedFactor = 2;
-      supportedFeatures = [
-        "nixos-test"
-        "benchmark"
-        "big-parallel"
-        "kvm"
-      ];
-      mandatoryFeatures = [ ];
-    }
-    {
       hostName = "hydrangea";
       system = "x86_64-linux";
       protocol = "ssh-ng";
