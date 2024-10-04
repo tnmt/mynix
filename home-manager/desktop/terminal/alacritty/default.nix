@@ -13,6 +13,10 @@ in
       window = {
         opacity = 0.9;
         blur = true;
+        padding = {
+          x = 5;
+          y = 5;
+        };
       };
       font = {
         size = fontsize;
