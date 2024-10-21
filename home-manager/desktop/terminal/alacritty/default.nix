@@ -11,7 +11,6 @@ in
         TERM = "xterm-256color";
       };
       window = {
-        opacity = 0.9;
         blur = true;
         padding = {
           x = 5;
