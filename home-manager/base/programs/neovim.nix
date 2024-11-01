@@ -81,18 +81,6 @@
         '';
       }
       {
-        plugin = copilot-vim;
-        config = ''
-          let g:copilot_filetypes = {
-                \ '*': v:false,
-                \ 'python': v:true,
-                \ 'go': v:true,
-                \ 'vim': v:true,
-                \ 'ruby': v:true,
-                \ }
-        '';
-      }
-      {
         plugin = ale;
         config = ''
           let g:ale_set_highlights = 0
