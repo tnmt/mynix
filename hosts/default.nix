@@ -62,11 +62,11 @@ in
       username = "tnmt";
       modules = [ ./maple/nixos.nix ];
     };
-    sunflower = mkNixosSystem {
+    camellia = mkNixosSystem {
       system = "x86_64-linux";
-      hostname = "sunflower";
+      hostname = "camellia";
       username = "tnmt";
-      modules = [ ./sunflower/nixos.nix ];
+      modules = [ ./camellia/nixos.nix ];
     };
     hydrangea = mkNixosSystem {
       system = "x86_64-linux";
@@ -101,11 +101,11 @@ in
       overlays = [ ];
       modules = [ ./maple/home-manager.nix ];
     };
-    "tnmt@sunflower" = mkHomeManagerConfiguration {
+    "tnmt@camellia" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
       overlays = [ ];
-      modules = [ ./sunflower/home-manager.nix ];
+      modules = [ ./camellia/home-manager.nix ];
     };
     "tnmt@vps02" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
