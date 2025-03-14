@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    python311Packages.pynvim
+    python313Packages.pynvim
     rubyPackages_3_2.solargraph
 
     nodePackages.coc-solargraph
