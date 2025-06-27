@@ -131,11 +131,11 @@ in
       overlays = [ ];
       modules = [ ./work/home-manager.nix ];
     };
-    "tnmt@goldmoon" = mkHomeManagerConfiguration {
+    "tnmt@hydrangea" = mkHomeManagerConfiguration {
       system = "aarch64-darwin";
       username = "tnmt";
       overlays = [ ];
-      modules = [ ./goldmoon/home-manager.nix ];
+      modules = [ ./hydrangea/home-manager.nix ];
     };
   };
 }
