@@ -2,7 +2,7 @@
 {
   nix.buildMachines = [
     {
-      hostName = "hydrangea";
+      hostName = "sunflower";
       system = "x86_64-linux";
       protocol = "ssh-ng";
       maxJobs = 1;
@@ -24,18 +24,18 @@
   '';
   nix.settings.trusted-public-keys = [
     "maple:YJWnCaukPN2HZDuJtVUpyVq2szmcgkKwMEzl+fXt1DA="
-    "hydrangea:iq3NX80BoEVA8m/+RF2xxirVdBVkvsdE75+elmlwQAI="
+    "sunflower:iq3NX80BoEVA8m/+RF2xxirVdBVkvsdE75+elmlwQAI="
     "vps03:C/1SqKVBylqziAX2hRuiCzQrNBB0Agfd/E0tu2rlXA8="
   ];
   nix.settings.trusted-substituters = [
-    "ssh-ng://hydrangea"
+    "ssh-ng://sunflower"
     #"ssh-ng://maple"
     #"ssh-ng://vps03"
   ];
 
   nix.settings.substituters = [
     "https://cache.nixos.org"
-    "ssh-ng://hydrangea"
+    "ssh-ng://sunflower"
     #"ssh-ng://maple"
     #"ssh-ng://vps03"
   ];

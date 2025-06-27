@@ -68,12 +68,12 @@ in
       username = "tnmt";
       modules = [ ./camellia/nixos.nix ];
     };
-    hydrangea = mkNixosSystem {
+    sunflower = mkNixosSystem {
       system = "x86_64-linux";
-      hostname = "hydrangea";
+      hostname = "sunflower";
       username = "tnmt";
       modules = [
-        ./hydrangea/nixos.nix
+        ./sunflower/nixos.nix
         {
           system.stateVersion = "23.11";
           wsl.enable = true;
@@ -85,7 +85,7 @@ in
       hostname = "dahlia";
       username = "tnmt";
       modules = [
-        ./hydrangea/nixos.nix
+        ./sunflower/nixos.nix
         {
           system.stateVersion = "23.11";
           wsl.enable = true;
@@ -113,17 +113,17 @@ in
       overlays = [ ];
       modules = [ ./vps02/home-manager.nix ];
     };
-    "tnmt@hydrangea" = mkHomeManagerConfiguration {
+    "tnmt@sunflower" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
       overlays = [ ];
-      modules = [ ./hydrangea/home-manager.nix ];
+      modules = [ ./sunflower/home-manager.nix ];
     };
     "tnmt@dahlia" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
       overlays = [ ];
-      modules = [ ./hydrangea/home-manager.nix ];
+      modules = [ ./sunflower/home-manager.nix ];
     };
     "tsunematsu@work" = mkHomeManagerConfiguration {
       system = "aarch64-darwin";
