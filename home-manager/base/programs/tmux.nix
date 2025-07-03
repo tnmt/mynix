@@ -39,6 +39,9 @@
 
       set-option -g renumber-windows on
 
+      set-option -g default-shell ~/.nix-profile/bin/zsh
+      set-option -g default-command ~/.nix-profile/bin/zsh
+
       bind e setw synchronize-panes on
       bind E setw synchronize-panes off
     '';
