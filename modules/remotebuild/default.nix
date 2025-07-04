@@ -23,20 +23,17 @@
     builders-use-substitutes = true
   '';
   nix.settings.trusted-public-keys = [
-    "maple:YJWnCaukPN2HZDuJtVUpyVq2szmcgkKwMEzl+fXt1DA="
     "sunflower:iq3NX80BoEVA8m/+RF2xxirVdBVkvsdE75+elmlwQAI="
     "vps03:C/1SqKVBylqziAX2hRuiCzQrNBB0Agfd/E0tu2rlXA8="
   ];
   nix.settings.trusted-substituters = [
     "ssh-ng://sunflower"
-    #"ssh-ng://maple"
     #"ssh-ng://vps03"
   ];
 
   nix.settings.substituters = [
     "https://cache.nixos.org"
     "ssh-ng://sunflower"
-    #"ssh-ng://maple"
     #"ssh-ng://vps03"
   ];
 }
