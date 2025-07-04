@@ -62,12 +62,6 @@ in
       username = "tnmt";
       modules = [ ./maple/nixos.nix ];
     };
-    camellia = mkNixosSystem {
-      system = "x86_64-linux";
-      hostname = "camellia";
-      username = "tnmt";
-      modules = [ ./camellia/nixos.nix ];
-    };
     sunflower = mkNixosSystem {
       system = "x86_64-linux";
       hostname = "sunflower";
@@ -100,12 +94,6 @@ in
       username = "tnmt";
       overlays = [ ];
       modules = [ ./maple/home-manager.nix ];
-    };
-    "tnmt@camellia" = mkHomeManagerConfiguration {
-      system = "x86_64-linux";
-      username = "tnmt";
-      overlays = [ ];
-      modules = [ ./camellia/home-manager.nix ];
     };
     "tnmt@vps02" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
