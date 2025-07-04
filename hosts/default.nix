@@ -56,12 +56,6 @@ let
 in
 {
   nixos = {
-    maple = mkNixosSystem {
-      system = "x86_64-linux";
-      hostname = "maple";
-      username = "tnmt";
-      modules = [ ./maple/nixos.nix ];
-    };
     sunflower = mkNixosSystem {
       system = "x86_64-linux";
       hostname = "sunflower";
@@ -89,12 +83,6 @@ in
   };
 
   home-manager = {
-    "tnmt@maple" = mkHomeManagerConfiguration {
-      system = "x86_64-linux";
-      username = "tnmt";
-      overlays = [ ];
-      modules = [ ./maple/home-manager.nix ];
-    };
     "tnmt@vps02" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
