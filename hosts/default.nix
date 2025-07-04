@@ -68,18 +68,6 @@ in
         }
       ];
     };
-    dahlia = mkNixosSystem {
-      system = "x86_64-linux";
-      hostname = "dahlia";
-      username = "tnmt";
-      modules = [
-        ./sunflower/nixos.nix
-        {
-          system.stateVersion = "23.11";
-          wsl.enable = true;
-        }
-      ];
-    };
   };
 
   home-manager = {
@@ -90,12 +78,6 @@ in
       modules = [ ./vps02/home-manager.nix ];
     };
     "tnmt@sunflower" = mkHomeManagerConfiguration {
-      system = "x86_64-linux";
-      username = "tnmt";
-      overlays = [ ];
-      modules = [ ./sunflower/home-manager.nix ];
-    };
-    "tnmt@dahlia" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
       overlays = [ ];
