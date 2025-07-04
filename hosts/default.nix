@@ -125,11 +125,17 @@ in
       overlays = [ ];
       modules = [ ./sunflower/home-manager.nix ];
     };
-    "tsunematsu@work" = mkHomeManagerConfiguration {
+    "tsunematsu@work_mac" = mkHomeManagerConfiguration {
       system = "aarch64-darwin";
       username = "tsunematsu";
       overlays = [ ];
-      modules = [ ./work/home-manager.nix ];
+      modules = [ ./work_mac/home-manager.nix ];
+    };
+    "tnmt@work_ubuntu" = mkHomeManagerConfiguration {
+      system = "x86_64-linux";
+      username = "tnmt";
+      overlays = [ ];
+      modules = [ ./work_ubuntu/home-manager.nix ];
     };
     "tnmt@hydrangea" = mkHomeManagerConfiguration {
       system = "aarch64-darwin";
