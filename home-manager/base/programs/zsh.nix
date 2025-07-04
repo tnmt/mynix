@@ -14,7 +14,7 @@
     #initExtraFirst = ''
     #  zmodload zsh/zprof
     #  '';
-    initExtra = ''
+    initContent = ''
       . ${./zsh/zshrc}
       . ${./zsh/p10k.zsh}
       #if (which zprof > /dev/null 2>&1) ;then
