@@ -77,6 +77,7 @@
             taplo
           ];
           format = pkgs.writeScriptBin "format" ''
+            #!${pkgs.runtimeShell}
             PATH=$PATH:${pkgs.lib.makeBinPath formatters}
             ${pkgs.treefmt}/bin/treefmt --config-file ${./treefmt.toml}
           '';
