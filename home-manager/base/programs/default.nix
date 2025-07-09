@@ -54,7 +54,6 @@
 
     # Etc(not categorized yet)
     direnv
-    fzf
     neofetch
   ];
 }
