@@ -55,5 +55,8 @@
     # Etc(not categorized yet)
     direnv
     neofetch
+
+    # Terraform
+    tenv
   ];
 }
