@@ -56,6 +56,9 @@
     direnv
     neofetch
 
+    # claude
+    claude-code
+
     # Terraform
     tenv
   ];
