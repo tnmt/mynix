@@ -52,7 +52,6 @@
       ".go-version"
     ];
 
-
     aliases = {
       co = "checkout";
       ci = "commit";
