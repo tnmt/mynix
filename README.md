@@ -60,7 +60,11 @@ This repository contains modular Nix configurations supporting:
 
 ### Building NixOS Configuration
 ```bash
+# Using nixos-rebuild directly
 sudo nixos-rebuild switch --flake .#sunflower
+
+# Using nh (recommended)
+nh os switch . -H sunflower
 ```
 
 ### Building Home Manager Configuration
