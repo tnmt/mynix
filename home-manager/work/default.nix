@@ -1,9 +1,6 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     openstackclient
-
-    # oneaws
-    inputs.oneaws.packages.${pkgs.system}.default
   ];
 }
