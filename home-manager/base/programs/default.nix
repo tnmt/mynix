@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./git.nix
@@ -58,6 +58,7 @@
 
     # claude
     claude-code
+    inputs.ccusage.packages.${pkgs.system}.default
 
     # Terraform
     tenv

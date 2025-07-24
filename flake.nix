@@ -27,6 +27,8 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
+    ccusage.url = "github:tnmt/ccusage-flake";
+
     # Hyprland
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     split-monitor-workspaces = {
