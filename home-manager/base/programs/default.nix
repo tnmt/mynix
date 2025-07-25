@@ -19,7 +19,6 @@
     fzf
     gh
     ghq
-    hub
     nkf
     peco
     platinum-searcher
