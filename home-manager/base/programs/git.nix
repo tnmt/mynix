@@ -50,6 +50,7 @@
       ".envrc"
       ".ruby-version"
       ".go-version"
+      "**/.claude/settings.local.json"
     ];
 
     aliases = {
