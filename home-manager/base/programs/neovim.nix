@@ -115,31 +115,8 @@
         config = ''
           let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/',
                                 \ 'syntax': 'markdown', 'ext': '.md'},
-                                \ {'path': '~/Dropbox/vimwiki/zettelkasten/',
                                 \ 'syntax': 'markdown', 'ext': '.md'}]
           let g:vimwiki_global_ext = 0
-        '';
-      }
-      {
-        plugin = vim-zettel;
-        config = ''
-          let g:zettel_format="%Y%m%d%H%M%S"
-          let g:zettel_fzf_command = "pt --column --ignore-case --color"
-          let g:zettel_date_format = "%Y/%m/%d %H:%M:%S"
-          function! s:insert_id()
-            if exists("g:zettel_current_id")
-              return strftime("%Y%m%d%H%M%S")
-            else
-              return "unnamed"
-            endif
-          endfunction
-          let g:zettel_options = [{}, {"front_matter" :
-                \ [
-                \   ["id", function("s:insert_id")],
-                \   ["tags", []],
-                \   ["publish", "false"]
-                \ ]
-                \}]
         '';
       }
       {
