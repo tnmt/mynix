@@ -46,7 +46,7 @@ let
           home = {
             inherit username;
             homeDirectory = if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
-            stateVersion = "24.05";
+            stateVersion = "25.05";
           };
           programs.home-manager.enable = true;
           programs.git.enable = true;
@@ -63,7 +63,7 @@ in
       modules = [
         ./sunflower/nixos.nix
         {
-          system.stateVersion = "24.05";
+          system.stateVersion = "25.05";
           wsl.enable = true;
         }
       ];
