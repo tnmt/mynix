@@ -10,7 +10,7 @@
   ];
 
   systemd.user.timers."obsidian-backup" = {
-    Unit.Description = "Run obsidian-backup.sh every 10 minutes";
+    Unit.Description = "Run obsidian backup daily at 3:00 AM";
     Timer = {
       OnCalendar = "3:00";
       Persistent = true;
@@ -19,7 +19,7 @@
   };
 
   systemd.user.services."obsidian-backup" = {
-    Unit.Description = "Run obsidian-backup.sh every 10 minutes";
+    Unit.Description = "Run obsidian backup daily at 3:00 AM";
     Service = {
       Type = "oneshot";
       ExecStart = "${pkgs.bash}/bin/bash /home/${username}/backup/obsidian-backup.sh";
