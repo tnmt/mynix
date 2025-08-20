@@ -73,7 +73,7 @@ nh os switch . -H sunflower
 home-manager switch --flake .#tnmt@sunflower
 
 # Using nh (recommended)
-nh home switch . -c tnmt@hydrangea
+nh home switch . -c tnmt@sunflower
 ```
 
 ### Development Shell
