@@ -2,9 +2,9 @@
   description = "NixOS & homa-manager configurations of tnmt";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-24.05";
-    nixpkgs-stable.url = "nixpkgs/nixos-24.05";
-    nixpkgs-darwin.url = "nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "nixpkgs/nixos-25.05";
+    nixpkgs-darwin.url = "nixpkgs/nixpkgs-25.05-darwin";
 
     darwin = {
       url = "github:lnl7/nix-darwin";
@@ -25,7 +25,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/05098ab6e48684c573d7033bd583b1eea2f5f851";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/eabf2ecbb69a6d501b4e85117f4799e0efb0e889";
 
     ccusage.url = "github:tnmt/ccusage-flake";
     oneaws.url = "github:tnmt/oneaws-flake";
