@@ -2,9 +2,9 @@
   description = "NixOS & homa-manager configurations of tnmt";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-25.05";
-    nixpkgs-darwin.url = "nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs.url = "nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "nixpkgs/nixos-24.05";
+    nixpkgs-darwin.url = "nixpkgs/nixpkgs-24.05-darwin";
 
     darwin = {
       url = "github:lnl7/nix-darwin";
