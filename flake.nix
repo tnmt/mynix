@@ -25,7 +25,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/05098ab6e48684c573d7033bd583b1eea2f5f851";
 
     ccusage.url = "github:tnmt/ccusage-flake";
     oneaws.url = "github:tnmt/oneaws-flake";
