@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -6,7 +6,7 @@
     defaultKeymap = "emacs";
 
     # ファイルが生成されるディレクトリ ($ZDOTDIR)
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
 
     # zsh-syntax-highlighting を有効化する
     syntaxHighlighting.enable = true;
