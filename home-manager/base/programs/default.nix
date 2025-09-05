@@ -59,6 +59,9 @@
     claude-code
     inputs.ccusage.packages.${pkgs.system}.default
 
+    # gemini
+    gemini-cli
+
     # Terraform
     tenv
   ];
