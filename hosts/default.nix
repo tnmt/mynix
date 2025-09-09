@@ -68,9 +68,26 @@ in
         }
       ];
     };
+    dahlia = mkNixosSystem {
+      system = "x86_64-linux";
+      hostname = "dahlia";
+      username = "tnmt";
+      modules = [
+        ./dahlia/nixos.nix
+        {
+          system.stateVersion = "25.05";
+        }
+      ];
+    };
   };
 
   home-manager = {
+    "tnmt@dahlia" = mkHomeManagerConfiguration {
+      system = "x86_64-linux";
+      username = "tnmt";
+      overlays = [ ];
+      modules = [ ./dahlia/home-manager.nix ];
+    };
     "tnmt@vps02" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";

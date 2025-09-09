@@ -1,7 +1,7 @@
 {
   # Sound
   #sound.enable = true;
-  hardware.pulseaudio = {
+  services.pulseaudio = {
     enable = false;
     extraConfig = "load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
   };
