@@ -62,6 +62,9 @@
     # gemini
     gemini-cli
 
+    # codex
+    codex
+
     # Terraform
     tenv
   ];
