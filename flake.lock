@@ -76,11 +76,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1759299405,
-        "narHash": "sha256-QSXOPSDUJf50K0sqI4Z9dyHSDFjklAU8Q799iVbumjU=",
+        "lastModified": 1763092629,
+        "narHash": "sha256-+gBPpTJbWG8x87+B588apq86p+Flq3TVs449OB1XjZ8=",
         "owner": "tnmt",
         "repo": "ccusage-flake",
-        "rev": "5a2d53cef250328380ed651a801b6dae7f2fd675",
+        "rev": "f71f0350d50a0a3dd3075aea60599d20a03a6d0b",
         "type": "github"
       },
       "original": {
