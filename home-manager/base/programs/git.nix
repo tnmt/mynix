@@ -7,7 +7,7 @@
       { path = "~/.gitconfig.default"; }
     ];
 
-    extraConfig = {
+    settings = {
       core = {
         editor = "nvim";
       };
@@ -39,6 +39,14 @@
         autostash = true;
         stat = true;
       };
+
+      alias = {
+        co = "checkout";
+        ci = "commit";
+        di = "diff";
+        st = "status";
+        up = "pull --rebase";
+      };
     };
 
     ignores = [
@@ -52,14 +60,6 @@
       ".go-version"
       "**/.claude/settings.local.json"
     ];
-
-    aliases = {
-      co = "checkout";
-      ci = "commit";
-      di = "diff";
-      st = "status";
-      up = "pull --rebase";
-    };
   };
 
   programs.gitui = {

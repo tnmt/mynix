@@ -2,17 +2,21 @@
 {
   programs.ssh = {
     enable = true;
-    controlMaster = "auto";
-    controlPersist = "60m";
-    serverAliveInterval = 60;
-    serverAliveCountMax = 5;
-    hashKnownHosts = true;
-    forwardAgent = true;
-    extraConfig = ''
-      User tnmt
-      StrictHostKeyChecking no
-      AddKeysToAgent yes
-    '';
+    enableDefaultConfig = false;
+
+    matchBlocks."*" = {
+      controlMaster = "auto";
+      controlPersist = "60m";
+      serverAliveInterval = 60;
+      serverAliveCountMax = 5;
+      hashKnownHosts = true;
+      forwardAgent = true;
+      user = "tnmt";
+      extraOptions = {
+        StrictHostKeyChecking = "no";
+        AddKeysToAgent = "yes";
+      };
+    };
 
     includes = [
       "conf.d/work.config"
