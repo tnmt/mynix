@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     python313Packages.pynvim
-    rubyPackages_3_2.solargraph
 
     nodePackages.coc-solargraph
     nodePackages.coc-go

@@ -30,7 +30,6 @@
     rsync
 
     # lang
-    rubyPackages_3_2.solargraph
     gopls
     nixd
 
