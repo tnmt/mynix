@@ -22,7 +22,9 @@
     secrets = {
       git_email = { };
       git_name = { };
-      atuin_sync_address = { };
+      atuin_sync_address = {
+        sopsFile = ../../secrets/common.yaml;
+      };
     };
   };
 
