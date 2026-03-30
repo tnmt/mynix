@@ -7,6 +7,7 @@
     ./ssh.nix
     ./starship.nix
     ./tmux.nix
+    ./zellij.nix
     ./zsh.nix
   ];
 
