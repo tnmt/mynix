@@ -9,6 +9,11 @@
     ../../home-manager/server
   ];
 
+  custom = {
+    email = "test@example.com";
+    name = "tnmt";
+  };
+
   home = {
     inherit username;
     homeDirectory = "/home/${username}";
