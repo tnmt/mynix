@@ -20,6 +20,7 @@ let
       username,
       overlays,
       modules,
+      sopsFile ? ../secrets/default.yaml,
     }:
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = import inputs.nixpkgs {
@@ -53,12 +54,14 @@ let
           programs.git.enable = true;
 
           sops = {
-            defaultSopsFile = ../secrets/default.yaml;
+            defaultSopsFile = sopsFile;
             age.keyFile = "${if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}"}/.config/sops/age/keys.txt";
             secrets = {
               git_email = { };
               git_name = { };
-              atuin_sync_address = { };
+              atuin_sync_address = {
+                sopsFile = ../secrets/common.yaml;
+              };
             };
           };
         }
@@ -109,6 +112,7 @@ in
       system = "aarch64-darwin";
       username = "tsunematsu";
       overlays = [ ];
+      sopsFile = ../secrets/work_mac.yaml;
       modules = [ ./work_mac/home-manager.nix ];
     };
     "tnmt@work_ubuntu" = mkHomeManagerConfiguration {
