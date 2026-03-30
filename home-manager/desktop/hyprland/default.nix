@@ -6,12 +6,12 @@
 }:
 {
   imports = [
-    ./dunst.nix
     ./keybinds.nix
+    ./mako.nix
     ./settings.nix
     ./swaylock.nix
+    ./walker.nix
     ./wofi.nix
-    #./waybar.nix
 
     inputs.hyprland.homeManagerModules.default
   ];
@@ -24,21 +24,21 @@
     plugins = [ inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces ];
   };
 
-  home.packages =
-    (with pkgs; [
-      brightnessctl # screen brightness
-      grimblast # screenshot
-      hyprpicker # color picker
-      pulseaudio # pulseaudio
-      pamixer # pulseaudio mixer
-      playerctl # media player control
-      swww # wallpaper
-      wayvnc # vnc server
-      wev # key event watcher
-      wf-recorder # screen recorder
-      wl-clipboard # clipboard manager
-    ])
-    ++ [ ];
+  home.packages = with pkgs; [
+    brightnessctl
+    grim
+    slurp
+    hyprpicker
+    pulseaudio
+    pamixer
+    playerctl
+    swww
+    wayvnc
+    wev
+    wf-recorder
+    wl-clipboard
+    wlogout
+  ];
 
   home.file = {
     "abstract-purple-background.jpg" = {
