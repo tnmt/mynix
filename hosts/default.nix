@@ -33,7 +33,7 @@ let
       };
       extraSpecialArgs = {
         inherit inputs username;
-        theme = (import ../themes) "tokyonight-moon";
+        theme = (import ../themes) "tokyonight-storm";
         pkgs-stable = import inputs.nixpkgs-stable {
           inherit system overlays;
           config = {
@@ -65,6 +65,17 @@ in
         {
           system.stateVersion = "25.05";
           wsl.enable = true;
+        }
+      ];
+    };
+    test-vm = mkNixosSystem {
+      system = "x86_64-linux";
+      hostname = "test-vm";
+      username = "tnmt";
+      modules = [
+        ./test-vm/nixos.nix
+        {
+          system.stateVersion = "25.05";
         }
       ];
     };

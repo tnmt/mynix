@@ -39,7 +39,7 @@
   };
 
   outputs =
-    inputs:
+    inputs@{ self, ... }:
     let
       allSystems = [
         "x86_64-linux" # 64-bit x86 Linux
@@ -52,6 +52,12 @@
 
       nixosConfigurations = (import ./hosts inputs).nixos;
       homeConfigurations = (import ./hosts inputs).home-manager;
+
+      # Run with: nix run .#test-vm
+      apps.x86_64-linux.test-vm = {
+        type = "app";
+        program = "${self.nixosConfigurations.test-vm.config.system.build.vm}/bin/run-test-vm-vm";
+      };
 
       devShells = forAllSystems (
         system:
