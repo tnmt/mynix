@@ -3,10 +3,11 @@
   programs.git = {
     enable = true;
 
-    settings = {
-      user.name = config.custom.name;
-      user.email = config.custom.email;
+    includes = [
+      { path = "~/.config/git/identity"; }
+    ];
 
+    settings = {
       core.editor = "nvim";
 
       push = {
@@ -89,4 +90,16 @@
   programs.gitui.enable = true;
 
   home.packages = with pkgs; [ git-trim ];
+
+  # Generate git identity from sops secrets
+  home.activation.gitIdentity = config.lib.dag.entryAfter [ "sopsNix" ] ''
+    mkdir -p ~/.config/git
+    if [ -f "${config.sops.secrets.git_email.path}" ] && [ -f "${config.sops.secrets.git_name.path}" ]; then
+      cat > ~/.config/git/identity <<EOF
+    [user]
+      email = $(cat "${config.sops.secrets.git_email.path}")
+      name = $(cat "${config.sops.secrets.git_name.path}")
+    EOF
+    fi
+  '';
 }
