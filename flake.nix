@@ -27,6 +27,11 @@
 
     nixos-wsl.url = "github:nix-community/NixOS-WSL/eabf2ecbb69a6d501b4e85117f4799e0efb0e889";
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ccusage.url = "github:tnmt/ccusage-flake";
     oneaws.url = "github:tnmt/oneaws-flake";
 

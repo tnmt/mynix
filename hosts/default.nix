@@ -42,6 +42,7 @@ let
         };
       };
       modules = modules ++ [
+        inputs.sops-nix.homeManagerModules.sops
         {
           home = {
             inherit username;
@@ -50,6 +51,16 @@ let
           };
           programs.home-manager.enable = true;
           programs.git.enable = true;
+
+          sops = {
+            defaultSopsFile = ../secrets/default.yaml;
+            age.keyFile = "${if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}"}/.config/sops/age/keys.txt";
+            secrets = {
+              git_email = { };
+              git_name = { };
+              atuin_sync_address = { };
+            };
+          };
         }
       ];
     };
