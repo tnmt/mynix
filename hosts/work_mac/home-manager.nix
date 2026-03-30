@@ -4,12 +4,18 @@
     ../../home-manager/base
     ../../home-manager/darwin
     ../../home-manager/desktop/terminal/alacritty
+    ../../home-manager/desktop/terminal/ghostty
     ../../home-manager/work
   ];
 
-  # work_mac specific packages
-  home.packages = with pkgs; [
-    # oneaws (work_mac only)
+  custom = {
+    desktop = true;
+    development = true;
+    email = ""; # set locally or via sops-nix
+    name = "tsunematsu";
+  };
+
+  home.packages = [
     inputs.oneaws.packages.${pkgs.system}.default
   ];
 }

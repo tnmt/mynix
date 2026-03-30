@@ -1,13 +1,69 @@
 { pkgs, inputs, ... }:
 {
   imports = [
+    ./atuin.nix
     ./git.nix
     ./neovim.nix
     ./ssh.nix
-    #./starship.nix
+    ./starship.nix
     ./tmux.nix
+    ./zellij.nix
     ./zsh.nix
   ];
+
+  programs = {
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    eza = {
+      enable = true;
+    };
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      options = [ "--cmd" "j" ];
+    };
+
+    bat = {
+      enable = true;
+      config = {
+        theme = "tokyonight_storm";
+      };
+    };
+
+    btop = {
+      enable = true;
+      settings = {
+        color_theme = "tokyo-night";
+        theme_background = true;
+        truecolor = true;
+        rounded_corners = true;
+        graph_symbol = "braille";
+        update_ms = 2000;
+        proc_sorting = "cpu lazy";
+        proc_colors = true;
+        proc_gradient = true;
+        proc_mem_bytes = true;
+        proc_cpu_graphs = true;
+        show_uptime = true;
+        show_cpu_freq = true;
+        check_temp = true;
+        show_coretemp = true;
+        show_battery = true;
+        vim_keys = false;
+        clock_format = "%X";
+      };
+    };
+  };
 
   home.packages = with pkgs; [
     # nix
@@ -15,19 +71,17 @@
     nh
 
     # cui
-    direnv
-    fzf
     gh
     ghq
     nkf
-    peco
-    platinum-searcher
+    ripgrep
+    fd
     sshuttle
     tig
-    tmux
     wget
     gnumake
     rsync
+    tree
 
     # lang
     gopls
@@ -45,14 +99,10 @@
     yamlfmt
 
     # SSH
-    openssh # provide ssh ssh-agent ssh-keygen ssh-add scp ssh-keyscan
+    openssh
 
     # TLS
     openssl
-
-    # Etc(not categorized yet)
-    direnv
-    neofetch
 
     # claude
     claude-code

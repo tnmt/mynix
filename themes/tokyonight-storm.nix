@@ -1,0 +1,43 @@
+# Tokyo Night Storm color palette
+# Ported from chezmoi dot_config/theme/colors/tokyo-night-storm.toml
+{
+  name = "tokyonight-storm";
+
+  # Neovim
+  neovim = {
+    plugin = "folke/tokyonight.nvim";
+    colorscheme = "tokyonight-storm";
+  };
+
+  # Ghostty
+  ghostty = {
+    linux = "tokyonight-storm";
+    darwin = "TokyoNight Storm";
+  };
+
+  # Base colors
+  background = "#24283b";
+  foreground = "#c0caf5";
+  cursor = "#c0caf5";
+  accent = "#7aa2f7";
+  selection_foreground = "#c0caf5";
+  selection_background = "#7aa2f7";
+
+  # ANSI colors
+  color0 = "#1d202f";
+  color1 = "#f7768e";
+  color2 = "#9ece6a";
+  color3 = "#e0af68";
+  color4 = "#7aa2f7";
+  color5 = "#bb9af7";
+  color6 = "#7dcfff";
+  color7 = "#a9b1d6";
+  color8 = "#414868";
+  color9 = "#ff899d";
+  color10 = "#9fe044";
+  color11 = "#faba4a";
+  color12 = "#8db0ff";
+  color13 = "#c7a9ff";
+  color14 = "#a4daff";
+  color15 = "#c0caf5";
+}
