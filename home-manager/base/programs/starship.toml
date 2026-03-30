@@ -1,0 +1,262 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+palette = "tokyonight_storm"
+
+format = """
+[░▒▓](fg:fg_dark)\
+$os\
+[](bg:blue fg:fg_dark)\
+$directory\
+[](fg:blue bg:terminal_black)\
+$git_branch\
+$git_status\
+[](fg:terminal_black bg:bg)\
+$nodejs\
+$rust\
+$golang\
+$php\
+[](fg:bg bg:bg_dark)\
+$time\
+[ ](fg:bg_dark)\
+$all\
+$character"""
+
+command_timeout = 1000
+
+[os]
+format = "[$symbol ](bg:fg_dark fg:bg_dark)"
+disabled = false
+
+[os.symbols]
+Android = "  "
+Arch = "  "
+CentOS = "  "
+Debian = "  "
+Fedora = "  "
+FreeBSD = "  "
+Gentoo = "  "
+Kali = "  "
+Linux = "  "
+Macos = "  "
+NetBSD = "  "
+NixOS = "  "
+Pop = "  "
+Redhat = "  "
+RedHatEnterprise = "  "
+RockyLinux = "  "
+Ubuntu = "  "
+Unknown = "  "
+Windows = " 󰍲 "
+
+[directory]
+read_only = " 󰌾"
+style = "fg:fg bg:blue"
+format = "[ $path ]($style)"
+truncation_length = 100
+truncate_to_repo = false
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[direnv]
+disabled = false
+
+[hostname]
+ssh_symbol = " "
+ssh_only = false
+disabled = false
+
+[gcloud]
+symbol = " "
+
+[git_branch]
+symbol = ""
+style = "bg:terminal_black"
+format = '[[ $symbol $branch ](fg:blue bg:terminal_black)]($style)'
+
+[git_status]
+style = "bg:terminal_black"
+format = '[[($all_status$ahead_behind )](fg:blue bg:terminal_black)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:bg"
+format = '[[ $symbol ($version) ](fg:green bg:bg)]($style)'
+
+[rust]
+symbol = "󱘗"
+style = "bg:bg"
+format = '[[ $symbol ($version) ](fg:orange bg:bg)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:bg"
+format = '[[ $symbol ($version) ](fg:cyan bg:bg)]($style)'
+
+[php]
+symbol = ""
+style = "bg:bg"
+format = '[[ $symbol ($version) ](fg:purple bg:bg)]($style)'
+
+[time]
+disabled = false
+time_format = "%T" # Hour:Minute Format
+style = "bg:bg_dark"
+format = '[[  $time ](fg:fg_dark bg:bg_dark)]($style)'
+
+[mise]
+disabled = false
+
+[localip]
+disabled = false
+
+[aws]
+symbol = " "
+
+[buf]
+symbol = " "
+
+[bun]
+symbol = " "
+
+[c]
+symbol = " "
+
+[cpp]
+symbol = " "
+
+[cmake]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[crystal]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[deno]
+symbol = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fennel]
+symbol = " "
+
+[fortran]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[git_commit]
+tag_symbol = '  '
+
+[gradle]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[kotlin]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
+
+[nim]
+symbol = "󰆥 "
+
+[nix_shell]
+symbol = " "
+
+[ocaml]
+symbol = " "
+
+[package]
+symbol = "󰏗 "
+
+[perl]
+symbol = " "
+
+[pijul_channel]
+symbol = " "
+
+[pixi]
+symbol = "󰏗 "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[status]
+symbol = " "
+
+[swift]
+symbol = " "
+
+[xmake]
+symbol = " "
+
+[zig]
+symbol = " "
+
+[palettes.tokyonight_storm]
+red = "#f7768e"
+orange = "#ff9e64"
+yellow = "#e0af68"
+green = "#9ece6a"
+teal = "#73daca"
+cyan = "#7dcfff"
+blue = "#7aa2f7"
+purple = "#bb9af7"
+magenta = "#ff007c"
+fg = "#c0caf5"
+fg_dark = "#a9b1d6"
+comment = "#565f89"
+dark5 = "#737aa2"
+terminal_black = "#414868"
+bg_highlight = "#292e42"
+bg = "#24283b"
+bg_dark = "#1f2335"

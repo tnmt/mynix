@@ -1,13 +1,44 @@
 { pkgs, inputs, ... }:
 {
   imports = [
+    ./atuin.nix
     ./git.nix
     ./neovim.nix
     ./ssh.nix
-    #./starship.nix
+    ./starship.nix
     ./tmux.nix
     ./zsh.nix
   ];
+
+  programs = {
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    eza = {
+      enable = true;
+    };
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      options = [ "--cmd" "j" ];
+    };
+
+    bat = {
+      enable = true;
+      config = {
+        theme = "tokyonight_storm";
+      };
+    };
+  };
 
   home.packages = with pkgs; [
     # nix
@@ -15,19 +46,17 @@
     nh
 
     # cui
-    direnv
-    fzf
     gh
     ghq
     nkf
-    peco
-    platinum-searcher
+    ripgrep
+    fd
     sshuttle
     tig
-    tmux
     wget
     gnumake
     rsync
+    tree
 
     # lang
     gopls
@@ -45,14 +74,10 @@
     yamlfmt
 
     # SSH
-    openssh # provide ssh ssh-agent ssh-keygen ssh-add scp ssh-keyscan
+    openssh
 
     # TLS
     openssl
-
-    # Etc(not categorized yet)
-    direnv
-    neofetch
 
     # claude
     claude-code
