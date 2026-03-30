@@ -1,6 +1,9 @@
 { ... }:
 {
-  imports = [ ./programs ];
+  imports = [
+    ./options.nix
+    ./programs
+  ];
 
   home = {
     sessionVariables = {

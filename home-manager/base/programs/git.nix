@@ -1,38 +1,26 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.git = {
     enable = true;
 
-    includes = [
-      { path = "~/.gitconfig.default"; }
-    ];
-
     settings = {
-      core = {
-        editor = "nvim";
-      };
+      user.name = config.custom.name;
+      user.email = config.custom.email;
+
+      core.editor = "nvim";
 
       push = {
-        # remoteに同じbranch名でpushする
-        # upstreamの設定を要求しない
         default = "current";
+        autoSetupRemote = true;
       };
 
-      pull = {
-        rebase = true;
-      };
+      pull.rebase = true;
 
-      init = {
-        defaultBranch = "main";
-      };
+      init.defaultBranch = "main";
 
-      color = {
-        ui = "auto";
-      };
+      color.ui = "auto";
 
-      credential = {
-        helper = "cache --timeout=604800";
-      };
+      credential.helper = "!gh auth git-credential";
 
       rebase = {
         autosquash = true;
@@ -46,7 +34,35 @@
         di = "diff";
         st = "status";
         up = "pull --rebase";
+        br = "branch";
+        graph = "log --graph --oneline --decorate --all";
+        ls = ''log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate'';
+        ll = ''log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'';
+        undo = "reset --soft HEAD^";
       };
+
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "zebra";
+        mnemonicPrefix = true;
+      };
+
+      merge.conflictstyle = "diff3";
+
+      commit.verbose = true;
+
+      column.ui = "auto";
+
+      branch.sort = "-committerdate";
+
+      tag.sort = "-version:refname";
+
+      rerere = {
+        enabled = true;
+        autoupdate = true;
+      };
+
+      fetch.prune = true;
     };
 
     ignores = [
@@ -62,9 +78,15 @@
     ];
   };
 
-  programs.gitui = {
+  programs.delta = {
     enable = true;
+    enableGitIntegration = true;
+    options = {
+      syntax-theme = "tokyonight_storm";
+    };
   };
+
+  programs.gitui.enable = true;
 
   home.packages = with pkgs; [ git-trim ];
 }

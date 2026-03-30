@@ -16,6 +16,11 @@ in
     ../../home-manager/server
   ];
 
+  custom = {
+    email = ""; # set locally or via sops-nix
+    name = "tnmt";
+  };
+
   systemd.user = {
     timers.obsidian-backup = {
       Unit.Description = obsidianBackup.description;

@@ -1,0 +1,40 @@
+ {
+    "title": "Alacritty tmux IME control",
+    "rules": [
+      {
+        "description": "Alacrittyでcontrol+t押下時にIMEをオフにする",
+        "manipulators": [
+          {
+            "type": "basic",
+            "conditions": [
+              {
+                "type": "frontmost_application_if",
+                "bundle_identifiers": [
+                  "^org\\.alacritty$"
+                ]
+              }
+            ],
+            "from": {
+              "key_code": "t",
+              "modifiers": {
+                "mandatory": [
+                  "control"
+                ]
+              }
+            },
+            "to": [
+              {
+                "key_code": "japanese_eisuu"
+              },
+              {
+                "key_code": "t",
+                "modifiers": [
+                  "control"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
