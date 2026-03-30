@@ -3,17 +3,10 @@
   programs.git = {
     enable = true;
 
-    userName = config.custom.name;
-    userEmail = config.custom.email;
-
-    delta = {
-      enable = true;
-      options = {
-        syntax-theme = "tokyonight_storm";
-      };
-    };
-
     settings = {
+      user.name = config.custom.name;
+      user.email = config.custom.email;
+
       core.editor = "nvim";
 
       push = {
@@ -83,6 +76,14 @@
       ".go-version"
       "**/.claude/settings.local.json"
     ];
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      syntax-theme = "tokyonight_storm";
+    };
   };
 
   programs.gitui.enable = true;

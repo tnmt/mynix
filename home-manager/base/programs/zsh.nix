@@ -7,7 +7,7 @@ in
   programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
 
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
