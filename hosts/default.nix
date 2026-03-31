@@ -44,12 +44,13 @@ let
       };
       modules = modules ++ [
         inputs.sops-nix.homeManagerModules.sops
-        {
+        ({ pkgs, ... }: {
           home = {
             inherit username;
             homeDirectory = if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
             stateVersion = "25.05";
           };
+          nix.package = pkgs.nix;
           programs.home-manager.enable = true;
           programs.git.enable = true;
 
@@ -64,7 +65,7 @@ let
               };
             };
           };
-        }
+        })
       ];
     };
 in
