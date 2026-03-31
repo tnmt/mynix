@@ -50,6 +50,8 @@
         capslock = "leftcontrol";
         yen = "backslash";
         ro = "grave";
+        leftalt = "overload(alt, muhenkan)";
+        rightalt = "overload(alt, henkan)";
       };
     };
   };
