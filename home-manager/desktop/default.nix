@@ -44,7 +44,7 @@
     kid3
 
     # music player
-    mpc-cli
+    mpc
     cantata
     mmtc
     ncmpcpp

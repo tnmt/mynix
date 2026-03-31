@@ -3,10 +3,10 @@
   fonts = {
     packages = with pkgs; [
       meslo-lgs-nf
-      nerdfonts
+      nerd-fonts.jetbrains-mono
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      noto-fonts-emoji
+      noto-fonts-color-emoji
     ];
     fontDir.enable = true;
     fontconfig = {
