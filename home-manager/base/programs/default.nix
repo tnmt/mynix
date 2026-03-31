@@ -117,7 +117,7 @@
 
     # claude
     claude-code
-    inputs.ccusage.packages.${pkgs.system}.default
+    inputs.ccusage.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # gemini
     gemini-cli

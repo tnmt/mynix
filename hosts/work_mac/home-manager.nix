@@ -16,6 +16,6 @@
   };
 
   home.packages = [
-    inputs.oneaws.packages.${pkgs.system}.default
+    inputs.oneaws.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
