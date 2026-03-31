@@ -24,6 +24,7 @@
     ];
 
     exec-once = [
+      "dbus-update-activation-environment --systemd --all"
       "fcitx5 -d --replace"
       "elephant"
       "walker --gapplication-service"
