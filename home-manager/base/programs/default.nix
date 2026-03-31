@@ -38,6 +38,17 @@
       config = {
         theme = "tokyonight_storm";
       };
+      themes = {
+        tokyonight_storm = {
+          src = pkgs.fetchFromGitHub {
+            owner = "folke";
+            repo = "tokyonight.nvim";
+            rev = "v4.12.0";
+            hash = "sha256-fj6x7R11+s0/lhWCe0s3ELTRLgvU25Rjp4M5vZw5i3c=";
+          };
+          file = "extras/sublime/tokyonight_storm.tmTheme";
+        };
+      };
     };
 
     btop = {

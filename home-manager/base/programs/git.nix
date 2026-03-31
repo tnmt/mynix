@@ -91,15 +91,12 @@
 
   home.packages = with pkgs; [ git-trim ];
 
-  # Generate git identity from sops secrets
-  home.activation.gitIdentity = config.lib.dag.entryAfter [ "sopsNix" ] ''
-    mkdir -p ~/.config/git
-    if [ -f "${config.sops.secrets.git_email.path}" ] && [ -f "${config.sops.secrets.git_name.path}" ]; then
-      cat > ~/.config/git/identity <<EOF
-    [user]
-      email = $(cat "${config.sops.secrets.git_email.path}")
-      name = $(cat "${config.sops.secrets.git_name.path}")
-    EOF
-    fi
-  '';
+  sops.templates."git-identity" = {
+    content = ''
+      [user]
+        email = ${config.sops.placeholder.git_email}
+        name = ${config.sops.placeholder.git_name}
+    '';
+    path = "${config.xdg.configHome}/git/identity";
+  };
 }
