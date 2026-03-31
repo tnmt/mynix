@@ -31,4 +31,6 @@
   nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
 
   wsl.defaultUser = "${username}";
+
+  services.openssh.ports = [ 2222 ];
 }
