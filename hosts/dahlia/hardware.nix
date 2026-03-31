@@ -16,6 +16,8 @@
   ];
   boot.kernelModules = [ "kvm-amd" ];
 
+  hardware.enableRedistributableFirmware = true;
+
   # Filesystems
   # NOTE: UUIDs will change after fresh install with ext4.
   #       Run `nixos-generate-config` on the installed system

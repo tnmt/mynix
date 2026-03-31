@@ -29,8 +29,6 @@
       "walker --gapplication-service"
       "waybar"
       "swww init && swww img ~/.config/hypr/wallpaper/abstract-black-background.jpg"
-      "systemctl --user import-environment"
-      "dbus-update-activation-environment --systemd --all"
     ];
 
     input = {
@@ -123,7 +121,7 @@
     xwayland.force_zero_scaling = true;
 
     windowrule = [
-      "suppress_event maximize, class:.*"
+      "suppressevent maximize, class:.*"
       "opacity 0.97 0.9, class:.*"
       "pseudo, noblur, class:(fcitx)"
     ];
