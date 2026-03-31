@@ -25,19 +25,19 @@ in
       font = {
         size = fontsize;
         normal = {
-          family = "MesloLGS Nerd Font";
+          family = "MesloLGS NF";
           style = "Regular";
         };
         bold = {
-          family = "MesloLGS Nerd Font";
+          family = "MesloLGS NF";
           style = "Bold";
         };
         italic = {
-          family = "MesloLGS Nerd Font";
+          family = "MesloLGS NF";
           style = "Italic";
         };
         bold_italic = {
-          family = "MesloLGS Nerd Font";
+          family = "MesloLGS NF";
           style = "Bold Italic";
         };
       };
