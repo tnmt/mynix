@@ -53,10 +53,6 @@
     provider = "clipboard"
   '';
 
-  xdg.configFile."elephant/elephant.toml".text = ''
-    auto_detect_launch_prefix = false
-    launch_prefix = "alacritty -e"
-  '';
 
   xdg.configFile."walker/themes/current/style.css" = {
     source = ./walker/themes/current/style.css;
