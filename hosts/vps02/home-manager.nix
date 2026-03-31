@@ -8,6 +8,9 @@ let
     ];
     cargoBuildFeatures = [ ];
     cargoCheckFeatures = [ ];
+    doCheck = false;
+    # atuin-server binary is named differently; skip shell completion generation
+    postInstall = "";
   });
 in
 {
