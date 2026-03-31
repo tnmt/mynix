@@ -18,7 +18,6 @@
       "XDG_CURRENT_DESKTOP, Hyprland"
       "XDG_SESSION_DESKTOP, Hyprland"
       "XDG_SESSION_TYPE, wayland"
-      "QT_IM_MODULE, fcitx"
       "XMODIFIERS, @im=fcitx"
       "INPUT_METHOD, fcitx"
       "LANG, ja_JP.UTF-8"
@@ -28,6 +27,7 @@
       "fcitx5 -d --replace"
       "elephant"
       "walker --gapplication-service"
+      "waybar"
       "swww init && swww img ~/.config/hypr/wallpaper/abstract-black-background.jpg"
     ];
 

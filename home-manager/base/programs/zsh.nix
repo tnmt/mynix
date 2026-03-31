@@ -144,7 +144,6 @@ in
     '' + lib.optionalString isLinux ''
 
       # Fcitx5 (Japanese input)
-      export QT_IM_MODULE=fcitx
       export XMODIFIERS=@im=fcitx
       export INPUT_METHOD=fcitx
     '';
