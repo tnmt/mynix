@@ -9,6 +9,17 @@
         fcitx5-gtk
         qt6Packages.fcitx5-configtool
       ];
+      settings.globalOptions = {
+        "Hotkey/ActivateKeys" = {
+          "0" = "Henkan";
+        };
+        "Hotkey/DeactivateKeys" = {
+          "0" = "Muhenkan";
+        };
+        "Hotkey/TriggerKeys" = {
+          "0" = "Control+space";
+        };
+      };
     };
   };
 }
