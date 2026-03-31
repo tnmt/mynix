@@ -50,7 +50,7 @@
     ncmpcpp
 
     # misc
-    neofetch
+    fastfetch
     cava
     tty-clock
     cmatrix
