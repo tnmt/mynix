@@ -54,7 +54,7 @@
     btop = {
       enable = true;
       settings = {
-        color_theme = "tokyo-night";
+        color_theme = "tokyo-storm";
         theme_background = true;
         truecolor = true;
         rounded_corners = true;
