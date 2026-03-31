@@ -21,49 +21,49 @@
       "$mainMod, DOWN, Move window focus down, movefocus, d"
 
       # Switch workspaces with SUPER + [1-9; 0]
-      "$mainMod, code:10, Switch to workspace 1, split-workspace,1"
-      "$mainMod, code:11, Switch to workspace 2, split-workspace,2"
-      "$mainMod, code:12, Switch to workspace 3, split-workspace,3"
-      "$mainMod, code:13, Switch to workspace 4, split-workspace,4"
-      "$mainMod, code:14, Switch to workspace 5, split-workspace,5"
-      "$mainMod, code:15, Switch to workspace 6, split-workspace,6"
-      "$mainMod, code:16, Switch to workspace 7, split-workspace,7"
-      "$mainMod, code:17, Switch to workspace 8, split-workspace,8"
-      "$mainMod, code:18, Switch to workspace 9, split-workspace,9"
-      "$mainMod, code:19, Switch to workspace 10, split-workspace,10"
+      "$mainMod, code:10, Switch to workspace 1, workspace,1"
+      "$mainMod, code:11, Switch to workspace 2, workspace,2"
+      "$mainMod, code:12, Switch to workspace 3, workspace,3"
+      "$mainMod, code:13, Switch to workspace 4, workspace,4"
+      "$mainMod, code:14, Switch to workspace 5, workspace,5"
+      "$mainMod, code:15, Switch to workspace 6, workspace,6"
+      "$mainMod, code:16, Switch to workspace 7, workspace,7"
+      "$mainMod, code:17, Switch to workspace 8, workspace,8"
+      "$mainMod, code:18, Switch to workspace 9, workspace,9"
+      "$mainMod, code:19, Switch to workspace 10, workspace,10"
 
       # Move active window to a workspace with SUPER + SHIFT + [1-9; 0]
-      "$mainMod SHIFT, code:10, Move window to workspace 1, split-movetoworkspace,1"
-      "$mainMod SHIFT, code:11, Move window to workspace 2, split-movetoworkspace,2"
-      "$mainMod SHIFT, code:12, Move window to workspace 3, split-movetoworkspace,3"
-      "$mainMod SHIFT, code:13, Move window to workspace 4, split-movetoworkspace,4"
-      "$mainMod SHIFT, code:14, Move window to workspace 5, split-movetoworkspace,5"
-      "$mainMod SHIFT, code:15, Move window to workspace 6, split-movetoworkspace,6"
-      "$mainMod SHIFT, code:16, Move window to workspace 7, split-movetoworkspace,7"
-      "$mainMod SHIFT, code:17, Move window to workspace 8, split-movetoworkspace,8"
-      "$mainMod SHIFT, code:18, Move window to workspace 9, split-movetoworkspace,9"
-      "$mainMod SHIFT, code:19, Move window to workspace 10, split-movetoworkspace,10"
+      "$mainMod SHIFT, code:10, Move window to workspace 1, movetoworkspace,1"
+      "$mainMod SHIFT, code:11, Move window to workspace 2, movetoworkspace,2"
+      "$mainMod SHIFT, code:12, Move window to workspace 3, movetoworkspace,3"
+      "$mainMod SHIFT, code:13, Move window to workspace 4, movetoworkspace,4"
+      "$mainMod SHIFT, code:14, Move window to workspace 5, movetoworkspace,5"
+      "$mainMod SHIFT, code:15, Move window to workspace 6, movetoworkspace,6"
+      "$mainMod SHIFT, code:16, Move window to workspace 7, movetoworkspace,7"
+      "$mainMod SHIFT, code:17, Move window to workspace 8, movetoworkspace,8"
+      "$mainMod SHIFT, code:18, Move window to workspace 9, movetoworkspace,9"
+      "$mainMod SHIFT, code:19, Move window to workspace 10, movetoworkspace,10"
 
       # Move active window silently to a workspace
-      "$mainMod SHIFT ALT, code:10, Move window silently to workspace 1, split-movetoworkspacesilent,1"
-      "$mainMod SHIFT ALT, code:11, Move window silently to workspace 2, split-movetoworkspacesilent,2"
-      "$mainMod SHIFT ALT, code:12, Move window silently to workspace 3, split-movetoworkspacesilent,3"
-      "$mainMod SHIFT ALT, code:13, Move window silently to workspace 4, split-movetoworkspacesilent,4"
-      "$mainMod SHIFT ALT, code:14, Move window silently to workspace 5, split-movetoworkspacesilent,5"
-      "$mainMod SHIFT ALT, code:15, Move window silently to workspace 6, split-movetoworkspacesilent,6"
-      "$mainMod SHIFT ALT, code:16, Move window silently to workspace 7, split-movetoworkspacesilent,7"
-      "$mainMod SHIFT ALT, code:17, Move window silently to workspace 8, split-movetoworkspacesilent,8"
-      "$mainMod SHIFT ALT, code:18, Move window silently to workspace 9, split-movetoworkspacesilent,9"
-      "$mainMod SHIFT ALT, code:19, Move window silently to workspace 10, split-movetoworkspacesilent,10"
+      "$mainMod SHIFT ALT, code:10, Move window silently to workspace 1, movetoworkspacesilent,1"
+      "$mainMod SHIFT ALT, code:11, Move window silently to workspace 2, movetoworkspacesilent,2"
+      "$mainMod SHIFT ALT, code:12, Move window silently to workspace 3, movetoworkspacesilent,3"
+      "$mainMod SHIFT ALT, code:13, Move window silently to workspace 4, movetoworkspacesilent,4"
+      "$mainMod SHIFT ALT, code:14, Move window silently to workspace 5, movetoworkspacesilent,5"
+      "$mainMod SHIFT ALT, code:15, Move window silently to workspace 6, movetoworkspacesilent,6"
+      "$mainMod SHIFT ALT, code:16, Move window silently to workspace 7, movetoworkspacesilent,7"
+      "$mainMod SHIFT ALT, code:17, Move window silently to workspace 8, movetoworkspacesilent,8"
+      "$mainMod SHIFT ALT, code:18, Move window silently to workspace 9, movetoworkspacesilent,9"
+      "$mainMod SHIFT ALT, code:19, Move window silently to workspace 10, movetoworkspacesilent,10"
 
       # Scratchpad
       "$mainMod, S, Toggle scratchpad, togglespecialworkspace, scratchpad"
       "$mainMod ALT, S, Move window to scratchpad, movetoworkspacesilent, special:scratchpad"
 
       # TAB between workspaces
-      "$mainMod, TAB, Next workspace, split-workspace,e+1"
-      "$mainMod SHIFT, TAB, Previous workspace, split-workspace,e-1"
-      "$mainMod CTRL, TAB, Former workspace, split-workspace,previous"
+      "$mainMod, TAB, Next workspace, workspace,e+1"
+      "$mainMod SHIFT, TAB, Previous workspace, workspace,e-1"
+      "$mainMod CTRL, TAB, Former workspace, workspace,previous"
 
       # Move workspaces to other monitors
       "$mainMod SHIFT ALT, LEFT, Move workspace to left monitor, movecurrentworkspacetomonitor, l"
@@ -90,8 +90,8 @@
       "$mainMod SHIFT, code:21, Expand window down, resizeactive, 0 100"
 
       # Scroll through workspaces
-      "$mainMod, mouse_down, Scroll active workspace forward, split-workspace,e+1"
-      "$mainMod, mouse_up, Scroll active workspace backward, split-workspace,e-1"
+      "$mainMod, mouse_down, Scroll active workspace forward, workspace,e+1"
+      "$mainMod, mouse_up, Scroll active workspace backward, workspace,e-1"
 
       # Toggle groups
       "$mainMod, G, Toggle window grouping, togglegroup"

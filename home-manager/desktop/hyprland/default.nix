@@ -21,16 +21,6 @@
     enable = true;
     xwayland.enable = true;
     systemd.enable = false;
-    settings.plugin = [
-      "${inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces}/lib/libsplit-monitor-workspaces.so"
-    ];
-    importantPrefixes = [
-      "$"
-      "bezier"
-      "name"
-      "output"
-      "plugin"
-    ];
   };
 
   home.packages = with pkgs; [
