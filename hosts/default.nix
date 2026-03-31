@@ -82,6 +82,17 @@ in
         }
       ];
     };
+    dahlia = mkNixosSystem {
+      system = "x86_64-linux";
+      hostname = "dahlia";
+      username = "tnmt";
+      modules = [
+        ./dahlia/nixos.nix
+        {
+          system.stateVersion = "25.05";
+        }
+      ];
+    };
     test-vm = mkNixosSystem {
       system = "x86_64-linux";
       hostname = "test-vm";

@@ -9,14 +9,7 @@
     userName = username;
     serviceMode = "user";
     config = {
-      modmap = [
-        {
-          name = "CapsLock is dead";
-          remap = {
-            CapsLock = "Ctrl_L";
-          };
-        }
-      ];
+      # CapsLock→Ctrl is handled by keyd at evdev level
       keymap = [
         {
           name = "Better Backspace";
