@@ -7,6 +7,7 @@
   imports = [
     ../../home-manager/base
     ../../home-manager/desktop
+    ../../home-manager/desktop/hyprland
     ../../home-manager/desktop/terminal
     inputs.sops-nix.homeManagerModules.sops
   ];

@@ -4,7 +4,6 @@
     ./fonts.nix
     ./security.nix
     ./sound.nix
-    ./xremap.nix
   ];
 
   programs = {
