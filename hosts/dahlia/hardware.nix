@@ -1,4 +1,4 @@
-# Hardware configuration for dahlia (AtomMan X7 Ti)
+# Hardware configuration for dahlia (ThinkPad X13 Gen1)
 # AMD Ryzen 5 PRO 4650U, AMD Renoir GPU, 119GB NVMe
 { lib, ... }:
 {
