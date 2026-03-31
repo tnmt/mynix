@@ -53,19 +53,6 @@
         "tooltip": false
     },
 
-    "network": {
-        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-        "format": "{icon}",
-        "format-wifi": "{icon}",
-        "format-ethernet": "󰀂",
-        "format-disconnected": "󰤮",
-        "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-        "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-        "tooltip-format-disconnected": "Disconnected",
-        "interval": 3,
-        "spacing": 1
-    },
-
     "battery": {
         "format": "{capacity}% {icon}",
         "format-discharging": "{icon}",
@@ -92,12 +79,27 @@
         "format-disabled": "󰂲",
         "format-connected": "󰂱",
         "format-no-controller": "",
-        "tooltip-format": "Devices connected: {num_connections}"
+        "tooltip-format": "Devices connected: {num_connections}",
+        "on-click": "launch-bluetooth"
+    },
+
+    "network": {
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format": "{icon}",
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰀂",
+        "format-disconnected": "󰤮",
+        "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+        "tooltip-format-disconnected": "Disconnected",
+        "interval": 3,
+        "spacing": 1,
+        "on-click": "launch-wifi"
     },
 
     "pulseaudio": {
         "format": "{icon}",
-        "on-click": "pavucontrol",
+        "on-click": "launch-audio",
         "on-click-right": "pamixer -t",
         "tooltip-format": "Playing at {volume}%",
         "scroll-step": 5,
