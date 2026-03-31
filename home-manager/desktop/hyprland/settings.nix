@@ -26,8 +26,8 @@
 
     exec-once = [
       "fcitx5 -d --replace"
+      "elephant"
       "walker --gapplication-service"
-      "waybar"
       "swww init && swww img ~/.config/hypr/wallpaper/abstract-black-background.jpg"
     ];
 

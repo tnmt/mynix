@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.walker ];
+  home.packages = [
+    pkgs.walker
+    pkgs.elephant
+  ];
 
   xdg.configFile."walker/config.toml".text = ''
     force_keyboard_focus = true
