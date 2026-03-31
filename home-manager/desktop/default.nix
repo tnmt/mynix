@@ -27,7 +27,7 @@
     #winetricks
 
     # filer
-    xfce.thunar
+    thunar
     ranger
 
     # cui image viewer
