@@ -10,6 +10,7 @@
     ./mako.nix
     ./settings.nix
     ./swaylock.nix
+    ./waybar.nix
     ./walker.nix
     ./wofi.nix
 
