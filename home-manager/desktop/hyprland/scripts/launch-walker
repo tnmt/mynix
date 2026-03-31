@@ -2,12 +2,14 @@
 
 # Launch Walker application launcher, ensuring elephant and walker service are running.
 
-if ! pgrep -x elephant > /dev/null; then
+if ! pgrep -f "bin/elephant" > /dev/null; then
   setsid elephant &
+  sleep 1
 fi
 
 if ! pgrep -f "walker --gapplication-service" > /dev/null; then
   setsid walker --gapplication-service &
+  sleep 1
 fi
 
 exec walker --width 644 --maxheight 300 --minheight 300 "$@"
