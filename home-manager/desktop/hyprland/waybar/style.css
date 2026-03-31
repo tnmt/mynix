@@ -1,13 +1,5 @@
 @define-color foreground #c0caf5;
 @define-color background #24283b;
-@define-color accent #7aa2f7;
-@define-color red #f7768e;
-@define-color green #9ece6a;
-@define-color yellow #e0af68;
-@define-color blue #7aa2f7;
-@define-color magenta #bb9af7;
-@define-color cyan #7dcfff;
-@define-color muted #414868;
 
 * {
   background-color: @background;
@@ -16,7 +8,7 @@
   border: none;
   border-radius: 0;
   min-height: 0;
-  font-family: 'JetBrainsMono Nerd Font', 'MesloLGS NF';
+  font-family: 'JetBrainsMono Nerd Font';
   font-size: 12px;
 }
 
@@ -33,88 +25,43 @@
   padding: 0 6px;
   margin: 0 1.5px;
   min-width: 9px;
-  color: @foreground;
-}
-
-#workspaces button.active {
-  color: @accent;
 }
 
 #workspaces button.empty {
   opacity: 0.5;
 }
 
-#clock {
-  margin-left: 8.75px;
-  font-weight: bold;
-}
-
 #cpu,
-#memory,
 #battery,
-#pulseaudio,
-#network,
-#bluetooth {
+#pulseaudio {
   min-width: 12px;
   margin: 0 7.5px;
-}
-
-#cpu {
-  color: @cyan;
-}
-
-#cpu.high {
-  color: @red;
-}
-
-#memory {
-  color: @cyan;
-}
-
-#battery {
-  color: @green;
-}
-
-#battery.low {
-  color: @red;
-}
-
-#battery.lower-medium {
-  color: @yellow;
-}
-
-#battery.charging {
-  color: @green;
-}
-
-#pulseaudio {
-  color: @foreground;
-}
-
-#pulseaudio.muted {
-  color: @muted;
-}
-
-#network {
-  color: @green;
-}
-
-#network.disconnected {
-  color: @red;
-}
-
-#bluetooth {
-  color: @blue;
-}
-
-#bluetooth.disabled {
-  color: @muted;
 }
 
 #tray {
   margin-right: 16px;
 }
 
+#bluetooth {
+  margin-right: 17px;
+}
+
+#network {
+  margin-right: 13px;
+}
+
+#custom-expand-icon {
+  margin-right: 18px;
+}
+
 tooltip {
   padding: 2px;
+}
+
+#clock {
+  margin-left: 8.75px;
+}
+
+.hidden {
+  opacity: 0;
 }
