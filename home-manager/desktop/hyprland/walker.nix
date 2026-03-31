@@ -9,6 +9,7 @@
     force_keyboard_focus = true
     selection_wrap = true
     hide_action_hints = true
+    terminal = "alacritty"
     theme = "current"
 
     [placeholders]
@@ -50,6 +51,11 @@
     [[providers.prefixes]]
     prefix = "$"
     provider = "clipboard"
+  '';
+
+  xdg.configFile."elephant/elephant.toml".text = ''
+    auto_detect_launch_prefix = false
+    launch_prefix = "alacritty -e"
   '';
 
   xdg.configFile."walker/themes/current/style.css" = {
