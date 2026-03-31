@@ -122,9 +122,10 @@
     xwayland.force_zero_scaling = true;
 
     windowrule = [
-      "suppressevent maximize, class:.*"
-      "opacity 0.97 0.9, class:.*"
-      "pseudo, noblur, class:(fcitx)"
+      "match:class .*, suppress_event maximize"
+      "match:class .*, opacity 0.97 0.9"
+      "match:class ^(fcitx)$, pseudo on"
+      "match:class ^(fcitx)$, no_blur on"
     ];
   };
 }
