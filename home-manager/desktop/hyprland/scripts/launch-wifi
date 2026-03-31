@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Launch wifi controls TUI (impala). Unblocks wifi first.
+
+rfkill unblock wifi
+launch-or-focus impala "alacritty -e impala"

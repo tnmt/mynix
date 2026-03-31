@@ -125,14 +125,15 @@
       "$mainMod CTRL, V, Clipboard manager, exec, walker -m clipboard"
 
       # Menus
-      "$mainMod, SPACE, Launch apps, exec, walker"
-      "$mainMod CTRL, E, Emoji picker, exec, walker -m symbols"
+      "$mainMod, SPACE, Launch apps, exec, launch-walker"
+      "$mainMod CTRL, E, Emoji picker, exec, launch-walker -m symbols"
 
       # Application bindings
       "$mainMod, RETURN, Terminal, exec, $terminal"
       ''$mainMod ALT, RETURN, Tmux, exec, $terminal bash -c 'tmux attach || tmux new -s Work' ''
-      "$mainMod SHIFT, RETURN, Browser, exec, $browser"
-      "$mainMod SHIFT, B, Browser, exec, $browser"
+      "$mainMod SHIFT, RETURN, Browser, exec, launch-browser"
+      "$mainMod SHIFT, B, Browser, exec, launch-browser"
+      "$mainMod SHIFT ALT, B, Browser (private), exec, launch-browser --private"
       "$mainMod SHIFT, SLASH, Passwords, exec, 1password"
 
       # Window transparency toggle
