@@ -15,7 +15,4 @@
   xdg.configFile."waybar/config" = {
     source = ./waybar/config;
   };
-  xdg.configFile."waybar/macchiato.css" = {
-    source = ./waybar/macchiato.css;
-  };
 }
