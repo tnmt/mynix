@@ -67,7 +67,7 @@
         return = "301 https://tnmt.info/blog$request_uri";
       };
       extraConfig = ''
-        location ~ "^/(\d{4})/(\d{2})/(\d{2})/([^/]+)/" {
+        location ~ "^/(\d{4})/(\d{2})/(\d{2})/([^/\r\n]+)/" {
           return 301 https://tnmt.info/blog/$4/;
         }
       '';
