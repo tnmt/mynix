@@ -72,7 +72,7 @@
         let
           pkgs = inputs.nixpkgs.legacyPackages.${system};
           formatters = with pkgs; [
-            nixfmt-rfc-style
+            nixfmt
             taplo
           ];
           scripts = [
@@ -82,7 +82,15 @@
           ];
         in
         {
-          default = pkgs.mkShell { packages = (with pkgs; [ nh cachix ]) ++ formatters ++ scripts; };
+          default = pkgs.mkShell {
+            packages =
+              (with pkgs; [
+                nh
+                cachix
+              ])
+              ++ formatters
+              ++ scripts;
+          };
         }
       );
       formatter = forAllSystems (
@@ -90,7 +98,7 @@
         let
           pkgs = inputs.nixpkgs.legacyPackages.${system};
           formatters = with pkgs; [
-            nixfmt-rfc-style
+            nixfmt
             taplo
           ];
           format = pkgs.writeScriptBin "format" ''
