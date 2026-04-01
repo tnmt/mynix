@@ -186,6 +186,16 @@
       enableACME = true;
       globalRedirect = "***REDACTED***";
     };
+
+    # obsidian-sync.tnmt.info → CouchDB (Obsidian LiveSync)
+    virtualHosts."obsidian-sync.tnmt.info" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:5984";
+        proxyWebsockets = true;
+      };
+    };
   };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];

@@ -2,7 +2,7 @@
 {
   services.couchdb = {
     enable = true;
-    bindAddress = "0.0.0.0";
+    bindAddress = "127.0.0.1";
     adminUser = "admin";
     adminPass = "will-be-replaced"; # placeholder, overridden by configFile
     configFile = config.sops.templates."couchdb_admin_config".path;
@@ -18,5 +18,6 @@
     owner = "couchdb";
   };
 
-  networking.firewall.allowedTCPPorts = [ 5984 6984 ];
+  # 5984/6984 are not exposed directly; nginx handles SSL termination
+  # Port 6984 is available via nginx reverse proxy with ACME cert
 }
