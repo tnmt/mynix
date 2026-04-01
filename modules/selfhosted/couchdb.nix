@@ -5,7 +5,7 @@
     bindAddress = "0.0.0.0";
     adminUser = "admin";
     adminPass = "will-be-replaced"; # placeholder, overridden by configFile
-    configFile = "/run/secrets/couchdb_admin_config";
+    configFile = config.sops.templates."couchdb_admin_config".path;
   };
 
   # Generate CouchDB config from sops secret
