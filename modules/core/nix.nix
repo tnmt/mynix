@@ -21,6 +21,7 @@
         "nixremote"
       ];
       accept-flake-config = true;
+      download-buffer-size = 256 * 1024 * 1024; # 256MB
 
       substituters = [
         "https://cache.nixos.org"
