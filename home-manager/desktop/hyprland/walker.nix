@@ -53,7 +53,6 @@
     provider = "clipboard"
   '';
 
-
   xdg.configFile."walker/themes/current/style.css" = {
     source = ./walker/themes/current/style.css;
   };

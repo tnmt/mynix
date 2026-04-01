@@ -103,7 +103,7 @@ format = '[[ $symbol ($version) ](fg:purple bg:bg)]($style)'
 
 [time]
 disabled = false
-time_format = "%T" # Hour:Minute Format
+time_format = "%T"                                      # Hour:Minute Format
 style = "bg:bg_dark"
 format = '[[  $time ](fg:fg_dark bg:bg_dark)]($style)'
 
