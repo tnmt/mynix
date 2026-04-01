@@ -22,9 +22,11 @@ in
       Restart = "on-failure";
       RestartSec = 5;
       StateDirectory = "atuin-server";
+      ConfigurationDirectory = "atuin";
       DynamicUser = true;
     };
     environment = {
+      HOME = "/var/lib/atuin-server";
       ATUIN_HOST = "127.0.0.1";
       ATUIN_PORT = "8888";
       ATUIN_OPEN_REGISTRATION = "false";
