@@ -83,6 +83,7 @@
     # nix
     cachix
     nh
+    sops
 
     # cui
     gh
