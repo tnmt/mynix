@@ -119,9 +119,9 @@
       "$mainMod ALT, code:14, Switch to group window 5, changegroupactive, 5"
 
       # Copy / Paste
-      ''$mainMod, C, Universal copy, sendshortcut, CTRL, Insert,''
-      ''$mainMod, V, Universal paste, sendshortcut, SHIFT, Insert,''
-      ''$mainMod, X, Universal cut, sendshortcut, CTRL, X,''
+      "$mainMod, C, Universal copy, sendshortcut, CTRL, Insert,"
+      "$mainMod, V, Universal paste, sendshortcut, SHIFT, Insert,"
+      "$mainMod, X, Universal cut, sendshortcut, CTRL, X,"
       "$mainMod CTRL, V, Clipboard manager, exec, walker -m clipboard"
 
       # Menus
@@ -130,7 +130,7 @@
 
       # Application bindings
       "$mainMod, RETURN, Terminal, exec, $terminal"
-      ''$mainMod ALT, RETURN, Tmux, exec, $terminal bash -c 'tmux attach || tmux new -s Work' ''
+      "$mainMod ALT, RETURN, Tmux, exec, $terminal bash -c 'tmux attach || tmux new -s Work' "
       "$mainMod SHIFT, RETURN, Browser, exec, launch-browser"
       "$mainMod SHIFT, B, Browser, exec, launch-browser"
       "$mainMod SHIFT ALT, B, Browser (private), exec, launch-browser --private"
@@ -144,7 +144,7 @@
       "$mainMod CTRL ALT, Z, Reset zoom, exec, hyprctl keyword cursor:zoom_factor 1"
 
       # Screenshot
-      ''  , PRINT, Screenshot, exec, grim -g "$(slurp)" - | wl-copy''
+      '', PRINT, Screenshot, exec, grim -g "$(slurp)" - | wl-copy''
 
       # System
       "$mainMod, ESCAPE, System menu, exec, wlogout"

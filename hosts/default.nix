@@ -44,28 +44,33 @@ let
       };
       modules = modules ++ [
         inputs.sops-nix.homeManagerModules.sops
-        ({ pkgs, ... }: {
-          home = {
-            inherit username;
-            homeDirectory = if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
-            stateVersion = "25.05";
-          };
-          nix.package = pkgs.nix;
-          programs.home-manager.enable = true;
-          programs.git.enable = true;
+        (
+          { pkgs, ... }:
+          {
+            home = {
+              inherit username;
+              homeDirectory = if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
+              stateVersion = "25.05";
+            };
+            nix.package = pkgs.nix;
+            programs.home-manager.enable = true;
+            programs.git.enable = true;
 
-          sops = {
-            defaultSopsFile = sopsFile;
-            age.keyFile = "${if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}"}/.config/sops/age/keys.txt";
-            secrets = {
-              git_email = { };
-              git_name = { };
-              atuin_sync_address = {
-                sopsFile = ../secrets/common.yaml;
+            sops = {
+              defaultSopsFile = sopsFile;
+              age.keyFile = "${
+                if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}"
+              }/.config/sops/age/keys.txt";
+              secrets = {
+                git_email = { };
+                git_name = { };
+                atuin_sync_address = {
+                  sopsFile = ../secrets/common.yaml;
+                };
               };
             };
-          };
-        })
+          }
+        )
       ];
     };
 in

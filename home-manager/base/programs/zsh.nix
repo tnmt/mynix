@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
@@ -25,24 +30,23 @@ in
       append = true;
     };
 
-    shellAliases =
-      {
-        mv = "mv -i";
-        info = "info --vi-keys";
-        g = "git";
-        be = "bundle exec";
-        vi = "nvim";
-        vim = "nvim";
-        cat = "bat";
-      }
-      // lib.optionalAttrs isLinux {
-        ls = "eza --color=auto --group-directories-first --time-style=full-iso";
-        l = "eza -lah --color=auto --group-directories-first --time-style=full-iso";
-      }
-      // lib.optionalAttrs isDarwin {
-        ls = "eza --color=auto --group-directories-first --time-style=full-iso";
-        l = "eza -lah --color=auto --group-directories-first --time-style=full-iso";
-      };
+    shellAliases = {
+      mv = "mv -i";
+      info = "info --vi-keys";
+      g = "git";
+      be = "bundle exec";
+      vi = "nvim";
+      vim = "nvim";
+      cat = "bat";
+    }
+    // lib.optionalAttrs isLinux {
+      ls = "eza --color=auto --group-directories-first --time-style=full-iso";
+      l = "eza -lah --color=auto --group-directories-first --time-style=full-iso";
+    }
+    // lib.optionalAttrs isDarwin {
+      ls = "eza --color=auto --group-directories-first --time-style=full-iso";
+      l = "eza -lah --color=auto --group-directories-first --time-style=full-iso";
+    };
 
     sessionVariables = {
       LANG = "ja_JP.UTF-8";
@@ -54,7 +58,8 @@ in
 
     envExtra = ''
       export PATH="''${KREW_ROOT:-$HOME/.krew}/bin:$GOPATH/bin:$HOME/.cache/.bun/bin:$HOME/.npm-global/bin:$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/work/bin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:$PATH"
-    '' + lib.optionalString isDarwin ''
+    ''
+    + lib.optionalString isDarwin ''
       export PATH="/opt/homebrew/bin:$PATH"
       export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
     '';
@@ -141,7 +146,8 @@ in
         }
         zle -N zle-line-init
       fi
-    '' + lib.optionalString isLinux ''
+    ''
+    + lib.optionalString isLinux ''
 
       # Fcitx5 (Japanese input)
       export XMODIFIERS=@im=fcitx
