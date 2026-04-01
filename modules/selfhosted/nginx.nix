@@ -147,18 +147,14 @@
       locations."/" = {
         tryFiles = "$uri /app.php$is_args$args";
       };
-      locations."~ ^/app\\.php(/|$)" = {
+      locations."~ \\.php$" = {
         extraConfig = ''
           fastcgi_pass unix:/run/phpfpm/wallabag.sock;
           fastcgi_split_path_info ^(.+\.php)(/.*)$;
           include ${config.services.nginx.package}/conf/fastcgi_params;
           fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
           fastcgi_param DOCUMENT_ROOT $realpath_root;
-          internal;
         '';
-      };
-      locations."~ \\.php$" = {
-        return = "404";
       };
     };
 
@@ -166,7 +162,7 @@
     virtualHosts."***REDACTED***" = {
       forceSSL = true;
       enableACME = true;
-      root = "/home/tnmt/work/***REDACTED***";
+      root = "/var/www/***REDACTED***";
       locations."/" = {
         tryFiles = "$uri $uri/ /index.php?$args";
         index = "index.php";
