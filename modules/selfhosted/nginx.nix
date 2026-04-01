@@ -166,7 +166,7 @@
     virtualHosts."***REDACTED***" = {
       forceSSL = true;
       enableACME = true;
-      root = "/var/www/***REDACTED***";
+      root = "/home/tnmt/work/***REDACTED***";
       locations."/" = {
         tryFiles = "$uri $uri/ /index.php?$args";
         index = "index.php";
