@@ -14,6 +14,7 @@
     ../../modules/selfhosted
 
     inputs.home-manager.nixosModules.home-manager
+    inputs.sops-nix.nixosModules.sops
   ];
 
   # Boot loader
@@ -73,6 +74,15 @@
         "pm.min_spare_servers" = 1;
         "pm.max_spare_servers" = 5;
       };
+    };
+  };
+
+  # Secrets
+  sops = {
+    defaultSopsFile = ../../secrets/vps01.yaml;
+    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    secrets = {
+      couchdb_admin_password = {};
     };
   };
 
