@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -17,6 +18,7 @@
     ../../modules/desktop
 
     inputs.home-manager.nixosModules.home-manager
+    inputs.sops-nix.nixosModules.sops
   ];
 
   # Display manager
@@ -33,8 +35,48 @@
   networking.networkmanager = {
     enable = true;
     wifi.backend = "iwd";
+    ensureProfiles.environmentFiles = [
+      config.sops.templates."wifi-env".path
+    ];
+    ensureProfiles.profiles = {
+      homelab = {
+        connection = {
+          id = "homelab";
+          type = "wifi";
+          interface-name = "wlan0";
+        };
+        wifi = {
+          ssid = "$WIFI_HOMELAB_SSID";
+          mode = "infrastructure";
+        };
+        wifi-security = {
+          key-mgmt = "wpa-psk";
+          psk = "$WIFI_HOMELAB_PSK";
+        };
+        ipv4 = {
+          method = "manual";
+          addresses = "REDACTED/24";
+          gateway = "REDACTED";
+          dns = "REDACTED";
+        };
+      };
+    };
   };
   services.resolved.enable = true;
+
+  # Secrets
+  sops = {
+    defaultSopsFile = ../../secrets/dahlia.yaml;
+    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    secrets.wifi_homelab_ssid = { };
+    secrets.wifi_homelab_psk = { };
+    templates."wifi-env" = {
+      content = ''
+        WIFI_HOMELAB_SSID=${config.sops.placeholder.wifi_homelab_ssid}
+        WIFI_HOMELAB_PSK=${config.sops.placeholder.wifi_homelab_psk}
+      '';
+    };
+  };
 
   # Tailscale VPN
   services.tailscale.enable = true;
