@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -83,6 +84,14 @@
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     secrets = {
       couchdb_admin_password = {};
+      cloudflare_api_key = {};
+      cloudflare_email = {};
+    };
+    templates."cloudflare-credentials" = {
+      content = ''
+        CLOUDFLARE_EMAIL=${config.sops.placeholder.cloudflare_email}
+        CLOUDFLARE_API_KEY=${config.sops.placeholder.cloudflare_api_key}
+      '';
     };
   };
 
