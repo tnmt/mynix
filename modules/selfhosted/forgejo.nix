@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   services.forgejo = {
     enable = true;
@@ -9,8 +9,9 @@
       port = 3306;
       name = "forgejo";
       user = "forgejo";
-      passwordFile = "/var/lib/forgejo/db-password";
+      passwordFile = config.sops.secrets.forgejo_db_password.path;
     };
+    secrets.server.LFS_JWT_SECRET = config.sops.secrets.forgejo_lfs_jwt_secret.path;
     settings = {
       DEFAULT = {
         APP_NAME = "git.tnmt.info";
@@ -24,12 +25,9 @@
         START_SSH_SERVER = true;
         SSH_LISTEN_PORT = 2223;
         LFS_START_SERVER = true;
-        LFS_JWT_SECRET = "QaBgxGTn0dJvJcSvhHlK5kRHHWdpy7PFk3d52osBY3o";
         OFFLINE_MODE = true;
       };
-      oauth2 = {
-        JWT_SECRET = "bceZIBmkkAReKpcIvpOxeHTMbnDnwYaZ7N0X_ZDR94I";
-      };
+      oauth2 = {};
       service = {
         DISABLE_REGISTRATION = true;
         REQUIRE_SIGNIN_VIEW = true;

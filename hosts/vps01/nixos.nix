@@ -86,6 +86,12 @@
       couchdb_admin_password = {};
       cloudflare_api_key = {};
       cloudflare_email = {};
+      forgejo_lfs_jwt_secret = {
+        owner = "forgejo";
+      };
+      forgejo_db_password = {
+        owner = "forgejo";
+      };
     };
     templates."cloudflare-credentials" = {
       content = ''
