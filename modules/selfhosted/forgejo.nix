@@ -23,7 +23,11 @@
         START_SSH_SERVER = true;
         SSH_LISTEN_PORT = 2223;
         LFS_START_SERVER = true;
+        LFS_JWT_SECRET = "QaBgxGTn0dJvJcSvhHlK5kRHHWdpy7PFk3d52osBY3o";
         OFFLINE_MODE = true;
+      };
+      oauth2 = {
+        JWT_SECRET = "bceZIBmkkAReKpcIvpOxeHTMbnDnwYaZ7N0X_ZDR94I";
       };
       service = {
         DISABLE_REGISTRATION = true;
