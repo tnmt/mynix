@@ -1,6 +1,7 @@
 {
   imports = [
     ./acme.nix
+    ./atuin-server.nix
     ./adguard.nix
     ./couchdb.nix
     ./fail2ban.nix
