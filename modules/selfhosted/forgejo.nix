@@ -1,7 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 {
   services.forgejo = {
     enable = true;
+    package = pkgs.forgejo;
     database = {
       type = "mysql";
       host = "127.0.0.1";
