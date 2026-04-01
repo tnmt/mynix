@@ -18,7 +18,7 @@ in
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = "${atuin-server}/bin/atuin-server server start";
+      ExecStart = "${atuin-server}/bin/atuin-server start";
       Restart = "on-failure";
       RestartSec = 5;
       StateDirectory = "atuin-server";
