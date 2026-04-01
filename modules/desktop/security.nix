@@ -4,6 +4,7 @@
   security = {
     polkit.enable = true;
     pam.services.login.enableGnomeKeyring = true;
+    pam.services.greetd.enableGnomeKeyring = true;
 
     # wayland display lockers (e.g. swaylock) needs this
     pam.services.swaylock.text = "auth include login";
