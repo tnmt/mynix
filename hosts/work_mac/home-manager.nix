@@ -15,7 +15,27 @@
     name = "tsunematsu";
   };
 
-  # home.packages = [
-  #   inputs.oneaws.packages.${pkgs.stdenv.hostPlatform.system}.default
-  # ];
+  home.packages = with pkgs; [
+    # inputs.oneaws.packages.${pkgs.stdenv.hostPlatform.system}.default
+    aws-sam-cli
+    awscli2
+    coreutils
+    curl
+    duckdb
+    exiftool
+    git-filter-repo
+    hugo
+    imagemagick
+    kubernetes-helm
+    libffi
+    libidn
+    luarocks
+    lynx
+    mariadb
+    minikube
+    ncdu
+    fastfetch
+    wget
+    yq-go
+  ];
 }

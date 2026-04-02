@@ -2,10 +2,6 @@
 {
   home.stateVersion = "25.05";
 
-  home.packages = with pkgs; [
-    envchain
-  ];
-
   programs.home-manager.enable = true;
 
   # Karabiner: auto-disable IME when pressing tmux prefix (Ctrl+t) in Alacritty
