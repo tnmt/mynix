@@ -12,6 +12,7 @@
   fonts = {
     packages = with pkgs; [
       meslo-lgs-nf
+      nerd-fonts.fira-code
     ];
   };
 
@@ -40,7 +41,15 @@
       "the_platinum_searcher"
     ];
     casks = [
+      "1password-cli"
       "alacritty"
+      "amazon-bedrock-client"
+      "chromedriver"
+      "firefox"
+      "gcloud-cli"
+      "google-chrome"
+      "goreleaser"
+      "visual-studio-code"
     ];
     onActivation = {
       autoUpdate = true;
