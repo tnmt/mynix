@@ -40,6 +40,15 @@ autocmd("BufReadPost", {
   end,
 })
 
+-- Stop all LSP clients before exit to suppress shutdown errors
+augroup("LspStopOnExit", { clear = true })
+autocmd("VimLeavePre", {
+  group = "LspStopOnExit",
+  callback = function()
+    vim.lsp.stop_client(vim.lsp.get_clients(), true)
+  end,
+})
+
 -- Close some filetypes with <q>
 augroup("CloseWithQ", { clear = true })
 autocmd("FileType", {

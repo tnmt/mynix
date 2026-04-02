@@ -5,17 +5,14 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
-    config = function()
-      -- Ensure parsers are installed
-      local parsers = {
+    opts = {
+      ensure_installed = {
         "bash", "c", "diff", "go", "html", "javascript", "json", "lua",
         "markdown", "markdown_inline", "nix", "python", "query", "regex", "ruby",
         "toml", "tsx", "typescript", "vim", "yaml",
-      }
-      for _, parser in ipairs(parsers) do
-        pcall(vim.treesitter.language.add, parser)
-      end
-    end,
+      },
+      highlight = { enable = true },
+    },
   },
 
   -- LSP Configuration
@@ -90,6 +87,7 @@ return {
             },
           },
         },
+        taplo = {},
         ts_ls = {},
         ruby_lsp = {},
       }

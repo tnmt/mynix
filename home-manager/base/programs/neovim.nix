@@ -22,6 +22,9 @@
       # Nix
       nil
       nixfmt
+
+      # TOML
+      taplo
     ];
   };
 
