@@ -28,6 +28,10 @@
       # LSP servers (managed by Nix instead of mason)
       gopls
       ruby-lsp
+      lua-language-server
+      pyright
+      ruff
+      typescript-language-server
     ];
   };
 

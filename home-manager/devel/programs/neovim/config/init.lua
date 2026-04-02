@@ -21,7 +21,6 @@ require("config.autocmds")
 
 -- Plugin management
 require("lazy").setup({
-  { "LazyVim/LazyVim", import = "lazyvim.plugins" },
   { import = "plugins" },
 }, {
   defaults = {
