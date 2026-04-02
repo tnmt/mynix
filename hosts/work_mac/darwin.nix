@@ -27,6 +27,7 @@ in
   homebrew = {
     enable = true;
     taps = [
+      "goreleaser/tap"
       "hashicorp/tap"
       "k1LoW/tap"
       "pyama86/kagiana"
@@ -34,7 +35,6 @@ in
     ];
     brews = [
       "colima"
-      "consul"
       "consul-template"
       "docker"
       "envchain"
@@ -56,7 +56,7 @@ in
     ];
     onActivation = {
       autoUpdate = true;
-      cleanup = "none";
+      cleanup = "uninstall";
     };
   };
 
