@@ -149,12 +149,6 @@ in
       overlays = [ ];
       modules = [ ./vps02/home-manager.nix ];
     };
-    "tnmt@sunflower" = mkHomeManagerConfiguration {
-      system = "x86_64-linux";
-      username = "tnmt";
-      overlays = [ ];
-      modules = [ ./sunflower/home-manager.nix ];
-    };
     "tsunematsu@work_mac" = mkHomeManagerConfiguration {
       system = "aarch64-darwin";
       username = "tsunematsu";
