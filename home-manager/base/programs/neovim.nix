@@ -25,6 +25,10 @@
 
       # TOML
       taplo
+
+      # LSP servers (managed by Nix instead of mason)
+      gopls
+      ruby-lsp
     ];
   };
 

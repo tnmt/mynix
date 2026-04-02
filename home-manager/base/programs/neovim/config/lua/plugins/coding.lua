@@ -30,9 +30,7 @@ return {
         ensure_installed = {
           "lua_ls",
           "pyright",
-          "gopls",
           "ts_ls",
-          "ruby_lsp",
         },
         automatic_installation = true,
         automatic_enable = false,
