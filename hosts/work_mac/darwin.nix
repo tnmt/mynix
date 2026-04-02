@@ -49,7 +49,6 @@ in
       "alacritty"
       "chromedriver"
       "firefox"
-      "gcloud-cli"
       "google-chrome"
       "goreleaser"
       "visual-studio-code"
