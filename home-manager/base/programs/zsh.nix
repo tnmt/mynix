@@ -34,14 +34,7 @@ in
       mv = "mv -i";
       info = "info --vi-keys";
       g = "git";
-      be = "bundle exec";
       cat = "bat";
-    }
-    // lib.optionalAttrs isLinux {
-      ls = "eza --color=auto --group-directories-first --time-style=full-iso";
-      l = "eza -lah --color=auto --group-directories-first --time-style=full-iso";
-    }
-    // lib.optionalAttrs isDarwin {
       ls = "eza --color=auto --group-directories-first --time-style=full-iso";
       l = "eza -lah --color=auto --group-directories-first --time-style=full-iso";
     };
@@ -49,13 +42,12 @@ in
     sessionVariables = {
       LANG = "ja_JP.UTF-8";
       LC_TIME = "C";
-      GOPATH = "$HOME/.go";
       PAGER = "less";
       LESS = "-R -X";
     };
 
     envExtra = ''
-      export PATH="''${KREW_ROOT:-$HOME/.krew}/bin:$GOPATH/bin:$HOME/.cache/.bun/bin:$HOME/.npm-global/bin:$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/work/bin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:$PATH"
+      export PATH="$HOME/bin:$HOME/.local/bin:$HOME/work/bin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:$PATH"
     ''
     + lib.optionalString isDarwin ''
       export PATH="/opt/homebrew/bin:$PATH"
