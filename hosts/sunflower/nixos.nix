@@ -23,7 +23,6 @@
 
   users.users."${username}" = {
     isNormalUser = true;
-    uid = lib.mkForce 1001; # WSL created this user with UID 1001
     home = "/home/${username}";
     shell = pkgs.zsh;
     group = "users";
