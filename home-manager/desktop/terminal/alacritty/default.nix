@@ -1,7 +1,6 @@
 { pkgs, theme, ... }:
 let
   fontsize = if pkgs.stdenv.isDarwin then 16 else 12;
-  isDarwin = pkgs.stdenv.isDarwin;
 in
 {
   programs.alacritty = {

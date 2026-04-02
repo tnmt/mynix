@@ -15,7 +15,7 @@
     name = "tsunematsu";
   };
 
-  home.packages = [
-    inputs.oneaws.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
+  # home.packages = [
+  #   inputs.oneaws.packages.${pkgs.stdenv.hostPlatform.system}.default
+  # ];
 }
