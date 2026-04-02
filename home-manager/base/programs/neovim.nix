@@ -18,6 +18,10 @@
       # Used by telescope
       ripgrep
       fd
+
+      # Nix
+      nil
+      nixfmt
     ];
   };
 
