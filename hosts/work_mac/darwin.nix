@@ -47,10 +47,28 @@ in
     casks = [
       "1password-cli"
       "alacritty"
+      "appcleaner"
+      "brave-browser"
+      "chatgpt"
+      "choosy"
+      "claude"
+      "discord"
+      "dropbox"
       "firefox"
+      "ghostty"
       "google-chrome"
       "goreleaser"
+      "iterm2"
+      "karabiner-elements"
+      "kiro"
+      "meetingbar"
+      "notion"
+      "obsidian"
+      "raycast"
+      "slack"
+      "vimr"
       "visual-studio-code"
+      "zoom"
     ];
     onActivation = {
       autoUpdate = true;
