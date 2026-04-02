@@ -1,26 +1,34 @@
-# NixOS & Home Manager Configurations
+# NixOS, nix-darwin & Home Manager Configurations
 
-Personal NixOS and Home Manager configurations for multiple hosts and environments.
+Personal Nix configurations for multiple hosts and environments.
 
 ## Overview
 
 This repository contains modular Nix configurations supporting:
-- **NixOS systems** with WSL support
+- **NixOS systems** (desktop, server, WSL)
+- **nix-darwin** for macOS system-level management
 - **Home Manager** configurations for Linux and macOS
-- **Multiple environments**: desktop, server, work, and development setups
+- **Secrets management** with sops-nix
+- **Selfhosted services** (Forgejo, AdGuard, Atuin Server, etc.)
 - **Cross-platform support**: x86_64-linux and aarch64-darwin
 
 ## Hosts
 
 ### NixOS Systems
-- **sunflower** - WSL-enabled NixOS system
+- **sunflower** - WSL-enabled NixOS system (x86_64-linux)
+- **dahlia** - Desktop system with Hyprland (x86_64-linux)
+- **vps01** - VPS with selfhosted services (x86_64-linux)
+- **test-vm** - VM testing environment (x86_64-linux)
+
+### nix-darwin Systems
+- **work_mac** - Work macOS setup (aarch64-darwin)
 
 ### Home Manager Configurations
-- **vps02** - Server environment (x86_64-linux)
-- **sunflower** - Desktop/WSL environment (x86_64-linux)
-- **work_mac** - Work macOS setup (aarch64-darwin)
-- **work_ubuntu** - Work Ubuntu environment (x86_64-linux)
-- **hydrangea** - Personal macOS setup (aarch64-darwin)
+- **tnmt@vps02** - Server environment (x86_64-linux)
+- **tnmt@sunflower** - Desktop/WSL environment (x86_64-linux)
+- **tsunematsu@work_mac** - Work macOS (aarch64-darwin)
+- **tnmt@work_ubuntu** - Work Ubuntu environment (x86_64-linux)
+- **tnmt@hydrangea** - Personal macOS (aarch64-darwin)
 
 ## Structure
 
@@ -29,32 +37,42 @@ This repository contains modular Nix configurations supporting:
 ├── hosts/                 # Host-specific configurations
 │   ├── default.nix        # Host definitions
 │   ├── sunflower/         # WSL NixOS system
+│   ├── dahlia/            # Desktop (Hyprland)
+│   ├── vps01/             # VPS with selfhosted services
 │   ├── vps02/             # Server configuration
-│   ├── work_mac/          # Work macOS
+│   ├── test-vm/           # VM testing
+│   ├── work_mac/          # Work macOS (nix-darwin)
 │   ├── work_ubuntu/       # Work Ubuntu
 │   └── hydrangea/         # Personal macOS
 ├── home-manager/          # Home Manager modules
-│   ├── base/              # Base configuration
-│   ├── darwin/            # macOS-specific
-│   ├── desktop/           # Desktop environment
+│   ├── base/              # Base configuration (shell, git, neovim, etc.)
+│   ├── darwin/            # macOS-specific (karabiner, etc.)
+│   ├── desktop/           # Desktop environment (hyprland, terminals)
 │   ├── server/            # Server-specific
 │   └── work/              # Work environment
 ├── modules/               # System modules
 │   ├── core/              # Core system settings
 │   ├── darwin/            # macOS system modules
-│   ├── desktop/           # Desktop environment modules
-│   └── programs/          # Program configurations
+│   ├── desktop/           # Desktop environment (fcitx5, greetd, sound)
+│   ├── programs/          # Program configurations
+│   ├── selfhosted/        # Selfhosted services
+│   └── remotebuild/       # Remote build cache
+├── secrets/               # sops-encrypted secrets
+├── themes/                # Theme definitions (Tokyo Night Storm)
 └── pkgs/                  # Custom packages
 ```
 
 ## Key Features
 
-- **Hyprland** desktop environment with custom configurations
+- **Hyprland** desktop environment with Waybar, Walker, Dunst
 - **Secure Boot** support via Lanzaboote
-- **Input remapping** with xremap
+- **sops-nix** for secrets management (age encryption)
+- **Selfhosted services**: Forgejo, AdGuard, Atuin Server, Nginx, CouchDB, MySQL, Postfix, Fail2ban, Tailscale
+- **Input remapping** with xremap / Karabiner-Elements
 - **Multi-language support** with fcitx5
-- **Development tools** and environments
-- **Consistent theming** across all systems
+- **Multiple terminal emulators**: Alacritty, foot, ghostty, kitty
+- **Theme system** with Tokyo Night Storm
+- **Greetd** display manager with tuigreet
 
 ## Usage
 
@@ -65,6 +83,15 @@ sudo nixos-rebuild switch --flake .#sunflower
 
 # Using nh (recommended)
 nh os switch . -H sunflower
+```
+
+### Building nix-darwin Configuration
+```bash
+# Using darwin-rebuild directly
+darwin-rebuild switch --flake .#work_mac
+
+# Using nh (recommended)
+nh darwin switch . -H work_mac
 ```
 
 ### Building Home Manager Configuration
@@ -89,14 +116,16 @@ nix fmt
 ## Dependencies
 
 This configuration uses several external inputs:
-- nixpkgs (unstable, stable, and darwin channels)
+- nixpkgs (unstable), nixpkgs-stable, nixpkgs-darwin
 - home-manager
 - nix-darwin
 - nixos-hardware
+- sops-nix
 - hyprland
 - lanzaboote
 - nixos-wsl
 - xremap
+- ccusage, oneaws (custom flakes)
 
 ## License
 
