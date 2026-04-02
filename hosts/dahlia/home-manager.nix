@@ -5,8 +5,7 @@
 }:
 {
   imports = [
-    ../../home-manager/base
-    ../../home-manager/base/nixos-hm.nix
+    ../../home-manager/base-nixos
     ../../home-manager/devel
     ../../home-manager/desktop
     ../../home-manager/desktop/hyprland
