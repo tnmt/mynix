@@ -47,7 +47,6 @@ in
     casks = [
       "1password-cli"
       "alacritty"
-      "amazon-bedrock-client"
       "chromedriver"
       "firefox"
       "gcloud-cli"
