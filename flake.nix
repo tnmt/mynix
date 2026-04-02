@@ -7,7 +7,7 @@
     nixpkgs-darwin.url = "nixpkgs/nixpkgs-25.05-darwin";
 
     darwin = {
-      url = "github:lnl7/nix-darwin";
+      url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
@@ -52,6 +52,7 @@
       packages = forAllSystems (system: import ./pkgs inputs.nixpkgs.legacyPackages.${system});
 
       nixosConfigurations = (import ./hosts inputs).nixos;
+      darwinConfigurations = (import ./hosts inputs).darwin;
       homeConfigurations = (import ./hosts inputs).home-manager;
 
       apps.x86_64-linux = {

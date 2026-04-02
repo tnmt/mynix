@@ -73,8 +73,30 @@ let
         )
       ];
     };
+  mkDarwinSystem =
+    {
+      system,
+      hostname,
+      username,
+      modules,
+    }:
+    inputs.darwin.lib.darwinSystem {
+      inherit system modules;
+      specialArgs = {
+        inherit inputs hostname username;
+      };
+    };
 in
 {
+  darwin = {
+    work_mac = mkDarwinSystem {
+      system = "aarch64-darwin";
+      hostname = "work_mac";
+      username = "tsunematsu";
+      modules = [ ./work_mac/darwin.nix ];
+    };
+  };
+
   nixos = {
     sunflower = mkNixosSystem {
       system = "x86_64-linux";
