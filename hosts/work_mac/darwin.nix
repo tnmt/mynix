@@ -1,4 +1,9 @@
-{ pkgs, inputs, username, ... }:
+{
+  pkgs,
+  inputs,
+  username,
+  ...
+}:
 let
   pkgs-unstable = import inputs.nixpkgs { system = "aarch64-darwin"; };
 in

@@ -9,7 +9,7 @@
   };
 
   # Generate CouchDB config from sops secret
-  sops.secrets.couchdb_admin_password = {};
+  sops.secrets.couchdb_admin_password = { };
   sops.templates."couchdb_admin_config" = {
     content = ''
       [admins]

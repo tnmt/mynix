@@ -83,9 +83,9 @@
     defaultSopsFile = ../../secrets/vps01.yaml;
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     secrets = {
-      couchdb_admin_password = {};
-      cloudflare_api_key = {};
-      cloudflare_email = {};
+      couchdb_admin_password = { };
+      cloudflare_api_key = { };
+      cloudflare_email = { };
       forgejo_lfs_jwt_secret = {
         owner = "forgejo";
       };

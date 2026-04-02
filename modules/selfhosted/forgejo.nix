@@ -27,7 +27,7 @@
         LFS_START_SERVER = true;
         OFFLINE_MODE = true;
       };
-      oauth2 = {};
+      oauth2 = { };
       service = {
         DISABLE_REGISTRATION = true;
         REQUIRE_SIGNIN_VIEW = true;
