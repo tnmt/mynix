@@ -89,6 +89,7 @@
     gh
     ghq
     nkf
+    platinum-searcher
     ripgrep
     fd
     sshuttle
