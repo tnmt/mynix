@@ -5,8 +5,7 @@
 }:
 {
   imports = [
-    ../../home-manager/base
-    ../../home-manager/base/nixos-hm.nix
+    ../../home-manager/base-nixos
   ];
 
   custom = {
