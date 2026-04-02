@@ -14,6 +14,7 @@
       # For treesitter compilation
       gcc
       gnumake
+      tree-sitter
 
       # Used by telescope
       ripgrep
