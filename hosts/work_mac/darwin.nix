@@ -31,6 +31,7 @@
     brews = [
       "colima"
       "consul"
+      "consul-template"
       "docker"
       "envchain"
       "gogcli"
