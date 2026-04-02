@@ -100,7 +100,6 @@
     tree
 
     # lang
-    gopls
     nixd
 
     # archiver
