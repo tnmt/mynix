@@ -872,11 +872,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1753367460,
-        "narHash": "sha256-9/uw3RbeCNYyktDcTF7KjzUzxeOqEhdHQ2nFW4790oo=",
+        "lastModified": 1775107718,
+        "narHash": "sha256-oeOHFNpmqryW0eCkEcpoQw95f/gZfdV26oE37bNO4/c=",
         "owner": "tnmt",
         "repo": "oneaws-flake",
-        "rev": "87f9523e8da1b063b8ec45071341d46758d282f8",
+        "rev": "a0127bde554b53b6f89069c03dc7655963ed14e3",
         "type": "github"
       },
       "original": {
