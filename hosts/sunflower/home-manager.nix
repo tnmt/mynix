@@ -13,6 +13,7 @@ in
 {
   imports = [
     ../../home-manager/base
+    ../../home-manager/devel
   ];
 
   custom = {
