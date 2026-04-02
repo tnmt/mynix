@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -19,5 +19,17 @@
     home-manager
   ];
 
+  homebrew = {
+    enable = true;
+    casks = [
+      "alacritty"
+    ];
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "none";
+    };
+  };
+
+  system.primaryUser = username;
   system.stateVersion = 6;
 }
