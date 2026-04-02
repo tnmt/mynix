@@ -27,9 +27,6 @@ let
         inherit system overlays;
         config = {
           allowUnfree = true;
-
-          # FIX: How to solve this?
-          permittedInsecurePackages = [ "electron-25.9.0" ];
         };
       };
       extraSpecialArgs = {
