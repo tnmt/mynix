@@ -47,7 +47,6 @@ in
     casks = [
       "1password-cli"
       "alacritty"
-      "chromedriver"
       "firefox"
       "google-chrome"
       "goreleaser"
