@@ -161,7 +161,12 @@ in
     "tsunematsu@work_mac" = mkHomeManagerConfiguration {
       system = "aarch64-darwin";
       username = "tsunematsu";
-      overlays = [ ];
+      overlays = [
+        (final: prev: {
+          oneaws = inputs.oneaws.packages.${final.stdenv.hostPlatform.system}.default;
+          ccusage = inputs.ccusage.packages.${final.stdenv.hostPlatform.system}.default;
+        })
+      ];
       sopsFile = ../secrets/work_mac.yaml;
       modules = [ ./work_mac/home-manager.nix ];
     };

@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../../home-manager/base
@@ -16,7 +16,8 @@
   };
 
   home.packages = with pkgs; [
-    # inputs.oneaws.packages.${pkgs.stdenv.hostPlatform.system}.default
+    oneaws
+    ccusage
     aws-sam-cli
     awscli2
     coreutils
