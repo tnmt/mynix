@@ -31,7 +31,10 @@
   networking.nameservers = [ "127.0.0.1" ];
 
   networking.firewall = {
-    allowedTCPPorts = [ 53 8000 ];
+    allowedTCPPorts = [
+      53
+      8000
+    ];
     allowedUDPPorts = [ 53 ];
   };
 }

@@ -9,7 +9,12 @@
 
     # Status endpoint (local only)
     virtualHosts."localhost" = {
-      listen = [{ addr = "127.0.0.1"; port = 8080; }];
+      listen = [
+        {
+          addr = "127.0.0.1";
+          port = 8080;
+        }
+      ];
       locations."/nginx_status" = {
         extraConfig = ''
           stub_status on;
@@ -216,5 +221,8 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 }
