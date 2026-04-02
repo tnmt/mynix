@@ -29,6 +29,17 @@
   # Firewall
   networking.firewall.enable = true;
 
+  # SSH hardening
+  services.openssh.settings = {
+    PasswordAuthentication = false;
+    KbdInteractiveAuthentication = false;
+    PermitRootLogin = "no";
+    X11Forwarding = false;
+    MaxAuthTries = 3;
+    ClientAliveInterval = 300;
+    ClientAliveCountMax = 2;
+  };
+
   # PHP-FPM pools for web apps
   services.phpfpm.pools = {
     freshrss = {
