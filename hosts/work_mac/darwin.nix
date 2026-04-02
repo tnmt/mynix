@@ -1,7 +1,11 @@
-{ pkgs, username, ... }:
+{ pkgs, inputs, username, ... }:
+let
+  pkgs-unstable = import inputs.nixpkgs { system = "aarch64-darwin"; };
+in
 {
   nixpkgs.config.allowUnfree = true;
 
+  nix.package = pkgs-unstable.nixVersions.latest;
   nix.settings = {
     experimental-features = [
       "nix-command"
