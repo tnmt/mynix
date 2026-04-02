@@ -21,6 +21,24 @@
 
   homebrew = {
     enable = true;
+    taps = [
+      "hashicorp/tap"
+      "k1LoW/tap"
+      "pyama86/kagiana"
+      "takai/tap"
+    ];
+    brews = [
+      "colima"
+      "consul"
+      "docker"
+      "envchain"
+      "gogcli"
+      "hashicorp/tap/vault"
+      "k1low/tap/mo"
+      "pyama86/kagiana/kagiana"
+      "takai/tap/git-ai-commit"
+      "the_platinum_searcher"
+    ];
     casks = [
       "alacritty"
     ];
