@@ -21,10 +21,12 @@
       "XMODIFIERS, @im=fcitx"
       "INPUT_METHOD, fcitx"
       "LANG, ja_JP.UTF-8"
+      "SSH_AUTH_SOCK, /run/user/1000/keyring/ssh"
     ];
 
     exec-once = [
       "dbus-update-activation-environment --systemd --all"
+      "gnome-keyring-daemon --start --components=secrets,ssh"
       "fcitx5 -d --replace"
       "elephant"
       "walker --gapplication-service"
