@@ -29,7 +29,6 @@
   # Firewall
   networking.firewall.enable = true;
 
-
   # PHP-FPM pools for web apps
   services.phpfpm.pools = {
     freshrss = {
