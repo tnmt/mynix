@@ -9,7 +9,7 @@ return {
       -- Ensure parsers are installed
       local parsers = {
         "bash", "c", "diff", "go", "html", "javascript", "json", "lua",
-        "markdown", "markdown_inline", "python", "query", "regex", "ruby",
+        "markdown", "markdown_inline", "nix", "python", "query", "regex", "ruby",
         "toml", "tsx", "typescript", "vim", "yaml",
       }
       for _, parser in ipairs(parsers) do
@@ -25,7 +25,6 @@ return {
       "mason-org/mason.nvim",
       "mason-org/mason-lspconfig.nvim",
       "folke/neodev.nvim",
-      "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       -- Setup mason first
@@ -64,7 +63,11 @@ return {
       end
 
       -- Setup LSP servers
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+      if ok then
+        capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+      end
 
       local servers = {
         lua_ls = {
@@ -79,6 +82,14 @@ return {
         pyright = {},
         ruff_lsp = {},
         gopls = {},
+        nil_ls = {
+          settings = {
+            ["nil"] = {
+              formatting = { command = { "nixfmt" } },
+              nix = { flake = { autoArchive = false } },
+            },
+          },
+        },
         ts_ls = {},
         ruby_lsp = {},
       }
