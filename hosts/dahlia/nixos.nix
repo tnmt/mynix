@@ -44,6 +44,8 @@
           id = "homelab";
           type = "wifi";
           interface-name = "wlan0";
+          autoconnect = true;
+          autoconnect-priority = 100;
         };
         wifi = {
           ssid = "$WIFI_HOMELAB_SSID";
