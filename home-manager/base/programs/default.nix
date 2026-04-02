@@ -3,11 +3,9 @@
   imports = [
     ./atuin.nix
     ./git.nix
-    ./neovim.nix
     ./ssh.nix
     ./starship.nix
     ./tmux.nix
-    ./zellij.nix
     ./zsh.nix
   ];
 
@@ -85,33 +83,24 @@
     nh
     sops
 
+    # editor (minimal)
+    vim
+
     # cui
     gh
     ghq
-    nkf
-    platinum-searcher
     ripgrep
     fd
-    sshuttle
     tig
     wget
-    gnumake
     rsync
     tree
-
-    # lang
-    nixd
 
     # archiver
     unzip
 
-    # k8s
-    kubectl
-    krew
-
     # Data format
     jq
-    yamlfmt
 
     # SSH
     openssh
@@ -119,17 +108,13 @@
     # TLS
     openssl
 
-    # claude
+    # search
+    platinum-searcher
+
+    # AI
     claude-code
     inputs.ccusage.packages.${pkgs.stdenv.hostPlatform.system}.default
-
-    # gemini
     gemini-cli
-
-    # codex
     codex
-
-    # Terraform
-    tenv
   ];
 }

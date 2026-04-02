@@ -1,13 +1,12 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
-    ./options.nix
     ./programs
   ];
 
   home = {
     sessionVariables = {
-      EDITOR = lib.mkDefault "vim";
+      EDITOR = "nvim";
     };
   };
 }

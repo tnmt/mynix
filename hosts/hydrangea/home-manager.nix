@@ -2,6 +2,7 @@
 {
   imports = [
     ../../home-manager/base
+    ../../home-manager/devel
     ../../home-manager/darwin
     ../../home-manager/desktop/terminal/alacritty
     ../../home-manager/desktop/terminal/ghostty
