@@ -43,7 +43,6 @@ in
       "k1low/tap/mo"
       "pyama86/kagiana/kagiana"
       "takai/tap/git-ai-commit"
-      "the_platinum_searcher"
     ];
     casks = [
       "1password-cli"
