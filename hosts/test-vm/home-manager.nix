@@ -7,7 +7,6 @@
 {
   imports = [
     ../../home-manager/base
-    ../../home-manager/server
     inputs.sops-nix.homeManagerModules.sops
   ];
 

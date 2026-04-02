@@ -8,5 +8,10 @@
     sessionVariables = {
       EDITOR = "nvim";
     };
+
+    shellAliases = {
+      vi = "nvim";
+      vim = "nvim";
+    };
   };
 }

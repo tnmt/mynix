@@ -35,8 +35,6 @@ in
       info = "info --vi-keys";
       g = "git";
       be = "bundle exec";
-      vi = "nvim";
-      vim = "nvim";
       cat = "bat";
     }
     // lib.optionalAttrs isLinux {
@@ -111,10 +109,6 @@ in
       if [ -f "$HOME/.config/op/service-account-token" ]; then
         export OP_SERVICE_ACCOUNT_TOKEN="$(cat "$HOME/.config/op/service-account-token")"
       fi
-
-      # Google Cloud SDK
-      if [ -f ~/.src/google-cloud-sdk/path.zsh.inc ]; then . ~/.src/google-cloud-sdk/path.zsh.inc; fi
-      if [ -f ~/.src/google-cloud-sdk/completion.zsh.inc ]; then . ~/.src/google-cloud-sdk/completion.zsh.inc; fi
 
       # Starship transient prompt
       if command -v starship &> /dev/null; then
