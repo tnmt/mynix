@@ -8,7 +8,7 @@ in
   xdg.configFile."ghostty/config".text = ''
     theme = ${themeName}
     font-size = 16
-    font-family = MesloLGS Nerd Font
+    font-family = MesloLGS NF
     font-family = Hiragino Kaku Gothic ProN
     copy-on-select = clipboard
     window-save-state = always
