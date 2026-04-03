@@ -1,5 +1,14 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 {
+  sops.secrets.cloudflare_api_key = { };
+  sops.secrets.cloudflare_email = { };
+  sops.templates."cloudflare-credentials" = {
+    content = ''
+      CLOUDFLARE_EMAIL=${config.sops.placeholder.cloudflare_email}
+      CLOUDFLARE_API_KEY=${config.sops.placeholder.cloudflare_api_key}
+    '';
+  };
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "s@tnmt.info";

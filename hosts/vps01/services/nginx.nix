@@ -1,5 +1,16 @@
 { config, ... }:
 {
+  sops.templates."nginx-trusted-ips" = {
+    content = ''
+      allow ${config.sops.placeholder.trusted_ip_home};
+      allow ${config.sops.placeholder.trusted_ip_homelab};
+      allow ${config.sops.placeholder.trusted_ip_office};
+      allow 100.64.0.0/10;
+      deny all;
+    '';
+    owner = "nginx";
+  };
+
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
