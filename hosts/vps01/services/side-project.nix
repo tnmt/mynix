@@ -1,11 +1,14 @@
 { config, pkgs, ... }:
+let
+  domain = import ../../../secrets/side-project-domain.nix;
+in
 {
-  services.phpfpm.pools.***REDACTED*** = {
+  services.phpfpm.pools.${domain} = {
     user = "nginx";
     group = "nginx";
     phpPackage = pkgs.php83;
     settings = {
-      "listen" = "/run/phpfpm/***REDACTED***.sock";
+      "listen" = "/run/phpfpm/${domain}.sock";
       "listen.owner" = "nginx";
       "listen.group" = "nginx";
       "pm" = "dynamic";
@@ -16,10 +19,10 @@
     };
   };
 
-  services.nginx.virtualHosts."***REDACTED***" = {
+  services.nginx.virtualHosts.${domain} = {
     forceSSL = true;
     enableACME = true;
-    root = "/var/www/***REDACTED***";
+    root = "/var/www/${domain}";
     locations."/" = {
       tryFiles = "$uri $uri/ /index.php?$args";
       index = "index.php";
@@ -28,7 +31,7 @@
       extraConfig = ''
         try_files $uri =404;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass unix:/run/phpfpm/***REDACTED***.sock;
+        fastcgi_pass unix:/run/phpfpm/${domain}.sock;
         fastcgi_index index.php;
         include ${config.services.nginx.package}/conf/fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
@@ -37,9 +40,9 @@
     };
   };
 
-  services.nginx.virtualHosts."www.***REDACTED***" = {
+  services.nginx.virtualHosts."www.${domain}" = {
     forceSSL = true;
     enableACME = true;
-    globalRedirect = "***REDACTED***";
+    globalRedirect = domain;
   };
 }
