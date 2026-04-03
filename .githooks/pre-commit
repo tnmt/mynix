@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Run nix fmt on staged .nix and .toml files
+staged=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(nix|toml)$' || true)
+
+if [ -n "$staged" ]; then
+  nix fmt
+  echo "$staged" | xargs git add
+fi
