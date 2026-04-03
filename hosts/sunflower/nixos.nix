@@ -22,15 +22,7 @@
     fsType = "ext4";
   };
 
-  users.users."${username}" = {
-    isNormalUser = true;
-    home = "/home/${username}";
-    shell = pkgs.zsh;
-    group = "users";
-    extraGroups = [ "wheel" ];
-  };
-
-  nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
+nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
 
   wsl.defaultUser = "${username}";
 

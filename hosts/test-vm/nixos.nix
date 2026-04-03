@@ -18,15 +18,7 @@
   };
   boot.loader.grub.device = "/dev/vda";
 
-  # User
-  users.users."${username}" = {
-    isNormalUser = true;
-    home = "/home/${username}";
-    shell = pkgs.zsh;
-    group = "users";
-    extraGroups = [ "wheel" ];
-    initialPassword = "test";
-  };
+  users.users."${username}".initialPassword = "test";
 
   home-manager.users."${username}" = import ./home-manager.nix;
 
