@@ -62,6 +62,7 @@
     enableACME = true;
     extraConfig = ''
       client_max_body_size 512M;
+      include ${config.sops.templates."nginx-trusted-ips".path};
     '';
     locations."/" = {
       proxyPass = "http://127.0.0.1:3000";
@@ -78,5 +79,10 @@
     owner = "forgejo";
   };
 
-  networking.firewall.allowedTCPPorts = [ 2223 ];
+  networking.firewall.extraCommands = ''
+    for ip in $(cat ${config.sops.templates."firewall-trusted-ips".path}); do
+      iptables -A nixos-fw -p tcp -s "$ip" --dport 2223 -j nixos-fw-accept
+    done
+    iptables -A nixos-fw -p tcp -s 100.64.0.0/10 --dport 2223 -j nixos-fw-accept
+  '';
 }
