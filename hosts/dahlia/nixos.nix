@@ -29,10 +29,8 @@
   };
 
   # Networking
-  networking.wireless.iwd.enable = true;
   networking.networkmanager = {
     enable = true;
-    wifi.backend = "iwd";
     ensureProfiles.environmentFiles = [
       config.sops.templates."wifi-env".path
     ];
@@ -41,7 +39,7 @@
         connection = {
           id = "homelab";
           type = "wifi";
-          interface-name = "wlan0";
+          interface-name = "wlp3s0";
           autoconnect = true;
           autoconnect-priority = 100;
         };
