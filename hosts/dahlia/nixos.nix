@@ -53,9 +53,8 @@
         };
         ipv4 = {
           method = "manual";
-          addresses = "$DAHLIA_IP";
-          gateway = "$DAHLIA_GATEWAY";
-          dns = "$DAHLIA_DNS";
+          address1 = "$DAHLIA_IP_WITH_PREFIX,$DAHLIA_GATEWAY";
+          dns = "$DAHLIA_DNS;";
         };
       };
     };
@@ -68,14 +67,14 @@
     age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
     secrets.wifi_homelab_ssid = { };
     secrets.wifi_homelab_psk = { };
-    secrets.dahlia_ip = { };
+    secrets.dahlia_ip_with_prefix = { };
     secrets.dahlia_gateway = { };
     secrets.dahlia_dns = { };
     templates."wifi-env" = {
       content = ''
         WIFI_HOMELAB_SSID=${config.sops.placeholder.wifi_homelab_ssid}
         WIFI_HOMELAB_PSK=${config.sops.placeholder.wifi_homelab_psk}
-        DAHLIA_IP=${config.sops.placeholder.dahlia_ip}
+        DAHLIA_IP_WITH_PREFIX=${config.sops.placeholder.dahlia_ip_with_prefix}
         DAHLIA_GATEWAY=${config.sops.placeholder.dahlia_gateway}
         DAHLIA_DNS=${config.sops.placeholder.dahlia_dns}
       '';
