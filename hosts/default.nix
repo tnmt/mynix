@@ -1,5 +1,13 @@
 inputs:
 let
+  commonOverlays = [
+    (final: prev: {
+      oneaws = inputs.oneaws.packages.${final.stdenv.hostPlatform.system}.default;
+      ccusage = inputs.ccusage.packages.${final.stdenv.hostPlatform.system}.default;
+      gws = inputs.gws.packages.${final.stdenv.hostPlatform.system}.default;
+    })
+  ];
+
   mkNixosSystem =
     {
       system,
@@ -18,7 +26,7 @@ let
     {
       system,
       username,
-      overlays,
+      overlays ? commonOverlays,
       modules,
       sopsFile ? ../secrets/default.yaml,
     }:
@@ -135,32 +143,22 @@ in
     "tnmt@vps02" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
-      overlays = [ ];
       modules = [ ./vps02/home-manager.nix ];
     };
     "tsunematsu@work_mac" = mkHomeManagerConfiguration {
       system = "aarch64-darwin";
       username = "tsunematsu";
-      overlays = [
-        (final: prev: {
-          oneaws = inputs.oneaws.packages.${final.stdenv.hostPlatform.system}.default;
-          ccusage = inputs.ccusage.packages.${final.stdenv.hostPlatform.system}.default;
-          gws = inputs.gws.packages.${final.stdenv.hostPlatform.system}.default;
-        })
-      ];
       sopsFile = ../secrets/work_mac.yaml;
       modules = [ ./work_mac/home-manager.nix ];
     };
     "tnmt@work_ubuntu" = mkHomeManagerConfiguration {
       system = "x86_64-linux";
       username = "tnmt";
-      overlays = [ ];
       modules = [ ./work_ubuntu/home-manager.nix ];
     };
     "tnmt@hydrangea" = mkHomeManagerConfiguration {
       system = "aarch64-darwin";
       username = "tnmt";
-      overlays = [ ];
       modules = [ ./hydrangea/home-manager.nix ];
     };
   };

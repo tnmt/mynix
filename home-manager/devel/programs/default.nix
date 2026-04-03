@@ -11,6 +11,9 @@
     tenv
     sshuttle
 
+    # Google Workspace
+    gws
+
     # Build/lang
     gnumake
     yamlfmt
