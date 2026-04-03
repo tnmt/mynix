@@ -9,7 +9,7 @@
     ./freshrss.nix
     ./mysql.nix
     ./nginx.nix
-    ./***REDACTED***.nix
+    ./side-project.nix
     ./postfix.nix
     ./tailscale.nix
     ./wallabag.nix
