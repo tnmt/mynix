@@ -19,6 +19,7 @@
   home.packages = with pkgs; [
     oneaws
     ccusage
+    gws
     aws-sam-cli
     awscli2
     coreutils
