@@ -12,6 +12,7 @@
     ../../modules/core
     ../../modules/programs/shell.nix
     ../../modules/programs/openssh.nix
+    ../../modules/services/mackerel-agent.nix
     ./services
 
   ];
