@@ -12,7 +12,6 @@
     ../../modules/programs/openssh.nix
 
     inputs.nixos-wsl.nixosModules.default
-    inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -40,14 +39,5 @@
 
   services.openssh.ports = [ 2222 ];
 
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = {
-      inherit inputs username;
-      theme = (import ../../themes) "tokyonight-storm";
-      pkgs-stable = pkgs;
-    };
-    users."${username}" = import ./home-manager.nix;
-  };
+  home-manager.users."${username}" = import ./home-manager.nix;
 }

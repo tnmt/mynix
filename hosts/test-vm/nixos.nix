@@ -9,7 +9,6 @@
     ../../modules/core
     ../../modules/programs/shell.nix
 
-    inputs.home-manager.nixosModules.home-manager
   ];
 
   # VM-specific hardware
@@ -29,17 +28,7 @@
     initialPassword = "test";
   };
 
-  # home-manager as NixOS module (VM only)
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = {
-      inherit inputs username;
-      theme = (import ../../themes) "tokyonight-storm";
-      pkgs-stable = pkgs;
-    };
-    users."${username}" = import ./home-manager.nix;
-  };
+  home-manager.users."${username}" = import ./home-manager.nix;
 
   # VM niceties
   virtualisation.vmVariant = {

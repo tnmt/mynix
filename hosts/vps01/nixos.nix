@@ -14,7 +14,6 @@
     ../../modules/programs/openssh.nix
     ../../modules/selfhosted
 
-    inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -113,15 +112,5 @@
     ];
   };
 
-  # home-manager as NixOS module
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = {
-      inherit inputs username;
-      theme = (import ../../themes) "tokyonight-storm";
-      pkgs-stable = pkgs;
-    };
-    users."${username}" = import ./home-manager.nix;
-  };
+  home-manager.users."${username}" = import ./home-manager.nix;
 }

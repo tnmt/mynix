@@ -17,7 +17,6 @@
     ../../modules/programs/virtualisation.nix
     ../../modules/desktop
 
-    inputs.home-manager.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -137,15 +136,5 @@
   # Auto-login for VM convenience
   services.getty.autologinUser = username;
 
-  # home-manager as NixOS module
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    extraSpecialArgs = {
-      inherit inputs username;
-      theme = (import ../../themes) "tokyonight-storm";
-      pkgs-stable = pkgs;
-    };
-    users."${username}" = import ./home-manager.nix;
-  };
+  home-manager.users."${username}" = import ./home-manager.nix;
 }
