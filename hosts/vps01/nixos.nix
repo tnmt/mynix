@@ -27,55 +27,6 @@
   # Firewall
   networking.firewall.enable = true;
 
-  # PHP-FPM pools for web apps
-  services.phpfpm.pools = {
-    freshrss = {
-      user = "nginx";
-      group = "nginx";
-      phpPackage = pkgs.php83;
-      settings = {
-        "listen" = "/run/phpfpm/freshrss.sock";
-        "listen.owner" = "nginx";
-        "listen.group" = "nginx";
-        "pm" = "dynamic";
-        "pm.max_children" = 10;
-        "pm.start_servers" = 2;
-        "pm.min_spare_servers" = 1;
-        "pm.max_spare_servers" = 5;
-      };
-    };
-    wallabag = {
-      user = "nginx";
-      group = "nginx";
-      phpPackage = pkgs.php83;
-      settings = {
-        "listen" = "/run/phpfpm/wallabag.sock";
-        "listen.owner" = "nginx";
-        "listen.group" = "nginx";
-        "pm" = "dynamic";
-        "pm.max_children" = 10;
-        "pm.start_servers" = 2;
-        "pm.min_spare_servers" = 1;
-        "pm.max_spare_servers" = 5;
-      };
-    };
-    ***REDACTED*** = {
-      user = "nginx";
-      group = "nginx";
-      phpPackage = pkgs.php83;
-      settings = {
-        "listen" = "/run/phpfpm/***REDACTED***.sock";
-        "listen.owner" = "nginx";
-        "listen.group" = "nginx";
-        "pm" = "dynamic";
-        "pm.max_children" = 10;
-        "pm.start_servers" = 2;
-        "pm.min_spare_servers" = 1;
-        "pm.max_spare_servers" = 5;
-      };
-    };
-  };
-
   # Secrets
   sops = {
     defaultSopsFile = ../../secrets/vps01.yaml;
@@ -90,12 +41,35 @@
       forgejo_db_password = {
         owner = "forgejo";
       };
+      trusted_ip_home = { };
+      trusted_ip_homelab = { };
+      trusted_ip_office = { };
     };
     templates."cloudflare-credentials" = {
       content = ''
         CLOUDFLARE_EMAIL=${config.sops.placeholder.cloudflare_email}
         CLOUDFLARE_API_KEY=${config.sops.placeholder.cloudflare_api_key}
       '';
+    };
+    templates."nginx-trusted-ips" = {
+      content = ''
+        allow ${config.sops.placeholder.trusted_ip_home};
+        allow ${config.sops.placeholder.trusted_ip_homelab};
+        allow ${config.sops.placeholder.trusted_ip_office};
+        allow 100.64.0.0/10;
+        deny all;
+      '';
+      owner = "nginx";
+    };
+    templates."firewall-trusted-ips" = {
+      content = ''
+        ${config.sops.placeholder.trusted_ip_home}
+        ${config.sops.placeholder.trusted_ip_homelab}
+        ${config.sops.placeholder.trusted_ip_office}
+      '';
+    };
+    templates."fail2ban-ignoreip" = {
+      content = "${config.sops.placeholder.trusted_ip_home} ${config.sops.placeholder.trusted_ip_homelab} ${config.sops.placeholder.trusted_ip_office} 100.64.0.0/10";
     };
   };
 
