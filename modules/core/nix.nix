@@ -2,12 +2,15 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  nix = {
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      extraArgs = "--keep 5 --keep-since 7d";
     };
+  };
+
+  nix = {
     settings = {
       auto-optimise-store = true;
       experimental-features = [
