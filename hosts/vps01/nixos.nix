@@ -14,7 +14,6 @@
     ../../modules/programs/openssh.nix
     ../../modules/selfhosted
 
-    inputs.sops-nix.nixosModules.sops
   ];
 
   # Boot loader

@@ -17,7 +17,6 @@
     ../../modules/programs/virtualisation.nix
     ../../modules/desktop
 
-    inputs.sops-nix.nixosModules.sops
   ];
 
   # Display manager

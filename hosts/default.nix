@@ -129,17 +129,6 @@ in
         }
       ];
     };
-    test-vm = mkNixosSystem {
-      system = "x86_64-linux";
-      hostname = "test-vm";
-      username = "tnmt";
-      modules = [
-        ./test-vm/nixos.nix
-        {
-          system.stateVersion = "25.05";
-        }
-      ];
-    };
   };
 
   home-manager = {

@@ -56,12 +56,7 @@
       homeConfigurations = (import ./hosts inputs).home-manager;
 
       apps.x86_64-linux = {
-        # Run with: nix run .#test-vm
-        test-vm = {
-          type = "app";
-          program = "${self.nixosConfigurations.test-vm.config.system.build.vm}/bin/run-test-vm-vm";
-        };
-        # Run with: nix run .#dahlia-vm
+# Run with: nix run .#dahlia-vm
         dahlia-vm = {
           type = "app";
           program = "${self.nixosConfigurations.dahlia.config.system.build.vm}/bin/run-dahlia-vm";
