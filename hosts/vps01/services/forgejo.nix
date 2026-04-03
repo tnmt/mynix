@@ -71,5 +71,12 @@
     };
   };
 
+  sops.secrets.forgejo_lfs_jwt_secret = {
+    owner = "forgejo";
+  };
+  sops.secrets.forgejo_db_password = {
+    owner = "forgejo";
+  };
+
   networking.firewall.allowedTCPPorts = [ 2223 ];
 }
