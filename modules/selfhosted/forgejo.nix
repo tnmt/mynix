@@ -57,5 +57,19 @@
     };
   };
 
+  services.nginx.virtualHosts."git.tnmt.info" = {
+    forceSSL = true;
+    enableACME = true;
+    extraConfig = ''
+      client_max_body_size 512M;
+    '';
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:3000";
+      extraConfig = ''
+        proxy_read_timeout 600;
+      '';
+    };
+  };
+
   networking.firewall.allowedTCPPorts = [ 2223 ];
 }

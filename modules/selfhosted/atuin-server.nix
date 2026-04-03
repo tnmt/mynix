@@ -33,4 +33,13 @@ in
       ATUIN_DB_URI = "sqlite:///var/lib/atuin-server/atuin.db";
     };
   };
+
+  services.nginx.virtualHosts."atuin.tnmt.info" = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8888";
+      proxyWebsockets = true;
+    };
+  };
 }
