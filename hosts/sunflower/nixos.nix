@@ -12,7 +12,6 @@
     ../../modules/programs/openssh.nix
 
     inputs.nixos-wsl.nixosModules.default
-    inputs.sops-nix.nixosModules.sops
   ];
 
   boot.loader.grub.enable = false;
