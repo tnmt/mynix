@@ -51,7 +51,6 @@ in
     ];
     casks = [
       "1password-cli"
-      "alacritty"
       "appcleaner"
       "brave-browser"
       "chatgpt"
@@ -60,7 +59,6 @@ in
       "discord"
       "dropbox"
       "firefox"
-      "ghostty"
       "google-chrome"
       "goreleaser"
       "iterm2"

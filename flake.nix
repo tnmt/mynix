@@ -49,8 +49,6 @@
       forAllSystems = inputs.nixpkgs.lib.genAttrs allSystems;
     in
     {
-      packages = forAllSystems (system: import ./pkgs inputs.nixpkgs.legacyPackages.${system});
-
       nixosConfigurations = (import ./hosts inputs).nixos;
       darwinConfigurations = (import ./hosts inputs).darwin;
       homeConfigurations = (import ./hosts inputs).home-manager;
