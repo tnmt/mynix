@@ -5,4 +5,3 @@
 *.pem
 *.key
 keys.txt
-secrets/side-project-domain.nix
