@@ -4,7 +4,6 @@ let
     (final: prev: {
       oneaws = inputs.oneaws.packages.${final.stdenv.hostPlatform.system}.default;
       ccusage = inputs.ccusage.packages.${final.stdenv.hostPlatform.system}.default;
-      gws = inputs.gws.packages.${final.stdenv.hostPlatform.system}.default;
     })
   ];
 
