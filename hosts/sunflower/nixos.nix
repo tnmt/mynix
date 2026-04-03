@@ -21,7 +21,7 @@
     fsType = "ext4";
   };
 
-nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
+  nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
 
   wsl.defaultUser = "${username}";
 
