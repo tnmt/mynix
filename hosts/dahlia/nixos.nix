@@ -111,18 +111,11 @@
   # Power management
   services.power-profiles-daemon.enable = true;
 
-  # User
-  users.users."${username}" = {
-    isNormalUser = true;
-    home = "/home/${username}";
-    shell = pkgs.zsh;
-    group = "users";
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-      "docker"
-    ];
-  };
+  users.users."${username}".extraGroups = [
+    "wheel"
+    "networkmanager"
+    "docker"
+  ];
 
   # VM testing (ignored on real hardware)
   virtualisation.vmVariant = {

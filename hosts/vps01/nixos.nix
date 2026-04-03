@@ -100,17 +100,10 @@
     };
   };
 
-  # User
-  users.users."${username}" = {
-    isNormalUser = true;
-    home = "/home/${username}";
-    shell = pkgs.zsh;
-    group = "users";
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ];
-  };
+  users.users."${username}".extraGroups = [
+    "wheel"
+    "networkmanager"
+  ];
 
   home-manager.users."${username}" = import ./home-manager.nix;
 }
