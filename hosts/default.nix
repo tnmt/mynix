@@ -114,17 +114,6 @@ in
         }
       ];
     };
-    vps01 = mkNixosSystem {
-      system = "x86_64-linux";
-      hostname = "vps01";
-      username = "tnmt";
-      modules = [
-        ./vps01/nixos.nix
-        {
-          system.stateVersion = "25.11";
-        }
-      ];
-    };
     dahlia = mkNixosSystem {
       system = "x86_64-linux";
       hostname = "dahlia";
