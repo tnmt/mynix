@@ -59,6 +59,7 @@ in
       "discord"
       "dropbox"
       "firefox"
+      "ghostty"
       "google-chrome"
       "goreleaser"
       "iterm2"
