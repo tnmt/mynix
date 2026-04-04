@@ -134,11 +134,6 @@ in
   };
 
   home-manager = {
-    "tnmt@vps02" = mkHomeManagerConfiguration {
-      system = "x86_64-linux";
-      username = "tnmt";
-      modules = [ ./vps02/home-manager.nix ];
-    };
     "tsunematsu@work_mac" = mkHomeManagerConfiguration {
       system = "aarch64-darwin";
       username = "tsunematsu";
