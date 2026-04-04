@@ -99,6 +99,12 @@ in
       username = "tsunematsu";
       modules = [ ./work_mac/darwin.nix ];
     };
+    hydrangea = mkDarwinSystem {
+      system = "aarch64-darwin";
+      hostname = "hydrangea";
+      username = "tnmt";
+      modules = [ ./hydrangea/darwin.nix ];
+    };
   };
 
   nixos = {
