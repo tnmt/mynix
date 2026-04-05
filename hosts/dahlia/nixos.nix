@@ -29,7 +29,6 @@
         connection = {
           id = "homelab";
           type = "wifi";
-          interface-name = "wlp3s0";
           autoconnect = true;
           autoconnect-priority = 100;
         };
