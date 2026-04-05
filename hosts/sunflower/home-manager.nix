@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   username,
   ...
@@ -6,7 +7,7 @@
 let
   obsidianBackup = {
     description = "Run obsidian backup daily at 3:00 AM";
-    scriptPath = "/home/${username}/backup/obsidian-backup.sh";
+    scriptPath = "${config.home.homeDirectory}/backup/obsidian-backup.sh";
     schedule = "3:00";
   };
 in

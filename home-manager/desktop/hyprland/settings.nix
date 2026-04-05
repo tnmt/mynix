@@ -21,7 +21,7 @@
       "XMODIFIERS, @im=fcitx"
       "INPUT_METHOD, fcitx"
       "LANG, ja_JP.UTF-8"
-      "SSH_AUTH_SOCK, /run/user/1000/keyring/ssh"
+      "SSH_AUTH_SOCK, $XDG_RUNTIME_DIR/keyring/ssh"
     ];
 
     exec-once = [

@@ -1,4 +1,4 @@
-{ ... }:
+{ username, ... }:
 {
   programs.ssh = {
     enable = true;
@@ -11,7 +11,7 @@
       serverAliveCountMax = 5;
       hashKnownHosts = true;
       forwardAgent = true;
-      user = "tnmt";
+      user = username;
       extraOptions = {
         StrictHostKeyChecking = "no";
         AddKeysToAgent = "yes";

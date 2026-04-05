@@ -16,6 +16,6 @@
 
   systemd.services.mpd.environment = {
     # User-id must match above user
-    XDG_RUNTIME_DIR = "/run/user/1000";
+    XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.${username}.uid}";
   };
 }
