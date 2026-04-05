@@ -5,11 +5,10 @@ Personal Nix configurations for multiple hosts and environments.
 ## Overview
 
 This repository contains modular Nix configurations supporting:
-- **NixOS systems** (desktop, server, WSL)
+- **NixOS systems** (desktop, WSL)
 - **nix-darwin** for macOS system-level management
 - **Home Manager** configurations for Linux and macOS
 - **Secrets management** with sops-nix
-- **Selfhosted services** (Forgejo, AdGuard, Atuin Server, etc.)
 - **Cross-platform support**: x86_64-linux and aarch64-darwin
 
 ## Hosts
@@ -17,15 +16,12 @@ This repository contains modular Nix configurations supporting:
 ### NixOS Systems
 - **sunflower** - WSL-enabled NixOS system (x86_64-linux)
 - **dahlia** - Desktop system with Hyprland (x86_64-linux)
-- **vps01** - VPS with selfhosted services (x86_64-linux)
-- **test-vm** - VM testing environment (x86_64-linux)
 
 ### nix-darwin Systems
 - **work_mac** - Work macOS setup (aarch64-darwin)
+- **hydrangea** - Personal macOS (aarch64-darwin)
 
 ### Home Manager Configurations
-- **tnmt@vps02** - Server environment (x86_64-linux)
-- **tnmt@sunflower** - Desktop/WSL environment (x86_64-linux)
 - **tsunematsu@work_mac** - Work macOS (aarch64-darwin)
 - **tnmt@work_ubuntu** - Work Ubuntu environment (x86_64-linux)
 - **tnmt@hydrangea** - Personal macOS (aarch64-darwin)
@@ -38,28 +34,25 @@ This repository contains modular Nix configurations supporting:
 │   ├── default.nix        # Host definitions
 │   ├── sunflower/         # WSL NixOS system
 │   ├── dahlia/            # Desktop (Hyprland)
-│   ├── vps01/             # VPS with selfhosted services
-│   ├── vps02/             # Server configuration
-│   ├── test-vm/           # VM testing
 │   ├── work_mac/          # Work macOS (nix-darwin)
 │   ├── work_ubuntu/       # Work Ubuntu
-│   └── hydrangea/         # Personal macOS
+│   └── hydrangea/         # Personal macOS (nix-darwin)
 ├── home-manager/          # Home Manager modules
-│   ├── base/              # Base configuration (shell, git, neovim, etc.)
+│   ├── base/              # Base configuration (shell, git, etc.)
+│   ├── base-nixos/        # NixOS-specific Home Manager base
 │   ├── darwin/            # macOS-specific (karabiner, etc.)
 │   ├── desktop/           # Desktop environment (hyprland, terminals)
-│   ├── server/            # Server-specific
+│   ├── devel/             # Development tools (neovim, etc.)
 │   └── work/              # Work environment
 ├── modules/               # System modules
 │   ├── core/              # Core system settings
-│   ├── darwin/            # macOS system modules
-│   ├── desktop/           # Desktop environment (fcitx5, greetd, sound)
+│   ├── desktop/           # Desktop environment (fcitx5, sound, etc.)
 │   ├── programs/          # Program configurations
-│   ├── selfhosted/        # Selfhosted services
+│   ├── services/          # Service configurations (mackerel-agent, etc.)
 │   └── remotebuild/       # Remote build cache
+├── profiles/              # Reusable NixOS profiles
 ├── secrets/               # sops-encrypted secrets
-├── themes/                # Theme definitions (Tokyo Night Storm)
-└── pkgs/                  # Custom packages
+└── themes/                # Theme definitions (Tokyo Night Storm)
 ```
 
 ## Key Features
@@ -67,7 +60,7 @@ This repository contains modular Nix configurations supporting:
 - **Hyprland** desktop environment with Waybar, Walker, Dunst
 - **Secure Boot** support via Lanzaboote
 - **sops-nix** for secrets management (age encryption)
-- **Selfhosted services**: Forgejo, AdGuard, Atuin Server, Nginx, CouchDB, MySQL, Postfix, Fail2ban, Tailscale
+- **Mackerel** monitoring agent integration
 - **Input remapping** with xremap / Karabiner-Elements
 - **Multi-language support** with fcitx5
 - **Multiple terminal emulators**: Alacritty, foot, ghostty, kitty
@@ -97,10 +90,10 @@ nh darwin switch . -H work_mac
 ### Building Home Manager Configuration
 ```bash
 # Using home-manager directly
-home-manager switch --flake .#tnmt@sunflower
+home-manager switch --flake .#tnmt@work_ubuntu
 
 # Using nh (recommended)
-nh home switch . -c tnmt@sunflower
+nh home switch . -c tnmt@work_ubuntu
 ```
 
 ### Development Shell

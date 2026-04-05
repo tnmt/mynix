@@ -69,7 +69,3 @@ jobs:
   # homeConfigurations on aarch64-darwin (need macOS runner):
   #   - tsunematsu@work_mac
   #   - tnmt@hydrangea
-  #
-  # Previously existing hosts not in current flake:
-  #   - vps01, test-vm (removed from nixosConfigurations)
-  #   - tnmt@vps02, tnmt@sunflower (not in homeConfigurations)
