@@ -127,6 +127,17 @@ This configuration uses several external inputs:
 - xremap
 - ccusage, oneaws (custom flakes)
 
+## CI
+
+GitHub Actions で以下を自動チェック:
+
+- `nix flake check` (devShells, formatter, checks の評価)
+- コードフォーマットの確認 (`nix fmt`)
+- NixOS ビルド: sunflower, dahlia
+- Home Manager ビルド: tnmt@work_ubuntu
+
+darwin 系ターゲット (work_mac, hydrangea) は macOS ランナーが必要なため現在は除外。
+
 ## License
 
 Personal configuration files - use at your own discretion.

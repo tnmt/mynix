@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel in-progress runs for the same branch/PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  flake-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: nix flake check
+        run: nix flake check
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Check formatting
+        run: |
+          nix fmt
+          git diff --exit-code || (echo "::error::Files are not formatted. Run 'nix fmt' locally." && exit 1)
+
+  build-nixos:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # dahlia: uses sops-nix but secrets are decrypted at activation time, not build time
+        # sunflower: WSL config, sops-nix imported via modules/core
+        host: [sunflower, dahlia]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Build NixOS (${{ matrix.host }})
+        run: nix build '.#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel' --no-link
+
+  build-home-manager:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Only x86_64-linux configs; darwin configs require macOS runners
+        config: ["tnmt@work_ubuntu"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Build Home Manager (${{ matrix.config }})
+        run: nix build '.#homeConfigurations."${{ matrix.config }}".activationPackage' --no-link
+
+  # NOTE: The following targets are excluded from CI:
+  #
+  # darwinConfigurations (need macOS runner / aarch64-darwin):
+  #   - work_mac
+  #   - hydrangea
+  #
+  # homeConfigurations on aarch64-darwin (need macOS runner):
+  #   - tsunematsu@work_mac
+  #   - tnmt@hydrangea
+  #
+  # Previously existing hosts not in current flake:
+  #   - vps01, test-vm (removed from nixosConfigurations)
+  #   - tnmt@vps02, tnmt@sunflower (not in homeConfigurations)

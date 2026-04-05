@@ -86,6 +86,29 @@
           };
         }
       );
+      checks = forAllSystems (
+        system:
+        let
+          pkgs = inputs.nixpkgs.legacyPackages.${system};
+          formatters = with pkgs; [
+            nixfmt
+            taplo
+          ];
+        in
+        {
+          formatting =
+            pkgs.runCommandLocal "check-formatting"
+              {
+                nativeBuildInputs = formatters ++ [ pkgs.treefmt ];
+                src = self;
+              }
+              ''
+                cd $src
+                treefmt --config-file ${./treefmt.toml} --ci
+                touch $out
+              '';
+        }
+      );
       formatter = forAllSystems (
         system:
         let
