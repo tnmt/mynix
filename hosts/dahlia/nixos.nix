@@ -12,23 +12,13 @@
     ../../modules/core
     ../../modules/programs/shell.nix
     ../../modules/programs/openssh.nix
-    ../../modules/programs/bluetooth.nix
-    ../../modules/programs/hyprland.nix
     ../../modules/programs/virtualisation.nix
-    ../../modules/desktop
-
+    ../../profiles/laptop.nix
+    ../../profiles/hyprland-desktop.nix
+    ../../profiles/japanese-keyboard.nix
   ];
 
-  # Display manager
-  services.greetd = {
-    enable = true;
-    settings.default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd start-hyprland";
-      user = "greeter";
-    };
-  };
-
-  # Networking
+  # Networking (dahlia-specific: static IP on homelab WiFi)
   networking.networkmanager = {
     enable = true;
     ensureProfiles.environmentFiles = [
@@ -61,10 +51,16 @@
   };
   services.resolved.enable = true;
 
-  # Secrets
+  # Tailscale VPN
+  services.tailscale.enable = true;
+
+  # Firewall
+  networking.firewall.enable = true;
+
+  # Secrets (dahlia-specific)
   sops = {
     defaultSopsFile = ../../secrets/dahlia.yaml;
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    age.keyFile = "${config.users.users.${username}.home}/.config/sops/age/keys.txt";
     secrets.wifi_homelab_ssid = { };
     secrets.wifi_homelab_psk = { };
     secrets.dahlia_ip_with_prefix = { };
@@ -81,49 +77,11 @@
     };
   };
 
-  # Tailscale VPN
-  services.tailscale.enable = true;
-
-  # Firewall
-  networking.firewall.enable = true;
-
-  # Key remapping (keyd)
-  services.keyd = {
-    enable = true;
-    keyboards.default.settings = {
-      main = {
-        capslock = "leftcontrol";
-        yen = "backslash";
-        ro = "grave";
-        leftalt = "overload(alt, muhenkan)";
-        rightalt = "overload(alt, henkan)";
-      };
-    };
-  };
-
-  # Disable ssh-agent from openssh (GNOME Keyring handles it on desktop)
-  programs.ssh.startAgent = lib.mkForce false;
-
-  # Power management
-  services.power-profiles-daemon.enable = true;
-
   users.users."${username}".extraGroups = [
     "wheel"
     "networkmanager"
     "docker"
   ];
-
-  # VM testing (ignored on real hardware)
-  virtualisation.vmVariant = {
-    virtualisation = {
-      memorySize = 4096;
-      cores = 4;
-      graphics = true;
-    };
-  };
-
-  # Auto-login for VM convenience
-  services.getty.autologinUser = username;
 
   home-manager.users."${username}" = import ./home-manager.nix;
 }
