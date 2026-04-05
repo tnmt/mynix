@@ -9,7 +9,8 @@
     ./keybinds.nix
     ./mako.nix
     ./settings.nix
-    ./swaylock.nix
+    ./hypridle.nix
+    ./hyprlock.nix
     ./waybar.nix
     ./walker.nix
     ./wofi.nix
