@@ -122,14 +122,14 @@ This configuration uses several external inputs:
 
 ## CI
 
-GitHub Actions で以下を自動チェック:
+GitHub Actions automatically checks the following:
 
-- `nix flake check` (devShells, formatter, checks の評価)
-- コードフォーマットの確認 (`nix fmt`)
-- NixOS ビルド: sunflower, dahlia
-- Home Manager ビルド: tnmt@work_ubuntu
+- `nix flake check` (evaluates devShells, formatter, and checks)
+- Code formatting verification (`nix fmt`)
+- NixOS builds: sunflower, dahlia
+- Home Manager build: tnmt@work_ubuntu
 
-darwin 系ターゲット (work_mac, hydrangea) は macOS ランナーが必要なため現在は除外。
+Darwin targets (work_mac, hydrangea) are currently excluded as they require a macOS runner.
 
 ## License
 
