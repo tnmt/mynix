@@ -1,6 +1,7 @@
 # Common home-manager settings for NixOS-integrated hosts.
 # Standalone home-manager hosts get these via mkHomeManagerConfiguration instead.
 {
+  config,
   inputs,
   lib,
   username,
@@ -22,7 +23,7 @@
 
   sops = {
     defaultSopsFile = ../../secrets/default.yaml;
-    age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     secrets = {
       git_email = { };
       git_name = { };
