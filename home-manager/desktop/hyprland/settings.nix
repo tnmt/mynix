@@ -1,7 +1,7 @@
 { lib, theme, ... }:
 {
   wayland.windowManager.hyprland.settings = {
-    "$terminal" = "alacritty";
+    "$terminal" = "ghostty";
     "$menu" = "walker";
     "$browser" = "brave";
 
@@ -22,6 +22,7 @@
       "INPUT_METHOD, fcitx"
       "LANG, ja_JP.UTF-8"
       "SSH_AUTH_SOCK, $HOME/.1password/agent.sock"
+      "TERMINAL, ghostty"
     ];
 
     exec-once = [

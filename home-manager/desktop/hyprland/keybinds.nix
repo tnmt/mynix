@@ -143,8 +143,11 @@
       "$mainMod CTRL, Z, Zoom in, exec, hyprctl keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '.float + 1')"
       "$mainMod CTRL ALT, Z, Reset zoom, exec, hyprctl keyword cursor:zoom_factor 1"
 
-      # Screenshot
-      '', PRINT, Screenshot, exec, grim -g "$(slurp)" - | wl-copy''
+      # Screenshot (P = Print)
+      ''$mainMod, P, Screenshot region to clipboard, exec, grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot" "Copied to clipboard" -t 2000''
+      ''$mainMod SHIFT, P, Screenshot fullscreen to clipboard, exec, grim - | wl-copy && notify-send "Screenshot" "Copied to clipboard" -t 2000''
+      ''$mainMod ALT, P, Screenshot region to file, exec, mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000''
+      ''$mainMod ALT SHIFT, P, Screenshot fullscreen to file, exec, mkdir -p ~/Pictures/Screenshots && grim ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000''
 
       # Settings / Controls
       "$mainMod ALT, SPACE, Settings menu, exec, launch-settings"

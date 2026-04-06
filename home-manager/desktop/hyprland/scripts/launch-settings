@@ -16,9 +16,9 @@ selected=$(echo "$menu" | walker --dmenu -p "Settings")
 action=$(echo "$selected" | awk -F'\t' '{print $NF}')
 
 case "$action" in
-  wifi)       alacritty -e nmtui &;;
-  bluetooth)  alacritty -e bluetui &;;
+  wifi)       ${TERMINAL:-ghostty} -e nmtui &;;
+  bluetooth)  ${TERMINAL:-ghostty} -e bluetui &;;
   audio)      switch-audio ;;
-  mixer)      alacritty -e pulsemixer &;;
-  keybindings) alacritty -e bash -c 'hyprctl binds | less' &;;
+  mixer)      ${TERMINAL:-ghostty} -e pulsemixer &;;
+  keybindings) ${TERMINAL:-ghostty} -e bash -c 'hyprctl binds | less' &;;
 esac
