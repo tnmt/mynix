@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./atuin.nix
@@ -113,7 +113,7 @@
 
     # AI
     claude-code
-    inputs.ccusage.packages.${pkgs.stdenv.hostPlatform.system}.default
+    ccusage
     gemini-cli
     codex
   ];
