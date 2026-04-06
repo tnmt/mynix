@@ -1,4 +1,9 @@
-{ pkgs, terminal, theme, ... }:
+{
+  pkgs,
+  terminal,
+  theme,
+  ...
+}:
 let
   isDarwin = pkgs.stdenv.isDarwin;
 in
