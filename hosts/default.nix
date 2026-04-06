@@ -16,7 +16,10 @@ let
       modules,
     }:
     inputs.nixpkgs.lib.nixosSystem {
-      inherit system modules;
+      inherit system;
+      modules = modules ++ [
+        { nixpkgs.overlays = commonOverlays; }
+      ];
       specialArgs = {
         inherit inputs hostname username;
       };
