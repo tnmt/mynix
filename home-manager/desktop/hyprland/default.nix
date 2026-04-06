@@ -33,6 +33,7 @@
     pulseaudio
     pamixer
     playerctl
+    pulsemixer
     wayvnc
     wev
     wf-recorder
@@ -48,6 +49,7 @@
         (pkgs.writeShellScriptBin "launch-wifi" (builtins.readFile ./scripts/launch-wifi))
         (pkgs.writeShellScriptBin "launch-audio" (builtins.readFile ./scripts/launch-audio))
         (pkgs.writeShellScriptBin "launch-walker" (builtins.readFile ./scripts/launch-walker))
+        (pkgs.writeShellScriptBin "switch-audio" (builtins.readFile ./scripts/switch-audio))
       ];
     })
   ];
