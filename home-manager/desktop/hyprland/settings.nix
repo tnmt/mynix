@@ -28,7 +28,6 @@
       "gnome-keyring-daemon --start --components=secrets,ssh"
       "elephant"
       "walker --gapplication-service"
-      "swww-daemon & sleep 0.5 && swww img ~/.config/hypr/wallpaper/abstract-black-background.jpg"
     ];
 
     input = {
