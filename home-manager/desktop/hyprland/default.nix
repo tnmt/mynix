@@ -10,6 +10,7 @@
     ./settings.nix
     ./hypridle.nix
     ./hyprlock.nix
+    ./hyprpaper.nix
     ./waybar.nix
     ./walker.nix
     ./wofi.nix
@@ -32,7 +33,6 @@
     pulseaudio
     pamixer
     playerctl
-    swww
     wayvnc
     wev
     wf-recorder
@@ -52,14 +52,4 @@
     })
   ];
 
-  home.file = {
-    "abstract-purple-background.jpg" = {
-      target = ".config/hypr/wallpaper/abstract-purple-background.jpg";
-      source = ./wallpaper/abstract-purple-background.jpg;
-    };
-    "abstract-black-background.jpg" = {
-      target = ".config/hypr/wallpaper/abstract-black-background.jpg";
-      source = ./wallpaper/abstract-black-background.jpg;
-    };
-  };
 }
