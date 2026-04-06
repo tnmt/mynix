@@ -21,6 +21,7 @@
       "XMODIFIERS, @im=fcitx"
       "INPUT_METHOD, fcitx"
       "LANG, ja_JP.UTF-8"
+      "SSH_AUTH_SOCK, $HOME/.1password/agent.sock"
     ];
 
     exec-once = [
