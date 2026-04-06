@@ -112,6 +112,11 @@
       mouse_move_enables_dpms = true;
     };
 
+    ecosystem = {
+      no_update_news = true;
+      no_donation_nag = true;
+    };
+
     cursor = {
       hide_on_key_press = true;
       warp_on_change_workspace = 1;
