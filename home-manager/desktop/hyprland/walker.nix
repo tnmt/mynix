@@ -9,7 +9,7 @@
     force_keyboard_focus = true
     selection_wrap = true
     hide_action_hints = true
-    terminal = "alacritty"
+    terminal = "ghostty"
     theme = "current"
 
     [placeholders]

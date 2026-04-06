@@ -22,7 +22,7 @@ selected=$(echo "$menu" | walker --dmenu -p "Audio Output")
 sink_name=$(echo "$selected" | awk -F'\t' '{print $NF}')
 
 if [ "$sink_name" = "__mixer__" ]; then
-  alacritty -e pulsemixer &
+  ${TERMINAL:-ghostty} -e pulsemixer &
 else
   pactl set-default-sink "$sink_name"
   desc=$(echo "$selected" | sed 's/^[✓ ]*//' | awk -F'\t' '{print $1}')
