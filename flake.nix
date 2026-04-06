@@ -55,6 +55,7 @@
         dahlia-vm = {
           type = "app";
           program = "${self.nixosConfigurations.dahlia.config.system.build.vm}/bin/run-dahlia-vm";
+          meta.description = "Run dahlia NixOS VM";
         };
       };
 
