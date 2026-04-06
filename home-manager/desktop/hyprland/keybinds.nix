@@ -148,7 +148,7 @@
 
       # Settings / Controls
       "$mainMod ALT, SPACE, Settings menu, exec, launch-settings"
-      "$mainMod, A, Switch audio output, exec, switch-audio"
+      "$mainMod SHIFT, A, Switch audio output, exec, switch-audio"
 
       # System
       "$mainMod, ESCAPE, System menu, exec, wlogout"
