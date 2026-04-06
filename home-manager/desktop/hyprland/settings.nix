@@ -25,11 +25,6 @@
     ];
 
     exec-once = [
-      # Phase 1: Environment Variable Bridge — systemd --user に Wayland セッション情報を渡す
-      "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-      "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-
-      # Phase 2: Session services
       "gnome-keyring-daemon --start --components=secrets,ssh"
       "fcitx5 -d --replace"
       "elephant"
