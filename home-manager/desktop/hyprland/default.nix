@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  inputs,
   ...
 }:
 {
@@ -14,8 +13,6 @@
     ./waybar.nix
     ./walker.nix
     ./wofi.nix
-
-    inputs.hyprland.homeManagerModules.default
   ];
 
   wayland.windowManager.hyprland = {

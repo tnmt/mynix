@@ -34,8 +34,6 @@
 
     ccusage.url = "github:tnmt/ccusage-flake";
     oneaws.url = "github:tnmt/oneaws-flake";
-    # Hyprland
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
   };
 
   outputs =
