@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Settings menu via Walker dmenu.
+# Opens various system control TUIs and tools.
+
+menu="󰤨  WiFi	wifi
+󰂯  Bluetooth	bluetooth
+󰕾  Audio Output	audio
+󰍬  Audio Mixer	mixer
+󰌌  Keybindings	keybindings"
+
+selected=$(echo "$menu" | walker --dmenu -p "Settings")
+
+[ -z "$selected" ] && exit 0
+
+action=$(echo "$selected" | awk -F'\t' '{print $NF}')
+
+case "$action" in
+  wifi)       alacritty -e nmtui &;;
+  bluetooth)  alacritty -e bluetui &;;
+  audio)      switch-audio ;;
+  mixer)      alacritty -e pulsemixer &;;
+  keybindings) alacritty -e bash -c 'hyprctl binds | less' &;;
+esac

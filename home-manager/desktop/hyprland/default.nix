@@ -28,7 +28,6 @@
     grim
     slurp
     hyprpicker
-    impala
     pavucontrol
     pulseaudio
     pamixer
@@ -50,6 +49,7 @@
         (pkgs.writeShellScriptBin "launch-audio" (builtins.readFile ./scripts/launch-audio))
         (pkgs.writeShellScriptBin "launch-walker" (builtins.readFile ./scripts/launch-walker))
         (pkgs.writeShellScriptBin "switch-audio" (builtins.readFile ./scripts/switch-audio))
+        (pkgs.writeShellScriptBin "launch-settings" (builtins.readFile ./scripts/launch-settings))
       ];
     })
   ];
