@@ -1,11 +1,17 @@
-{ lib, terminal, theme, ... }:
+{
+  pkgs,
+  lib,
+  terminal,
+  theme,
+  ...
+}:
 let
   # foot uses hex without '#' prefix
   strip = s: lib.removePrefix "#" s;
 in
 {
   programs.foot = {
-    enable = true;
+    enable = pkgs.stdenv.isLinux;
     settings = {
       main = {
         font = "${terminal.font.name}:size=${toString terminal.font.size}";
