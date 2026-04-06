@@ -146,6 +146,9 @@
       # Screenshot
       '', PRINT, Screenshot, exec, grim -g "$(slurp)" - | wl-copy''
 
+      # Audio
+      "$mainMod, A, Switch audio output, exec, switch-audio"
+
       # System
       "$mainMod, ESCAPE, System menu, exec, wlogout"
     ];

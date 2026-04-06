@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Switch audio output device via Walker or launch pulsemixer TUI.
+# Lists PipeWire sinks with a marker for the current default,
+# plus an option to open the full mixer.
+
+default_sink=$(pactl -f json info | jq -r '.default_sink_name')
+
+# Build menu: sinks + mixer option
+menu=$(
+  pactl -f json list sinks | jq -r --arg def "$default_sink" '
+    .[] | (if .name == $def then "✓ " else "  " end)
+      + (.properties."node.nick" // .description) + "\t" + .name
+  '
+  echo -e "  Open Mixer\t__mixer__"
+)
+
+selected=$(echo "$menu" | walker --dmenu -p "Audio Output")
+
+[ -z "$selected" ] && exit 0
+
+sink_name=$(echo "$selected" | awk -F'\t' '{print $NF}')
+
+if [ "$sink_name" = "__mixer__" ]; then
+  alacritty -e pulsemixer &
+else
+  pactl set-default-sink "$sink_name"
+  desc=$(echo "$selected" | sed 's/^[✓ ]*//' | awk -F'\t' '{print $1}')
+  notify-send "Audio Output" "$desc" -t 2000
+fi
