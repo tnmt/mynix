@@ -1,7 +1,4 @@
-{ pkgs, theme, ... }:
-let
-  fontsize = if pkgs.stdenv.isDarwin then 16 else 12;
-in
+{ terminal, theme, ... }:
 {
   programs.alacritty = {
     enable = true;
@@ -22,21 +19,21 @@ in
       };
 
       font = {
-        size = fontsize;
+        size = terminal.font.size;
         normal = {
-          family = "MesloLGS NF";
+          family = terminal.font.name;
           style = "Regular";
         };
         bold = {
-          family = "MesloLGS NF";
+          family = terminal.font.name;
           style = "Bold";
         };
         italic = {
-          family = "MesloLGS NF";
+          family = terminal.font.name;
           style = "Italic";
         };
         bold_italic = {
-          family = "MesloLGS NF";
+          family = terminal.font.name;
           style = "Bold Italic";
         };
       };

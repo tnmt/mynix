@@ -10,10 +10,7 @@
   };
 
   # Ghostty
-  ghostty = {
-    linux = "tokyonight-storm";
-    darwin = "TokyoNight Storm";
-  };
+  ghostty = "TokyoNight Storm";
 
   # Kitty
   kitty = "tokyo_night_storm";

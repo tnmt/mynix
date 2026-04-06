@@ -1,4 +1,4 @@
-{ lib, theme, ... }:
+{ lib, terminal, theme, ... }:
 let
   # foot uses hex without '#' prefix
   strip = s: lib.removePrefix "#" s;
@@ -8,7 +8,7 @@ in
     enable = true;
     settings = {
       main = {
-        font = "MesloLGS NF:size=12";
+        font = "${terminal.font.name}:size=${toString terminal.font.size}";
       };
       mouse = {
         hide-when-typing = "yes";

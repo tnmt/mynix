@@ -1,4 +1,4 @@
-{ pkgs, theme, ... }:
+{ pkgs, terminal, theme, ... }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
 in
@@ -7,10 +7,10 @@ in
     enable = true;
     package = if isDarwin then null else pkgs.ghostty;
     settings = {
-      theme = if isDarwin then theme.ghostty.darwin else theme.ghostty.linux;
-      font-size = 16;
+      theme = theme.ghostty;
+      font-size = terminal.font.size;
       font-family = [
-        "MesloLGS NF"
+        terminal.font.name
         "Hiragino Kaku Gothic ProN"
       ];
       copy-on-select = "clipboard";
