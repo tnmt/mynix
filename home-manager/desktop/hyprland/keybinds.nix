@@ -146,7 +146,8 @@
       # Screenshot
       '', PRINT, Screenshot, exec, grim -g "$(slurp)" - | wl-copy''
 
-      # Audio
+      # Settings / Controls
+      "$mainMod ALT, SPACE, Settings menu, exec, launch-settings"
       "$mainMod, A, Switch audio output, exec, switch-audio"
 
       # System
