@@ -32,8 +32,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ccusage.url = "github:tnmt/ccusage-flake";
-    oneaws.url = "github:tnmt/oneaws-flake";
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs =

@@ -1,9 +1,10 @@
 inputs:
 let
   commonOverlays = [
+    inputs.nur.overlays.default
     (final: prev: {
-      oneaws = inputs.oneaws.packages.${final.stdenv.hostPlatform.system}.default;
-      ccusage = inputs.ccusage.packages.${final.stdenv.hostPlatform.system}.default;
+      oneaws = final.nur.repos.tnmt.oneaws;
+      ccusage = final.nur.repos.tnmt.ccusage;
     })
   ];
 
