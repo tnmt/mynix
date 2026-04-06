@@ -21,11 +21,9 @@
       "XMODIFIERS, @im=fcitx"
       "INPUT_METHOD, fcitx"
       "LANG, ja_JP.UTF-8"
-      "SSH_AUTH_SOCK, $XDG_RUNTIME_DIR/keyring/ssh"
     ];
 
     exec-once = [
-      "gnome-keyring-daemon --start --components=secrets,ssh"
       "elephant"
       "walker --gapplication-service"
     ];
