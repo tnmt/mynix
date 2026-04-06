@@ -15,6 +15,9 @@
     darwin = "TokyoNight Storm";
   };
 
+  # Kitty
+  kitty = "tokyo_night_storm";
+
   # Base colors
   background = "#24283b";
   foreground = "#c0caf5";

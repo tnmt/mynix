@@ -1,3 +1,8 @@
+{ lib, theme, ... }:
+let
+  # foot uses hex without '#' prefix
+  strip = s: lib.removePrefix "#" s;
+in
 {
   programs.foot = {
     enable = true;
@@ -8,35 +13,32 @@
       mouse = {
         hide-when-typing = "yes";
       };
-      cursor = {
-        color = "c0caf5 2e3c64";
-      };
-      colors = {
+      colors-dark = {
         alpha = 0.8;
 
-        foreground = "c0caf5";
-        background = "24283b";
-        selection-foreground = "c0caf5";
-        selection-background = "2e3c64";
+        foreground = strip theme.foreground;
+        background = strip theme.background;
+        selection-foreground = strip theme.selection_foreground;
+        selection-background = strip theme.selection_background;
         urls = "73daca";
 
-        regular0 = "1d202f";
-        regular1 = "f7768e";
-        regular2 = "9ece6a";
-        regular3 = "e0af68";
-        regular4 = "7aa2f7";
-        regular5 = "bb9af7";
-        regular6 = "7dcfff";
-        regular7 = "a9b1d6";
+        regular0 = strip theme.color0;
+        regular1 = strip theme.color1;
+        regular2 = strip theme.color2;
+        regular3 = strip theme.color3;
+        regular4 = strip theme.color4;
+        regular5 = strip theme.color5;
+        regular6 = strip theme.color6;
+        regular7 = strip theme.color7;
 
-        bright0 = "414868";
-        bright1 = "f7768e";
-        bright2 = "9ece6a";
-        bright3 = "e0af68";
-        bright4 = "7aa2f7";
-        bright5 = "bb9af7";
-        bright6 = "7dcfff";
-        bright7 = "c0caf5";
+        bright0 = strip theme.color8;
+        bright1 = strip theme.color9;
+        bright2 = strip theme.color10;
+        bright3 = strip theme.color11;
+        bright4 = strip theme.color12;
+        bright5 = strip theme.color13;
+        bright6 = strip theme.color14;
+        bright7 = strip theme.color15;
 
         "16" = "ff9e64";
         "17" = "db4b4b";
