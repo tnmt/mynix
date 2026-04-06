@@ -8,7 +8,7 @@
 {
   programs.waybar = {
     enable = true;
-    systemd.enable = false;
+    systemd.enable = true;
   };
   xdg.configFile."waybar/style.css" = {
     source = ./waybar/style.css;
