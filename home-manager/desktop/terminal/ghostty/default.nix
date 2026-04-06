@@ -1,14 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
-  themeName = if isDarwin then "TokyoNight Storm" else "tokyonight-storm";
 in
 {
   programs.ghostty = {
     enable = true;
     package = if isDarwin then null else pkgs.ghostty;
     settings = {
-      theme = themeName;
+      theme = if isDarwin then theme.ghostty.darwin else theme.ghostty.linux;
       font-size = 16;
       font-family = [
         "MesloLGS NF"
