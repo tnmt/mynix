@@ -14,7 +14,6 @@
     ./kanshi.nix
     ./waybar.nix
     ./walker.nix
-    ./wofi.nix
   ];
 
   wayland.windowManager.hyprland = {
