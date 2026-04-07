@@ -11,6 +11,7 @@
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix
+    ./kanshi.nix
     ./waybar.nix
     ./walker.nix
     ./wofi.nix
