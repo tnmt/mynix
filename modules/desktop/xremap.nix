@@ -10,7 +10,7 @@
     userName = username;
     serviceMode = "user";
     config = {
-      # CapsLock→Ctrl is handled by keyd at evdev level
+      # CapsLock→Ctrl is handled by kanata at evdev level
       keymap = [
         {
           name = "Better Backspace";
