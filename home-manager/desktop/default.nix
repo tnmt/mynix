@@ -48,6 +48,9 @@
     mmtc
     ncmpcpp
 
+    # remote desktop
+    remmina
+
     # misc
     fastfetch
     cava
