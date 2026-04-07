@@ -1,20 +1,36 @@
-# Japanese keyboard remapping via keyd
+# Japanese keyboard remapping via kanata
 # - CapsLock -> Left Control
 # - Yen (¥) -> Backslash (\)
 # - Ro (ろ) -> Grave (`)
-# - Left Alt overload -> Muhenkan (IME off)
-# - Right Alt overload -> Henkan (IME on)
+# - Left Alt: hold -> Alt / tap -> Muhenkan (IME off)
+# - Right Alt: hold -> Alt / tap -> Henkan (IME on)
 {
-  services.keyd = {
+  services.kanata = {
     enable = true;
-    keyboards.default.settings = {
-      main = {
-        capslock = "leftcontrol";
-        yen = "backslash";
-        ro = "grave";
-        leftalt = "overload(alt, muhenkan)";
-        rightalt = "overload(alt, henkan)";
-      };
+    keyboards.default = {
+      extraDefCfg = "process-unmapped-keys yes";
+      config = ''
+        (defsrc
+          caps
+          yen
+          ro
+          lalt
+          ralt
+        )
+
+        (defalias
+          lalt (tap-hold 200 200 muhenkan lalt)
+          ralt (tap-hold 200 200 henkan ralt)
+        )
+
+        (deflayer default
+          lctl
+          \
+          grv
+          @lalt
+          @ralt
+        )
+      '';
     };
   };
 }
