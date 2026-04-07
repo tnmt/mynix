@@ -40,14 +40,14 @@
       gaps_out = 6;
       border_size = 2;
       "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-      "col.inactive_border" = "rgba(595959aa)";
+      "col.inactive_border" = "rgba(00000000)";
       resize_on_border = false;
       allow_tearing = false;
       layout = "dwindle";
     };
 
     decoration = {
-      rounding = 0;
+      rounding = 8;
       shadow = {
         enabled = true;
         range = 2;
@@ -56,11 +56,12 @@
       };
       blur = {
         enabled = true;
-        size = 2;
-        passes = 2;
+        size = 6;
+        passes = 3;
         special = true;
         brightness = 0.60;
         contrast = 0.75;
+        vibrancy = 1;
       };
     };
 
@@ -88,7 +89,7 @@
         "layersOut, 1, 1.5, linear, fade"
         "fadeLayersIn, 1, 1.79, almostLinear"
         "fadeLayersOut, 1, 1.39, almostLinear"
-        "workspaces, 0, 0, ease"
+        "workspaces, 1, 5, easeOutQuint, slide"
         "specialWorkspace, 1, 4, easeOutQuint, slidevert"
       ];
     };
@@ -116,10 +117,17 @@
 
     cursor = {
       hide_on_key_press = true;
+      inactive_timeout = 3;
       warp_on_change_workspace = 1;
     };
 
     xwayland.force_zero_scaling = true;
+
+    layerrule = [
+      "blur walker"
+      "blur waybar"
+      "blur notifications"
+    ];
 
     windowrule = [
       "match:class .*, suppress_event maximize"
