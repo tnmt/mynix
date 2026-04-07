@@ -1,5 +1,5 @@
 {
-  description = "NixOS & homa-manager configurations of tnmt";
+  description = "NixOS & home-manager configurations of tnmt";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
