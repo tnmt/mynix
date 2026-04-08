@@ -5,6 +5,7 @@ let
     (final: prev: {
       oneaws = final.nur.repos.tnmt.oneaws;
       ccusage = final.nur.repos.tnmt.ccusage;
+      gogcli = final.nur.repos.tnmt.gogcli;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];

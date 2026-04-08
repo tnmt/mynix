@@ -13,6 +13,7 @@
 
     # Google Workspace
     gws
+    gogcli
 
     # Build/lang
     gnumake
