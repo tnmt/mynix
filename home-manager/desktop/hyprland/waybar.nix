@@ -3,6 +3,7 @@
   pkgs,
   lib,
   theme,
+  fonts,
   ...
 }:
 
@@ -22,7 +23,7 @@
       border: none;
       border-radius: 0;
       min-height: 0;
-      font-family: 'Noto Sans CJK JP', 'MesloLGS Nerd Font';
+      font-family: '${fonts.sans}', '${fonts.monospace}';
       font-size: 12px;
     }
 

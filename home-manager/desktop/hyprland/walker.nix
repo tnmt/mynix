@@ -1,4 +1,4 @@
-{ pkgs, theme, ... }:
+{ pkgs, theme, fonts, ... }:
 {
   home.packages = [
     pkgs.walker
@@ -66,7 +66,7 @@
     }
 
     * {
-      font-family: monospace;
+      font-family: '${fonts.sans}', '${fonts.monospace}';
       font-size: 18px;
       color: @text;
     }

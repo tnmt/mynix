@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, fonts, ... }:
 let
   terminal = {
     font = {
-      name = "MesloLGS NF";
+      name = fonts.monospace;
       size = if pkgs.stdenv.isDarwin then 16 else 12;
     };
   };

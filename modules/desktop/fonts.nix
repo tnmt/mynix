@@ -3,7 +3,6 @@
   fonts = {
     packages = with pkgs; [
       meslo-lgs-nf
-      nerd-fonts.jetbrains-mono
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-color-emoji
@@ -20,7 +19,7 @@
           "Noto Color Emoji"
         ];
         monospace = [
-          "JetBrainsMono Nerd Font"
+          "MesloLGS NF"
           "Noto Color Emoji"
         ];
         emoji = [ "Noto Color Emoji" ];
