@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 {
   home.packages = with pkgs; [
     # browser
@@ -59,6 +59,19 @@
     htop
     gotop
   ];
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = theme.gtk;
+      package = pkgs.tokyonight-gtk-theme;
+    };
+    gtk4.theme = null;
+    iconTheme = {
+      name = theme.gtkIcon;
+      package = pkgs.tokyonight-gtk-theme;
+    };
+  };
 
   programs.yazi = {
     enable = true;
