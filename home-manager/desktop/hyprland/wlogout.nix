@@ -1,5 +1,10 @@
-{ pkgs, theme, fonts, ... }:
+{
+  pkgs,
+  theme,
+  ...
+}:
 let
+  fonts = import ../fonts.nix;
   wlogoutIcons = "${pkgs.wlogout}/share/wlogout/icons";
 in
 {

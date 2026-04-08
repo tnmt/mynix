@@ -3,9 +3,11 @@
   pkgs,
   lib,
   theme,
-  fonts,
   ...
 }:
+let
+  fonts = import ../fonts.nix;
+in
 
 {
   programs.waybar = {

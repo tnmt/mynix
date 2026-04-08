@@ -1,4 +1,11 @@
-{ pkgs, theme, fonts, ... }:
+{
+  pkgs,
+  theme,
+  ...
+}:
+let
+  fonts = import ../fonts.nix;
+in
 {
   home.packages = [
     pkgs.walker

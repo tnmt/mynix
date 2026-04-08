@@ -1,9 +1,5 @@
 { pkgs, theme, ... }:
-let
-  fonts = import ./fonts.nix;
-in
 {
-  _module.args = { inherit fonts; };
 
   imports = [
     ./yazi.nix
