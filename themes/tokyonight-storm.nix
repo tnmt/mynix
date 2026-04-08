@@ -15,6 +15,10 @@
   # Kitty
   kitty = "tokyo_night_storm";
 
+  # GTK
+  gtk = "Tokyonight-Dark-Storm";
+  gtkIcon = "Tokyonight-Dark";
+
   # Base colors
   background = "#24283b";
   foreground = "#c0caf5";
