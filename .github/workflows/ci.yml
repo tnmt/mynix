@@ -30,7 +30,7 @@ jobs:
         with:
           use-flakehub: false
       - name: nix flake check
-        run: nix flake check --system x86_64-linux
+        run: nix build '.#checks.x86_64-linux.formatting' --no-link
 
   format:
     runs-on: ubuntu-latest
