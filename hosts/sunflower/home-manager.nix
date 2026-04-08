@@ -39,5 +39,6 @@ in
         ExecStart = "${pkgs.bash}/bin/bash ${obsidianBackup.scriptPath}";
       };
     };
-  };
+
+};
 }
