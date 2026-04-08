@@ -155,6 +155,7 @@
 
       # Voice input
       "$mainMod, M, Toggle voice input, exec, voice-input"
+      "$mainMod SHIFT, M, Toggle voice input (LLM refine), exec, voice-input --refine"
 
       # System
       "$mainMod, ESCAPE, System menu, exec, wlogout -b 3 -c 20 -r 20"

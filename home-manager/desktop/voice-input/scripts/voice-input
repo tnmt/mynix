@@ -1,14 +1,20 @@
 #!/usr/bin/env bash
 # Toggle voice input: press once to start recording, again to stop and transcribe.
 # Uses whisper.cpp with the medium model for Japanese speech-to-text.
+# With --refine flag, post-processes via OpenRouter LLM API.
 
 set -euo pipefail
 
+REFINE=false
+[[ "${1:-}" == "--refine" ]] && REFINE=true
+
 PIDFILE="/tmp/voice-input.pid"
+MODEFILE="/tmp/voice-input.mode"
 AUDIO="/tmp/voice-input.wav"
 MODEL_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/whisper-models"
 MODEL="$MODEL_DIR/ggml-medium.bin"
 MODEL_URL="https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin"
+API_KEY_FILE=$(find "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"/secrets.d -name voice_input_openrouter_api_key 2>/dev/null | head -1)
 
 ensure_model() {
   if [[ ! -f "$MODEL" ]]; then
@@ -19,9 +25,52 @@ ensure_model() {
   fi
 }
 
+refine_text() {
+  local raw="$1"
+  if [[ -z "$API_KEY_FILE" || ! -f "$API_KEY_FILE" ]]; then
+    notify-send "Voice Input" "API key not found, skipping refinement" -t 2000
+    echo "$raw"
+    return
+  fi
+
+  local api_key
+  api_key=$(cat "$API_KEY_FILE")
+
+  local prompt
+  prompt="以下は日本語の音声認識結果です。句読点の補完、フィラー（えーと、あのー等）の除去、明らかな誤認識の修正を行い、整形後のテキストのみを出力してください。余計な説明は不要です。
+
+$raw"
+
+  local payload
+  payload=$(jq -n --arg model "anthropic/claude-3-haiku" --arg content "$prompt" \
+    '{model: $model, messages: [{role: "user", content: $content}]}')
+
+  local response
+  response=$(curl -s --max-time 10 \
+    -H "Authorization: Bearer $api_key" \
+    -H "Content-Type: application/json" \
+    -d "$payload" \
+    https://openrouter.ai/api/v1/chat/completions)
+
+  local refined
+  refined=$(echo "$response" | jq -r '.choices[0].message.content // empty' 2>/dev/null)
+
+  if [[ -n "$refined" ]]; then
+    echo "$refined"
+  else
+    echo "$raw"
+  fi
+}
+
 start_recording() {
   ensure_model
-  notify-send "Voice Input" "Recording... Press Super+M to stop" -t 2000
+  if [[ "$REFINE" == true ]]; then
+    echo "refine" > "$MODEFILE"
+    notify-send "Voice Input (LLM)" "Recording... Press Super+Shift+M to stop" -t 2000
+  else
+    echo "raw" > "$MODEFILE"
+    notify-send "Voice Input" "Recording... Press Super+M to stop" -t 2000
+  fi
   rec -q -r 16000 -c 1 -b 16 "$AUDIO" &
   echo $! > "$PIDFILE"
 }
@@ -32,6 +81,9 @@ stop_and_transcribe() {
   rm -f "$PIDFILE"
   kill "$pid" 2>/dev/null || true
   wait "$pid" 2>/dev/null || true
+
+  local mode="raw"
+  [[ -f "$MODEFILE" ]] && mode=$(cat "$MODEFILE") && rm -f "$MODEFILE"
 
   if [[ ! -f "$AUDIO" ]]; then
     notify-send "Voice Input" "No audio recorded" -t 2000
@@ -50,6 +102,11 @@ stop_and_transcribe() {
   if [[ -z "$text" ]]; then
     notify-send "Voice Input" "No speech detected" -t 2000
     exit 0
+  fi
+
+  if [[ "$mode" == "refine" ]]; then
+    notify-send "Voice Input" "Refining with LLM..." -t 2000
+    text=$(refine_text "$text")
   fi
 
   wtype -- "$text"
