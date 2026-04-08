@@ -1,5 +1,6 @@
-{ pkgs, fonts, ... }:
+{ pkgs, ... }:
 let
+  fonts = import ../fonts.nix;
   terminal = {
     font = {
       name = fonts.monospace;
