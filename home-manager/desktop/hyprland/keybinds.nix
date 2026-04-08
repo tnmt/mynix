@@ -154,7 +154,7 @@
       "$mainMod SHIFT, A, Switch audio output, exec, switch-audio"
 
       # System
-      "$mainMod, ESCAPE, System menu, exec, wlogout"
+      "$mainMod, ESCAPE, System menu, exec, wlogout -b 3 -c 20 -r 20"
     ];
 
     bindmd = [

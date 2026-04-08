@@ -14,6 +14,7 @@
     ./kanshi.nix
     ./waybar.nix
     ./walker.nix
+    ./wlogout.nix
   ];
 
   wayland.windowManager.hyprland = {
