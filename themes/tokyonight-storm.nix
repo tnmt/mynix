@@ -19,6 +19,15 @@
   gtk = "Tokyonight-Dark-Storm";
   gtkIcon = "Tokyonight-Dark";
 
+  # Bat
+  bat = "tokyonight_storm";
+
+  # Btop
+  btop = "tokyo-storm";
+
+  # Delta
+  delta = "tokyonight_storm";
+
   # Base colors
   background = "#24283b";
   foreground = "#c0caf5";
@@ -44,4 +53,13 @@
   color13 = "#c7a9ff";
   color14 = "#a4daff";
   color15 = "#c0caf5";
+
+  # Extended palette
+  bg_dark = "#1f2335";
+  bg_highlight = "#292e42";
+  comment = "#565f89";
+  dark5 = "#737aa2";
+  orange = "#ff9e64";
+  teal = "#73daca";
+  magenta = "#ff007c";
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, theme, ... }:
 {
   programs.git = {
     enable = true;
@@ -83,7 +83,7 @@
     enable = true;
     enableGitIntegration = true;
     options = {
-      syntax-theme = "tokyonight_storm";
+      syntax-theme = theme.delta;
     };
   };
 
