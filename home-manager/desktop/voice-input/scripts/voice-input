@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Toggle voice input: press once to start recording, again to stop and transcribe.
+# Uses whisper.cpp with the medium model for Japanese speech-to-text.
+
+set -euo pipefail
+
+PIDFILE="/tmp/voice-input.pid"
+AUDIO="/tmp/voice-input.wav"
+MODEL_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/whisper-models"
+MODEL="$MODEL_DIR/ggml-medium.bin"
+MODEL_URL="https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin"
+
+ensure_model() {
+  if [[ ! -f "$MODEL" ]]; then
+    mkdir -p "$MODEL_DIR"
+    notify-send "Voice Input" "Downloading whisper model (medium)..." -t 5000
+    curl -L -o "$MODEL" "$MODEL_URL"
+    notify-send "Voice Input" "Model download complete" -t 3000
+  fi
+}
+
+start_recording() {
+  ensure_model
+  notify-send "Voice Input" "Recording... Press Super+M to stop" -t 2000
+  rec -q -r 16000 -c 1 -b 16 "$AUDIO" &
+  echo $! > "$PIDFILE"
+}
+
+stop_and_transcribe() {
+  local pid
+  pid=$(cat "$PIDFILE")
+  rm -f "$PIDFILE"
+  kill "$pid" 2>/dev/null || true
+  wait "$pid" 2>/dev/null || true
+
+  if [[ ! -f "$AUDIO" ]]; then
+    notify-send "Voice Input" "No audio recorded" -t 2000
+    exit 1
+  fi
+
+  notify-send "Voice Input" "Transcribing..." -t 2000
+
+  local text
+  text=$(whisper-cli -m "$MODEL" -l ja --no-timestamps -f "$AUDIO" 2>/dev/null \
+    | sed '/^$/d; s/^ *//; s/ *$//' \
+    | tr -d '\n')
+
+  rm -f "$AUDIO"
+
+  if [[ -z "$text" ]]; then
+    notify-send "Voice Input" "No speech detected" -t 2000
+    exit 0
+  fi
+
+  wtype -- "$text"
+  notify-send "Voice Input" "$text" -t 3000
+}
+
+if [[ -f "$PIDFILE" ]] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
+  stop_and_transcribe
+else
+  rm -f "$PIDFILE"
+  start_recording
+fi
