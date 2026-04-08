@@ -19,6 +19,9 @@
     fzf = "extras/fzf/tokyonight_storm.sh";
     eza = "extras/eza/tokyonight_storm.yml";
     yazi = "extras/yazi/tokyonight_storm.toml";
+    discord = "extras/discord/tokyonight_storm.css";
+    slack = "extras/slack/tokyonight_storm.txt";
+    vim = "extras/vim/colors/tokyonight-storm.vim";
   };
 
   # Neovim
