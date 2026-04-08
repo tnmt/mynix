@@ -43,7 +43,6 @@ in
       "consul-template"
       "docker"
       "envchain"
-      "gogcli"
       "hashicorp/tap/vault"
       "k1low/tap/mo"
       "pyama86/kagiana/kagiana"

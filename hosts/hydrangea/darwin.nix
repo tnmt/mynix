@@ -36,7 +36,6 @@ in
       "takai/tap"
     ];
     brews = [
-      "gogcli"
       "k1low/tap/mo"
       "takai/tap/git-ai-commit"
     ];
