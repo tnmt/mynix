@@ -5,7 +5,7 @@ in
 {
   home.packages = [ pkgs.vesktop ];
 
-  # Tokyo Night Storm theme via quickCss
-  xdg.configFile."vesktop/settings/quickCss.css".source =
+  # Tokyo Night Storm theme
+  xdg.configFile."vesktop/themes/tokyonight-storm.css".source =
     "${themeSrc}/${theme.extras.discord}";
 }

@@ -2,6 +2,7 @@
 {
 
   imports = [
+    ./vesktop.nix
     ./yazi.nix
   ];
   home.packages = with pkgs; [
@@ -19,7 +20,6 @@
     _1password-gui
 
     # chat
-    discord
     slack
 
     # container & virtualisation
