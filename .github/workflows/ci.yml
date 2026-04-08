@@ -21,17 +21,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  flake-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - uses: DeterminateSystems/nix-installer-action@main
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-        with:
-          use-flakehub: false
-      - name: nix flake check
-        run: nix build '.#checks.x86_64-linux.formatting' --no-link
-
   format:
     runs-on: ubuntu-latest
     steps:
