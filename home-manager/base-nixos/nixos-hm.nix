@@ -30,6 +30,9 @@
       atuin_sync_address = {
         sopsFile = ../../secrets/common.yaml;
       };
+      voice_input_openrouter_api_key = {
+        sopsFile = ../../secrets/common.yaml;
+      };
     };
   };
 }
