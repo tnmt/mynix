@@ -27,6 +27,8 @@ jobs:
       - uses: actions/checkout@v5
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
       - name: nix flake check
         run: nix flake check
 
@@ -36,6 +38,8 @@ jobs:
       - uses: actions/checkout@v5
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
       - name: Check formatting
         run: |
           nix fmt
@@ -53,6 +57,8 @@ jobs:
       - uses: actions/checkout@v5
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
       - name: Build NixOS (${{ matrix.host }})
         run: nix build '.#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel' --no-link
 
@@ -67,6 +73,8 @@ jobs:
       - uses: actions/checkout@v5
       - uses: DeterminateSystems/nix-installer-action@main
       - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
       - name: Build Home Manager (${{ matrix.config }})
         run: nix build '.#homeConfigurations."${{ matrix.config }}".activationPackage' --no-link
 
