@@ -1,4 +1,4 @@
-{ theme, ... }:
+{ theme, fonts, ... }:
 {
   services.mako = {
     enable = true;
@@ -11,7 +11,7 @@
       border-size = 2;
       border-color = theme.accent;
       max-icon-size = 32;
-      font = "sans-serif 14px";
+      font = "${fonts.sans} 14px";
       text-color = theme.foreground;
       background-color = theme.background;
 
