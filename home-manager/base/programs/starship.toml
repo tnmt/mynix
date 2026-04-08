@@ -241,22 +241,3 @@ symbol = " "
 
 [zig]
 symbol = " "
-
-[palettes.tokyonight_storm]
-red = "#f7768e"
-orange = "#ff9e64"
-yellow = "#e0af68"
-green = "#9ece6a"
-teal = "#73daca"
-cyan = "#7dcfff"
-blue = "#7aa2f7"
-purple = "#bb9af7"
-magenta = "#ff007c"
-fg = "#c0caf5"
-fg_dark = "#a9b1d6"
-comment = "#565f89"
-dark5 = "#737aa2"
-terminal_black = "#414868"
-bg_highlight = "#292e42"
-bg = "#24283b"
-bg_dark = "#1f2335"
