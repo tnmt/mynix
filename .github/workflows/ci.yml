@@ -30,7 +30,7 @@ jobs:
         with:
           use-flakehub: false
       - name: nix flake check
-        run: nix flake check
+        run: nix flake check --system x86_64-linux
 
   format:
     runs-on: ubuntu-latest
