@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 {
   imports = [
     ./atuin.nix
@@ -37,7 +37,7 @@
     bat = {
       enable = true;
       config = {
-        theme = "tokyonight_storm";
+        theme = theme.bat;
       };
       themes = {
         tokyonight_storm = {
@@ -55,7 +55,7 @@
     btop = {
       enable = true;
       settings = {
-        color_theme = "tokyo-storm";
+        color_theme = theme.btop;
         theme_background = true;
         truecolor = true;
         rounded_corners = true;
