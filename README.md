@@ -1,136 +1,129 @@
 # NixOS, nix-darwin & Home Manager Configurations
 
-Personal Nix configurations for multiple hosts and environments.
+Personal Nix configurations for Linux and macOS hosts, built as a single flake.
 
 ## Overview
 
-This repository contains modular Nix configurations supporting:
-- **NixOS systems** (desktop, WSL)
-- **nix-darwin** for macOS system-level management
-- **Home Manager** configurations for Linux and macOS
-- **Secrets management** with sops-nix
-- **Cross-platform support**: x86_64-linux and aarch64-darwin
+This repository contains:
+- NixOS system definitions for a desktop machine and a WSL machine
+- nix-darwin system definitions for two macOS hosts
+- standalone Home Manager configurations for Linux and macOS
+- shared modules for core settings, desktop features, services, and user programs
+- secrets management with `sops-nix`
+
+Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 
 ## Hosts
 
-### NixOS Systems
-- **sunflower** - WSL-enabled NixOS system (x86_64-linux)
-- **dahlia** - Desktop system with Hyprland (x86_64-linux)
+### `nixosConfigurations`
+- `sunflower`: WSL-based NixOS host
+- `dahlia`: desktop/laptop-style NixOS host with Hyprland
 
-### nix-darwin Systems
-- **work_mac** - Work macOS setup (aarch64-darwin)
-- **hydrangea** - Personal macOS (aarch64-darwin)
+### `darwinConfigurations`
+- `work_mac`: work macOS machine
+- `hydrangea`: personal macOS machine
 
-### Home Manager Configurations
-- **tsunematsu@work_mac** - Work macOS (aarch64-darwin)
-- **tnmt@work_ubuntu** - Work Ubuntu environment (x86_64-linux)
-- **tnmt@hydrangea** - Personal macOS (aarch64-darwin)
+### `homeConfigurations`
+- `tsunematsu@work_mac`: Home Manager for work macOS
+- `tnmt@work_ubuntu`: Home Manager for Ubuntu
+- `tnmt@hydrangea`: Home Manager for personal macOS
 
-## Structure
+## Repository Layout
 
-```
-├── flake.nix              # Main flake configuration
-├── hosts/                 # Host-specific configurations
-│   ├── default.nix        # Host definitions
-│   ├── sunflower/         # WSL NixOS system
-│   ├── dahlia/            # Desktop (Hyprland)
-│   ├── work_mac/          # Work macOS (nix-darwin)
-│   ├── work_ubuntu/       # Work Ubuntu
-│   └── hydrangea/         # Personal macOS (nix-darwin)
-├── home-manager/          # Home Manager modules
-│   ├── base/              # Base configuration (shell, git, etc.)
-│   ├── base-nixos/        # NixOS-specific Home Manager base
-│   ├── darwin/            # macOS-specific (karabiner, etc.)
-│   ├── desktop/           # Desktop environment (hyprland, terminals)
-│   ├── devel/             # Development tools (neovim, etc.)
-│   └── work/              # Work environment
-├── modules/               # System modules
-│   ├── core/              # Core system settings
-│   ├── desktop/           # Desktop environment (fcitx5, sound, etc.)
-│   ├── programs/          # Program configurations
-│   ├── services/          # Service configurations (mackerel-agent, etc.)
-│   └── remotebuild/       # Remote build cache
-├── profiles/              # Reusable NixOS profiles
-├── secrets/               # sops-encrypted secrets
-└── themes/                # Theme definitions (Tokyo Night Storm)
+```text
+.
+├── flake.nix              # Flake inputs, outputs, devShell, formatter, helper app
+├── hosts/                 # Concrete host entrypoints
+├── home-manager/          # Reusable Home Manager modules
+├── modules/               # Reusable NixOS and cross-host modules
+├── profiles/              # Higher-level NixOS profiles
+├── secrets/               # sops-encrypted secret files
+├── themes/                # Shared theme definitions
+└── treefmt.toml           # Formatter configuration
 ```
 
-## Key Features
+The important split is:
+- `hosts/` selects a machine and wires modules together
+- `modules/` holds lower-level reusable system pieces
+- `home-manager/` holds reusable user-level pieces
+- `profiles/` bundles opinionated groups of modules such as the Hyprland desktop profile
 
-- **Hyprland** desktop environment with Waybar, Walker, Dunst
-- **Secure Boot** support via Lanzaboote
-- **sops-nix** for secrets management (age encryption)
-- **Mackerel** monitoring agent integration
-- **Input remapping** with xremap / Karabiner-Elements
-- **Multi-language support** with fcitx5
-- **Multiple terminal emulators**: Alacritty, foot, ghostty, kitty
-- **Theme system** with Tokyo Night Storm
-- **Greetd** display manager with tuigreet
+## Notable Features
+
+- Hyprland desktop setup with Waybar, Walker, Mako, Hyprlock, Hypridle, and Wlogout
+- `greetd` + `tuigreet` login flow for the Linux desktop profile
+- Secure Boot support via Lanzaboote
+- `sops-nix` secrets for both system and Home Manager configs
+- Input remapping with `xremap` and Karabiner-Elements
+- Shared Tokyo Night Storm theme wiring
+- NUR overlay usage for custom packages such as `oneaws`, `ccusage`, and `gogcli`
 
 ## Usage
 
-### Building NixOS Configuration
-```bash
-# Using nixos-rebuild directly
-sudo nixos-rebuild switch --flake .#sunflower
+### NixOS
 
-# Using nh (recommended)
-nh os switch . -H sunflower
+```bash
+# Recommended
+nh os switch . -H dahlia
+
+# Directly
+sudo nixos-rebuild switch --flake .#dahlia
 ```
 
-### Building nix-darwin Configuration
-```bash
-# Using darwin-rebuild directly
-darwin-rebuild switch --flake .#work_mac
+### nix-darwin
 
-# Using nh (recommended)
-nh darwin switch . -H work_mac
+```bash
+# Recommended
+nh darwin switch . -H hydrangea
+
+# Directly
+darwin-rebuild switch --flake .#hydrangea
 ```
 
-### Building Home Manager Configuration
-```bash
-# Using home-manager directly
-home-manager switch --flake .#tnmt@work_ubuntu
+### Home Manager
 
-# Using nh (recommended)
+```bash
+# Recommended
 nh home switch . -c tnmt@work_ubuntu
+
+# Directly
+home-manager switch --flake .#tnmt@work_ubuntu
 ```
 
-### Development Shell
+### Development helpers
+
 ```bash
+# Enter the dev shell
 nix develop
-```
 
-### Formatting Code
-```bash
+# Format Nix and TOML files
 nix fmt
+
+# Update a flake input
+update-input nixpkgs github:NixOS/nixpkgs/nixos-unstable
+
+# Run the desktop VM for dahlia
+nix run .#dahlia-vm
 ```
 
-## Dependencies
+## Secrets
 
-This configuration uses several external inputs:
-- nixpkgs (unstable), nixpkgs-stable, nixpkgs-darwin
-- home-manager
-- nix-darwin
-- nixos-hardware
-- sops-nix
-- hyprland
-- lanzaboote
-- nixos-wsl
-- xremap
-- ccusage, oneaws (custom flakes)
+This repo expects `sops-nix` with age keys available on the target machine.
+
+- system-level secrets live under `secrets/` and are referenced from host modules
+- Home Manager configs also load secrets, including shared values from `secrets/common.yaml`
+
+Builds may evaluate without secrets in some cases, but activation on real machines assumes the corresponding key material exists.
 
 ## CI
 
-GitHub Actions automatically checks the following:
+GitHub Actions currently checks:
+- formatting via `nix fmt`
+- NixOS builds for `sunflower` and `dahlia`
+- Home Manager build for `tnmt@work_ubuntu`
 
-- `nix flake check` (evaluates devShells, formatter, and checks)
-- Code formatting verification (`nix fmt`)
-- NixOS builds: sunflower, dahlia
-- Home Manager build: tnmt@work_ubuntu
-
-Darwin targets (work_mac, hydrangea) are currently excluded as they require a macOS runner.
+Darwin system and Home Manager targets are excluded from CI because they require macOS runners.
 
 ## License
 
-Personal configuration files - use at your own discretion.
+Personal configuration files. Reuse with care.
