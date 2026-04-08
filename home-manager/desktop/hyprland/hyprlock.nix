@@ -50,7 +50,7 @@
         }
         {
           monitor = "";
-          text = "cmd[update:3600000] date +\"%a, %b %d\"";
+          text = "cmd[update:60000] date +\"%Y-%m-%d\"";
           font_size = 20;
           color = "rgb(c8d3f5)";
           font_family = "Noto Sans CJK JP";
