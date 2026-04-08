@@ -101,8 +101,10 @@
                 src = self;
               }
               ''
-                cd $src
-                treefmt --config-file ${./treefmt.toml} --ci
+                cp -r $src source
+                chmod -R u+w source
+                cd source
+                treefmt --config-file ${./treefmt.toml} --tree-root . --ci
                 touch $out
               '';
         }
