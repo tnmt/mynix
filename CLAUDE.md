@@ -25,3 +25,10 @@ git config core.hooksPath .githooks  # 未設定の場合
 - **ベースカラー（背景/前景/ANSI 16色/アクセント）** は `themes/` を正とし、`theme.background` 等で参照する
 - **アプリ内蔵テーマがある場合**（Kitty, Ghostty 等）はテーマ名のみ `themes/` で管理し、色の二重定義を避ける
 - **アプリ固有の装飾色**（ボーダー、グラデーション、UI 要素の配色等）はアプリの設定にハードコードで構わない
+
+## フォント管理
+
+フォント定義は `home-manager/desktop/fonts.nix` で一元管理している。
+
+- フォントを使うモジュールは `let fonts = import ../fonts.nix;`（パスは相対）で直接インポートする
+- `_module.args` 経由では渡さない — 各モジュールが自己完結的にインポートする方針

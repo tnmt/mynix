@@ -1,4 +1,7 @@
-{ theme, fonts, ... }:
+{ theme, ... }:
+let
+  fonts = import ../fonts.nix;
+in
 {
   # Notification daemon — started on-demand via D-Bus activation
   # (not in exec-once; launched automatically when an app sends a notification)

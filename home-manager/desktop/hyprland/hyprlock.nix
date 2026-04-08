@@ -1,4 +1,7 @@
-{ theme, fonts, ... }:
+{ theme, ... }:
+let
+  fonts = import ../fonts.nix;
+in
 let
   strip = color: builtins.substring 1 (-1) color;
 in
