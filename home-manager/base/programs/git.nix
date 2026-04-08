@@ -4,12 +4,16 @@
   theme,
   ...
 }:
+let
+  themeSrc = pkgs.fetchFromGitHub theme.src;
+in
 {
   programs.git = {
     enable = true;
 
     includes = [
       { path = "~/.config/git/identity"; }
+      { path = "${themeSrc}/${theme.extras.delta}"; }
     ];
 
     settings = {

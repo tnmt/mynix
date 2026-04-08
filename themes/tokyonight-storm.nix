@@ -3,6 +3,24 @@
 {
   name = "tokyonight-storm";
 
+  # Theme source repository (extras/ contains configs for many programs)
+  src = {
+    owner = "folke";
+    repo = "tokyonight.nvim";
+    rev = "v4.14.1";
+    hash = "sha256-kQsV0x8/ycFp3+S6YKyiKFsAG5taOdQmx/dMuDqGyEQ=";
+  };
+
+  # Extras file paths (relative to src)
+  extras = {
+    alacritty = "extras/alacritty/tokyonight_storm.toml";
+    delta = "extras/delta/tokyonight_storm.gitconfig";
+    foot = "extras/foot/tokyonight_storm.ini";
+    fzf = "extras/fzf/tokyonight_storm.sh";
+    eza = "extras/eza/tokyonight_storm.yml";
+    yazi = "extras/yazi/tokyonight_storm.toml";
+  };
+
   # Neovim
   neovim = {
     plugin = "folke/tokyonight.nvim";
@@ -20,7 +38,10 @@
   gtkIcon = "Tokyonight-Dark";
 
   # Bat
-  bat = "tokyonight_storm";
+  bat = {
+    name = "tokyonight_storm";
+    file = "extras/sublime/tokyonight_storm.tmTheme";
+  };
 
   # Btop
   btop = "tokyo-storm";
@@ -31,10 +52,7 @@
   # Base colors
   background = "#24283b";
   foreground = "#c0caf5";
-  cursor = "#c0caf5";
   accent = "#7aa2f7";
-  selection_foreground = "#c0caf5";
-  selection_background = "#7aa2f7";
 
   # ANSI colors
   color0 = "#1d202f";
