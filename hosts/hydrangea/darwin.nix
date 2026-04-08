@@ -33,6 +33,7 @@ in
     enable = true;
     taps = [
       "k1LoW/tap"
+      "nikitabobko/tap"
       "takai/tap"
     ];
     brews = [
@@ -41,6 +42,7 @@ in
     ];
     casks = [
       "1password-cli"
+      "aerospace"
       "appcleaner"
       "brave-browser"
       "chatgpt"

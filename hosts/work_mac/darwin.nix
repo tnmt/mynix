@@ -35,6 +35,7 @@ in
       "goreleaser/tap"
       "hashicorp/tap"
       "k1LoW/tap"
+      "nikitabobko/tap"
       "pyama86/kagiana"
       "takai/tap"
     ];
@@ -50,6 +51,7 @@ in
     ];
     casks = [
       "1password-cli"
+      "aerospace"
       "appcleaner"
       "brave-browser"
       "chatgpt"
