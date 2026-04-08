@@ -4,7 +4,7 @@
     ./atuin.nix
     ./git.nix
     ./ssh.nix
-    ./starship.nix
+    ./starship
     ./tmux.nix
     ./zsh.nix
   ];
