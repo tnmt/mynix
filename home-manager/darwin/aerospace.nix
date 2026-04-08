@@ -15,6 +15,51 @@ in
     default-root-container-orientation = "auto";
     on-focused-monitor-changed = [ "move-mouse monitor-lazy-center" ];
 
+    # Workspace-to-monitor assignment (1=laptop, 2-10=external)
+    # main=DELL(external), secondary=Built-in(laptop)
+    workspace-to-monitor-force-assignment = {
+      "1" = [
+        "secondary"
+        "main"
+      ];
+      "2" = [
+        "main"
+        "secondary"
+      ];
+      "3" = [
+        "main"
+        "secondary"
+      ];
+      "4" = [
+        "main"
+        "secondary"
+      ];
+      "5" = [
+        "main"
+        "secondary"
+      ];
+      "6" = [
+        "main"
+        "secondary"
+      ];
+      "7" = [
+        "main"
+        "secondary"
+      ];
+      "8" = [
+        "main"
+        "secondary"
+      ];
+      "9" = [
+        "main"
+        "secondary"
+      ];
+      "10" = [
+        "main"
+        "secondary"
+      ];
+    };
+
     # Gaps (matching Hyprland: gaps_in=3, gaps_out=6)
     gaps = {
       inner.horizontal = 6;
