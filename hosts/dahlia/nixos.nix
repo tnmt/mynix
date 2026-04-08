@@ -81,6 +81,7 @@
     "networkmanager"
     "docker"
   ];
+  users.users."${username}".linger = true;
 
   home-manager.users."${username}" = import ./home-manager.nix;
 }
