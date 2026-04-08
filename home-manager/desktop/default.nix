@@ -60,6 +60,30 @@
     gotop
   ];
 
+  qt = {
+    enable = true;
+    platformTheme.name = "kvantum";
+    style = {
+      name = "kvantum";
+      package = pkgs.kdePackages.qtstyleplugin-kvantum;
+    };
+  };
+
+  xdg.configFile."Kvantum/Tokyo-Night/Tokyo-Night.kvconfig".source =
+    pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/0xsch1zo/Kvantum-Tokyo-Night/main/Kvantum-Tokyo-Night/Kvantum-Tokyo-Night.kvconfig";
+      hash = "sha256-kVUFh4i+aQ/tHuyUqoeDeiLNV1zR2Vhf7J2GeU5JLZU=";
+    };
+  xdg.configFile."Kvantum/Tokyo-Night/Tokyo-Night.svg".source =
+    pkgs.fetchurl {
+      url = "https://raw.githubusercontent.com/0xsch1zo/Kvantum-Tokyo-Night/main/Kvantum-Tokyo-Night/Kvantum-Tokyo-Night.svg";
+      hash = "sha256-of/VrZxyfKSUSLODoe/GtAOHlpeh43OOG+/lrmrL/gw=";
+    };
+  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+    [General]
+    theme=Tokyo-Night
+  '';
+
   gtk = {
     enable = true;
     theme = {
