@@ -10,6 +10,8 @@
       "HYPRCURSOR_SIZE, 24"
       "GDK_BACKEND, wayland,x11,*"
       "QT_QPA_PLATFORM, wayland;xcb"
+      "QT_QPA_PLATFORMTHEME, kvantum"
+      "QT_STYLE_OVERRIDE, kvantum"
       "SDL_VIDEODRIVER, wayland,x11"
       "MOZ_ENABLE_WAYLAND, 1"
       "ELECTRON_OZONE_PLATFORM_HINT, wayland"
