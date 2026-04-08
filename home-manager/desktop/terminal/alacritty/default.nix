@@ -1,9 +1,19 @@
-{ terminal, theme, ... }:
+{
+  pkgs,
+  lib,
+  terminal,
+  theme,
+  ...
+}:
+let
+  themeSrc = pkgs.fetchFromGitHub theme.src;
+  themeColors = builtins.fromTOML (builtins.readFile "${themeSrc}/${theme.extras.alacritty}");
+in
 {
   programs.alacritty = {
     enable = true;
 
-    settings = {
+    settings = lib.recursiveUpdate themeColors {
       env.TERM = "xterm-256color";
 
       window = {
@@ -64,33 +74,6 @@
       };
 
       mouse.hide_when_typing = false;
-
-      colors = {
-        primary = {
-          background = theme.background;
-          foreground = theme.foreground;
-        };
-        normal = {
-          black = theme.color0;
-          red = theme.color1;
-          green = theme.color2;
-          yellow = theme.color3;
-          blue = theme.color4;
-          magenta = theme.color5;
-          cyan = theme.color6;
-          white = theme.color7;
-        };
-        bright = {
-          black = theme.color8;
-          red = theme.color9;
-          green = theme.color10;
-          yellow = theme.color11;
-          blue = theme.color12;
-          magenta = theme.color13;
-          cyan = theme.color14;
-          white = theme.color15;
-        };
-      };
 
       keyboard.bindings = [
         {
