@@ -153,6 +153,9 @@
       "$mainMod ALT, SPACE, Settings menu, exec, launch-settings"
       "$mainMod SHIFT, A, Switch audio output, exec, switch-audio"
 
+      # Voice input
+      "$mainMod, M, Toggle voice input, exec, voice-input"
+
       # System
       "$mainMod, ESCAPE, System menu, exec, wlogout -b 3 -c 20 -r 20"
     ];
