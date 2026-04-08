@@ -1,4 +1,4 @@
-{ pkgs, theme, ... }:
+{ pkgs, theme, fonts, ... }:
 let
   wlogoutIcons = "${pkgs.wlogout}/share/wlogout/icons";
 in
@@ -7,7 +7,7 @@ in
     * {
       background-image: none;
       box-shadow: none;
-      font-family: "Noto Sans CJK JP";
+      font-family: "${fonts.sans}";
     }
 
     window {

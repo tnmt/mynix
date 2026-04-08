@@ -1,5 +1,14 @@
 { pkgs, theme, ... }:
+let
+  fonts = {
+    sans = "Noto Sans CJK JP";
+    monospace = "MesloLGS NF";
+    emoji = "Noto Color Emoji";
+  };
+in
 {
+  _module.args = { inherit fonts; };
+
   imports = [
     ./yazi.nix
   ];

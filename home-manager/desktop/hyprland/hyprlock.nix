@@ -1,4 +1,4 @@
-{ theme, ... }:
+{ theme, fonts, ... }:
 let
   strip = color: builtins.substring 1 (-1) color;
 in
@@ -46,7 +46,7 @@ in
           text = "$TIME";
           font_size = 64;
           color = "rgb(${strip theme.foreground})";
-          font_family = "Noto Sans CJK JP";
+          font_family = fonts.sans;
           position = "0, 60";
           halign = "center";
           valign = "center";
@@ -56,7 +56,7 @@ in
           text = "cmd[update:60000] date +\"%Y-%m-%d\"";
           font_size = 20;
           color = "rgb(${strip theme.foreground})";
-          font_family = "Noto Sans CJK JP";
+          font_family = fonts.sans;
           position = "0, 140";
           halign = "center";
           valign = "center";
