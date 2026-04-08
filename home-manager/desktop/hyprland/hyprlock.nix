@@ -1,4 +1,7 @@
-{ ... }:
+{ theme, ... }:
+let
+  strip = color: builtins.substring 1 (-1) color;
+in
 {
   programs.hyprlock = {
     enable = true;
@@ -22,11 +25,11 @@
           monitor = "";
           size = "300, 50";
           outline_thickness = 2;
-          outer_color = "rgb(c8d3f5)";
+          outer_color = "rgb(${strip theme.foreground})";
           inner_color = "rgb(000000)";
-          font_color = "rgb(c8d3f5)";
+          font_color = "rgb(${strip theme.foreground})";
           check_color = "rgb(828bb8)";
-          fail_color = "rgb(ff757f)";
+          fail_color = "rgb(${strip theme.color1})";
           fade_on_empty = true;
           placeholder_text = "";
           dots_spacing = 0.3;
@@ -42,7 +45,7 @@
           monitor = "";
           text = "$TIME";
           font_size = 64;
-          color = "rgb(c8d3f5)";
+          color = "rgb(${strip theme.foreground})";
           font_family = "Noto Sans CJK JP";
           position = "0, 60";
           halign = "center";
@@ -52,7 +55,7 @@
           monitor = "";
           text = "cmd[update:60000] date +\"%Y-%m-%d\"";
           font_size = 20;
-          color = "rgb(c8d3f5)";
+          color = "rgb(${strip theme.foreground})";
           font_family = "Noto Sans CJK JP";
           position = "0, 140";
           halign = "center";
