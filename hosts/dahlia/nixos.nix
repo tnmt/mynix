@@ -76,12 +76,14 @@
     };
   };
 
-  users.users."${username}".extraGroups = [
-    "wheel"
-    "networkmanager"
-    "docker"
-  ];
-  users.users."${username}".linger = true;
+  users.users."${username}" = {
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+    ];
+    linger = true;
+  };
 
   home-manager.users."${username}" = import ./home-manager.nix;
 }
