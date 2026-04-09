@@ -25,7 +25,6 @@
     duckdb
     exiftool
     git-filter-repo
-    google-cloud-sdk
     hugo
     imagemagick
     kubernetes-helm

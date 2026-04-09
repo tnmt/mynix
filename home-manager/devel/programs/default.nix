@@ -10,6 +10,7 @@
     krew
     tenv
     sshuttle
+    google-cloud-sdk
 
     # Google Workspace
     gws
