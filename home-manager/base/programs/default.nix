@@ -68,6 +68,7 @@ in
       vim
 
       # cui
+      forgejo-cli
       gh
       ghq
       ripgrep
