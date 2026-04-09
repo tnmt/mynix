@@ -1,4 +1,9 @@
-{ pkgs, theme, ... }:
+{
+  lib,
+  pkgs,
+  theme,
+  ...
+}:
 let
   themeSrc = pkgs.fetchFromGitHub theme.src;
 in
@@ -51,44 +56,49 @@ in
     colorscheme tokyonight-storm
   '';
 
-  home.packages = with pkgs; [
-    # nix
-    cachix
-    nh
-    sops
+  home.packages =
+    with pkgs;
+    [
+      # nix
+      cachix
+      nh
+      sops
 
-    # editor (minimal)
-    vim
+      # editor (minimal)
+      vim
 
-    # cui
-    gh
-    ghq
-    ripgrep
-    fd
-    tig
-    wget
-    rsync
-    tree
+      # cui
+      gh
+      ghq
+      ripgrep
+      fd
+      tig
+      wget
+      rsync
+      tree
 
-    # archiver
-    unzip
+      # archiver
+      unzip
 
-    # Data format
-    jq
+      # Data format
+      jq
 
-    # SSH
-    openssh
+      # SSH
+      openssh
 
-    # TLS
-    openssl
+      # TLS
+      openssl
 
-    # search
-    platinum-searcher
+      # search
+      platinum-searcher
 
-    # AI
-    claude-code
-    ccusage
-    gemini-cli
-    codex
-  ];
+      # AI
+      claude-code
+      ccusage
+      gemini-cli
+      codex
+    ]
+    ++ lib.optionals pkgs.stdenv.isLinux [
+      bubblewrap
+    ];
 }
