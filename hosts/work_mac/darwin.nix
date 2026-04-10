@@ -57,6 +57,7 @@ in
       "chatgpt"
       "choosy"
       "claude"
+      "cmux"
       "discord"
       "dropbox"
       "firefox"
