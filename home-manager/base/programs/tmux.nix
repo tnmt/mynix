@@ -16,6 +16,7 @@ in
     plugins = with pkgs.tmuxPlugins; [
       sensible
       copycat
+      fingers
       yank
       resurrect
       pain-control
