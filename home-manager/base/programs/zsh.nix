@@ -94,6 +94,13 @@ in
         mkdir -p "$d" && cd "$d"
       }
 
+      # Ghostty shell integration (cmux compatibility)
+      # cmux sets GHOSTTY_RESOURCES_DIR but has a different directory layout,
+      # so we need to guard the auto-generated source line from failing.
+      if [[ -n $GHOSTTY_RESOURCES_DIR && ! -f "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration" ]]; then
+        unset GHOSTTY_RESOURCES_DIR
+      fi
+
       # 1Password CLI plugin
       [ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
 
