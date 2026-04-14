@@ -1,10 +1,14 @@
 { pkgs, ... }:
 let
-  fetchFavicon = domain: name: hash: builtins.toString (pkgs.fetchurl {
-    url = "https://www.google.com/s2/favicons?domain=${domain}&sz=128";
-    name = "${name}-icon.png";
-    inherit hash;
-  });
+  fetchFavicon =
+    domain: name: hash:
+    builtins.toString (
+      pkgs.fetchurl {
+        url = "https://www.google.com/s2/favicons?domain=${domain}&sz=128";
+        name = "${name}-icon.png";
+        inherit hash;
+      }
+    );
 
   tuiFloat = cmd: "${pkgs.alacritty}/bin/alacritty --class tui-float -e ${cmd}";
 in
@@ -14,9 +18,14 @@ in
       name = "Amazon Music";
       comment = "Amazon Music Web App";
       exec = "launch-webapp https://music.amazon.co.jp/";
-      icon = fetchFavicon "music.amazon.co.jp" "amazon-music" "sha256-9RKGPm7JTy3vzzqnBQjITtcWZVvyuUze6Ms/rzMRCSc=";
+      icon =
+        fetchFavicon "music.amazon.co.jp" "amazon-music"
+          "sha256-9RKGPm7JTy3vzzqnBQjITtcWZVvyuUze6Ms/rzMRCSc=";
       terminal = false;
-      categories = [ "Audio" "Music" ];
+      categories = [
+        "Audio"
+        "Music"
+      ];
     };
 
     chatgpt = {
@@ -41,7 +50,9 @@ in
       name = "Gemini";
       comment = "Gemini Web App";
       exec = "launch-webapp https://gemini.google.com/";
-      icon = fetchFavicon "gemini.google.com" "gemini" "sha256-IezRXZPMIZhpImrxwTyUUBZjY0+Y7LDRki82nvUfkc4=";
+      icon =
+        fetchFavicon "gemini.google.com" "gemini"
+          "sha256-IezRXZPMIZhpImrxwTyUUBZjY0+Y7LDRki82nvUfkc4=";
       terminal = false;
       categories = [ "Network" ];
     };
@@ -53,7 +64,11 @@ in
       exec = tuiFloat "btop";
       icon = "btop";
       terminal = false;
-      categories = [ "System" "Monitor" "ConsoleOnly" ];
+      categories = [
+        "System"
+        "Monitor"
+        "ConsoleOnly"
+      ];
     };
 
     wiremix = {
@@ -62,7 +77,10 @@ in
       exec = tuiFloat "wiremix -v output";
       icon = "audio-volume-high";
       terminal = false;
-      categories = [ "Audio" "Mixer" ];
+      categories = [
+        "Audio"
+        "Mixer"
+      ];
     };
   };
 }
