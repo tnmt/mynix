@@ -37,8 +37,12 @@ in
     defaultSopsFile = ../../secrets/default.yaml;
     age.keyFile = "${homeDir}/.config/sops/age/keys.txt";
     secrets = {
-      git_email = { owner = username; };
-      git_name = { owner = username; };
+      git_email = {
+        owner = username;
+      };
+      git_name = {
+        owner = username;
+      };
       atuin_sync_address = {
         sopsFile = ../../secrets/common.yaml;
         owner = username;
