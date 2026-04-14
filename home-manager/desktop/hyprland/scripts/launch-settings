@@ -18,7 +18,7 @@ action=$(echo "$selected" | awk -F'\t' '{print $NF}')
 tui() { alacritty --class tui-float -e "$@" & }
 
 case "$action" in
-  wifi)       tui nmtui ;;
+  wifi)       rfkill unblock wifi; tui nmtui ;;
   bluetooth)  tui bluetui ;;
   audio)      switch-audio ;;
   mixer)      tui wiremix -v output ;;
