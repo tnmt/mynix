@@ -85,6 +85,16 @@
     categories = [ "Audio" "Music" ];
   };
 
+  xdg.desktopEntries.btop = {
+    name = "btop++";
+    genericName = "System Monitor";
+    comment = "Resource monitor that shows usage and stats for processor, memory, disks, network and processes";
+    exec = "${pkgs.alacritty}/bin/alacritty --class tui-float -e btop";
+    icon = "btop";
+    terminal = false;
+    categories = [ "System" "Monitor" "ConsoleOnly" ];
+  };
+
   xdg.desktopEntries.wiremix = {
     name = "Wiremix";
     comment = "PipeWire TUI mixer";
