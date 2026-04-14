@@ -31,7 +31,6 @@
     #winetricks
 
     # filer
-    thunar
     ranger
 
     # cui image viewer
