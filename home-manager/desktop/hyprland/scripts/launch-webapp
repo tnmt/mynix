@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Launch URL as a web app using chromium --app mode.
+# Usage: launch-webapp <url>
+
+exec chromium --app="$1" "${@:2}"

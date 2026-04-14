@@ -52,6 +52,7 @@
         (pkgs.writeShellScriptBin "launch-walker" (builtins.readFile ./scripts/launch-walker))
         (pkgs.writeShellScriptBin "switch-audio" (builtins.readFile ./scripts/switch-audio))
         (pkgs.writeShellScriptBin "launch-settings" (builtins.readFile ./scripts/launch-settings))
+        (pkgs.writeShellScriptBin "launch-webapp" (builtins.readFile ./scripts/launch-webapp))
       ];
     })
   ];
@@ -67,6 +68,19 @@
       Restart = "on-failure";
     };
     Install.WantedBy = [ "graphical-session.target" ];
+  };
+
+  xdg.desktopEntries.amazon-music = {
+    name = "Amazon Music";
+    comment = "Amazon Music Web App";
+    exec = "launch-webapp https://music.amazon.co.jp/";
+    icon = builtins.toString (pkgs.fetchurl {
+      url = "https://www.google.com/s2/favicons?domain=music.amazon.co.jp&sz=128";
+      name = "amazon-music-icon.png";
+      hash = "sha256-9RKGPm7JTy3vzzqnBQjITtcWZVvyuUze6Ms/rzMRCSc=";
+    });
+    terminal = false;
+    categories = [ "Audio" "Music" ];
   };
 
   xdg.desktopEntries.wiremix = {
