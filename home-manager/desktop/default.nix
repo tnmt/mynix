@@ -9,7 +9,6 @@
     # browser
     brave
     microsoft-edge
-    chromium
     firefox
 
     # dev
@@ -84,6 +83,11 @@
     [General]
     theme=Tokyo-Night
   '';
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.chromium.override { enableWideVine = true; };
+  };
 
   gtk = {
     enable = true;
