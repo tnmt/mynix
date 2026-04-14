@@ -14,8 +14,6 @@
     inputs.nixos-wsl.nixosModules.default
   ];
 
-  boot.loader.grub.enable = false;
-
   fileSystems."/" = {
     device = "/dev/sdd";
     fsType = "ext4";
