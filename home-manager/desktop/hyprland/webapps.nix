@@ -57,6 +57,15 @@ in
       categories = [ "Network" ];
     };
 
+    zoom = {
+      name = "Zoom";
+      comment = "Zoom Web App";
+      exec = "launch-webapp https://app.zoom.us/wc/home";
+      icon = fetchFavicon "zoom.us" "zoom" "sha256-FtJJln9Q4USibHTf/3FIRMyhyRx+eK4fMOCD/4XAJDQ=";
+      terminal = false;
+      categories = [ "Network" ];
+    };
+
     btop = {
       name = "btop++";
       genericName = "System Monitor";
