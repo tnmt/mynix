@@ -71,17 +71,25 @@
     };
   };
 
-  xdg.configFile."Kvantum/Tokyo-Night/Tokyo-Night.kvconfig".source = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/0xsch1zo/Kvantum-Tokyo-Night/main/Kvantum-Tokyo-Night/Kvantum-Tokyo-Night.kvconfig";
-    hash = "sha256-kVUFh4i+aQ/tHuyUqoeDeiLNV1zR2Vhf7J2GeU5JLZU=";
-  };
-  xdg.configFile."Kvantum/Tokyo-Night/Tokyo-Night.svg".source = pkgs.fetchurl {
+  xdg.configFile."Kvantum/Tokyo-Night-Storm/Tokyo-Night-Storm.kvconfig".source =
+    pkgs.runCommand "tokyo-night-storm-kvconfig" { } ''
+      ${pkgs.gnused}/bin/sed \
+        -e 's/#1a1b26/#24283b/g' \
+        -e 's/#16161e/#1f2335/g' \
+        -e 's/#15161E/#1f2335/g' \
+        -e 's/#1d1f2b/#292e42/g' \
+        ${pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/0xsch1zo/Kvantum-Tokyo-Night/main/Kvantum-Tokyo-Night/Kvantum-Tokyo-Night.kvconfig";
+          hash = "sha256-kVUFh4i+aQ/tHuyUqoeDeiLNV1zR2Vhf7J2GeU5JLZU=";
+        }} > $out
+    '';
+  xdg.configFile."Kvantum/Tokyo-Night-Storm/Tokyo-Night-Storm.svg".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/0xsch1zo/Kvantum-Tokyo-Night/main/Kvantum-Tokyo-Night/Kvantum-Tokyo-Night.svg";
     hash = "sha256-of/VrZxyfKSUSLODoe/GtAOHlpeh43OOG+/lrmrL/gw=";
   };
   xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
     [General]
-    theme=Tokyo-Night
+    theme=Tokyo-Night-Storm
   '';
 
   programs.chromium = {
