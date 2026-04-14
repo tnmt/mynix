@@ -35,8 +35,8 @@ in
       info = "info --vi-keys";
       g = "git";
       cat = "bat";
-      ls = "eza --color=auto --group-directories-first --time-style=full-iso";
-      l = "eza -lah --color=auto --group-directories-first --time-style=full-iso";
+      ls = "eza --icons --color=auto --group-directories-first --time-style=full-iso";
+      l = "eza --icons -lah --color=auto --group-directories-first --time-style=full-iso";
     };
 
     sessionVariables = {
