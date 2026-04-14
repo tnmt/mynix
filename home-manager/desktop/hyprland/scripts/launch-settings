@@ -19,6 +19,6 @@ case "$action" in
   wifi)       ${TERMINAL:-ghostty} -e nmtui &;;
   bluetooth)  ${TERMINAL:-ghostty} -e bluetui &;;
   audio)      switch-audio ;;
-  mixer)      ${TERMINAL:-ghostty} -e pulsemixer &;;
+  mixer)      ${TERMINAL:-ghostty} -e wiremix -v output &;;
   keybindings) ${TERMINAL:-ghostty} -e bash -c 'hyprctl binds | less' &;;
 esac

@@ -170,14 +170,14 @@
       ", XF86AudioPlay, Play, exec, playerctl play-pause"
       ", XF86AudioPrev, Previous track, exec, playerctl previous"
       ", XF86AudioNext, Next track, exec, playerctl next"
-      ", XF86AudioMute, Mute, exec, pamixer -t"
+      ", XF86AudioMute, Mute, exec, swayosd-client --output-volume mute-toggle"
     ];
 
     bindeld = [
-      ", XF86AudioRaiseVolume, Volume up, exec, pamixer -i 10"
-      ", XF86AudioLowerVolume, Volume down, exec, pamixer -d 10"
-      ", XF86MonBrightnessUp, Brightness up, exec, brightnessctl set +10%"
-      ", XF86MonBrightnessDown, Brightness down, exec, brightnessctl set 10%-"
+      ", XF86AudioRaiseVolume, Volume up, exec, swayosd-client --output-volume raise"
+      ", XF86AudioLowerVolume, Volume down, exec, swayosd-client --output-volume lower"
+      ", XF86MonBrightnessUp, Brightness up, exec, swayosd-client --brightness raise"
+      ", XF86MonBrightnessDown, Brightness down, exec, swayosd-client --brightness lower"
     ];
   };
 }
