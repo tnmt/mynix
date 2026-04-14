@@ -3,4 +3,4 @@
 # Launch bluetooth controls TUI (bluetui). Unblocks bluetooth first.
 
 rfkill unblock bluetooth
-launch-or-focus bluetui "${TERMINAL:-ghostty} -e bluetui"
+launch-or-focus bluetui "alacritty --class tui-float -e bluetui"
