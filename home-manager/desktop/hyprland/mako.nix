@@ -24,9 +24,15 @@ in
         invisible = true;
       };
 
+      "urgency=low" = {
+        border-color = theme.comment;
+      };
+
       "urgency=critical" = {
         default-timeout = 0;
         layer = "overlay";
+        border-color = theme.color1;
+        background-color = theme.bg_dark;
       };
     };
   };

@@ -14,6 +14,7 @@
     ./kanshi.nix
     ./waybar.nix
     ./walker.nix
+    ./swayosd.nix
     ./wlogout.nix
   ];
 
