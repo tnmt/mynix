@@ -60,6 +60,10 @@ in
     provider = "clipboard"
   '';
 
+  xdg.configFile."elephant/clipboard.toml".text = ''
+    max_items = 10000
+  '';
+
   xdg.configFile."walker/themes/current/style.css".text = ''
     @define-color selected-text ${theme.accent};
     @define-color text ${theme.foreground};

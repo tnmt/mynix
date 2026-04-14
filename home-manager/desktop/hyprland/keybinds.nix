@@ -122,7 +122,7 @@
       "$mainMod, C, Universal copy, sendshortcut, CTRL, Insert,"
       "$mainMod, V, Universal paste, sendshortcut, SHIFT, Insert,"
       "$mainMod, X, Universal cut, sendshortcut, CTRL, X,"
-      "$mainMod CTRL, V, Clipboard manager, exec, walker -m clipboard"
+      "$mainMod SHIFT, C, Clipboard manager, exec, walker -m clipboard"
 
       # Menus
       "$mainMod, SPACE, Launch apps, exec, launch-walker"
