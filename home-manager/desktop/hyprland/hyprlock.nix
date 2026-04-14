@@ -27,12 +27,14 @@ in
         {
           monitor = "";
           size = "300, 50";
-          outline_thickness = 2;
-          outer_color = "rgb(${strip theme.foreground})";
-          inner_color = "rgb(000000)";
+          outline_thickness = 3;
+          rounding = 40;
+          outer_color = "rgb(${strip theme.accent})";
+          inner_color = "rgb(${strip theme.bg_dark})";
           font_color = "rgb(${strip theme.foreground})";
-          check_color = "rgb(828bb8)";
+          check_color = "rgb(${strip theme.accent})";
           fail_color = "rgb(${strip theme.color1})";
+          fail_text = "$FAIL";
           fade_on_empty = true;
           placeholder_text = "";
           dots_spacing = 0.3;
@@ -40,6 +42,8 @@ in
           position = "0, -80";
           halign = "center";
           valign = "center";
+          shadow_passes = 3;
+          shadow_size = 12;
         }
       ];
 
@@ -53,16 +57,20 @@ in
           position = "0, 60";
           halign = "center";
           valign = "center";
+          shadow_passes = 5;
+          shadow_size = 10;
         }
         {
           monitor = "";
           text = "cmd[update:60000] date +\"%Y-%m-%d\"";
           font_size = 20;
-          color = "rgb(${strip theme.foreground})";
+          color = "rgb(${strip theme.comment})";
           font_family = fonts.sans;
           position = "0, 140";
           halign = "center";
           valign = "center";
+          shadow_passes = 5;
+          shadow_size = 10;
         }
       ];
     };

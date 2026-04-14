@@ -20,20 +20,19 @@ in
     }
 
     button {
-      border-radius: 8px;
-      border: 1px solid ${theme.color8};
+      border-radius: 40px;
+      border: none;
       color: ${theme.foreground};
-      background-color: ${theme.background};
+      background-color: transparent;
       background-repeat: no-repeat;
       background-position: center 30%;
       background-size: 64px;
       font-size: 14px;
-      margin: 5px;
+      margin: 10px;
     }
 
     button:focus, button:active, button:hover {
-      background-color: ${theme.color8};
-      border-color: ${theme.accent};
+      background-color: ${theme.bg_highlight};
       outline-style: none;
     }
 
