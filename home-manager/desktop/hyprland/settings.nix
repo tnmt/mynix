@@ -40,30 +40,35 @@
     general = {
       gaps_in = 3;
       gaps_out = 6;
-      border_size = 2;
+      border_size = 1;
       "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
       "col.inactive_border" = "rgba(00000000)";
-      resize_on_border = false;
-      allow_tearing = false;
+      resize_on_border = true;
+      allow_tearing = true;
       layout = "dwindle";
     };
 
     decoration = {
       rounding = 8;
+      rounding_power = 2;
+      inactive_opacity = 0.9;
       shadow = {
         enabled = true;
-        range = 2;
+        range = 1;
         render_power = 3;
         color = "rgba(1a1a1aee)";
       };
       blur = {
         enabled = true;
-        size = 6;
-        passes = 3;
+        size = 8;
+        passes = 4;
         special = true;
-        brightness = 0.60;
-        contrast = 0.75;
+        noise = 0.034;
+        brightness = 1.50;
+        contrast = 0.74;
         vibrancy = 1;
+        vibrancy_darkness = 0.28;
+        xray = true;
       };
     };
 
@@ -107,6 +112,8 @@
       focus_on_activate = true;
       key_press_enables_dpms = true;
       mouse_move_enables_dpms = true;
+      animate_manual_resizes = true;
+      animate_mouse_windowdragging = true;
     };
 
     ecosystem = {
@@ -130,7 +137,7 @@
 
     windowrule = [
       "match:class .*, suppress_event maximize"
-      "match:class .*, opacity 0.97 0.9"
+      "match:class .*, opacity 0.97"
       "match:class ^(fcitx)$, pseudo on"
       "match:class ^(fcitx)$, no_blur on"
     ];
