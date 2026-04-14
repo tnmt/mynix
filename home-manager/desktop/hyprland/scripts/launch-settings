@@ -15,10 +15,12 @@ selected=$(echo "$menu" | walker --dmenu -p "Settings")
 
 action=$(echo "$selected" | awk -F'\t' '{print $NF}')
 
+tui() { alacritty --class tui-float -e "$@" & }
+
 case "$action" in
-  wifi)       ${TERMINAL:-ghostty} -e nmtui &;;
-  bluetooth)  ${TERMINAL:-ghostty} -e bluetui &;;
+  wifi)       tui nmtui ;;
+  bluetooth)  tui bluetui ;;
   audio)      switch-audio ;;
-  mixer)      ${TERMINAL:-ghostty} -e wiremix -v output &;;
-  keybindings) ${TERMINAL:-ghostty} -e bash -c 'hyprctl binds | less' &;;
+  mixer)      tui wiremix -v output ;;
+  keybindings) tui bash -c 'hyprctl binds | less' ;;
 esac

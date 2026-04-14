@@ -54,6 +54,7 @@
         (pkgs.writeShellScriptBin "switch-audio" (builtins.readFile ./scripts/switch-audio))
         (pkgs.writeShellScriptBin "launch-settings" (builtins.readFile ./scripts/launch-settings))
         (pkgs.writeShellScriptBin "launch-webapp" (builtins.readFile ./scripts/launch-webapp))
+        (pkgs.writeShellScriptBin "window-pop" (builtins.readFile ./scripts/window-pop))
       ];
     })
   ];
@@ -87,7 +88,7 @@
   xdg.desktopEntries.wiremix = {
     name = "Wiremix";
     comment = "PipeWire TUI mixer";
-    exec = "ghostty -e wiremix -v output";
+    exec = "alacritty --class tui-float -e wiremix -v output";
     icon = "audio-volume-high";
     terminal = false;
     categories = [ "Audio" "Mixer" ];

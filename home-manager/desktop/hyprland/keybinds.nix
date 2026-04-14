@@ -10,6 +10,7 @@
       "$mainMod, J, Toggle window split, layoutmsg, togglesplit"
       "$mainMod, P, Pseudo window, pseudo,"
       "$mainMod, T, Toggle window floating/tiling, togglefloating,"
+      "$mainMod, O, Pop out window (float + pin), exec, window-pop"
       "$mainMod, F, Full screen, fullscreen, 0"
       "$mainMod CTRL, F, Tiled full screen, fullscreenstate, 0 2"
       "$mainMod ALT, F, Full width, fullscreen, 1"
