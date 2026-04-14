@@ -72,20 +72,23 @@
   };
 
   xdg.configFile."Kvantum/Tokyo-Night-Storm/Tokyo-Night-Storm.kvconfig".source =
-    pkgs.runCommand "tokyo-night-storm-kvconfig" { } ''
-      ${pkgs.gnused}/bin/sed \
-        -e 's/#1a1b26/#24283b/g' \
-        -e 's/#16161e/#1f2335/g' \
-        -e 's/#15161E/#1f2335/g' \
-        -e 's/#1d1f2b/#292e42/g' \
-        -e 's/dark.color=black/dark.color=#1f2335/g' \
-        -e 's/#191919/#24283b/g' \
-        -e 's/#3e415c/#414868/g' \
-        ${pkgs.fetchurl {
-          url = "https://raw.githubusercontent.com/0xsch1zo/Kvantum-Tokyo-Night/main/Kvantum-Tokyo-Night/Kvantum-Tokyo-Night.kvconfig";
-          hash = "sha256-kVUFh4i+aQ/tHuyUqoeDeiLNV1zR2Vhf7J2GeU5JLZU=";
-        }} > $out
-    '';
+    pkgs.runCommand "tokyo-night-storm-kvconfig" { }
+      ''
+        ${pkgs.gnused}/bin/sed \
+          -e 's/#1a1b26/#24283b/g' \
+          -e 's/#16161e/#1f2335/g' \
+          -e 's/#15161E/#1f2335/g' \
+          -e 's/#1d1f2b/#292e42/g' \
+          -e 's/dark.color=black/dark.color=#1f2335/g' \
+          -e 's/#191919/#24283b/g' \
+          -e 's/#3e415c/#414868/g' \
+          ${
+            pkgs.fetchurl {
+              url = "https://raw.githubusercontent.com/0xsch1zo/Kvantum-Tokyo-Night/main/Kvantum-Tokyo-Night/Kvantum-Tokyo-Night.kvconfig";
+              hash = "sha256-kVUFh4i+aQ/tHuyUqoeDeiLNV1zR2Vhf7J2GeU5JLZU=";
+            }
+          } > $out
+      '';
   xdg.configFile."Kvantum/Tokyo-Night-Storm/Tokyo-Night-Storm.svg".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/0xsch1zo/Kvantum-Tokyo-Night/main/Kvantum-Tokyo-Night/Kvantum-Tokyo-Night.svg";
     hash = "sha256-of/VrZxyfKSUSLODoe/GtAOHlpeh43OOG+/lrmrL/gw=";
