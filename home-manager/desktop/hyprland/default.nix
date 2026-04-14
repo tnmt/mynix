@@ -88,7 +88,7 @@
   xdg.desktopEntries.wiremix = {
     name = "Wiremix";
     comment = "PipeWire TUI mixer";
-    exec = "alacritty --class tui-float -e wiremix -v output";
+    exec = "${pkgs.alacritty}/bin/alacritty --class tui-float -e wiremix -v output";
     icon = "audio-volume-high";
     terminal = false;
     categories = [ "Audio" "Mixer" ];
