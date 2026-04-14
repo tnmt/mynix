@@ -85,6 +85,45 @@
     categories = [ "Audio" "Music" ];
   };
 
+  xdg.desktopEntries.chatgpt = {
+    name = "ChatGPT";
+    comment = "ChatGPT Web App";
+    exec = "launch-webapp https://chatgpt.com/";
+    icon = builtins.toString (pkgs.fetchurl {
+      url = "https://www.google.com/s2/favicons?domain=chatgpt.com&sz=128";
+      name = "chatgpt-icon.png";
+      hash = "sha256-kbYOlSqwmYks6+g2l5V+zg+aDz6KllM7QStI/KmH7Yk=";
+    });
+    terminal = false;
+    categories = [ "Network" ];
+  };
+
+  xdg.desktopEntries.claude = {
+    name = "Claude";
+    comment = "Claude Web App";
+    exec = "launch-webapp https://claude.ai/";
+    icon = builtins.toString (pkgs.fetchurl {
+      url = "https://www.google.com/s2/favicons?domain=claude.ai&sz=128";
+      name = "claude-icon.png";
+      hash = "sha256-AWqC8d5172Kt+sCI2h4Qzu9NjmWBPicmxzCKdVBw3Xw=";
+    });
+    terminal = false;
+    categories = [ "Network" ];
+  };
+
+  xdg.desktopEntries.gemini = {
+    name = "Gemini";
+    comment = "Gemini Web App";
+    exec = "launch-webapp https://gemini.google.com/";
+    icon = builtins.toString (pkgs.fetchurl {
+      url = "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128";
+      name = "gemini-icon.png";
+      hash = "sha256-IezRXZPMIZhpImrxwTyUUBZjY0+Y7LDRki82nvUfkc4=";
+    });
+    terminal = false;
+    categories = [ "Network" ];
+  };
+
   xdg.desktopEntries.btop = {
     name = "btop++";
     genericName = "System Monitor";
