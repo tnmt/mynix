@@ -26,6 +26,7 @@
   home.packages = with pkgs; [
     brightnessctl
     bluetui
+    swayosd
     grim
     slurp
     hyprpicker
@@ -33,7 +34,7 @@
     pulseaudio
     pamixer
     playerctl
-    pulsemixer
+    wiremix
     wayvnc
     wev
     wf-recorder
@@ -54,5 +55,27 @@
       ];
     })
   ];
+
+  systemd.user.services.swayosd = {
+    Unit = {
+      Description = "SwayOSD OSD server";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.swayosd}/bin/swayosd-server";
+      Restart = "on-failure";
+    };
+    Install.WantedBy = [ "graphical-session.target" ];
+  };
+
+  xdg.desktopEntries.wiremix = {
+    name = "Wiremix";
+    comment = "PipeWire TUI mixer";
+    exec = "ghostty -e wiremix -v output";
+    icon = "audio-volume-high";
+    terminal = false;
+    categories = [ "Audio" "Mixer" ];
+  };
 
 }
