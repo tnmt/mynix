@@ -138,6 +138,10 @@
     windowrule = [
       "match:class .*, suppress_event maximize"
       "match:class .*, opacity 0.97"
+      # Float + center for TUI popup windows
+      "match:class ^(tui-float)$, float on"
+      "match:class ^(tui-float)$, center on"
+      "match:class ^(tui-float)$, size 875 600"
       "match:class ^(fcitx)$, pseudo on"
       "match:class ^(fcitx)$, no_blur on"
     ];
