@@ -66,9 +66,11 @@ in
 
   xdg.configFile."walker/themes/current/style.css".text = ''
     @define-color selected-text ${theme.accent};
+    @define-color selected-bg ${theme.bg_highlight};
     @define-color text ${theme.foreground};
+    @define-color subtext ${theme.comment};
     @define-color base ${theme.background};
-    @define-color border ${theme.foreground};
+    @define-color border ${theme.color8};
     @define-color foreground ${theme.foreground};
     @define-color background ${theme.background};
 
@@ -113,6 +115,11 @@ in
     .input:active {
       box-shadow: none;
       outline: none;
+    }
+
+    child:selected .item-box {
+      background: @selected-bg;
+      border-radius: 6px;
     }
 
     child:selected .item-box * {
