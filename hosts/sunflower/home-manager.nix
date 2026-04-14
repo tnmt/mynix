@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   username,
   ...
@@ -21,6 +22,11 @@ in
     email = ""; # set locally or via sops-nix
     name = "tnmt";
   };
+
+  # Disable home-manager sops (WSL has no user systemd; secrets are managed
+  # at the NixOS system level in sunflower/nixos.nix instead)
+  sops.secrets = lib.mkForce { };
+  sops.templates = lib.mkForce { };
 
   systemd.user = {
     timers.obsidian-backup = {
