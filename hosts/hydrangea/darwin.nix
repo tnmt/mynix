@@ -42,7 +42,6 @@ in
     ];
     casks = [
       "1password-cli"
-      "aerospace"
       "appcleaner"
       "brave-browser"
       "chatgpt"
