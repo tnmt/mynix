@@ -37,6 +37,7 @@ in
       "k1LoW/tap"
       "nikitabobko/tap"
       "pyama86/kagiana"
+      "rtk-ai/tap"
       "takai/tap"
     ];
     brews = [
@@ -47,6 +48,7 @@ in
       "hashicorp/tap/vault"
       "k1low/tap/mo"
       "pyama86/kagiana/kagiana"
+      "rtk-ai/tap/rtk"
       "takai/tap/git-ai-commit"
     ];
     casks = [
