@@ -3,7 +3,6 @@
 # - Hyprland compositor
 # - Desktop environment (fonts, sound, fcitx5, security)
 # - Bluetooth
-# - GNOME Keyring handles ssh-agent (disable openssh's)
 # - VM variant for testing
 {
   inputs,
@@ -27,9 +26,6 @@
       user = "greeter";
     };
   };
-
-  # Disable ssh-agent from openssh (GNOME Keyring handles it on desktop)
-  programs.ssh.startAgent = lib.mkForce false;
 
   # VM testing (ignored on real hardware)
   virtualisation.vmVariant = {
