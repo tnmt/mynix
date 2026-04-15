@@ -76,6 +76,8 @@
     };
   };
 
+  security.sudo.wheelNeedsPassword = false;
+
   users.users."${username}" = {
     extraGroups = [
       "wheel"
