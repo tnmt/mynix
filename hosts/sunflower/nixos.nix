@@ -12,7 +12,6 @@ in
 {
   imports = [
     ../../modules/core
-    ../../modules/programs/shell.nix
     ../../modules/programs/openssh.nix
 
     inputs.nixos-wsl.nixosModules.default

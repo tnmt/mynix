@@ -10,7 +10,6 @@
   imports = [
     ./hardware.nix
     ../../modules/core
-    ../../modules/programs/shell.nix
     ../../modules/programs/openssh.nix
     ../../modules/programs/virtualisation.nix
     ../../profiles/laptop.nix

@@ -8,4 +8,6 @@
     ./sops.nix
     ./user.nix
   ];
+
+  programs.zsh.enable = true;
 }
