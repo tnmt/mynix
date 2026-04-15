@@ -27,9 +27,6 @@ in
 
   wsl.defaultUser = "${username}";
 
-  # WSL uses Windows networking, no need for NetworkManager or wpa_supplicant
-  networking.networkmanager.enable = lib.mkForce false;
-
   services.openssh.ports = [ 2222 ];
 
   # System-level sops (WSL has no user systemd, so home-manager sops doesn't work)
