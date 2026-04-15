@@ -98,6 +98,7 @@ in
       ccusage
       gemini-cli
       codex
+      rtk
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       bubblewrap
