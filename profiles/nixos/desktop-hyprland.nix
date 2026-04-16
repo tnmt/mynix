@@ -10,7 +10,7 @@
 }:
 {
   imports = [
-    ../../modules/programs/hyprland.nix
+    ../../modules/desktop/hyprland-system.nix
     ../../modules/hardware/bluetooth.nix
     ../../modules/desktop
   ];

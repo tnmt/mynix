@@ -134,27 +134,23 @@ let
         inherit hostname username;
       };
     };
-in
-{
-  darwin = {
-    work_mac = mkDarwinSystem {
+
+  darwinHosts = {
+    work_mac = {
       system = "aarch64-darwin";
-      hostname = "work_mac";
       username = "tsunematsu";
       modules = [ ./work_mac/darwin.nix ];
     };
-    hydrangea = mkDarwinSystem {
+    hydrangea = {
       system = "aarch64-darwin";
-      hostname = "hydrangea";
       username = "tnmt";
       modules = [ ./hydrangea/darwin.nix ];
     };
   };
 
-  nixos = {
-    sunflower = mkNixosSystem {
+  nixosHosts = {
+    sunflower = {
       system = "x86_64-linux";
-      hostname = "sunflower";
       username = "tnmt";
       modules = [
         ./sunflower/nixos.nix
@@ -164,9 +160,8 @@ in
         }
       ];
     };
-    dahlia = mkNixosSystem {
+    dahlia = {
       system = "x86_64-linux";
-      hostname = "dahlia";
       username = "tnmt";
       modules = [
         ./dahlia/nixos.nix
@@ -177,22 +172,45 @@ in
     };
   };
 
-  home-manager = {
-    "tsunematsu@work_mac" = mkHomeManagerConfiguration {
+  homeManagerHosts = {
+    "tsunematsu@work_mac" = {
       system = "aarch64-darwin";
       username = "tsunematsu";
       sopsFile = ../secrets/work_mac.yaml;
       modules = [ ./work_mac/home-manager.nix ];
     };
-    "tnmt@work_ubuntu" = mkHomeManagerConfiguration {
+    "tnmt@work_ubuntu" = {
       system = "x86_64-linux";
       username = "tnmt";
       modules = [ ./work_ubuntu/home-manager.nix ];
     };
-    "tnmt@hydrangea" = mkHomeManagerConfiguration {
+    "tnmt@hydrangea" = {
       system = "aarch64-darwin";
       username = "tnmt";
       modules = [ ./hydrangea/home-manager.nix ];
     };
   };
+in
+{
+  darwin = inputs.nixpkgs.lib.mapAttrs (
+    hostname: args:
+    mkDarwinSystem (
+      args
+      // {
+        inherit hostname;
+      }
+    )
+  ) darwinHosts;
+
+  nixos = inputs.nixpkgs.lib.mapAttrs (
+    hostname: args:
+    mkNixosSystem (
+      args
+      // {
+        inherit hostname;
+      }
+    )
+  ) nixosHosts;
+
+  home-manager = inputs.nixpkgs.lib.mapAttrs (_: mkHomeManagerConfiguration) homeManagerHosts;
 }
