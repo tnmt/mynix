@@ -135,6 +135,20 @@ let
       };
     };
 
+  mkHostConfigurations =
+    builder: hosts:
+    inputs.nixpkgs.lib.mapAttrs (
+      hostname: args:
+      builder (
+        args
+        // {
+          inherit hostname;
+        }
+      )
+    ) hosts;
+
+  mkNamedConfigurations = builder: hosts: inputs.nixpkgs.lib.mapAttrs (_: builder) hosts;
+
   darwinHosts = {
     work_mac = {
       system = "aarch64-darwin";
@@ -192,25 +206,7 @@ let
   };
 in
 {
-  darwin = inputs.nixpkgs.lib.mapAttrs (
-    hostname: args:
-    mkDarwinSystem (
-      args
-      // {
-        inherit hostname;
-      }
-    )
-  ) darwinHosts;
-
-  nixos = inputs.nixpkgs.lib.mapAttrs (
-    hostname: args:
-    mkNixosSystem (
-      args
-      // {
-        inherit hostname;
-      }
-    )
-  ) nixosHosts;
-
-  home-manager = inputs.nixpkgs.lib.mapAttrs (_: mkHomeManagerConfiguration) homeManagerHosts;
+  darwin = mkHostConfigurations mkDarwinSystem darwinHosts;
+  nixos = mkHostConfigurations mkNixosSystem nixosHosts;
+  home-manager = mkNamedConfigurations mkHomeManagerConfiguration homeManagerHosts;
 }
