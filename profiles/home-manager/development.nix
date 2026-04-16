@@ -1,3 +1,4 @@
+# Shared Home Manager baseline for NixOS development machines.
 { ... }:
 {
   imports = [

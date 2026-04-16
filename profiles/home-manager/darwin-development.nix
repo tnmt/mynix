@@ -1,3 +1,4 @@
+# Shared Home Manager profile for darwin development machines.
 { ... }:
 {
   imports = [

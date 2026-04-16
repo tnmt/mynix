@@ -1,3 +1,4 @@
+# Common Homebrew baseline for darwin hosts.
 { ... }:
 {
   homebrew = {

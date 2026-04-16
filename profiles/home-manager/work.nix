@@ -1,3 +1,4 @@
+# Shared standalone Home Manager profile for work Linux environments.
 { ... }:
 {
   imports = [

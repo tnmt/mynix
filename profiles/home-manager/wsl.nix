@@ -1,3 +1,4 @@
+# Home Manager adjustments for WSL-integrated NixOS hosts.
 { lib, ... }:
 {
   imports = [
