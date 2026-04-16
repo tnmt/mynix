@@ -1,7 +1,6 @@
 { lib, ... }:
 {
   imports = [
-    ./options.nix
     ./programs
   ];
 

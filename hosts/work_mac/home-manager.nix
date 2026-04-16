@@ -1,19 +1,9 @@
 { pkgs, ... }:
 {
   imports = [
-    ../../home-manager/base
-    ../../home-manager/devel
-    ../../home-manager/darwin
-    ../../home-manager/desktop/terminal
+    ../../profiles/home-manager/darwin-development.nix
     ../../home-manager/work
   ];
-
-  custom = {
-    desktop = true;
-    development = true;
-    email = ""; # set locally or via sops-nix
-    name = "tsunematsu";
-  };
 
   home.packages = with pkgs; [
     oneaws
