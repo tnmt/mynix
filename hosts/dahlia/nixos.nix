@@ -10,11 +10,11 @@
   imports = [
     ./hardware.nix
     ../../modules/core
-    ../../modules/programs/openssh.nix
+    ../../modules/services/openssh.nix
     ../../modules/programs/virtualisation.nix
-    ../../profiles/laptop.nix
+    ../../modules/hardware/power-management.nix
     ../../profiles/hyprland-desktop.nix
-    ../../profiles/japanese-keyboard.nix
+    ../../modules/hardware/kanata.nix
   ];
 
   # Networking (dahlia-specific: static IP on homelab WiFi)
