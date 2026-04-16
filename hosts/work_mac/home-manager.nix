@@ -1,10 +1,12 @@
 { pkgs, ... }:
 {
   imports = [
+    # Shared darwin user profile for development hosts.
     ../../profiles/home-manager/darwin-development.nix
     ../../home-manager/work
   ];
 
+  # Work-machine-only CLI packages that do not belong in shared profiles.
   home.packages = with pkgs; [
     oneaws
     ccusage

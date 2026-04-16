@@ -9,6 +9,8 @@ in
 {
   imports = [
     ./hardware.nix
+
+    # Shared system roles.
     ../../modules/core
     services."openssh"
     ../../modules/programs/virtualisation.nix
@@ -18,13 +20,11 @@ in
     ../../modules/hardware/kanata.nix
   ];
 
-  # Tailscale VPN
+  # Host-local networking and access.
   services.tailscale.enable = true;
-
-  # Firewall
   networking.firewall.enable = true;
 
-  # Secrets (dahlia-specific)
+  # Host-local secrets file.
   sops = {
     defaultSopsFile = ../../secrets/dahlia.yaml;
     age.keyFile = "${config.users.users.${username}.home}/.config/sops/age/keys.txt";
@@ -41,5 +41,6 @@ in
     linger = true;
   };
 
+  # Host-specific Home Manager entrypoint.
   home-manager.users."${username}" = import ./home-manager.nix;
 }
