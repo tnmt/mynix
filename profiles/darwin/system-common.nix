@@ -1,3 +1,4 @@
+# Common macOS system baseline shared by darwin hosts.
 {
   pkgs,
   inputs,

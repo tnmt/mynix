@@ -1,3 +1,4 @@
+# Static Wi-Fi profile for the homelab network, backed by sops secrets.
 {
   config,
   ...

@@ -1,3 +1,4 @@
+# Work-specific Homebrew additions for darwin hosts.
 { ... }:
 {
   homebrew = {

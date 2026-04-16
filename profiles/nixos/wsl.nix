@@ -1,3 +1,4 @@
+# Shared WSL system profile for NixOS hosts running inside Windows.
 {
   config,
   inputs,
