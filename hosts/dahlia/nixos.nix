@@ -10,7 +10,7 @@ in
   imports = [
     ./hardware.nix
     ../../modules/core
-    services.openssh
+    services."openssh"
     ../../modules/programs/virtualisation.nix
     ../../modules/hardware/power-management.nix
     ../../profiles/nixos/desktop-hyprland.nix

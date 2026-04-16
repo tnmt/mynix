@@ -8,7 +8,7 @@ in
 {
   imports = [
     ../../modules/core
-    services.openssh
+    services."openssh"
     services."ccpocket-bridge"
     ../../profiles/nixos/wsl.nix
   ];
