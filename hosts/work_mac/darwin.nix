@@ -41,6 +41,7 @@ in
       "takai/tap"
     ];
     brews = [
+      "azure-cli"
       "colima"
       "consul-template"
       "docker"
