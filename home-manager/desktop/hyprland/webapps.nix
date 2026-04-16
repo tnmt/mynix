@@ -12,6 +12,7 @@ in
       icon = icon "amazon-music";
       terminal = false;
       categories = [
+        "AudioVideo"
         "Audio"
         "Music"
       ];
@@ -74,6 +75,7 @@ in
       icon = "audio-volume-high";
       terminal = false;
       categories = [
+        "AudioVideo"
         "Audio"
         "Mixer"
       ];
