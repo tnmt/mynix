@@ -1,14 +1,6 @@
 { ... }:
 {
   imports = [
-    ../../home-manager/base
-    ../../home-manager/devel
-    ../../home-manager/work
+    ../../profiles/home-manager/work.nix
   ];
-
-  custom = {
-    development = true;
-    email = ""; # set locally or via sops-nix
-    name = "tnmt";
-  };
 }

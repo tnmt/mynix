@@ -14,14 +14,8 @@ let
 in
 {
   imports = [
-    ../../home-manager/base-nixos
-    ../../home-manager/devel
+    ../../profiles/home-manager/nixos-development.nix
   ];
-
-  custom = {
-    email = ""; # set locally or via sops-nix
-    name = "tnmt";
-  };
 
   # Disable home-manager sops (WSL has no user systemd; secrets are managed
   # at the NixOS system level in sunflower/nixos.nix instead)
