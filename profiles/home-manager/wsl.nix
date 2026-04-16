@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   imports = [
-    ./nixos-development.nix
+    ./development.nix
   ];
 
   # WSL has no user systemd; secrets are managed at the NixOS system level.

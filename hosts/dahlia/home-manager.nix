@@ -1,9 +1,12 @@
 {
   ...
 }:
+let
+  services = import ../../home-manager/services;
+in
 {
   imports = [
-    ../../profiles/desktop/hyprland/home-manager.nix
-    ../../home-manager/services/ccpocket-bridge.nix
+    ../../profiles/home-manager/desktop-hyprland.nix
+    services."ccpocket-bridge"
   ];
 }
