@@ -14,6 +14,68 @@ let
     })
   ];
 
+  mkSpecialArgs =
+    {
+      hostname ? null,
+      username,
+    }:
+    {
+      inherit inputs username;
+    }
+    // inputs.nixpkgs.lib.optionalAttrs (hostname != null) {
+      inherit hostname;
+    };
+
+  mkPkgs =
+    {
+      nixpkgs,
+      system,
+      overlays ? commonOverlays,
+    }:
+    import nixpkgs {
+      inherit system overlays;
+      config.allowUnfree = true;
+    };
+
+  mkHomeDirectory =
+    username: system: if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
+
+  mkHomeManagerDefaults =
+    {
+      system,
+      username,
+      sopsFile,
+    }:
+    {
+      pkgs,
+      ...
+    }:
+    let
+      homeDirectory = mkHomeDirectory username system;
+    in
+    {
+      home = {
+        inherit username homeDirectory;
+        stateVersion = "25.05";
+      };
+
+      nix.package = pkgs.nix;
+      programs.home-manager.enable = true;
+      programs.git.enable = true;
+
+      sops = {
+        defaultSopsFile = sopsFile;
+        age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
+        secrets = {
+          git_email = { };
+          git_name = { };
+          atuin_sync_address = {
+            sopsFile = ../secrets/common.yaml;
+          };
+        };
+      };
+    };
+
   mkNixosSystem =
     {
       system,
@@ -26,8 +88,8 @@ let
       modules = modules ++ [
         { nixpkgs.overlays = commonOverlays; }
       ];
-      specialArgs = {
-        inherit inputs hostname username;
+      specialArgs = mkSpecialArgs {
+        inherit hostname username;
       };
     };
 
@@ -40,51 +102,23 @@ let
       sopsFile ? ../secrets/default.yaml,
     }:
     inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = import inputs.nixpkgs {
+      pkgs = mkPkgs {
+        nixpkgs = inputs.nixpkgs;
         inherit system overlays;
-        config = {
-          allowUnfree = true;
-        };
       };
       extraSpecialArgs = {
         inherit inputs username;
         theme = (import ../themes) "tokyonight-storm";
-        pkgs-stable = import inputs.nixpkgs-stable {
+        pkgs-stable = mkPkgs {
+          nixpkgs = inputs.nixpkgs-stable;
           inherit system overlays;
-          config = {
-            allowUnfree = true;
-          };
         };
       };
       modules = modules ++ [
         inputs.sops-nix.homeManagerModules.sops
-        (
-          { pkgs, ... }:
-          {
-            home = {
-              inherit username;
-              homeDirectory = if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
-              stateVersion = "25.05";
-            };
-            nix.package = pkgs.nix;
-            programs.home-manager.enable = true;
-            programs.git.enable = true;
-
-            sops = {
-              defaultSopsFile = sopsFile;
-              age.keyFile = "${
-                if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}"
-              }/.config/sops/age/keys.txt";
-              secrets = {
-                git_email = { };
-                git_name = { };
-                atuin_sync_address = {
-                  sopsFile = ../secrets/common.yaml;
-                };
-              };
-            };
-          }
-        )
+        (mkHomeManagerDefaults {
+          inherit system username sopsFile;
+        })
       ];
     };
   mkDarwinSystem =
@@ -96,8 +130,8 @@ let
     }:
     inputs.darwin.lib.darwinSystem {
       inherit system modules;
-      specialArgs = {
-        inherit inputs hostname username;
+      specialArgs = mkSpecialArgs {
+        inherit hostname username;
       };
     };
 in
