@@ -14,7 +14,7 @@
     dconf.enable = true;
     thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         thunar-volman
       ];
     };

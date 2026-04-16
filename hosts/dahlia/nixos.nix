@@ -13,7 +13,7 @@
     ../../modules/services/openssh.nix
     ../../modules/programs/virtualisation.nix
     ../../modules/hardware/power-management.nix
-    ../../profiles/hyprland-desktop.nix
+    ../../profiles/desktop/hyprland/nixos.nix
     ../../modules/hardware/kanata.nix
   ];
 

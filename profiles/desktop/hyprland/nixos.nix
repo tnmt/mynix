@@ -1,24 +1,20 @@
-# Hyprland desktop workstation profile
+# Hyprland desktop system profile
 # - Greetd display manager with tuigreet
 # - Hyprland compositor
 # - Desktop environment (fonts, sound, fcitx5, security)
 # - Bluetooth
 # - VM variant for testing
 {
-  inputs,
-  lib,
   pkgs,
-  username,
   ...
 }:
 {
   imports = [
-    ../modules/programs/hyprland.nix
-    ../modules/hardware/bluetooth.nix
-    ../modules/desktop
+    ../../../modules/programs/hyprland.nix
+    ../../../modules/hardware/bluetooth.nix
+    ../../../modules/desktop
   ];
 
-  # Display manager
   services.greetd = {
     enable = true;
     settings.default_session = {
@@ -27,7 +23,6 @@
     };
   };
 
-  # VM testing (ignored on real hardware)
   virtualisation.vmVariant = {
     virtualisation = {
       memorySize = 4096;
@@ -35,7 +30,4 @@
       graphics = true;
     };
   };
-
-  # Auto-login for VM convenience
-  services.getty.autologinUser = username;
 }

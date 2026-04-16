@@ -1,23 +1,12 @@
 {
   pkgs,
-  inputs,
   username,
   ...
 }:
 {
   imports = [
-    ../../home-manager/base-nixos
-    ../../home-manager/devel
-    ../../home-manager/desktop
-    ../../home-manager/desktop/hyprland
-    ../../home-manager/desktop/voice-input
-    ../../home-manager/desktop/terminal
+    ../../profiles/desktop/hyprland/home-manager.nix
   ];
-
-  custom = {
-    desktop = true;
-    development = true;
-  };
 
   systemd.user.services.ccpocket-bridge = {
     Unit.Description = "CC Pocket Bridge Server";
