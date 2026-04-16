@@ -12,7 +12,7 @@ in
 {
   imports = [
     ../../modules/core
-    ../../modules/programs/openssh.nix
+    ../../modules/services/openssh.nix
 
     inputs.nixos-wsl.nixosModules.default
   ];

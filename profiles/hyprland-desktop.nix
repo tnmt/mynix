@@ -14,7 +14,7 @@
 {
   imports = [
     ../modules/programs/hyprland.nix
-    ../modules/programs/bluetooth.nix
+    ../modules/hardware/bluetooth.nix
     ../modules/desktop
   ];
 
