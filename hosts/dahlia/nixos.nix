@@ -1,19 +1,19 @@
 {
   config,
-  inputs,
-  lib,
-  pkgs,
   username,
   ...
 }:
+let
+  services = import ../../modules/services;
+in
 {
   imports = [
     ./hardware.nix
     ../../modules/core
-    ../../modules/services/openssh.nix
+    services.openssh
     ../../modules/programs/virtualisation.nix
     ../../modules/hardware/power-management.nix
-    ../../profiles/desktop/hyprland/nixos.nix
+    ../../profiles/nixos/desktop-hyprland.nix
     ../../modules/hardware/kanata.nix
   ];
 

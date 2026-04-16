@@ -10,9 +10,9 @@
 }:
 {
   imports = [
-    ../../../modules/programs/hyprland.nix
-    ../../../modules/hardware/bluetooth.nix
-    ../../../modules/desktop
+    ../../modules/programs/hyprland.nix
+    ../../modules/hardware/bluetooth.nix
+    ../../modules/desktop
   ];
 
   services.greetd = {
