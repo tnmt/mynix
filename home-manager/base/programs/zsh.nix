@@ -152,5 +152,5 @@ in
       export INPUT_METHOD=fcitx
     '';
 
-};
+  };
 }
