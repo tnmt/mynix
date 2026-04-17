@@ -12,6 +12,7 @@ in
     ./atuin.nix
     ./bat.nix
     ./btop.nix
+    ./eza.nix
     ./git.nix
     ./ssh.nix
     ./starship
@@ -31,10 +32,6 @@ in
       enableZshIntegration = true;
     };
 
-    eza = {
-      enable = true;
-    };
-
     zoxide = {
       enable = true;
       enableZshIntegration = true;
@@ -49,7 +46,6 @@ in
     '';
   };
 
-  xdg.configFile."eza/theme.yml".source = "${themeSrc}/${theme.extras.eza}";
   home.file.".vim/colors/tokyonight-storm.vim".source = "${themeSrc}/${theme.extras.vim}";
   home.file.".vimrc".text = ''
     set termguicolors
