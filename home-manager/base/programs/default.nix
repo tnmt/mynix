@@ -17,6 +17,7 @@ in
     ./ssh.nix
     ./starship
     ./tmux.nix
+    ./vim.nix
     ./zsh.nix
   ];
 
@@ -46,12 +47,6 @@ in
     '';
   };
 
-  home.file.".vim/colors/tokyonight-storm.vim".source = "${themeSrc}/${theme.extras.vim}";
-  home.file.".vimrc".text = ''
-    set termguicolors
-    colorscheme tokyonight-storm
-  '';
-
   home.packages =
     with pkgs;
     [
@@ -59,9 +54,6 @@ in
       cachix
       nh
       sops
-
-      # editor (minimal)
-      vim
 
       # cui
       forgejo-cli
