@@ -40,7 +40,7 @@ Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 ├── hosts/                 # Concrete host entrypoints
 ├── home-manager/          # Reusable Home Manager modules
 ├── modules/               # Reusable NixOS and cross-host modules
-├── profiles/              # Higher-level NixOS profiles
+├── profiles/              # Role-based profiles (nixos, home-manager, darwin)
 ├── secrets/               # sops-encrypted secret files
 ├── themes/                # Shared theme definitions
 └── treefmt.toml           # Formatter configuration
@@ -50,15 +50,14 @@ The important split is:
 - `hosts/` selects a machine and wires modules together
 - `modules/` holds lower-level reusable system pieces
 - `home-manager/` holds reusable user-level pieces
-- `profiles/` bundles opinionated groups of modules such as the Hyprland desktop profile
+- `profiles/` bundles opinionated groups of modules per layer (nixos, home-manager, darwin)
 
 ## Notable Features
 
 - Hyprland desktop setup with Waybar, Walker, Mako, Hyprlock, Hypridle, and Wlogout
 - `greetd` + `tuigreet` login flow for the Linux desktop profile
-- Secure Boot support via Lanzaboote
 - `sops-nix` secrets for both system and Home Manager configs
-- Input remapping with `xremap` and Karabiner-Elements
+- Input remapping with `kanata` (Linux) and Karabiner-Elements (macOS)
 - Shared Tokyo Night Storm theme wiring
 - NUR overlay usage for custom packages such as `oneaws`, `ccusage`, `gogcli`, and `kagiana`
 
