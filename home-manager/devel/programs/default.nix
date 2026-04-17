@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./neovim.nix
@@ -9,7 +9,6 @@
     kubectl
     krew
     tenv
-    sshuttle
     google-cloud-sdk
 
     # Google Workspace
@@ -17,7 +16,6 @@
     gogcli
 
     # Build/lang
-    gnumake
     yamlfmt
     nkf
     nixd
