@@ -2,11 +2,13 @@
   config,
   lib,
   pkgs,
+  theme,
   ...
 }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
+  themeSrc = pkgs.fetchFromGitHub theme.src;
 in
 {
   programs.zsh = {
@@ -55,6 +57,9 @@ in
     '';
 
     initContent = ''
+      # fzf theme
+      source ${themeSrc}/${theme.extras.fzf}
+
       # Shell options
       setopt no_beep rmstar_wait notify hist_verify transient_rprompt no_flow_control
       setopt hist_no_store inc_append_history
@@ -146,5 +151,6 @@ in
       export XMODIFIERS=@im=fcitx
       export INPUT_METHOD=fcitx
     '';
-  };
+
+};
 }

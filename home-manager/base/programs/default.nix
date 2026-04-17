@@ -1,12 +1,8 @@
 {
   lib,
   pkgs,
-  theme,
   ...
 }:
-let
-  themeSrc = pkgs.fetchFromGitHub theme.src;
-in
 {
   imports = [
     ./atuin.nix
@@ -42,10 +38,7 @@ in
       ];
     };
 
-    zsh.initContent = ''
-      source ${themeSrc}/${theme.extras.fzf}
-    '';
-  };
+};
 
   home.packages =
     with pkgs;
