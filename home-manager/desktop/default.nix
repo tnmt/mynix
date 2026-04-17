@@ -11,19 +11,12 @@
     microsoft-edge
     firefox
 
-    # dev
-    vscode
-
     # essential
     obsidian
     _1password-gui
 
     # chat
     slack
-
-    # container & virtualisation
-    docker-compose
-    kubectl
 
     # wine
     #wine-wayland
