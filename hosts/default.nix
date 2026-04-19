@@ -17,6 +17,7 @@ let
   mkSpecialArgs =
     {
       hostname ? null,
+      sopsFile ? null,
       username,
     }:
     {
@@ -24,6 +25,9 @@ let
     }
     // inputs.nixpkgs.lib.optionalAttrs (hostname != null) {
       inherit hostname;
+    }
+    // inputs.nixpkgs.lib.optionalAttrs (sopsFile != null) {
+      inherit sopsFile;
     };
 
   mkPkgs =
@@ -47,6 +51,7 @@ let
       sopsFile,
     }:
     {
+      lib,
       pkgs,
       ...
     }:
@@ -59,7 +64,7 @@ let
         stateVersion = "25.05";
       };
 
-      nix.package = pkgs.nix;
+      nix.package = lib.mkDefault pkgs.nix;
       programs.home-manager.enable = true;
       programs.git.enable = true;
 
@@ -101,9 +106,14 @@ let
       modules,
       sopsFile ? ../secrets/default.yaml,
     }:
-    inputs.home-manager.lib.homeManagerConfiguration {
+    let
+      isDarwin = system == "aarch64-darwin";
+      homeManagerInput = if isDarwin then inputs.home-manager-darwin else inputs.home-manager;
+      nixpkgsInput = if isDarwin then inputs.nixpkgs-darwin else inputs.nixpkgs;
+    in
+    homeManagerInput.lib.homeManagerConfiguration {
       pkgs = mkPkgs {
-        nixpkgs = inputs.nixpkgs;
+        nixpkgs = nixpkgsInput;
         inherit system overlays;
       };
       extraSpecialArgs = {
@@ -127,11 +137,47 @@ let
       hostname,
       username,
       modules,
+      homeManagerModule,
+      sopsFile ? ../secrets/default.yaml,
     }:
     inputs.darwin.lib.darwinSystem {
-      inherit system modules;
+      inherit system;
+      modules = modules ++ [
+        { nixpkgs.overlays = commonOverlays; }
+        inputs.home-manager-darwin.darwinModules.home-manager
+        {
+          users.users."${username}".home = mkHomeDirectory username system;
+
+          home-manager = {
+            useGlobalPkgs = false;
+            useUserPackages = true;
+            extraSpecialArgs = {
+              inherit inputs username;
+              theme = (import ../themes) "tokyonight-storm";
+              pkgs-stable = mkPkgs {
+                nixpkgs = inputs.nixpkgs-stable;
+                inherit system;
+              };
+            };
+            users."${username}" = {
+              _module.args.pkgsPath = inputs.nixpkgs-darwin;
+              nixpkgs = {
+                config.allowUnfree = true;
+                overlays = commonOverlays;
+              };
+              imports = [
+                inputs.sops-nix.homeManagerModules.sops
+                (mkHomeManagerDefaults {
+                  inherit system username sopsFile;
+                })
+                homeManagerModule
+              ];
+            };
+          };
+        }
+      ];
       specialArgs = mkSpecialArgs {
-        inherit hostname username;
+        inherit hostname sopsFile username;
       };
     };
 
@@ -153,12 +199,15 @@ let
     work_mac = {
       system = "aarch64-darwin";
       username = "tsunematsu";
+      sopsFile = ../secrets/work_mac.yaml;
       modules = [ ./work_mac/darwin.nix ];
+      homeManagerModule = ./work_mac/home-manager.nix;
     };
     hydrangea = {
       system = "aarch64-darwin";
       username = "tnmt";
       modules = [ ./hydrangea/darwin.nix ];
+      homeManagerModule = ./hydrangea/home-manager.nix;
     };
   };
 

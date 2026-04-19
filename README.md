@@ -13,6 +13,12 @@ This repository contains:
 
 Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 
+## Input Strategy
+
+- Linux system and Home Manager targets use `nixpkgs` with `home-manager`
+- macOS system and Home Manager targets use `nixpkgs-darwin` with `home-manager-darwin`
+- nix-darwin tracks `master` together with `nixpkgs-darwin` on `nixpkgs-unstable`
+
 ## Hosts
 
 ### `nixosConfigurations`
@@ -73,7 +79,7 @@ sudo nixos-rebuild switch --flake .#dahlia
 ### nix-darwin
 
 ```bash
-# Recommended
+# Recommended; also activates the matching Home Manager user.
 nh darwin switch . -H hydrangea
 
 # Directly
