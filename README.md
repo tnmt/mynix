@@ -30,9 +30,7 @@ Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 - `hydrangea`: personal macOS machine
 
 ### `homeConfigurations`
-- `tsunematsu@work_mac`: Home Manager for work macOS
 - `tnmt@work_ubuntu`: Home Manager for Ubuntu
-- `tnmt@hydrangea`: Home Manager for personal macOS
 
 ## Repository Layout
 
@@ -87,6 +85,8 @@ darwin-rebuild switch --flake .#hydrangea
 ```
 
 ### Home Manager
+
+Standalone Home Manager outputs are only for non-Darwin hosts. Darwin hosts activate Home Manager through `nh darwin switch`.
 
 ```bash
 # Recommended
