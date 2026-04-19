@@ -10,7 +10,7 @@ in
     ./hardware.nix
 
     # Shared system roles.
-    ../../modules/core
+    ../../modules/nixos/core
     services."openssh"
     ../../modules/programs/virtualisation.nix
     ../../modules/hardware/power-management.nix

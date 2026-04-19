@@ -8,7 +8,7 @@ in
 {
   imports = [
     # Shared system roles for the WSL host.
-    ../../modules/core
+    ../../modules/nixos/core
     services."openssh"
     services."ccpocket-bridge"
     ../../profiles/nixos/wsl.nix
