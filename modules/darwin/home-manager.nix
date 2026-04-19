@@ -1,9 +1,9 @@
 {
   commonOverlays,
+  homeSopsFile,
   homeManagerModule,
   inputs,
   pkgs,
-  sopsFile,
   username,
   ...
 }:
@@ -39,7 +39,7 @@ in
       imports = [
         inputs.sops-nix.homeManagerModules.sops
         (import ../../home-manager/defaults.nix {
-          inherit homeDirectory sopsFile username;
+          inherit homeDirectory homeSopsFile username;
         })
         homeManagerModule
       ];

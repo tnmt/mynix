@@ -1,5 +1,4 @@
 {
-  config,
   username,
   ...
 }:
@@ -23,12 +22,6 @@ in
   # Host-local networking and access.
   services.tailscale.enable = true;
   networking.firewall.enable = true;
-
-  # Host-local secrets file.
-  sops = {
-    defaultSopsFile = ../../secrets/dahlia.yaml;
-    age.keyFile = "${config.users.users.${username}.home}/.config/sops/age/keys.txt";
-  };
 
   security.sudo.wheelNeedsPassword = false;
 
