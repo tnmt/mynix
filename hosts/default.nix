@@ -17,6 +17,7 @@ let
   mkSpecialArgs =
     {
       hostname ? null,
+      systemSopsFile ? null,
       username,
     }:
     {
@@ -24,21 +25,25 @@ let
     }
     // inputs.nixpkgs.lib.optionalAttrs (hostname != null) {
       inherit hostname;
+    }
+    // inputs.nixpkgs.lib.optionalAttrs (systemSopsFile != null) {
+      inherit systemSopsFile;
     };
 
   mkDarwinSpecialArgs =
     {
       homeManagerModule,
+      homeSopsFile,
       hostname,
-      sopsFile,
+      systemSopsFile,
       username,
     }:
-    (mkSpecialArgs { inherit hostname username; })
+    (mkSpecialArgs { inherit hostname systemSopsFile username; })
     // {
       inherit
         commonOverlays
+        homeSopsFile
         homeManagerModule
-        sopsFile
         ;
     };
 
@@ -60,13 +65,13 @@ let
     {
       system,
       username,
-      sopsFile,
+      homeSopsFile,
     }:
     let
       homeDirectory = mkHomeDirectory username system;
     in
     import ../home-manager/defaults.nix {
-      inherit homeDirectory sopsFile username;
+      inherit homeDirectory homeSopsFile username;
     };
 
   mkNixosSystem =
@@ -75,6 +80,7 @@ let
       hostname,
       username,
       modules,
+      systemSopsFile ? ../secrets/${hostname}.yaml,
     }:
     inputs.nixpkgs.lib.nixosSystem {
       inherit system;
@@ -82,7 +88,7 @@ let
         { nixpkgs.overlays = commonOverlays; }
       ];
       specialArgs = mkSpecialArgs {
-        inherit hostname username;
+        inherit hostname systemSopsFile username;
       };
     };
 
@@ -92,7 +98,7 @@ let
       username,
       overlays ? commonOverlays,
       modules,
-      sopsFile ? ../secrets/personal.yaml,
+      homeSopsFile ? ../secrets/personal.yaml,
     }:
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = mkPkgs {
@@ -110,7 +116,7 @@ let
       modules = modules ++ [
         inputs.sops-nix.homeManagerModules.sops
         (mkHomeManagerDefaults {
-          inherit system username sopsFile;
+          inherit system username homeSopsFile;
         })
       ];
     };
@@ -121,19 +127,22 @@ let
       username,
       modules,
       homeManagerModule,
-      sopsFile ? ../secrets/personal.yaml,
+      homeSopsFile ? ../secrets/personal.yaml,
+      systemSopsFile ? ../secrets/${hostname}.yaml,
     }:
     inputs.darwin.lib.darwinSystem {
       inherit system;
       modules = modules ++ [
         { nixpkgs.overlays = commonOverlays; }
+        ../modules/darwin/sops.nix
         ../modules/darwin/home-manager.nix
       ];
       specialArgs = mkDarwinSpecialArgs {
         inherit
+          homeSopsFile
           homeManagerModule
           hostname
-          sopsFile
+          systemSopsFile
           username
           ;
       };
@@ -157,7 +166,7 @@ let
     work_mac = {
       system = "aarch64-darwin";
       username = "tsunematsu";
-      sopsFile = ../secrets/work.yaml;
+      homeSopsFile = ../secrets/work.yaml;
       modules = [ ./work_mac/darwin.nix ];
       homeManagerModule = ./work_mac/home-manager.nix;
     };
@@ -197,7 +206,7 @@ let
     "tnmt@work_ubuntu" = {
       system = "x86_64-linux";
       username = "tnmt";
-      sopsFile = ../secrets/work.yaml;
+      homeSopsFile = ../secrets/work.yaml;
       modules = [ ./work_ubuntu/home-manager.nix ];
     };
   };

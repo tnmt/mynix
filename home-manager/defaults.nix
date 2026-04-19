@@ -1,6 +1,6 @@
 {
   homeDirectory,
-  sopsFile,
+  homeSopsFile,
   username,
 }:
 {
@@ -19,7 +19,7 @@
   programs.git.enable = true;
 
   sops = {
-    defaultSopsFile = sopsFile;
+    defaultSopsFile = homeSopsFile;
     age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
     secrets = {
       git_email = { };
