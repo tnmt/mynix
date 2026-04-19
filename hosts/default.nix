@@ -106,14 +106,9 @@ let
       modules,
       sopsFile ? ../secrets/default.yaml,
     }:
-    let
-      isDarwin = system == "aarch64-darwin";
-      homeManagerInput = if isDarwin then inputs.home-manager-darwin else inputs.home-manager;
-      nixpkgsInput = if isDarwin then inputs.nixpkgs-darwin else inputs.nixpkgs;
-    in
-    homeManagerInput.lib.homeManagerConfiguration {
+    inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = mkPkgs {
-        nixpkgs = nixpkgsInput;
+        nixpkgs = inputs.nixpkgs;
         inherit system overlays;
       };
       extraSpecialArgs = {
@@ -236,21 +231,10 @@ let
   };
 
   homeManagerHosts = {
-    "tsunematsu@work_mac" = {
-      system = "aarch64-darwin";
-      username = "tsunematsu";
-      sopsFile = ../secrets/work_mac.yaml;
-      modules = [ ./work_mac/home-manager.nix ];
-    };
     "tnmt@work_ubuntu" = {
       system = "x86_64-linux";
       username = "tnmt";
       modules = [ ./work_ubuntu/home-manager.nix ];
-    };
-    "tnmt@hydrangea" = {
-      system = "aarch64-darwin";
-      username = "tnmt";
-      modules = [ ./hydrangea/home-manager.nix ];
     };
   };
 in
