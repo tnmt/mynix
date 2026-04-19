@@ -22,7 +22,7 @@
   programs.git.enable = true;
 
   sops = {
-    defaultSopsFile = ../../secrets/default.yaml;
+    defaultSopsFile = ../../secrets/personal.yaml;
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     secrets = {
       git_email = { };
