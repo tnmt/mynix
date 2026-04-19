@@ -104,7 +104,7 @@ let
       username,
       overlays ? commonOverlays,
       modules,
-      sopsFile ? ../secrets/default.yaml,
+      sopsFile ? ../secrets/personal.yaml,
     }:
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = mkPkgs {
@@ -133,7 +133,7 @@ let
       username,
       modules,
       homeManagerModule,
-      sopsFile ? ../secrets/default.yaml,
+      sopsFile ? ../secrets/personal.yaml,
     }:
     inputs.darwin.lib.darwinSystem {
       inherit system;
@@ -194,7 +194,7 @@ let
     work_mac = {
       system = "aarch64-darwin";
       username = "tsunematsu";
-      sopsFile = ../secrets/work_mac.yaml;
+      sopsFile = ../secrets/work.yaml;
       modules = [ ./work_mac/darwin.nix ];
       homeManagerModule = ./work_mac/home-manager.nix;
     };

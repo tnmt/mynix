@@ -117,7 +117,8 @@ nix run .#dahlia-vm
 This repo expects `sops-nix` with age keys available on the target machine.
 
 - system-level secrets live under `secrets/` and are referenced from host modules
-- Home Manager configs also load secrets, including shared values from `secrets/common.yaml`
+- Home Manager identity secrets use `secrets/personal.yaml` by default, with work-specific values in `secrets/work.yaml`
+- shared Home Manager values, such as service endpoints or API keys, live in `secrets/common.yaml`
 
 Builds may evaluate without secrets in some cases, but activation on real machines assumes the corresponding key material exists.
 
