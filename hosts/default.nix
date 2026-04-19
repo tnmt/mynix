@@ -17,7 +17,6 @@ let
   mkSpecialArgs =
     {
       hostname ? null,
-      sopsFile ? null,
       username,
     }:
     {
@@ -25,9 +24,22 @@ let
     }
     // inputs.nixpkgs.lib.optionalAttrs (hostname != null) {
       inherit hostname;
-    }
-    // inputs.nixpkgs.lib.optionalAttrs (sopsFile != null) {
-      inherit sopsFile;
+    };
+
+  mkDarwinSpecialArgs =
+    {
+      homeManagerModule,
+      hostname,
+      sopsFile,
+      username,
+    }:
+    (mkSpecialArgs { inherit hostname username; })
+    // {
+      inherit
+        commonOverlays
+        homeManagerModule
+        sopsFile
+        ;
     };
 
   mkPkgs =
@@ -50,35 +62,11 @@ let
       username,
       sopsFile,
     }:
-    {
-      lib,
-      pkgs,
-      ...
-    }:
     let
       homeDirectory = mkHomeDirectory username system;
     in
-    {
-      home = {
-        inherit username homeDirectory;
-        stateVersion = "25.05";
-      };
-
-      nix.package = lib.mkDefault pkgs.nix;
-      programs.home-manager.enable = true;
-      programs.git.enable = true;
-
-      sops = {
-        defaultSopsFile = sopsFile;
-        age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
-        secrets = {
-          git_email = { };
-          git_name = { };
-          atuin_sync_address = {
-            sopsFile = ../secrets/common.yaml;
-          };
-        };
-      };
+    import ../home-manager/defaults.nix {
+      inherit homeDirectory sopsFile username;
     };
 
   mkNixosSystem =
@@ -139,40 +127,15 @@ let
       inherit system;
       modules = modules ++ [
         { nixpkgs.overlays = commonOverlays; }
-        inputs.home-manager-darwin.darwinModules.home-manager
-        {
-          users.users."${username}".home = mkHomeDirectory username system;
-
-          home-manager = {
-            useGlobalPkgs = false;
-            useUserPackages = true;
-            extraSpecialArgs = {
-              inherit inputs username;
-              theme = (import ../themes) "tokyonight-storm";
-              pkgs-stable = mkPkgs {
-                nixpkgs = inputs.nixpkgs-stable;
-                inherit system;
-              };
-            };
-            users."${username}" = {
-              _module.args.pkgsPath = inputs.nixpkgs-darwin;
-              nixpkgs = {
-                config.allowUnfree = true;
-                overlays = commonOverlays;
-              };
-              imports = [
-                inputs.sops-nix.homeManagerModules.sops
-                (mkHomeManagerDefaults {
-                  inherit system username sopsFile;
-                })
-                homeManagerModule
-              ];
-            };
-          };
-        }
+        ../modules/darwin/home-manager.nix
       ];
-      specialArgs = mkSpecialArgs {
-        inherit hostname sopsFile username;
+      specialArgs = mkDarwinSpecialArgs {
+        inherit
+          homeManagerModule
+          hostname
+          sopsFile
+          username
+          ;
       };
     };
 
