@@ -1,7 +1,6 @@
 {
   commonOverlays,
   homeSopsFile,
-  homeManagerModule,
   inputs,
   pkgs,
   username,
@@ -20,14 +19,12 @@ in
     inputs.home-manager-darwin.darwinModules.home-manager
   ];
 
-  users.users."${username}".home = homeDirectory;
-
   home-manager = {
     useGlobalPkgs = false;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit inputs username;
-      theme = (import ../../themes) "tokyonight-storm";
+      inherit homeSopsFile inputs username;
+      theme = (import ../../../themes) "tokyonight-storm";
       inherit pkgs-stable;
     };
     users."${username}" = {
@@ -38,10 +35,9 @@ in
       };
       imports = [
         inputs.sops-nix.homeManagerModules.sops
-        (import ../../home-manager/defaults.nix {
+        (import ../../../home-manager/defaults.nix {
           inherit homeDirectory homeSopsFile username;
         })
-        homeManagerModule
       ];
     };
   };

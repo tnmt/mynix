@@ -1,4 +1,5 @@
 {
+  homeSopsFile,
   inputs,
   pkgs,
   username,
@@ -13,8 +14,8 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit inputs username;
-      theme = (import ../../themes) "tokyonight-storm";
+      inherit homeSopsFile inputs username;
+      theme = (import ../../../themes) "tokyonight-storm";
       pkgs-stable = pkgs;
     };
   };

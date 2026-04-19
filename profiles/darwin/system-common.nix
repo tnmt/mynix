@@ -2,7 +2,6 @@
 {
   pkgs,
   inputs,
-  username,
   ...
 }:
 let
@@ -51,7 +50,5 @@ in
     dock.wvous-bl-corner = 13;
     dock.wvous-br-corner = 14;
   };
-
-  system.primaryUser = username;
   system.stateVersion = 6;
 }

@@ -16,35 +16,22 @@ let
 
   mkSpecialArgs =
     {
+      homeSopsFile ? null,
       hostname ? null,
       systemSopsFile ? null,
       username,
     }:
     {
-      inherit inputs username;
+      inherit commonOverlays inputs username;
     }
     // inputs.nixpkgs.lib.optionalAttrs (hostname != null) {
       inherit hostname;
     }
+    // inputs.nixpkgs.lib.optionalAttrs (homeSopsFile != null) {
+      inherit homeSopsFile;
+    }
     // inputs.nixpkgs.lib.optionalAttrs (systemSopsFile != null) {
       inherit systemSopsFile;
-    };
-
-  mkDarwinSpecialArgs =
-    {
-      homeManagerModule,
-      homeSopsFile,
-      hostname,
-      systemSopsFile,
-      username,
-    }:
-    (mkSpecialArgs { inherit hostname systemSopsFile username; })
-    // {
-      inherit
-        commonOverlays
-        homeSopsFile
-        homeManagerModule
-        ;
     };
 
   mkPkgs =
@@ -80,6 +67,7 @@ let
       hostname,
       username,
       modules,
+      homeSopsFile ? ../secrets/personal.yaml,
       systemSopsFile ? ../secrets/${hostname}.yaml,
     }:
     inputs.nixpkgs.lib.nixosSystem {
@@ -88,7 +76,12 @@ let
         { nixpkgs.overlays = commonOverlays; }
       ];
       specialArgs = mkSpecialArgs {
-        inherit hostname systemSopsFile username;
+        inherit
+          homeSopsFile
+          hostname
+          systemSopsFile
+          username
+          ;
       };
     };
 
@@ -126,7 +119,6 @@ let
       hostname,
       username,
       modules,
-      homeManagerModule,
       homeSopsFile ? ../secrets/personal.yaml,
       systemSopsFile ? ../secrets/${hostname}.yaml,
     }:
@@ -134,13 +126,10 @@ let
       inherit system;
       modules = modules ++ [
         { nixpkgs.overlays = commonOverlays; }
-        ../modules/darwin/sops.nix
-        ../modules/darwin/home-manager.nix
       ];
-      specialArgs = mkDarwinSpecialArgs {
+      specialArgs = mkSpecialArgs {
         inherit
           homeSopsFile
-          homeManagerModule
           hostname
           systemSopsFile
           username
@@ -168,13 +157,11 @@ let
       username = "tsunematsu";
       homeSopsFile = ../secrets/work.yaml;
       modules = [ ./work_mac/darwin.nix ];
-      homeManagerModule = ./work_mac/home-manager.nix;
     };
     hydrangea = {
       system = "aarch64-darwin";
       username = "tnmt";
       modules = [ ./hydrangea/darwin.nix ];
-      homeManagerModule = ./hydrangea/home-manager.nix;
     };
   };
 
