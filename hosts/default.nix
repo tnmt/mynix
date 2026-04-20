@@ -159,6 +159,12 @@ let
         }
       ];
     };
+    work_vm = {
+      system = "x86_64-linux";
+      username = "tnmt";
+      homeSopsFile = ../secrets/work.yaml;
+      modules = [ ./work_vm/nixos.nix ];
+    };
   };
 
   homeManagerHosts = {
