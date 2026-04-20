@@ -110,11 +110,6 @@ in
       # 1Password CLI plugin
       [ -f ~/.config/op/plugins.sh ] && source ~/.config/op/plugins.sh
 
-      # 1Password service account (headless)
-      if [ -f "$HOME/.config/op/service-account-token" ]; then
-        export OP_SERVICE_ACCOUNT_TOKEN="$(cat "$HOME/.config/op/service-account-token")"
-      fi
-
       # Starship transient prompt
       if command -v starship &> /dev/null; then
         zle-line-init() {
