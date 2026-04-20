@@ -17,7 +17,7 @@ in
 
   # WSL has no user systemd, so keep these secrets at the system level.
   sops = {
-    defaultSopsFile = ../../secrets/personal.yaml;
+    defaultSopsFile = ../../secrets/roles/personal.yaml;
     age.keyFile = "${homeDir}/.config/sops/age/keys.txt";
     secrets = {
       git_email.owner = username;
