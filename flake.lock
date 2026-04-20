@@ -65,11 +65,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776373306,
-        "narHash": "sha256-iAJIzHngGZeLIkjzuuWI6VBsYJ1n89a/Esq0m8R1vjs=",
+        "lastModified": 1776661682,
+        "narHash": "sha256-X32LTSDqUdVqMy85WYdRgyt0I75wc4Lhi9j+lrCDR8w=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "d401492e2acd4fea42f7705a3c266cea739c9c36",
+        "rev": "4bfce11ea820df0359f73736fd59c7e8f53641a6",
         "type": "github"
       },
       "original": {
@@ -85,11 +85,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776562531,
-        "narHash": "sha256-Lh5Ns9DI67E+lSMOCGK0S+mFPy0mz0yOGiJTUXiR9JI=",
+        "lastModified": 1776661682,
+        "narHash": "sha256-X32LTSDqUdVqMy85WYdRgyt0I75wc4Lhi9j+lrCDR8w=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5b56ad02dc643808b8af6d5f3ff179e2ce9593f4",
+        "rev": "4bfce11ea820df0359f73736fd59c7e8f53641a6",
         "type": "github"
       },
       "original": {
@@ -217,36 +217,16 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1776649926,
-        "narHash": "sha256-TjHyeHARNh62IjU5En75ZY/MmfJmJ4imBgO3k4t+d8M=",
+        "lastModified": 1776659439,
+        "narHash": "sha256-Zy/seVhnv3CmeoTBKxN4DpWY8hVWRXTiH+t7cAhKpN0=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "da546643a95e1b533be0dac575805be34b0b4f5e",
+        "rev": "e6a3a3e55b37d01b51cc0c204f0f40ea26b4193b",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "NUR",
-        "type": "github"
-      }
-    },
-    "nur-tnmt": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1776650135,
-        "narHash": "sha256-87ibP6ByXGIn2DVQMpe68OQn0uIH/WtwusQ7nMS2G30=",
-        "owner": "tnmt",
-        "repo": "nur-packages",
-        "rev": "149895a81892fe03a36421f707c951fbf6e4a683",
-        "type": "github"
-      },
-      "original": {
-        "owner": "tnmt",
-        "repo": "nur-packages",
         "type": "github"
       }
     },
@@ -261,7 +241,6 @@
         "nixpkgs-darwin": "nixpkgs-darwin",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
-        "nur-tnmt": "nur-tnmt",
         "sops-nix": "sops-nix"
       }
     },
