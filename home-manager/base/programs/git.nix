@@ -13,6 +13,10 @@ in
 
     includes = [
       { path = "~/.config/git/identity"; }
+      {
+        path = "~/.config/git/personal-identity";
+        condition = "gitdir:~/ghq/github.com/";
+      }
       { path = "${themeSrc}/${theme.extras.delta}"; }
     ];
 
@@ -108,5 +112,14 @@ in
         name = ${config.sops.placeholder.git_name}
     '';
     path = "${config.xdg.configHome}/git/identity";
+  };
+
+  sops.templates."git-personal-identity" = {
+    content = ''
+      [user]
+        email = ${config.sops.placeholder.git_personal_email}
+        name = ${config.sops.placeholder.git_personal_name}
+    '';
+    path = "${config.xdg.configHome}/git/personal-identity";
   };
 }
