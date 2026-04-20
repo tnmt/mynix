@@ -1,6 +1,12 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  theme,
+  ...
+}:
 let
   isDarwin = pkgs.stdenv.isDarwin;
+  themeSrc = pkgs.fetchFromGitHub theme.src;
 in
 {
   programs.tmux = {
@@ -20,29 +26,12 @@ in
       yank
       resurrect
       pain-control
-      {
-        plugin = pkgs.tmuxPlugins.mkTmuxPlugin {
-          name = "tokyo-night-tmux";
-          pluginName = "tokyo-night-tmux";
-          rtpFilePath = "tokyo-night.tmux";
-          src = pkgs.fetchFromGitHub {
-            owner = "janoamaral";
-            repo = "tokyo-night-tmux";
-            rev = "v1.5";
-            sha256 = "sha256-yho2irPSwdRkNNwU7HZzN5dvspjDHWl75NlpS3uwz8M=";
-          };
-        };
-        extraConfig = ''
-          set -g @tokyo-night-tmux_window_id_style none
-          set -g @tokyo-night-tmux_date_format YMD
-          set -g @tokyo-night-tmux_time_format 24H
-          set -g @tokyo-night-tmux_show_battery_widget 1
-          set -g @tokyo-night-tmux_battery_low_threshold 21
-        '';
-      }
+      prefix-highlight
     ];
 
     extraConfig = ''
+      source-file ${themeSrc}/${theme.extras.tmux}
+
       set-option -ga terminal-overrides ",$TERM:Tc"
       set-option -g renumber-windows on
       set -sg repeat-time 600

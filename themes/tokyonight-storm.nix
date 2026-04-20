@@ -19,6 +19,10 @@
     fzf = "extras/fzf/tokyonight_storm.sh";
     eza = "extras/eza/tokyonight_storm.yml";
     yazi = "extras/yazi/tokyonight_storm.toml";
+    ghostty = "extras/ghostty/tokyonight_storm";
+    gitui = "extras/gitui/tokyonight_storm.ron";
+    kitty = "extras/kitty/tokyonight_storm.conf";
+    tmux = "extras/tmux/tokyonight_storm.tmux";
     discord = "extras/discord/tokyonight_storm.css";
     slack = "extras/slack/tokyonight_storm.txt";
     vim = "extras/vim/colors/tokyonight-storm.vim";
