@@ -22,7 +22,11 @@
     discord = "extras/discord/tokyonight_storm.css";
     slack = "extras/slack/tokyonight_storm.txt";
     vim = "extras/vim/colors/tokyonight-storm.vim";
+    btop = "extras/btop/tokyonight_storm.theme";
   };
+
+  # Btop (theme name matches extras/btop/*.theme basename)
+  btop = "tokyonight_storm";
 
   # Neovim
   neovim = {
@@ -45,9 +49,6 @@
     name = "tokyonight_storm";
     file = "extras/sublime/tokyonight_storm.tmTheme";
   };
-
-  # Btop
-  btop = "tokyo-storm";
 
   # Delta
   delta = "tokyonight_storm";

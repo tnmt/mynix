@@ -1,4 +1,7 @@
-{ theme, ... }:
+{ theme, pkgs, ... }:
+let
+  themeSrc = pkgs.fetchFromGitHub theme.src;
+in
 {
   programs.btop = {
     enable = true;
@@ -23,4 +26,7 @@
       clock_format = "%X";
     };
   };
+
+  # Use the official folke/tokyonight.nvim extras/btop theme (matches other apps)
+  xdg.configFile."btop/themes/${theme.btop}.theme".source = "${themeSrc}/${theme.extras.btop}";
 }
