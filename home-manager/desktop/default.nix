@@ -80,6 +80,10 @@
 
   gtk = {
     enable = true;
+    font = {
+      name = "Noto Sans CJK JP";
+      size = 10;
+    };
     theme = {
       name = theme.gtk;
       package = pkgs.tokyonight-gtk-theme;
