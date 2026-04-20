@@ -6,7 +6,7 @@ let
       oneaws = final.nur.repos.tnmt.oneaws;
       ccusage = final.nur.repos.tnmt.ccusage;
       gogcli = final.nur.repos.tnmt.gogcli;
-      kagiana = (import inputs.nur-tnmt { pkgs = final; }).kagiana;
+      kagiana = final.nur.repos.tnmt.kagiana;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];
