@@ -2,6 +2,7 @@
 # Standalone home-manager hosts get these via mkHomeManagerConfiguration instead.
 {
   config,
+  homeSopsFile,
   inputs,
   lib,
   username,
@@ -22,7 +23,7 @@
   programs.git.enable = true;
 
   sops = {
-    defaultSopsFile = ../../secrets/default.yaml;
+    defaultSopsFile = homeSopsFile;
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     secrets = {
       git_email = { };

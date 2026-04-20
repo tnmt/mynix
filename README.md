@@ -13,6 +13,12 @@ This repository contains:
 
 Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 
+## Input Strategy
+
+- Linux system and Home Manager targets use `nixpkgs` with `home-manager`
+- macOS system and Home Manager targets use `nixpkgs-darwin` with `home-manager-darwin`
+- nix-darwin tracks `master` together with `nixpkgs-darwin` on `nixpkgs-unstable`
+
 ## Hosts
 
 ### `nixosConfigurations`
@@ -24,9 +30,7 @@ Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 - `hydrangea`: personal macOS machine
 
 ### `homeConfigurations`
-- `tsunematsu@work_mac`: Home Manager for work macOS
 - `tnmt@work_ubuntu`: Home Manager for Ubuntu
-- `tnmt@hydrangea`: Home Manager for personal macOS
 
 ## Repository Layout
 
@@ -73,7 +77,7 @@ sudo nixos-rebuild switch --flake .#dahlia
 ### nix-darwin
 
 ```bash
-# Recommended
+# Recommended; also activates the matching Home Manager user.
 nh darwin switch . -H hydrangea
 
 # Directly
@@ -81,6 +85,8 @@ darwin-rebuild switch --flake .#hydrangea
 ```
 
 ### Home Manager
+
+Standalone Home Manager outputs are only for non-Darwin hosts. Darwin hosts activate Home Manager through `nh darwin switch`.
 
 ```bash
 # Recommended
@@ -110,8 +116,9 @@ nix run .#dahlia-vm
 
 This repo expects `sops-nix` with age keys available on the target machine.
 
-- system-level secrets live under `secrets/` and are referenced from host modules
-- Home Manager configs also load secrets, including shared values from `secrets/common.yaml`
+- host/system-specific secrets live in `secrets/<hostname>.yaml`
+- Home Manager identity secrets use `secrets/personal.yaml` by default, with work-specific values in `secrets/work.yaml`
+- shared Home Manager values, such as service endpoints or API keys, live in `secrets/common.yaml`
 
 Builds may evaluate without secrets in some cases, but activation on real machines assumes the corresponding key material exists.
 

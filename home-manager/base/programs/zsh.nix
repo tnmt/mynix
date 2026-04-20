@@ -52,6 +52,7 @@ in
       export PATH="$HOME/bin:$HOME/.local/bin:$HOME/work/bin:/usr/local/bin:/usr/local/sbin:/sbin:/usr/sbin:$PATH"
     ''
     + lib.optionalString isDarwin ''
+      export PATH="/etc/profiles/per-user/$USER/bin:$PATH"
       export PATH="/opt/homebrew/bin:$PATH"
       export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
     '';

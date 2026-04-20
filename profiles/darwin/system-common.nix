@@ -2,22 +2,13 @@
 {
   pkgs,
   inputs,
-  username,
   ...
 }:
 let
   pkgs-unstable = import inputs.nixpkgs { system = "aarch64-darwin"; };
 in
 {
-  nixpkgs.config.allowUnfree = true;
-
   nix.package = pkgs-unstable.nixVersions.latest;
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-  };
 
   fonts = {
     packages = with pkgs; [
@@ -25,10 +16,6 @@ in
       nerd-fonts.fira-code
     ];
   };
-
-  environment.systemPackages = with pkgs; [
-    home-manager
-  ];
 
   system.defaults = {
     dock = {
@@ -51,7 +38,5 @@ in
     dock.wvous-bl-corner = 13;
     dock.wvous-br-corner = 14;
   };
-
-  system.primaryUser = username;
   system.stateVersion = 6;
 }
