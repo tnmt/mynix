@@ -6,13 +6,14 @@
 }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
+  themeSrc = pkgs.fetchFromGitHub theme.src;
 in
 {
   programs.ghostty = {
     enable = true;
     package = if isDarwin then null else pkgs.ghostty;
     settings = {
-      theme = theme.ghostty;
+      theme = "tokyonight_storm";
       font-size = terminal.font.size;
       font-family = [
         terminal.font.name
@@ -28,4 +29,6 @@ in
       term = "xterm-256color";
     };
   };
+
+  xdg.configFile."ghostty/themes/tokyonight_storm".source = "${themeSrc}/${theme.extras.ghostty}";
 }

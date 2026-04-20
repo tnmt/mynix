@@ -101,7 +101,10 @@ in
     };
   };
 
-  programs.gitui.enable = true;
+  programs.gitui = {
+    enable = true;
+    theme = builtins.readFile "${themeSrc}/${theme.extras.gitui}";
+  };
 
   home.packages = with pkgs; [ git-trim ];
 

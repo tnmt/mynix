@@ -22,8 +22,8 @@ git config core.hooksPath .githooks  # 未設定の場合
 
 ### カラー定義の使い分け
 
+- **folke/tokyonight.nvim の extras/ にテーマがある場合**、積極的にそちらを使う。`theme.extras.*` にパスを定義し、`xdg.configFile` 等で配置する
 - **ベースカラー（背景/前景/ANSI 16色/アクセント）** は `themes/` を正とし、`theme.background` 等で参照する
-- **アプリ内蔵テーマがある場合**（Kitty, Ghostty 等）はテーマ名のみ `themes/` で管理し、色の二重定義を避ける
 - **アプリ固有の装飾色**（ボーダー、グラデーション、UI 要素の配色等）はアプリの設定にハードコードで構わない
 
 ## フォント管理
