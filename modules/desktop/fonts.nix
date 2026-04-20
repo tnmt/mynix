@@ -20,6 +20,7 @@
         ];
         monospace = [
           "MesloLGS NF"
+          "Noto Sans CJK JP"
           "Noto Color Emoji"
         ];
         emoji = [ "Noto Color Emoji" ];
