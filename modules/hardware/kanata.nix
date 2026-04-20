@@ -5,6 +5,13 @@
 # - Left Alt: hold -> Alt / tap -> Muhenkan (IME off)
 # - Right Alt: hold -> Alt / tap -> Henkan (IME on)
 {
+  systemd.services.kanata-default = {
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = 3;
+    };
+  };
+
   services.kanata = {
     enable = true;
     keyboards.default = {
