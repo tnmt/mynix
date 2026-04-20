@@ -48,20 +48,8 @@ let
   mkHomeDirectory =
     username: system: if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
 
-  mkHomeManagerDefaults =
-    {
-      system,
-      username,
-      homeSopsFile,
-    }:
-    let
-      homeDirectory = mkHomeDirectory username system;
-    in
-    import ../home-manager/defaults.nix {
-      inherit homeDirectory homeSopsFile username;
-    };
-
-  mkNixosSystem =
+  mkSystem =
+    builder:
     {
       system,
       hostname,
@@ -70,7 +58,7 @@ let
       homeSopsFile ? ../secrets/personal.yaml,
       systemSopsFile ? ../secrets/${hostname}.yaml,
     }:
-    inputs.nixpkgs.lib.nixosSystem {
+    builder {
       inherit system;
       modules = modules ++ [
         { nixpkgs.overlays = commonOverlays; }
@@ -85,6 +73,9 @@ let
       };
     };
 
+  mkNixosSystem = mkSystem inputs.nixpkgs.lib.nixosSystem;
+  mkDarwinSystem = mkSystem inputs.darwin.lib.darwinSystem;
+
   mkHomeManagerConfiguration =
     {
       system,
@@ -93,6 +84,9 @@ let
       modules,
       homeSopsFile ? ../secrets/personal.yaml,
     }:
+    let
+      homeDirectory = mkHomeDirectory username system;
+    in
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = mkPkgs {
         nixpkgs = inputs.nixpkgs;
@@ -108,33 +102,10 @@ let
       };
       modules = modules ++ [
         inputs.sops-nix.homeManagerModules.sops
-        (mkHomeManagerDefaults {
-          inherit system username homeSopsFile;
+        (import ../home-manager/defaults.nix {
+          inherit homeDirectory homeSopsFile username;
         })
       ];
-    };
-  mkDarwinSystem =
-    {
-      system,
-      hostname,
-      username,
-      modules,
-      homeSopsFile ? ../secrets/personal.yaml,
-      systemSopsFile ? ../secrets/${hostname}.yaml,
-    }:
-    inputs.darwin.lib.darwinSystem {
-      inherit system;
-      modules = modules ++ [
-        { nixpkgs.overlays = commonOverlays; }
-      ];
-      specialArgs = mkSpecialArgs {
-        inherit
-          homeSopsFile
-          hostname
-          systemSopsFile
-          username
-          ;
-      };
     };
 
   mkHostConfigurations =
