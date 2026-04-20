@@ -16,14 +16,22 @@ let
 
   mkSpecialArgs =
     {
+      homeSopsFile ? null,
       hostname ? null,
+      systemSopsFile ? null,
       username,
     }:
     {
-      inherit inputs username;
+      inherit commonOverlays inputs username;
     }
     // inputs.nixpkgs.lib.optionalAttrs (hostname != null) {
       inherit hostname;
+    }
+    // inputs.nixpkgs.lib.optionalAttrs (homeSopsFile != null) {
+      inherit homeSopsFile;
+    }
+    // inputs.nixpkgs.lib.optionalAttrs (systemSopsFile != null) {
+      inherit systemSopsFile;
     };
 
   mkPkgs =
@@ -40,58 +48,33 @@ let
   mkHomeDirectory =
     username: system: if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
 
-  mkHomeManagerDefaults =
-    {
-      system,
-      username,
-      sopsFile,
-    }:
-    {
-      pkgs,
-      ...
-    }:
-    let
-      homeDirectory = mkHomeDirectory username system;
-    in
-    {
-      home = {
-        inherit username homeDirectory;
-        stateVersion = "25.05";
-      };
-
-      nix.package = pkgs.nix;
-      programs.home-manager.enable = true;
-      programs.git.enable = true;
-
-      sops = {
-        defaultSopsFile = sopsFile;
-        age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
-        secrets = {
-          git_email = { };
-          git_name = { };
-          atuin_sync_address = {
-            sopsFile = ../secrets/common.yaml;
-          };
-        };
-      };
-    };
-
-  mkNixosSystem =
+  mkSystem =
+    builder:
     {
       system,
       hostname,
       username,
       modules,
+      homeSopsFile ? ../secrets/personal.yaml,
+      systemSopsFile ? ../secrets/${hostname}.yaml,
     }:
-    inputs.nixpkgs.lib.nixosSystem {
+    builder {
       inherit system;
       modules = modules ++ [
         { nixpkgs.overlays = commonOverlays; }
       ];
       specialArgs = mkSpecialArgs {
-        inherit hostname username;
+        inherit
+          homeSopsFile
+          hostname
+          systemSopsFile
+          username
+          ;
       };
     };
+
+  mkNixosSystem = mkSystem inputs.nixpkgs.lib.nixosSystem;
+  mkDarwinSystem = mkSystem inputs.darwin.lib.darwinSystem;
 
   mkHomeManagerConfiguration =
     {
@@ -99,8 +82,11 @@ let
       username,
       overlays ? commonOverlays,
       modules,
-      sopsFile ? ../secrets/default.yaml,
+      homeSopsFile ? ../secrets/personal.yaml,
     }:
+    let
+      homeDirectory = mkHomeDirectory username system;
+    in
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = mkPkgs {
         nixpkgs = inputs.nixpkgs;
@@ -116,23 +102,10 @@ let
       };
       modules = modules ++ [
         inputs.sops-nix.homeManagerModules.sops
-        (mkHomeManagerDefaults {
-          inherit system username sopsFile;
+        (import ../home-manager/defaults.nix {
+          inherit homeDirectory homeSopsFile username;
         })
       ];
-    };
-  mkDarwinSystem =
-    {
-      system,
-      hostname,
-      username,
-      modules,
-    }:
-    inputs.darwin.lib.darwinSystem {
-      inherit system modules;
-      specialArgs = mkSpecialArgs {
-        inherit hostname username;
-      };
     };
 
   mkHostConfigurations =
@@ -153,6 +126,7 @@ let
     work_mac = {
       system = "aarch64-darwin";
       username = "tsunematsu";
+      homeSopsFile = ../secrets/work.yaml;
       modules = [ ./work_mac/darwin.nix ];
     };
     hydrangea = {
@@ -187,21 +161,11 @@ let
   };
 
   homeManagerHosts = {
-    "tsunematsu@work_mac" = {
-      system = "aarch64-darwin";
-      username = "tsunematsu";
-      sopsFile = ../secrets/work_mac.yaml;
-      modules = [ ./work_mac/home-manager.nix ];
-    };
     "tnmt@work_ubuntu" = {
       system = "x86_64-linux";
       username = "tnmt";
+      homeSopsFile = ../secrets/work.yaml;
       modules = [ ./work_ubuntu/home-manager.nix ];
-    };
-    "tnmt@hydrangea" = {
-      system = "aarch64-darwin";
-      username = "tnmt";
-      modules = [ ./hydrangea/home-manager.nix ];
     };
   };
 in
