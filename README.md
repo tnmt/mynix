@@ -24,6 +24,7 @@ Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 ### `nixosConfigurations`
 - `sunflower`: WSL-based NixOS host
 - `dahlia`: desktop/laptop-style NixOS host with Hyprland
+- `work_vm`: NixOS on a work OpenStack instance
 
 ### `darwinConfigurations`
 - `work_mac`: work macOS machine
