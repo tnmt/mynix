@@ -56,8 +56,8 @@ let
       hostname,
       username,
       modules,
-      homeSopsFile ? ../secrets/personal.yaml,
-      systemSopsFile ? ../secrets/${hostname}.yaml,
+      homeSopsFile ? ../secrets/roles/personal.yaml,
+      systemSopsFile ? ../secrets/hosts/${hostname}.yaml,
     }:
     builder {
       inherit system;
@@ -83,7 +83,7 @@ let
       username,
       overlays ? commonOverlays,
       modules,
-      homeSopsFile ? ../secrets/personal.yaml,
+      homeSopsFile ? ../secrets/roles/personal.yaml,
     }:
     let
       homeDirectory = mkHomeDirectory username system;
@@ -127,7 +127,7 @@ let
     work_mac = {
       system = "aarch64-darwin";
       username = "tsunematsu";
-      homeSopsFile = ../secrets/work.yaml;
+      homeSopsFile = ../secrets/roles/work.yaml;
       modules = [ ./work_mac/darwin.nix ];
     };
     hydrangea = {
@@ -162,7 +162,7 @@ let
     work_vm = {
       system = "x86_64-linux";
       username = "tnmt";
-      homeSopsFile = ../secrets/work.yaml;
+      homeSopsFile = ../secrets/roles/work.yaml;
       modules = [ ./work_vm/nixos.nix ];
     };
   };

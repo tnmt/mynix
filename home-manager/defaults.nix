@@ -25,11 +25,11 @@
       git_email = { };
       git_name = { };
       git_personal_email = {
-        sopsFile = ../secrets/personal.yaml;
+        sopsFile = ../secrets/roles/personal.yaml;
         key = "git_email";
       };
       git_personal_name = {
-        sopsFile = ../secrets/personal.yaml;
+        sopsFile = ../secrets/roles/personal.yaml;
         key = "git_name";
       };
       atuin_sync_address = {
