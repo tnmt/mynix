@@ -16,6 +16,7 @@
     gogcli
 
     # Build/lang
+    gnumake
     yamlfmt
     nkf
     nixd

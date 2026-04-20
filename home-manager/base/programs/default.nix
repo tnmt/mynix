@@ -49,6 +49,7 @@
       sops
 
       # cui
+      file
       forgejo-cli
       gh
       ghq
