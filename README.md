@@ -7,7 +7,6 @@ Personal Nix configurations for Linux and macOS hosts, built as a single flake.
 This repository contains:
 - NixOS system definitions for a desktop machine and a WSL machine
 - nix-darwin system definitions for two macOS hosts
-- standalone Home Manager configurations for Linux and macOS
 - shared modules for core settings, desktop features, services, and user programs
 - secrets management with `sops-nix`
 
@@ -29,9 +28,6 @@ Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 ### `darwinConfigurations`
 - `work_mac`: work macOS machine
 - `hydrangea`: personal macOS machine
-
-### `homeConfigurations`
-- `tnmt@work_ubuntu`: Home Manager for Ubuntu
 
 ## Repository Layout
 
@@ -84,18 +80,6 @@ nh darwin switch . -H hydrangea
 darwin-rebuild switch --flake .#hydrangea
 ```
 
-### Home Manager
-
-Standalone Home Manager outputs are only for non-Darwin hosts. Darwin hosts activate Home Manager through `nh darwin switch`.
-
-```bash
-# Recommended
-nh home switch . -c tnmt@work_ubuntu
-
-# Directly
-home-manager switch --flake .#tnmt@work_ubuntu
-```
-
 ### Development helpers
 
 ```bash
@@ -126,8 +110,7 @@ Builds may evaluate without secrets in some cases, but activation on real machin
 
 GitHub Actions currently checks:
 - formatting via `nix fmt`
-- NixOS builds for `sunflower` and `dahlia`
-- Home Manager build for `tnmt@work_ubuntu`
+- NixOS builds for `sunflower`, `dahlia`, and `work_vm`
 
 Darwin system and Home Manager targets are excluded from CI because they require macOS runners.
 

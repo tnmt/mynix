@@ -168,12 +168,6 @@ let
   };
 
   homeManagerHosts = {
-    "tnmt@work_ubuntu" = {
-      system = "x86_64-linux";
-      username = "tnmt";
-      homeSopsFile = ../secrets/work.yaml;
-      modules = [ ./work_ubuntu/home-manager.nix ];
-    };
   };
 in
 {
