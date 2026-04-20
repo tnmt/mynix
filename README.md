@@ -60,7 +60,7 @@ The important split is:
 - `sops-nix` secrets for both system and Home Manager configs
 - Input remapping with `xremap` and Karabiner-Elements
 - Shared Tokyo Night Storm theme wiring
-- NUR overlay usage for custom packages such as `oneaws`, `ccusage`, and `gogcli`
+- NUR overlay usage for custom packages such as `oneaws`, `ccusage`, `gogcli`, and `kagiana`
 
 ## Usage
 
