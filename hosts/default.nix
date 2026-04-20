@@ -167,8 +167,9 @@ let
     };
   };
 
-  homeManagerHosts = {
-  };
+  # Standalone Home Manager outputs are kept for compatibility with flake
+  # consumers, but all current hosts use NixOS/nix-darwin integration.
+  homeManagerHosts = { };
 in
 {
   darwin = mkHostConfigurations mkDarwinSystem darwinHosts;
