@@ -5,7 +5,6 @@
     taps = [
       "goreleaser/tap"
       "hashicorp/tap"
-      "pyama86/kagiana"
       "rtk-ai/tap"
     ];
     brews = [
@@ -15,7 +14,6 @@
       "docker"
       "envchain"
       "hashicorp/tap/vault"
-      "pyama86/kagiana/kagiana"
       "rtk-ai/tap/rtk"
     ];
     casks = [
