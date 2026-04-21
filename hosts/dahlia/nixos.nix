@@ -40,6 +40,7 @@ in
       legacy.workmac_rsa
       legacy.goldmoon_ed25519
       hosts.sunflower
+      hosts.hydrangea
     ];
   };
 
