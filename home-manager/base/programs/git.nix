@@ -21,8 +21,6 @@ in
     ];
 
     settings = {
-      core.editor = "nvim";
-
       push = {
         default = "current";
         autoSetupRemote = true;
