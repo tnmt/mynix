@@ -16,11 +16,9 @@ in
   # /etc/ssh/sshd_config.d/101-authorized-keys.conf is installed.
   services.openssh.enable = true;
 
-  # Authorize work_mac so it can ssh in (matches the prior manual
-  # ~/.ssh/authorized_keys setup). To be replaced by hosts.work_mac
-  # once work_mac gets its own per-host ed25519.
+  # Authorize work_mac so it can ssh in.
   users.users."${username}".openssh.authorizedKeys.keys = with pubkeys; [
-    legacy.workmac_rsa
+    hosts.work_mac
   ];
 
   # Host-specific Home Manager entrypoint.

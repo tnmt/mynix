@@ -8,11 +8,10 @@ in
     ../../modules/nixos/core
   ];
 
-  # Receive-only node: no private key here. Authorize work_mac's RSA
-  # so it can ssh in. To be replaced by hosts.work_mac (new ed25519)
-  # once work_mac generates its per-host key.
+  # Receive-only node: no private key here. Authorize work_mac so it
+  # can ssh in.
   users.users."${username}".openssh.authorizedKeys.keys = with pubkeys; [
-    legacy.workmac_rsa
+    hosts.work_mac
   ];
 
   home-manager.users."${username}" = import ./home-manager.nix;

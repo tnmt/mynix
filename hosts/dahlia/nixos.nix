@@ -37,7 +37,7 @@ in
     # the manual ~/.ssh/authorized_keys is still read by sshd until removed,
     # so it is safe to roll this out before cleaning up the manual file.
     openssh.authorizedKeys.keys = with pubkeys; [
-      legacy.workmac_rsa
+      hosts.work_mac
       hosts.sunflower
       hosts.hydrangea
     ];
