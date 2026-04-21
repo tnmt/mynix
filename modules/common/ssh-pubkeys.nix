@@ -34,13 +34,12 @@
 
     # ed25519 originally generated on the now-decommissioned "goldmoon"
     # machine. The same private key has been carried across personal
-    # machines (currently lives on dahlia and hydrangea) and acts as
-    # the de-facto shared personal key. Authorized on dahlia and
-    # sunflower today.
-    # TODO: replace per host with hosts.<machine> ed25519 keys, then
-    # revoke. sunflower in particular is a receive-only node, so it
-    # must accept each personal machine's per-host key before this
-    # one can be removed.
+    # machines (currently lives on dahlia, hydrangea, and sunflower)
+    # and acts as the de-facto shared personal key. Authorized on
+    # dahlia and sunflower today.
+    # TODO: generate a per-host ed25519 on each of the 3 machines that
+    # currently holds this key, register them under hosts.<machine>,
+    # add them to every receiver's authorized_keys, then revoke.
     goldmoon_ed25519 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIvp9PeEFVc7pupvKgW3oe4uugSAj5M3pwh9sVNGB3k tnmt@goldmoon.local (legacy shared personal key)";
   };
 }

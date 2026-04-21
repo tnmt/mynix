@@ -27,9 +27,10 @@ in
 
   services.openssh.ports = [ 2222 ];
 
-  # Receive-only node: no private key here. Authorize the shared
-  # personal key so dahlia / hydrangea can ssh in. To be replaced
-  # by per-host keys (hosts.<machine>) once they exist.
+  # Authorize the shared personal goldmoon key so dahlia / hydrangea
+  # / sunflower itself can ssh in (the key currently lives on all
+  # three). To be replaced by per-host keys (hosts.<machine>) once
+  # they exist.
   users.users."${username}".openssh.authorizedKeys.keys = with pubkeys; [
     legacy.goldmoon_ed25519
   ];
