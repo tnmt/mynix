@@ -6,6 +6,7 @@
 }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
+
 in
 {
   programs.tmux = {
@@ -86,6 +87,7 @@ in
       set -g status-justify centre
       setw -g monitor-activity on
       set -g visual-activity off
+      setw -g window-status-activity-style "none"
     '';
   };
 }
