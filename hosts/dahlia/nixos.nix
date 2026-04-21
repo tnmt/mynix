@@ -38,7 +38,6 @@ in
     # so it is safe to roll this out before cleaning up the manual file.
     openssh.authorizedKeys.keys = with pubkeys; [
       legacy.workmac_rsa
-      legacy.goldmoon_ed25519
       hosts.sunflower
       hosts.hydrangea
     ];
