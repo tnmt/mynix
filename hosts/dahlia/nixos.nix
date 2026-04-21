@@ -39,6 +39,7 @@ in
     openssh.authorizedKeys.keys = with pubkeys; [
       legacy.workmac_rsa
       legacy.goldmoon_ed25519
+      hosts.sunflower
     ];
   };
 
