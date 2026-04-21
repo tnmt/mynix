@@ -4,6 +4,7 @@
 }:
 let
   services = import ../../modules/services;
+  pubkeys = import ../../modules/common/ssh-pubkeys.nix;
 in
 {
   imports = [
@@ -32,6 +33,13 @@ in
       "docker"
     ];
     linger = true;
+    # Declarative authorized_keys. Lives at /etc/ssh/authorized_keys.d/<user>;
+    # the manual ~/.ssh/authorized_keys is still read by sshd until removed,
+    # so it is safe to roll this out before cleaning up the manual file.
+    openssh.authorizedKeys.keys = with pubkeys; [
+      legacy.workmac_rsa
+      legacy.unknown_ed25519
+    ];
   };
 
   # Host-specific Home Manager entrypoint.
