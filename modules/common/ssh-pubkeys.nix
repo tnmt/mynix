@@ -27,6 +27,8 @@
     sunflower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINIK98Iy+8/zRYoc4VRxc2dYCwkhz3i7RVz6DfaQuEN4 tnmt@sunflower";
     hydrangea = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICUZO2rriQloQ/mQADud1tIJRpvcyq8NngULwVTsIqm8 tnmt@hydrangea";
     obsync = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZAfUnd8RmE5fcD42sbEySb/YVOo+f6sJ0DpYF1BGAS tnmt@obsync";
+    vps01 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEHy1KngSuTaq/DzzIWjmw24m7OPcVBHNSb1YiulTnm tnmt@vps01";
+    silvea = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoT5hp55zFSK6RTP3OqXW+sFlx0ppIhnb7mn4ikECWP tnmt@silvea";
   };
 
   legacy = {
