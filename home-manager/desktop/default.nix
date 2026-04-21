@@ -46,6 +46,9 @@
     # remote desktop
     remmina
 
+    # cloud storage
+    rclone
+
     # misc
     fastfetch
     cava
