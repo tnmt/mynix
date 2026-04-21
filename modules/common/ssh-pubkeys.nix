@@ -23,6 +23,7 @@
     # -a 100` on each machine. The matching private key lives only on
     # the named host. Add a new entry as each machine migrates off the
     # legacy shared keys below.
+    dahlia = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPzvOWsFZvqwisafP0yU9X4xOl432dwl2t5tG/JqeKKE tnmt@dahlia";
     sunflower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINIK98Iy+8/zRYoc4VRxc2dYCwkhz3i7RVz6DfaQuEN4 tnmt@sunflower";
   };
 

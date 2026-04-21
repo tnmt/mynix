@@ -33,6 +33,7 @@ in
   # they exist.
   users.users."${username}".openssh.authorizedKeys.keys = with pubkeys; [
     legacy.goldmoon_ed25519
+    hosts.dahlia
   ];
 
   # Host-specific Home Manager entrypoint.
