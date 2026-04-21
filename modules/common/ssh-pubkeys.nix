@@ -19,9 +19,11 @@
 #   ];
 {
   hosts = {
-    # Populated as each machine generates its own ed25519 key during
-    # the user-key-per-machine migration. Until then, machines fall back
-    # to the legacy shared keys below.
+    # Per-machine ed25519 keys, generated with `ssh-keygen -t ed25519
+    # -a 100` on each machine. The matching private key lives only on
+    # the named host. Add a new entry as each machine migrates off the
+    # legacy shared keys below.
+    sunflower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINIK98Iy+8/zRYoc4VRxc2dYCwkhz3i7RVz6DfaQuEN4 tnmt@sunflower";
   };
 
   legacy = {
