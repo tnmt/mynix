@@ -12,6 +12,7 @@ in
     services."openssh"
     services."ccpocket-bridge"
     ../../profiles/nixos/wsl.nix
+    ../../modules/nixos/remotebuild/builder.nix
   ];
 
   # Host-local filesystem layout.
