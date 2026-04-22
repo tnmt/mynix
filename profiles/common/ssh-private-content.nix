@@ -74,6 +74,9 @@ let
 
     Host dahlia-ts
         HostName dahlia
+
+    Host obsync-ts
+        HostName obsync
   '';
 in
 base + (if includeTailscale then tailscale else "")
