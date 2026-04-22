@@ -1,5 +1,6 @@
 {
   imports = [
+    ./firewall.nix
     ./home-manager.nix
     ./i18n.nix
     ./network.nix

@@ -22,7 +22,6 @@ in
 
   # Host-local networking and access.
   services.tailscale.enable = true;
-  networking.firewall.enable = true;
 
   # SSH Term on zfold7 lacks ETM MAC support; allow non-ETM SHA-2 on
   # this host only. ETM variants remain preferred; sha1/md5 stay out.
