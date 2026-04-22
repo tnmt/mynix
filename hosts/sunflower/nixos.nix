@@ -27,6 +27,16 @@ in
 
   services.openssh.ports = [ 2222 ];
 
+  # SSH Term on zfold7 lacks ETM MAC support; allow non-ETM SHA-2 on
+  # this host only. ETM variants remain preferred; sha1/md5 stay out.
+  services.openssh.settings.Macs = [
+    "hmac-sha2-512-etm@openssh.com"
+    "hmac-sha2-256-etm@openssh.com"
+    "umac-128-etm@openssh.com"
+    "hmac-sha2-512"
+    "hmac-sha2-256"
+  ];
+
   users.users."${username}".openssh.authorizedKeys.keys = with pubkeys; [
     hosts.dahlia
     hosts.hydrangea
