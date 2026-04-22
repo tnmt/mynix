@@ -34,6 +34,7 @@ in
     # route switch when outside the home network) can authenticate
     # directly to sunflower without relying on agent forwarding.
     hosts.work_mac
+    hosts.zfold7
   ];
 
   # Host-specific Home Manager entrypoint.
