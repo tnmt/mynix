@@ -26,6 +26,17 @@ in
         sopsFile = ../../secrets/common.yaml;
         owner = username;
       };
+      lan_prefix.owner = username;
+      vps01_host.owner = username;
+    };
+    templates."ssh-private-config" = {
+      owner = username;
+      # WSL hosts don't run tailscaled, so Tailscale aliases are omitted.
+      content = import ../common/ssh-private-content.nix {
+        lanPrefix = config.sops.placeholder.lan_prefix;
+        vps01Host = config.sops.placeholder.vps01_host;
+        includeTailscale = false;
+      };
     };
     templates."git-identity" = {
       owner = username;
@@ -59,9 +70,10 @@ in
       RemainAfterExit = true;
     };
     script = ''
-      mkdir -p ${homeDir}/.config/git ${homeDir}/.config/atuin
+      mkdir -p ${homeDir}/.config/git ${homeDir}/.config/atuin ${homeDir}/.ssh/conf.d
       ln -sf ${config.sops.templates."git-identity".path} ${homeDir}/.config/git/identity
       ln -sf ${config.sops.templates."atuin-config".path} ${homeDir}/.config/atuin/config.toml
+      ln -sf ${config.sops.templates."ssh-private-config".path} ${homeDir}/.ssh/conf.d/private.config
     '';
   };
 }

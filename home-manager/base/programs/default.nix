@@ -11,6 +11,7 @@
     ./eza.nix
     ./git.nix
     ./ssh.nix
+    ./ssh-private.nix
     ./starship
     ./tmux.nix
     ./vim.nix
