@@ -1,8 +1,20 @@
 # Static Wi-Fi profile for the homelab network, backed by sops secrets.
+# The LAN prefix (first three octets of the private subnet) is rendered
+# from secrets/roles/personal.yaml via sops.placeholder at activation
+# time, so the dahlia host octet and prefix length can live in plaintext
+# Nix while subnet layout stays out of the public repo. Mirrors the SSH
+# private.config pattern in home-manager/base/programs/ssh-private.nix.
 {
   config,
   ...
 }:
+let
+  # Non-identifying host/subnet layout; LAN prefix is substituted from sops.
+  hostOctet = "15";
+  gatewayOctet = "1";
+  prefixLength = "24";
+  lanPrefix = config.sops.placeholder.lan_prefix;
+in
 {
   networking.networkmanager = {
     enable = true;
@@ -39,16 +51,16 @@
   sops = {
     secrets.wifi_homelab_ssid = { };
     secrets.wifi_homelab_psk = { };
-    secrets.dahlia_ip_with_prefix = { };
-    secrets.dahlia_gateway = { };
-    secrets.dahlia_dns = { };
+    secrets.lan_prefix = {
+      sopsFile = ../../secrets/roles/personal.yaml;
+    };
     templates."wifi-env" = {
       content = ''
         WIFI_HOMELAB_SSID=${config.sops.placeholder.wifi_homelab_ssid}
         WIFI_HOMELAB_PSK=${config.sops.placeholder.wifi_homelab_psk}
-        DAHLIA_IP_WITH_PREFIX=${config.sops.placeholder.dahlia_ip_with_prefix}
-        DAHLIA_GATEWAY=${config.sops.placeholder.dahlia_gateway}
-        DAHLIA_DNS=${config.sops.placeholder.dahlia_dns}
+        DAHLIA_IP_WITH_PREFIX=${lanPrefix}.${hostOctet}/${prefixLength}
+        DAHLIA_GATEWAY=${lanPrefix}.${gatewayOctet}
+        DAHLIA_DNS=${lanPrefix}.${gatewayOctet}
       '';
     };
   };
