@@ -24,8 +24,6 @@ in
   services.tailscale.enable = true;
   networking.firewall.enable = true;
 
-  security.sudo.wheelNeedsPassword = false;
-
   users.users."${username}" = {
     extraGroups = [
       "wheel"

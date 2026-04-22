@@ -5,6 +5,7 @@
     ./network.nix
     ./nix.nix
     ./sops.nix
+    ./sudo.nix
     ./user.nix
   ];
 

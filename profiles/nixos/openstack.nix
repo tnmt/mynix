@@ -22,7 +22,6 @@
   programs.zsh.enable = true;
 
   users.users."${username}".extraGroups = [ "wheel" ];
-  security.sudo.wheelNeedsPassword = false;
 
   environment.systemPackages = with pkgs; [
     git
