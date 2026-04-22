@@ -25,6 +25,7 @@
     obsync = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPZAfUnd8RmE5fcD42sbEySb/YVOo+f6sJ0DpYF1BGAS tnmt@obsync";
     vps01 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOEHy1KngSuTaq/DzzIWjmw24m7OPcVBHNSb1YiulTnm tnmt@vps01";
     silvea = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAoT5hp55zFSK6RTP3OqXW+sFlx0ppIhnb7mn4ikECWP tnmt@silvea";
+    zfold7 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBiX6l6ZOU+EtRG668IEGd4WcVl6cNslyxu8yZIXS68q tnmt@zfold7";
 
     # 4096-bit RSA. Intentionally kept as RSA (not rotated to ed25519)
     # because some Linux servers this machine ssh's into require extra
