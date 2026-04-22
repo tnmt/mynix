@@ -8,6 +8,8 @@
     withPython3 = true;
     withRuby = false;
 
+    initLua = builtins.readFile ./neovim/config/init.lua;
+
     extraPackages = with pkgs; [
       # For treesitter compilation
       gcc
@@ -35,9 +37,9 @@
     ];
   };
 
-  # Place the lua config tree as-is. Lazy.nvim + mason manage plugins at runtime.
-  xdg.configFile."nvim" = {
-    source = ./neovim/config;
+  # Place the lua config tree as-is. init.lua は programs.neovim.initLua 経由で投入する。
+  xdg.configFile."nvim/lua" = {
+    source = ./neovim/config/lua;
     recursive = true;
   };
 
