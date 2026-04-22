@@ -21,5 +21,6 @@
     nkf
     nixd
     python3
+    nodejs
   ];
 }
