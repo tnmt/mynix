@@ -29,36 +29,41 @@ let
         LocalForward 13389 sunflower:3389
 
     # === sunflower (Windows SSH, port 22) ===
+    # Probe via Tailscale MagicDNS (direct peer). Fall back to vps01
+    # jump when the peer is unreachable (e.g. Tailscale down).
+    Match host sunflower !exec "nc -z -w2 sunflower 22 2>/dev/null"
+        ProxyJump vps01
     Host sunflower
-        HostName ${lanPrefix}.10
+        HostName sunflower
         Port 22
         ControlMaster no
-        ProxyCommand sh -c 'timeout 2 nc -z sunflower %p 2>/dev/null && exec nc sunflower %p || exec ssh -W sunflower:%p vps01'
 
     # === sunflower-wsl (WSL2 SSH, port 2222) ===
+    Match host sunflower-wsl !exec "nc -z -w2 sunflower 2222 2>/dev/null"
+        ProxyJump vps01
     Host sunflower-wsl
-        HostName ${lanPrefix}.10
+        HostName sunflower
         Port 2222
         ControlMaster no
-        ProxyCommand sh -c 'timeout 2 nc -z sunflower %p 2>/dev/null && exec nc sunflower %p || exec ssh -W sunflower:%p vps01'
 
     # === dahlia ===
+    Match host dahlia !exec "nc -z -w2 dahlia 22 2>/dev/null"
+        ProxyJump vps01
     Host dahlia
-        HostName ${lanPrefix}.15
+        HostName dahlia
         ControlMaster no
-        ProxyCommand sh -c 'timeout 2 nc -z dahlia %p 2>/dev/null && exec nc dahlia %p || exec ssh -W dahlia:%p vps01'
 
     # === obsync (via sunflower-wsl) ===
     Host obsync
         HostName ${lanPrefix}.40
         ControlMaster no
-        ProxyCommand sh -c 'timeout 2 nc -z obsync %p 2>/dev/null && exec nc obsync %p || exec ssh -W %h:%p sunflower-wsl'
+        ProxyJump sunflower-wsl
 
     # === silvea (via sunflower-wsl) ===
     Host silvea
         HostName ${lanPrefix}.41
         ControlMaster no
-        ProxyCommand sh -c 'timeout 2 nc -z %h %p 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p sunflower-wsl'
+        ProxyJump sunflower-wsl
   '';
 
   tailscale = ''
