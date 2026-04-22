@@ -5,7 +5,6 @@ in
 {
   imports = [
     ../../profiles/nixos/openstack.nix
-    ../../modules/nixos/core
   ];
 
   # Receive-only node: no private key here. Authorize work_mac so it

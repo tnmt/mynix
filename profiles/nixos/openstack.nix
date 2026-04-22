@@ -1,7 +1,8 @@
 # Base NixOS profile for OpenStack instances (qcow2 images booted on Nova).
 # Inherits cloud-init / serial / fstab from nixpkgs' openstack-config module
-# and layers on the shared mynix core (sans sops / home-manager).
+# and layers on the shared mynix core.
 {
+  lib,
   modulesPath,
   pkgs,
   username,
@@ -9,18 +10,16 @@
 }:
 {
   imports = [
-    # Also supplies cloud-init which sets the hostname from OpenStack
-    # metadata at boot, so we intentionally skip core/network.nix here.
     "${modulesPath}/virtualisation/openstack-config.nix"
 
-    ../../modules/nixos/core/firewall.nix
-    ../../modules/nixos/core/i18n.nix
-    ../../modules/nixos/core/nix.nix
-    ../../modules/nixos/core/user.nix
+    ../../modules/nixos/core
     ../../modules/services/openssh.nix
   ];
 
-  programs.zsh.enable = true;
+  # cloud-init (bundled with openstack-config) sets the hostname from
+  # OpenStack metadata at boot; clear the NixOS-managed value so it
+  # doesn't fight the runtime source.
+  networking.hostName = lib.mkForce "";
 
   users.users."${username}".extraGroups = [ "wheel" ];
 
