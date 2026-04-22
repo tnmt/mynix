@@ -13,6 +13,7 @@
     # metadata at boot, so we intentionally skip core/network.nix here.
     "${modulesPath}/virtualisation/openstack-config.nix"
 
+    ../../modules/nixos/core/firewall.nix
     ../../modules/nixos/core/i18n.nix
     ../../modules/nixos/core/nix.nix
     ../../modules/nixos/core/user.nix
@@ -27,8 +28,6 @@
     git
     vim
   ];
-
-  networking.firewall.enable = true;
 
   system.stateVersion = "25.05";
 }
