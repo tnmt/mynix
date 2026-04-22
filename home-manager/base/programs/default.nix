@@ -66,7 +66,7 @@
 
       # Data format
       jq
-      yq
+      yq-go
 
       # SSH
       openssh

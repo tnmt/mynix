@@ -29,6 +29,5 @@
     ncdu
     fastfetch
     wget
-    yq-go
   ];
 }
