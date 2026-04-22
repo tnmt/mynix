@@ -30,6 +30,10 @@ in
   users.users."${username}".openssh.authorizedKeys.keys = with pubkeys; [
     hosts.dahlia
     hosts.hydrangea
+    # Authorize work_mac so ProxyJump via vps01 (used for the auto
+    # route switch when outside the home network) can authenticate
+    # directly to sunflower without relying on agent forwarding.
+    hosts.work_mac
   ];
 
   # Host-specific Home Manager entrypoint.
