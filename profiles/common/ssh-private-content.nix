@@ -48,17 +48,17 @@ let
         ControlMaster no
         ProxyCommand sh -c 'timeout 2 nc -z %h %p 2>/dev/null && exec nc %h %p || exec ssh -W dahlia:%p vps01'
 
-    # === obsync (via sunflower) ===
+    # === obsync (via sunflower-wsl) ===
     Host obsync
         HostName ${lanPrefix}.40
         ControlMaster no
-        ProxyCommand sh -c 'timeout 2 nc -z %h %p 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p sunflower'
+        ProxyCommand sh -c 'timeout 2 nc -z %h %p 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p sunflower-wsl'
 
-    # === silvea (via sunflower) ===
+    # === silvea (via sunflower-wsl) ===
     Host silvea
         HostName ${lanPrefix}.41
         ControlMaster no
-        ProxyCommand sh -c 'timeout 2 nc -z %h %p 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p sunflower'
+        ProxyCommand sh -c 'timeout 2 nc -z %h %p 2>/dev/null && exec nc %h %p || exec ssh -W %h:%p sunflower-wsl'
   '';
 
   tailscale = ''
