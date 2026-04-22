@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, pkgs, ... }:
 {
   programs.ssh = {
     enable = true;
@@ -15,6 +15,9 @@
       extraOptions = {
         StrictHostKeyChecking = "no";
         AddKeysToAgent = "yes";
+      }
+      // lib.optionalAttrs pkgs.stdenv.isDarwin {
+        IdentityAgent = ''"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"'';
       };
     };
 
