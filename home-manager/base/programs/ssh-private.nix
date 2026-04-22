@@ -12,13 +12,20 @@ let
   cfg = config.profiles.sshPrivate;
 in
 {
-  options.profiles.sshPrivate.includeTailscale = lib.mkOption {
-    type = lib.types.bool;
-    default = true;
-    description = "Include Tailscale -ts host aliases (requires MagicDNS on this host).";
+  options.profiles.sshPrivate = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Render ~/.ssh/conf.d/private.config from the sops-nix template.";
+    };
+    includeTailscale = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Include Tailscale -ts host aliases (requires MagicDNS on this host).";
+    };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     # Parent directory for Include target. sops-nix creates parents for
     # template output paths, but this guards the case where ssh reads
     # the config before activation completes.
