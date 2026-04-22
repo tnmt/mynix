@@ -20,5 +20,6 @@
     yamlfmt
     nkf
     nixd
+    python3
   ];
 }
