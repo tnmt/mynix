@@ -31,6 +31,11 @@
     };
 
     nur.url = "github:nix-community/NUR";
+
+    nur-tnmt = {
+      url = "github:tnmt/nur-packages";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
