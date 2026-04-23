@@ -12,9 +12,13 @@
   sops.secrets.anthropic_api_key = {
     sopsFile = ../../secrets/common.yaml;
   };
+  sops.secrets.ccpocket_bridge_api_key = {
+    sopsFile = ../../secrets/common.yaml;
+  };
   sops.templates."ccpocket-bridge-env" = {
     content = ''
       ANTHROPIC_API_KEY=${config.sops.placeholder.anthropic_api_key}
+      BRIDGE_API_KEY=${config.sops.placeholder.ccpocket_bridge_api_key}
     '';
     owner = username;
   };
