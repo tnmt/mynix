@@ -13,6 +13,7 @@ in
     # Shared system roles.
     ../../modules/nixos/core
     services."openssh"
+    services."ccpocket-bridge"
     ../../modules/programs/virtualisation.nix
     ../../modules/hardware/power-management.nix
     ../../profiles/nixos/desktop-hyprland.nix
