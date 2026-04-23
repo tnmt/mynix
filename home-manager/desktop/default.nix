@@ -85,7 +85,7 @@
     enable = true;
     font = {
       name = "Noto Sans CJK JP";
-      size = 10;
+      size = 11;
     };
     theme = {
       name = theme.gtk;

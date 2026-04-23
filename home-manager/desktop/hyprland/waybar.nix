@@ -26,7 +26,7 @@ in
       border-radius: 0;
       min-height: 0;
       font-family: '${fonts.sans}', '${fonts.monospace}';
-      font-size: 12px;
+      font-size: 13px;
     }
 
     .modules-left {
