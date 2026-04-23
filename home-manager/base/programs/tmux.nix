@@ -37,6 +37,7 @@ in
             rev = "v1.7.0";
             sha256 = "sha256-nbQ0yefjhxr6d4SJeGtY7zLnHLgSouwQrlHDo9N3QeY=";
           };
+          patches = [ ./tokyo-night-tmux-battery-status.patch ];
         };
         extraConfig = ''
           set -g @tokyo-night-tmux_theme storm
