@@ -1,7 +1,6 @@
 # Common home-manager settings for NixOS-integrated hosts.
 # Standalone home-manager hosts get these via mkHomeManagerConfiguration instead.
 {
-  config,
   homeSopsFile,
   inputs,
   lib,
@@ -11,37 +10,17 @@
 {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
+    (import ../common-init.nix {
+      homeDirectory = "/home/${username}";
+      inherit homeSopsFile username;
+    })
   ];
 
-  home = {
-    inherit username;
-    homeDirectory = "/home/${username}";
-    stateVersion = lib.mkDefault "25.05";
-  };
+  home.stateVersion = lib.mkDefault "25.05";
 
-  programs.home-manager.enable = true;
-  programs.git.enable = true;
-
-  sops = {
-    defaultSopsFile = homeSopsFile;
-    age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-    secrets = {
-      git_email = { };
-      git_name = { };
-      git_personal_email = {
-        sopsFile = ../../secrets/roles/personal.yaml;
-        key = "git_email";
-      };
-      git_personal_name = {
-        sopsFile = ../../secrets/roles/personal.yaml;
-        key = "git_name";
-      };
-      atuin_sync_address = {
-        sopsFile = ../../secrets/common.yaml;
-      };
-      voice_input_openrouter_api_key = {
-        sopsFile = ../../secrets/common.yaml;
-      };
+  sops.secrets = {
+    voice_input_openrouter_api_key = {
+      sopsFile = ../../secrets/common.yaml;
     };
   };
 }
