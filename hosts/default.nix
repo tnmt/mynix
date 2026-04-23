@@ -94,14 +94,16 @@ let
         nixpkgs = inputs.nixpkgs;
         inherit system overlays;
       };
-      extraSpecialArgs = {
-        inherit inputs username;
-        theme = (import ../themes) "tokyonight-storm";
-        pkgs-stable = mkPkgs {
-          nixpkgs = inputs.nixpkgs-stable;
-          inherit system overlays;
+      extraSpecialArgs =
+        (mkSpecialArgs {
+          inherit
+            homeSopsFile
+            username
+            ;
+        })
+        // {
+          theme = (import ../themes) "tokyonight-storm";
         };
-      };
       modules = modules ++ [
         inputs.sops-nix.homeManagerModules.sops
         (import ../home-manager/defaults.nix {

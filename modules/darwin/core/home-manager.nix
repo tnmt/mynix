@@ -2,17 +2,11 @@
   commonOverlays,
   homeSopsFile,
   inputs,
-  pkgs,
   username,
   ...
 }:
 let
   homeDirectory = "/Users/${username}";
-  pkgs-stable = import inputs.nixpkgs-stable {
-    inherit (pkgs.stdenv.hostPlatform) system;
-    overlays = commonOverlays;
-    config.allowUnfree = true;
-  };
 in
 {
   imports = [
@@ -25,7 +19,6 @@ in
     extraSpecialArgs = {
       inherit homeSopsFile inputs username;
       theme = (import ../../../themes) "tokyonight-storm";
-      inherit pkgs-stable;
     };
     users."${username}" = {
       _module.args.pkgsPath = inputs.nixpkgs-darwin;
