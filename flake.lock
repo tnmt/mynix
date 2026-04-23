@@ -217,16 +217,36 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1776905393,
-        "narHash": "sha256-pY/p8bpk7i5CVTCZ2d39IVf42pqVyqTFbL6bQSGLNMo=",
+        "lastModified": 1776953400,
+        "narHash": "sha256-NQvu5isEAHCQZFFc/Tj517hlmm63ENGiEsI44WvJeqs=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "f9c95bad7299d9d638d984b8faf3254b21df67dc",
+        "rev": "96e27f3189db1050eb9a8b86d87df76195669f39",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "nur-tnmt": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1776958921,
+        "narHash": "sha256-8Ui0R8eiamLP3nH6jH+ZSg5ntl6G+w6nGixgDJvbL24=",
+        "owner": "tnmt",
+        "repo": "nur-packages",
+        "rev": "32885a18ee37cda5fe6e81091e2e89cabe68e6af",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tnmt",
+        "repo": "nur-packages",
         "type": "github"
       }
     },
@@ -241,6 +261,7 @@
         "nixpkgs-darwin": "nixpkgs-darwin",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
+        "nur-tnmt": "nur-tnmt",
         "sops-nix": "sops-nix"
       }
     },

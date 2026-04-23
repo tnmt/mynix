@@ -7,6 +7,7 @@ let
       ccusage = final.nur.repos.tnmt.ccusage;
       gogcli = final.nur.repos.tnmt.gogcli;
       kagiana = final.nur.repos.tnmt.kagiana;
+      ccpocket-bridge = (import inputs.nur-tnmt { pkgs = final; }).ccpocket-bridge;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];
