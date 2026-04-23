@@ -4,7 +4,7 @@ let
   terminal = {
     font = {
       name = fonts.monospace;
-      size = if pkgs.stdenv.isDarwin then 16 else 12;
+      size = if pkgs.stdenv.isDarwin then 16 else 13;
     };
   };
 in
