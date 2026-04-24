@@ -6,6 +6,7 @@
 }:
 let
   themeSrc = pkgs.fetchFromGitHub theme.src;
+  sopsShared = import ../../../profiles/common/sops-shared.nix;
 in
 {
   programs.git = {
@@ -107,20 +108,18 @@ in
   home.packages = with pkgs; [ git-trim ];
 
   sops.templates."git-identity" = {
-    content = ''
-      [user]
-        email = ${config.sops.placeholder.git_email}
-        name = ${config.sops.placeholder.git_name}
-    '';
+    content = sopsShared.mkGitIdentityTemplate {
+      emailPlaceholder = config.sops.placeholder.git_email;
+      namePlaceholder = config.sops.placeholder.git_name;
+    };
     path = "${config.xdg.configHome}/git/identity";
   };
 
   sops.templates."git-personal-identity" = {
-    content = ''
-      [user]
-        email = ${config.sops.placeholder.git_personal_email}
-        name = ${config.sops.placeholder.git_personal_name}
-    '';
+    content = sopsShared.mkGitIdentityTemplate {
+      emailPlaceholder = config.sops.placeholder.git_personal_email;
+      namePlaceholder = config.sops.placeholder.git_personal_name;
+    };
     path = "${config.xdg.configHome}/git/personal-identity";
   };
 }
