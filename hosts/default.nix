@@ -1,5 +1,7 @@
 inputs:
 let
+  sopsShared = import ../profiles/common/sops-shared.nix;
+
   commonOverlays = [
     inputs.nur.overlays.default
     (final: prev: {
@@ -24,7 +26,12 @@ let
       username,
     }:
     {
-      inherit commonOverlays inputs username;
+      inherit
+        commonOverlays
+        inputs
+        sopsShared
+        username
+        ;
     }
     // inputs.nixpkgs.lib.optionalAttrs (hostname != null) {
       inherit hostname;
@@ -107,7 +114,12 @@ let
       modules = modules ++ [
         inputs.sops-nix.homeManagerModules.sops
         (import ../home-manager/defaults.nix {
-          inherit homeDirectory homeSopsFile username;
+          inherit
+            homeDirectory
+            homeSopsFile
+            sopsShared
+            username
+            ;
         })
       ];
     };

@@ -6,11 +6,11 @@
 {
   config,
   lib,
+  sopsShared,
   ...
 }:
 let
   cfg = config.profiles.sshPrivate;
-  sopsShared = import ../../../profiles/common/sops-shared.nix;
 in
 {
   options.profiles.sshPrivate = {

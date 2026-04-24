@@ -1,6 +1,7 @@
 {
   homeDirectory,
   homeSopsFile,
+  sopsShared,
   username,
 }:
 {
@@ -11,7 +12,12 @@
 {
   imports = [
     (import ./common-init.nix {
-      inherit homeDirectory homeSopsFile username;
+      inherit
+        homeDirectory
+        homeSopsFile
+        sopsShared
+        username
+        ;
     })
   ];
 

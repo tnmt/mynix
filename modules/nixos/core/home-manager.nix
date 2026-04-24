@@ -1,6 +1,7 @@
 {
   homeSopsFile,
   inputs,
+  sopsShared,
   username,
   ...
 }:
@@ -13,7 +14,12 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit homeSopsFile inputs username;
+      inherit
+        homeSopsFile
+        inputs
+        sopsShared
+        username
+        ;
       theme = (import ../../../themes) "tokyonight-storm";
     };
   };
