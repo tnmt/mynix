@@ -8,3 +8,10 @@ if [ -n "$staged" ]; then
   nix fmt
   echo "$staged" | xargs git add
 fi
+
+# Lint .nix files (only if any .nix is staged)
+nix_staged=$(echo "$staged" | grep -E '\.nix$' || true)
+if [ -n "$nix_staged" ]; then
+  nix run nixpkgs#deadnix -- --fail .
+  nix run nixpkgs#statix -- check .
+fi
