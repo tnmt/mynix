@@ -38,7 +38,8 @@ in
       hosts.work_mac
       hosts.sunflower
       hosts.hydrangea
-      hosts.zfold7
+      mobile.zfold7SshTerm
+      mobile.iphone13miniSshTerm
     ];
   };
 
