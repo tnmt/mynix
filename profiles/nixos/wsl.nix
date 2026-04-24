@@ -7,6 +7,7 @@
 }:
 let
   homeDir = "/home/${username}";
+  sopsShared = import ../common/sops-shared.nix;
 in
 {
   imports = [
@@ -19,44 +20,35 @@ in
   sops = {
     defaultSopsFile = ../../secrets/roles/personal.yaml;
     age.keyFile = "${homeDir}/.config/sops/age/keys.txt";
-    secrets = {
-      git_email.owner = username;
-      git_name.owner = username;
-      atuin_sync_address = {
-        sopsFile = ../../secrets/common.yaml;
-        owner = username;
-      };
-      lan_prefix.owner = username;
-      vps01_host.owner = username;
-    };
+    secrets = sopsShared.mkOwnedSecrets username (
+      sopsShared.mkCoreSecrets {
+        commonSopsFile = ../../secrets/common.yaml;
+      }
+      // sopsShared.mkSshPrivateSecrets {
+        personalSopsFile = ../../secrets/roles/personal.yaml;
+      }
+    );
     templates."ssh-private-config" = {
       owner = username;
       # WSL hosts don't run tailscaled, so Tailscale aliases are omitted.
-      content = import ../common/ssh-private-content.nix {
-        lanPrefix = config.sops.placeholder.lan_prefix;
-        vps01Host = config.sops.placeholder.vps01_host;
+      content = sopsShared.mkSshPrivateTemplate {
+        lanPrefixPlaceholder = config.sops.placeholder.lan_prefix;
+        vps01HostPlaceholder = config.sops.placeholder.vps01_host;
         includeTailscale = false;
       };
     };
     templates."git-identity" = {
       owner = username;
-      content = ''
-        [user]
-          email = ${config.sops.placeholder.git_email}
-          name = ${config.sops.placeholder.git_name}
-      '';
+      content = sopsShared.mkGitIdentityTemplate {
+        emailPlaceholder = config.sops.placeholder.git_email;
+        namePlaceholder = config.sops.placeholder.git_name;
+      };
     };
     templates."atuin-config" = {
       owner = username;
-      content = ''
-        auto_sync = true
-        sync_frequency = "20m"
-        search_mode = "fuzzy"
-        filter_mode = "global"
-        inline_height = 20
-        enter_accept = false
-        sync_address = "${config.sops.placeholder.atuin_sync_address}"
-      '';
+      content = sopsShared.mkAtuinConfigTemplate {
+        syncAddressPlaceholder = config.sops.placeholder.atuin_sync_address;
+      };
     };
   };
 

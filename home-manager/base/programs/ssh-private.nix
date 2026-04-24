@@ -10,6 +10,7 @@
 }:
 let
   cfg = config.profiles.sshPrivate;
+  sopsShared = import ../../../profiles/common/sops-shared.nix;
 in
 {
   options.profiles.sshPrivate = {
@@ -31,22 +32,15 @@ in
     # the config before activation completes.
     home.file.".ssh/conf.d/.keep".text = "";
 
-    sops.secrets = {
-      lan_prefix = {
-        sopsFile = ../../../secrets/roles/personal.yaml;
-        key = "lan_prefix";
-      };
-      vps01_host = {
-        sopsFile = ../../../secrets/roles/personal.yaml;
-        key = "vps01_host";
-      };
+    sops.secrets = sopsShared.mkSshPrivateSecrets {
+      personalSopsFile = ../../../secrets/roles/personal.yaml;
     };
 
     sops.templates."ssh-private-config" = {
       path = "${config.home.homeDirectory}/.ssh/conf.d/private.config";
-      content = import ../../../profiles/common/ssh-private-content.nix {
-        lanPrefix = config.sops.placeholder.lan_prefix;
-        vps01Host = config.sops.placeholder.vps01_host;
+      content = sopsShared.mkSshPrivateTemplate {
+        lanPrefixPlaceholder = config.sops.placeholder.lan_prefix;
+        vps01HostPlaceholder = config.sops.placeholder.vps01_host;
         inherit (cfg) includeTailscale;
       };
     };

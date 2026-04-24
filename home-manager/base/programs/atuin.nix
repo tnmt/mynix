@@ -1,4 +1,7 @@
 { config, ... }:
+let
+  sopsShared = import ../../../profiles/common/sops-shared.nix;
+in
 {
   programs.atuin = {
     enable = true;
@@ -9,15 +12,9 @@
   };
 
   sops.templates."atuin-config" = {
-    content = ''
-      auto_sync = true
-      sync_frequency = "20m"
-      search_mode = "fuzzy"
-      filter_mode = "global"
-      inline_height = 20
-      enter_accept = false
-      sync_address = "${config.sops.placeholder.atuin_sync_address}"
-    '';
+    content = sopsShared.mkAtuinConfigTemplate {
+      syncAddressPlaceholder = config.sops.placeholder.atuin_sync_address;
+    };
     path = "${config.xdg.configHome}/atuin/config.toml";
   };
 }

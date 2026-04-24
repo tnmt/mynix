@@ -3,6 +3,9 @@
   homeSopsFile,
   username,
 }:
+let
+  sopsShared = import ../profiles/common/sops-shared.nix;
+in
 {
   home = {
     inherit username homeDirectory;
@@ -14,20 +17,12 @@
   sops = {
     defaultSopsFile = homeSopsFile;
     age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
-    secrets = {
-      git_email = { };
-      git_name = { };
-      git_personal_email = {
-        sopsFile = ../secrets/roles/personal.yaml;
-        key = "git_email";
+    secrets =
+      sopsShared.mkCoreSecrets {
+        commonSopsFile = ../secrets/common.yaml;
+      }
+      // sopsShared.mkPersonalGitSecrets {
+        personalSopsFile = ../secrets/roles/personal.yaml;
       };
-      git_personal_name = {
-        sopsFile = ../secrets/roles/personal.yaml;
-        key = "git_name";
-      };
-      atuin_sync_address = {
-        sopsFile = ../secrets/common.yaml;
-      };
-    };
   };
 }
