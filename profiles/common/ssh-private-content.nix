@@ -6,21 +6,24 @@
 # non-identifying tokens (host-suffix octets, local aliases, ports)
 # live in plaintext Nix. Tailscale -ts aliases resolve via MagicDNS.
 #
-# tier = "laptop":      public path only — github, vps01, sunflower,
-#                       rdp-sunflower. Tailscale aliases limited to
+# tier = "laptop":      public path only — github, vps01, and the
+#                       sunflower entrypoint blocks (jump via vps01 on
+#                       Tailscale miss). Tailscale aliases limited to
 #                       sunflower variants.
-# tier = "workstation": adds the LAN hub view — dahlia + obsync + silvea.
-#                       Tailscale aliases also include dahlia/obsync.
-#                       Sunflower itself is the workstation, so on
-#                       sunflower-wsl (wslLocal = true) self-reference
-#                       blocks are dropped and LAN hosts are reached
-#                       directly instead of via ProxyJump sunflower-wsl.
+# tier = "workstation": the LAN hub itself. Self-reference sunflower
+#                       blocks are dropped (useless on the hub), and
+#                       LAN peers (dahlia, obsync, silvea) are reached
+#                       directly instead of via ProxyJump. Tailscale
+#                       aliases also include the LAN peers.
+#
+# The hub-is-workstation coupling is intentional: there is no current
+# use case for a non-hub workstation. If one appears, re-introduce a
+# `selfIsHub` flag rather than guessing from tier.
 {
   lanPrefix,
   vps01Host,
   tier,
   includeTailscale,
-  wslLocal ? false,
 }:
 let
   header = ''
@@ -62,7 +65,7 @@ let
         ControlMaster no
   '';
 
-  dahliaBlock = ''
+  lanHosts = ''
 
     # === dahlia ===
     Match host dahlia !exec "nc -z -w2 dahlia 22 2>/dev/null"
@@ -70,24 +73,6 @@ let
     Host dahlia
         HostName dahlia
         ControlMaster no
-  '';
-
-  lanHostsViaJump = ''
-
-    # === obsync (via sunflower-wsl) ===
-    Host obsync
-        HostName ${lanPrefix}.40
-        ControlMaster no
-        ProxyJump sunflower-wsl
-
-    # === silvea (via sunflower-wsl) ===
-    Host silvea
-        HostName ${lanPrefix}.41
-        ControlMaster no
-        ProxyJump sunflower-wsl
-  '';
-
-  lanHostsDirect = ''
 
     # === obsync (LAN direct) ===
     Host obsync
@@ -121,13 +106,10 @@ let
         HostName obsync
   '';
 
-  sunflowerPart = if wslLocal then "" else sunflowerBlocks;
+  laptopPart = sunflowerBlocks;
+  workstationPart = lanHosts;
 
-  lanPart =
-    if tier == "workstation" then
-      dahliaBlock + (if wslLocal then lanHostsDirect else lanHostsViaJump)
-    else
-      "";
+  tierPart = if tier == "workstation" then workstationPart else laptopPart;
 
   tailscalePart =
     if includeTailscale then
@@ -135,4 +117,4 @@ let
     else
       "";
 in
-header + sunflowerPart + lanPart + tailscalePart
+header + tierPart + tailscalePart
