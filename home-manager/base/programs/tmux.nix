@@ -6,7 +6,10 @@
 }:
 let
   isDarwin = pkgs.stdenv.isDarwin;
-
+  clipboard = if isDarwin then "pbcopy" else "wl-copy";
+  stripTrailingNewline = pkgs.writeShellScript "tmux-copy-strip-nl" ''
+    awk 'NR>1{printf "\n"}{printf "%s",$0}' | ${clipboard}
+  '';
 in
 {
   programs.tmux = {
@@ -76,10 +79,12 @@ in
 
       # Vi copy mode
       bind -T copy-mode-vi v send-keys -X begin-selection
-      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${
-        if isDarwin then "pbcopy" else "wl-copy"
-      }"
+      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${clipboard}"
       bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
+
+      # Mouse drag: strip trailing newline before clipboard
+      unbind -T copy-mode-vi MouseDragEnd1Pane
+      bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear "${stripTrailingNewline}"
 
       # Quick window selection
       bind -r C-p previous-window
