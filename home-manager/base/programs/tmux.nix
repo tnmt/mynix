@@ -4,10 +4,6 @@
 }:
 let
   inherit (pkgs.stdenv) isDarwin;
-  clipboard = if isDarwin then "pbcopy" else "wl-copy";
-  stripTrailingNewline = pkgs.writeShellScript "tmux-copy-strip-nl" ''
-    awk 'NR>1{printf "\n"}{printf "%s",$0}' | ${clipboard}
-  '';
 in
 {
   programs.tmux = {
@@ -55,9 +51,17 @@ in
     ];
 
     extraConfig = ''
-      set-option -ga terminal-overrides ",$TERM:Tc"
+      set-option -ga terminal-overrides ",*:Tc"
       set-option -g renumber-windows on
       set -sg repeat-time 600
+
+      # Clipboard: OSC52 で SSH越え・headless 対応。
+      # ローカル環境では tmux-yank がランタイム検出 (pbcopy/wl-copy/xclip/clip.exe)。
+      set -g set-clipboard on
+      set -ga terminal-features "*:clipboard"
+      set -g @yank_selection 'clipboard'
+      set -g @yank_selection_mouse 'clipboard'
+      set -g @yank_with_mouse on
 
       # Split panes
       bind | split-window -h -c "#{pane_current_path}"
@@ -75,14 +79,9 @@ in
       bind e setw synchronize-panes on \; display "Synchronize: ON"
       bind E setw synchronize-panes off \; display "Synchronize: OFF"
 
-      # Vi copy mode
+      # Vi copy mode (y / MouseDragEnd1Pane は tmux-yank が設定)
       bind -T copy-mode-vi v send-keys -X begin-selection
-      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "${clipboard}"
       bind -T copy-mode-vi C-v send-keys -X rectangle-toggle
-
-      # Mouse drag: strip trailing newline before clipboard
-      unbind -T copy-mode-vi MouseDragEnd1Pane
-      bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-no-clear "${stripTrailingNewline}"
 
       # Quick window selection
       bind -r C-p previous-window
