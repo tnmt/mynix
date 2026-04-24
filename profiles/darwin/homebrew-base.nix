@@ -1,6 +1,5 @@
 # Base Homebrew packages shared by all darwin hosts.
-{ ... }:
-{
+_: {
   homebrew = {
     enable = true;
     taps = [

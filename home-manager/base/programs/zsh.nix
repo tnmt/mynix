@@ -6,8 +6,8 @@
   ...
 }:
 let
-  isDarwin = pkgs.stdenv.isDarwin;
-  isLinux = pkgs.stdenv.isLinux;
+  inherit (pkgs.stdenv) isDarwin;
+  inherit (pkgs.stdenv) isLinux;
   themeSrc = pkgs.fetchFromGitHub theme.src;
 in
 {

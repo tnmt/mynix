@@ -1,6 +1,5 @@
 # Work-specific Homebrew additions for darwin hosts.
-{ ... }:
-{
+_: {
   homebrew = {
     taps = [
       "goreleaser/tap"

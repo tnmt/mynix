@@ -5,11 +5,11 @@ let
   commonOverlays = [
     inputs.nur.overlays.default
     (final: prev: {
-      oneaws = final.nur.repos.tnmt.oneaws;
-      ccusage = final.nur.repos.tnmt.ccusage;
-      gogcli = final.nur.repos.tnmt.gogcli;
-      kagiana = final.nur.repos.tnmt.kagiana;
-      ccpocket-bridge = final.nur.repos.tnmt.ccpocket-bridge;
+      inherit (final.nur.repos.tnmt) oneaws;
+      inherit (final.nur.repos.tnmt) ccusage;
+      inherit (final.nur.repos.tnmt) gogcli;
+      inherit (final.nur.repos.tnmt) kagiana;
+      inherit (final.nur.repos.tnmt) ccpocket-bridge;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];
@@ -98,7 +98,7 @@ let
     in
     inputs.home-manager.lib.homeManagerConfiguration {
       pkgs = mkPkgs {
-        nixpkgs = inputs.nixpkgs;
+        inherit (inputs) nixpkgs;
         inherit system overlays;
       };
       extraSpecialArgs =
