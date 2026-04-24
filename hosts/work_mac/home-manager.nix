@@ -6,6 +6,11 @@
     ../../home-manager/work
   ];
 
+  profiles.sshPrivate = {
+    role = "client";
+    tier = "laptop";
+  };
+
   # Work-machine-only CLI packages that do not belong in shared profiles.
   home.packages = with pkgs; [
     oneaws

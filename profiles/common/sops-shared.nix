@@ -70,13 +70,14 @@ let
     {
       lanPrefixPlaceholder,
       vps01HostPlaceholder,
+      tier,
       includeTailscale ? true,
       wslLocal ? false,
     }:
     import ./ssh-private-content.nix {
       lanPrefix = lanPrefixPlaceholder;
       vps01Host = vps01HostPlaceholder;
-      inherit includeTailscale wslLocal;
+      inherit tier includeTailscale wslLocal;
     };
 in
 {

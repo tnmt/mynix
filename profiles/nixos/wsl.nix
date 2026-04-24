@@ -34,9 +34,13 @@ in
         # WSL hosts don't run tailscaled, so Tailscale aliases are omitted.
         # wslLocal drops self-reference entries (sunflower/sunflower-wsl)
         # and routes obsync/silvea directly over the LAN.
+        # sunflower is the only WSL host and acts as the LAN hub, so
+        # hard-code tier = "workstation" here. A future WSL host in a
+        # different tier would need to parameterise this profile.
         content = sopsShared.mkSshPrivateTemplate {
           lanPrefixPlaceholder = config.sops.placeholder.lan_prefix;
           vps01HostPlaceholder = config.sops.placeholder.vps01_host;
+          tier = "workstation";
           includeTailscale = false;
           wslLocal = true;
         };

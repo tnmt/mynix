@@ -1,18 +1,24 @@
 # Shared content builder for ~/.ssh/conf.d/private.config.
-# Consumed by profiles/{darwin,nixos}/ssh-private.nix. The LAN prefix
-# (first three octets of the private subnet) and the vps01 FQDN are
-# substituted from sops secrets at activation time via
-# config.sops.placeholder.<name>, so only non-identifying tokens
-# (host-suffix octets, local aliases, ports) live in plaintext Nix.
-# Tailscale -ts aliases resolve via MagicDNS and can be toggled per host.
+# Consumed by home-manager/base/programs/ssh-private.nix and
+# profiles/nixos/wsl.nix. The LAN prefix (first three octets of the
+# private subnet) and the vps01 FQDN are substituted from sops secrets
+# at activation time via config.sops.placeholder.<name>, so only
+# non-identifying tokens (host-suffix octets, local aliases, ports)
+# live in plaintext Nix. Tailscale -ts aliases resolve via MagicDNS.
 #
-# wslLocal = true when the config is rendered on sunflower-wsl itself.
-# In that mode the sunflower/sunflower-wsl/rdp-sunflower entries are
-# dropped (self-reference) and obsync/silvea reach the LAN directly
-# instead of jumping through sunflower-wsl.
+# tier = "laptop":      public path only — github, vps01, sunflower,
+#                       rdp-sunflower. Tailscale aliases limited to
+#                       sunflower variants.
+# tier = "workstation": adds the LAN hub view — dahlia + obsync + silvea.
+#                       Tailscale aliases also include dahlia/obsync.
+#                       Sunflower itself is the workstation, so on
+#                       sunflower-wsl (wslLocal = true) self-reference
+#                       blocks are dropped and LAN hosts are reached
+#                       directly instead of via ProxyJump sunflower-wsl.
 {
   lanPrefix,
   vps01Host,
+  tier,
   includeTailscale,
   wslLocal ? false,
 }:
@@ -94,13 +100,7 @@ let
         ControlMaster no
   '';
 
-  base =
-    header
-    + (if wslLocal then "" else sunflowerBlocks)
-    + dahliaBlock
-    + (if wslLocal then lanHostsDirect else lanHostsViaJump);
-
-  tailscale = ''
+  tailscaleSunflower = ''
 
     # === Tailscale (MagicDNS) ===
     Host sunflower-ts
@@ -110,6 +110,9 @@ let
     Host sunflower-wsl-ts
         HostName sunflower
         Port 2222
+  '';
+
+  tailscaleLan = ''
 
     Host dahlia-ts
         HostName dahlia
@@ -117,5 +120,19 @@ let
     Host obsync-ts
         HostName obsync
   '';
+
+  sunflowerPart = if wslLocal then "" else sunflowerBlocks;
+
+  lanPart =
+    if tier == "workstation" then
+      dahliaBlock + (if wslLocal then lanHostsDirect else lanHostsViaJump)
+    else
+      "";
+
+  tailscalePart =
+    if includeTailscale then
+      tailscaleSunflower + (if tier == "workstation" then tailscaleLan else "")
+    else
+      "";
 in
-base + (if includeTailscale then tailscale else "")
+header + sunflowerPart + lanPart + tailscalePart
