@@ -1,6 +1,7 @@
 /result
 *.qcow2
 .claude/settings.local.json
+.codex
 .env*
 *.pem
 *.key
