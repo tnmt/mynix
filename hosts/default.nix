@@ -168,6 +168,7 @@ let
       system = "x86_64-linux";
       username = "tnmt";
       modules = [
+        inputs.disko.nixosModules.disko
         ./dahlia/nixos.nix
         {
           system.stateVersion = "25.05";
