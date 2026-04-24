@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./hardware.nix
+    ./disko.nix
 
     # Shared system roles.
     ../../modules/nixos/core
