@@ -1,12 +1,12 @@
 {
   config,
   pkgs,
+  sopsShared,
   theme,
   ...
 }:
 let
   themeSrc = pkgs.fetchFromGitHub theme.src;
-  sopsShared = import ../../../profiles/common/sops-shared.nix;
 in
 {
   programs.git = {

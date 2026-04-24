@@ -2,6 +2,7 @@
   commonOverlays,
   homeSopsFile,
   inputs,
+  sopsShared,
   username,
   ...
 }:
@@ -17,7 +18,12 @@ in
     useGlobalPkgs = false;
     useUserPackages = true;
     extraSpecialArgs = {
-      inherit homeSopsFile inputs username;
+      inherit
+        homeSopsFile
+        inputs
+        sopsShared
+        username
+        ;
       theme = (import ../../../themes) "tokyonight-storm";
     };
     users."${username}" = {
@@ -29,7 +35,12 @@ in
       imports = [
         inputs.sops-nix.homeManagerModules.sops
         (import ../../../home-manager/defaults.nix {
-          inherit homeDirectory homeSopsFile username;
+          inherit
+            homeDirectory
+            homeSopsFile
+            sopsShared
+            username
+            ;
         })
       ];
     };

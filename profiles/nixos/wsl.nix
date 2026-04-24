@@ -2,12 +2,12 @@
 {
   config,
   inputs,
+  sopsShared,
   username,
   ...
 }:
 let
   homeDir = "/home/${username}";
-  sopsShared = import ../common/sops-shared.nix;
 in
 {
   imports = [

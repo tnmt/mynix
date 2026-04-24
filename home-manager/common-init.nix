@@ -1,11 +1,9 @@
 {
   homeDirectory,
   homeSopsFile,
+  sopsShared,
   username,
 }:
-let
-  sopsShared = import ../profiles/common/sops-shared.nix;
-in
 {
   home = {
     inherit username homeDirectory;

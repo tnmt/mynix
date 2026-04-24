@@ -4,6 +4,7 @@
   homeSopsFile,
   inputs,
   lib,
+  sopsShared,
   username,
   ...
 }:
@@ -12,7 +13,7 @@
     inputs.sops-nix.homeManagerModules.sops
     (import ../common-init.nix {
       homeDirectory = "/home/${username}";
-      inherit homeSopsFile username;
+      inherit homeSopsFile sopsShared username;
     })
   ];
 

@@ -1,7 +1,4 @@
-{ config, ... }:
-let
-  sopsShared = import ../../../profiles/common/sops-shared.nix;
-in
+{ config, sopsShared, ... }:
 {
   programs.atuin = {
     enable = true;
