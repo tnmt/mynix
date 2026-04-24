@@ -1,4 +1,0 @@
-# statix lint configuration
-# disable W20 (repeated_keys): some files intentionally split keys for readability
-# (e.g. programs.git/delta/gitui, hardware.* sectioned by comment)
-disabled = ["repeated_keys"]
