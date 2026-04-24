@@ -31,10 +31,13 @@ in
     templates."ssh-private-config" = {
       owner = username;
       # WSL hosts don't run tailscaled, so Tailscale aliases are omitted.
+      # wslLocal drops self-reference entries (sunflower/sunflower-wsl)
+      # and routes obsync/silvea directly over the LAN.
       content = sopsShared.mkSshPrivateTemplate {
         lanPrefixPlaceholder = config.sops.placeholder.lan_prefix;
         vps01HostPlaceholder = config.sops.placeholder.vps01_host;
         includeTailscale = false;
+        wslLocal = true;
       };
     };
     templates."git-identity" = {
