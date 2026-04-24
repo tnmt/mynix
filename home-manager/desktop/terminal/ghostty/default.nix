@@ -5,7 +5,7 @@
   ...
 }:
 let
-  isDarwin = pkgs.stdenv.isDarwin;
+  inherit (pkgs.stdenv) isDarwin;
   themeSrc = pkgs.fetchFromGitHub theme.src;
 in
 {

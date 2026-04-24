@@ -29,7 +29,7 @@ in
       };
 
       font = {
-        size = terminal.font.size;
+        inherit (terminal.font) size;
         normal = {
           family = terminal.font.name;
           style = "Regular";

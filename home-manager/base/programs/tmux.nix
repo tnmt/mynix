@@ -1,11 +1,9 @@
 {
   pkgs,
-  lib,
-  theme,
   ...
 }:
 let
-  isDarwin = pkgs.stdenv.isDarwin;
+  inherit (pkgs.stdenv) isDarwin;
   clipboard = if isDarwin then "pbcopy" else "wl-copy";
   stripTrailingNewline = pkgs.writeShellScript "tmux-copy-strip-nl" ''
     awk 'NR>1{printf "\n"}{printf "%s",$0}' | ${clipboard}

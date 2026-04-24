@@ -1,4 +1,4 @@
-{ lib, theme, ... }:
+{ lib, ... }:
 {
   wayland.windowManager.hyprland.settings = {
     "$terminal" = "ghostty";

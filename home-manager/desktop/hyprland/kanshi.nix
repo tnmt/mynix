@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   services.kanshi = {
     enable = true;
     settings = [

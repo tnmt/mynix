@@ -11,8 +11,8 @@ in
   programs.kitty = {
     enable = true;
     font = {
-      name = terminal.font.name;
-      size = terminal.font.size;
+      inherit (terminal.font) name;
+      inherit (terminal.font) size;
     };
     extraConfig = "include tokyonight_storm.conf";
   };
