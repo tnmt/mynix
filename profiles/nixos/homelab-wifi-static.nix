@@ -49,10 +49,12 @@ in
   services.resolved.enable = true;
 
   sops = {
-    secrets.wifi_homelab_ssid = { };
-    secrets.wifi_homelab_psk = { };
-    secrets.lan_prefix = {
-      sopsFile = ../../secrets/roles/personal.yaml;
+    secrets = {
+      wifi_homelab_ssid = { };
+      wifi_homelab_psk = { };
+      lan_prefix = {
+        sopsFile = ../../secrets/roles/personal.yaml;
+      };
     };
     templates."wifi-env" = {
       content = ''

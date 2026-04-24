@@ -3,18 +3,22 @@
 { lib, ... }:
 {
   # Boot
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/efi";
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      efi.efiSysMountPoint = "/efi";
+    };
 
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "usb_storage"
-    "sd_mod"
-    "amdgpu"
-  ];
-  boot.kernelModules = [ "kvm-amd" ];
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "usb_storage"
+      "sd_mod"
+      "amdgpu"
+    ];
+    kernelModules = [ "kvm-amd" ];
+  };
 
   hardware.enableRedistributableFirmware = true;
 

@@ -67,14 +67,15 @@
     };
   };
 
-  xdg.configFile."Kvantum/Tokyo-Night-Storm/Tokyo-Night-Storm.kvconfig".source =
-    ./kvantum/Tokyo-Night-Storm.kvconfig;
-  xdg.configFile."Kvantum/Tokyo-Night-Storm/Tokyo-Night-Storm.svg".source =
-    ./kvantum/Tokyo-Night-Storm.svg;
-  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
-    [General]
-    theme=Tokyo-Night-Storm
-  '';
+  xdg.configFile = {
+    "Kvantum/Tokyo-Night-Storm/Tokyo-Night-Storm.kvconfig".source =
+      ./kvantum/Tokyo-Night-Storm.kvconfig;
+    "Kvantum/Tokyo-Night-Storm/Tokyo-Night-Storm.svg".source = ./kvantum/Tokyo-Night-Storm.svg;
+    "Kvantum/kvantum.kvconfig".text = ''
+      [General]
+      theme=Tokyo-Night-Storm
+    '';
+  };
 
   programs.chromium = {
     enable = true;
