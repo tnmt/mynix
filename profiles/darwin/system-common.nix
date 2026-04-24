@@ -5,10 +5,10 @@
   ...
 }:
 let
-  pkgs-unstable = import inputs.nixpkgs { system = "aarch64-darwin"; };
+  pkgsUnstable = import inputs.nixpkgs { system = "aarch64-darwin"; };
 in
 {
-  nix.package = pkgs-unstable.nixVersions.latest;
+  nix.package = pkgsUnstable.nixVersions.latest;
 
   fonts = {
     packages = with pkgs; [
