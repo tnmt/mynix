@@ -20,7 +20,13 @@
     kernelModules = [ "kvm-amd" ];
   };
 
-  hardware.enableRedistributableFirmware = true;
+  hardware = {
+    enableRedistributableFirmware = true;
+    # GPU - AMD Renoir (Radeon Vega Series)
+    graphics.enable = true;
+    # CPU
+    cpu.amd.updateMicrocode = lib.mkDefault true;
+  };
 
   # Filesystems
   # NOTE: UUIDs will change after fresh install with ext4.
@@ -43,10 +49,4 @@
   swapDevices = [
     { device = "/dev/disk/by-uuid/0568ef41-b667-4dcb-893a-a5f7d7b0899f"; }
   ];
-
-  # GPU - AMD Renoir (Radeon Vega Series)
-  hardware.graphics.enable = true;
-
-  # CPU
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault true;
 }
