@@ -5,13 +5,19 @@
 # config.sops.placeholder.<name>, so only non-identifying tokens
 # (host-suffix octets, local aliases, ports) live in plaintext Nix.
 # Tailscale -ts aliases resolve via MagicDNS and can be toggled per host.
+#
+# wslLocal = true when the config is rendered on sunflower-wsl itself.
+# In that mode the sunflower/sunflower-wsl/rdp-sunflower entries are
+# dropped (self-reference) and obsync/silvea reach the LAN directly
+# instead of jumping through sunflower-wsl.
 {
   lanPrefix,
   vps01Host,
   includeTailscale,
+  wslLocal ? false,
 }:
 let
-  base = ''
+  header = ''
     # github.com (personal)
     Host github.com
         HostName github.com
@@ -22,6 +28,9 @@ let
     # VPS (always on)
     Host vps01
         HostName ${vps01Host}
+  '';
+
+  sunflowerBlocks = ''
 
     # RDP port-forward entrypoint
     Host rdp-sunflower
@@ -45,6 +54,9 @@ let
         HostName sunflower
         Port 2222
         ControlMaster no
+  '';
+
+  dahliaBlock = ''
 
     # === dahlia ===
     Match host dahlia !exec "nc -z -w2 dahlia 22 2>/dev/null"
@@ -52,6 +64,9 @@ let
     Host dahlia
         HostName dahlia
         ControlMaster no
+  '';
+
+  lanHostsViaJump = ''
 
     # === obsync (via sunflower-wsl) ===
     Host obsync
@@ -65,6 +80,25 @@ let
         ControlMaster no
         ProxyJump sunflower-wsl
   '';
+
+  lanHostsDirect = ''
+
+    # === obsync (LAN direct) ===
+    Host obsync
+        HostName ${lanPrefix}.40
+        ControlMaster no
+
+    # === silvea (LAN direct) ===
+    Host silvea
+        HostName ${lanPrefix}.41
+        ControlMaster no
+  '';
+
+  base =
+    header
+    + (if wslLocal then "" else sunflowerBlocks)
+    + dahliaBlock
+    + (if wslLocal then lanHostsDirect else lanHostsViaJump);
 
   tailscale = ''
 
