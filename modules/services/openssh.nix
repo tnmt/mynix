@@ -44,14 +44,20 @@ in
     };
   };
 
-  # SSH Term on zfold7 lacks ETM MAC support. If this host authorizes
-  # pubkeys.hosts.zfold7, keep ETM variants preferred but allow non-ETM
-  # SHA-2 too.
-  services.openssh.settings.Macs = lib.mkIf (builtins.elem pubkeys.hosts.zfold7 authorizedHostKeys) [
-    "hmac-sha2-512-etm@openssh.com"
-    "hmac-sha2-256-etm@openssh.com"
-    "umac-128-etm@openssh.com"
-    "hmac-sha2-512"
-    "hmac-sha2-256"
-  ];
+  # SSH Term mobile apps lack ETM MAC support. If this host authorizes
+  # any pubkeys.mobile.*SshTerm entry, keep ETM variants preferred but
+  # allow non-ETM SHA-2 too.
+  services.openssh.settings.Macs =
+    let
+      sshTermKeys = lib.attrValues (
+        lib.filterAttrs (name: _: lib.hasSuffix "SshTerm" name) pubkeys.mobile
+      );
+    in
+    lib.mkIf (lib.any (k: builtins.elem k authorizedHostKeys) sshTermKeys) [
+      "hmac-sha2-512-etm@openssh.com"
+      "hmac-sha2-256-etm@openssh.com"
+      "umac-128-etm@openssh.com"
+      "hmac-sha2-512"
+      "hmac-sha2-256"
+    ];
 }
