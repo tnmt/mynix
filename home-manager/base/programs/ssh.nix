@@ -4,6 +4,11 @@
     enable = true;
     enableDefaultConfig = false;
 
+    matchBlocks."1password" = lib.mkIf pkgs.stdenv.isLinux {
+      match = ''exec "[ -S $HOME/.1password/agent.sock ]"'';
+      identityAgent = "~/.1password/agent.sock";
+    };
+
     matchBlocks."*" = {
       controlMaster = "auto";
       controlPersist = "60m";
