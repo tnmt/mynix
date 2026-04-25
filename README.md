@@ -12,6 +12,8 @@ This repository contains:
 
 Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 
+Standalone `homeConfigurations` outputs are currently kept only for compatibility; active Home Manager setups are integrated into the NixOS and nix-darwin hosts defined in this flake.
+
 ## Input Strategy
 
 - Linux system and Home Manager targets use `nixpkgs` with `home-manager`
@@ -22,12 +24,22 @@ Supported platforms are `x86_64-linux` and `aarch64-darwin`.
 
 ### `nixosConfigurations`
 - `sunflower`: WSL-based NixOS host
-- `dahlia`: desktop/laptop-style NixOS host with Hyprland
+- `dahlia`: personal NixOS laptop with Hyprland
 - `work_vm`: NixOS on a work OpenStack instance
 
 ### `darwinConfigurations`
 - `work_mac`: work macOS machine
 - `hydrangea`: personal macOS machine
+
+### At a glance
+
+| Host | Platform | Role |
+| --- | --- | --- |
+| `sunflower` | NixOS / WSL | personal Linux-on-WSL environment |
+| `dahlia` | NixOS | personal laptop with Hyprland |
+| `work_vm` | NixOS | work OpenStack VM |
+| `work_mac` | nix-darwin | work macOS machine |
+| `hydrangea` | nix-darwin | personal macOS machine |
 
 ## Repository Layout
 
@@ -60,6 +72,13 @@ The important split is:
 
 ## Usage
 
+### Prerequisites
+
+Before switching a host, make sure the target machine has:
+- Nix with flakes enabled
+- `nh` available if you want to use the recommended commands below
+- the corresponding `age` key material required by `sops-nix`
+
 ### NixOS
 
 ```bash
@@ -89,7 +108,7 @@ nix develop
 # Format Nix and TOML files
 nix fmt
 
-# Update a flake input
+# Update a flake input (from the dev shell)
 update-input nixpkgs github:NixOS/nixpkgs/nixos-unstable
 
 # Run the desktop VM for dahlia
@@ -100,8 +119,8 @@ nix run .#dahlia-vm
 
 This repo expects `sops-nix` with age keys available on the target machine.
 
-- host/system-specific secrets live in `secrets/<hostname>.yaml`
-- Home Manager identity secrets use `secrets/personal.yaml` by default, with work-specific values in `secrets/work.yaml`
+- host/system-specific secrets live in `secrets/hosts/<hostname>.yaml`
+- Home Manager identity secrets use `secrets/roles/personal.yaml` by default, with work-specific values in `secrets/roles/work.yaml`
 - shared Home Manager values, such as service endpoints or API keys, live in `secrets/common.yaml`
 
 Builds may evaluate without secrets in some cases, but activation on real machines assumes the corresponding key material exists.
@@ -110,6 +129,7 @@ Builds may evaluate without secrets in some cases, but activation on real machin
 
 GitHub Actions currently checks:
 - formatting via `nix fmt`
+- lint via `deadnix` and `statix`
 - NixOS builds for `sunflower`, `dahlia`, and `work_vm`
 
 Darwin system and Home Manager targets are excluded from CI because they require macOS runners.
