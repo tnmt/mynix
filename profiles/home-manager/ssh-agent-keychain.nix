@@ -14,6 +14,13 @@
       _keychain_state="$HOME/.keychain/$(hostname)-sh"
       if [ -r "$_keychain_state" ]; then
         . "$_keychain_state"
+        if [ -n "$SSH_AUTH_SOCK" ] && [ ! -S "$SSH_AUTH_SOCK" ]; then
+          unset SSH_AUTH_SOCK SSH_AGENT_PID
+          rm -f \
+            "$HOME/.keychain/$(hostname)-sh" \
+            "$HOME/.keychain/$(hostname)-csh" \
+            "$HOME/.keychain/$(hostname)-fish"
+        fi
       fi
       unset _keychain_state
     fi

@@ -5,7 +5,7 @@
     enableDefaultConfig = false;
 
     matchBlocks."1password" = lib.mkIf pkgs.stdenv.isLinux {
-      match = ''exec "[ -S $HOME/.1password/agent.sock ]"'';
+      match = ''exec "[ -z \"$SSH_CONNECTION\" ] && [ -S $HOME/.1password/agent.sock ]"'';
       identityAgent = "~/.1password/agent.sock";
     };
 
