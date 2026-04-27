@@ -19,7 +19,6 @@ in
   # WSL has no user systemd, so keep these secrets at the system level.
   sops = {
     defaultSopsFile = ../../secrets/roles/personal.yaml;
-    age.keyFile = "${homeDir}/.config/sops/age/keys.txt";
     secrets = sopsShared.mkOwnedSecrets username (
       sopsShared.mkCoreSecrets {
         commonSopsFile = ../../secrets/common.yaml;
