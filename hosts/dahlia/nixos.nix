@@ -22,6 +22,10 @@ in
     ../../modules/hardware/kanata.nix
   ];
 
+  # Use host SSH key for sops; avoids /home dependency at boot time.
+  sops.age.keyFile = null;
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
   # Host-local networking and access.
   services.tailscale.enable = true;
 
