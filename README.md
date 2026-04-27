@@ -23,8 +23,8 @@ Standalone `homeConfigurations` outputs are currently kept only for compatibilit
 ## Hosts
 
 ### `nixosConfigurations`
-- `sunflower`: WSL-based NixOS host
-- `dahlia`: personal NixOS laptop with Hyprland
+- `sunflower`: WSL-based NixOS host, also acts as a remote build target
+- `dahlia`: personal NixOS laptop with Hyprland; disko-managed LUKS + btrfs root with TPM2 auto-unlock
 
 ### `darwinConfigurations`
 - `hydrangea`: personal macOS machine
@@ -33,8 +33,8 @@ Standalone `homeConfigurations` outputs are currently kept only for compatibilit
 
 | Host | Platform | Role |
 | --- | --- | --- |
-| `sunflower` | NixOS / WSL | personal Linux-on-WSL environment |
-| `dahlia` | NixOS | personal laptop with Hyprland |
+| `sunflower` | NixOS / WSL | personal Linux-on-WSL environment, remote build target |
+| `dahlia` | NixOS | personal laptop with Hyprland, LUKS+btrfs via disko |
 | `hydrangea` | nix-darwin | personal macOS machine |
 
 Work-related hosts (`work_mac`, `work_vm`) live in the private `tnmt-work-flake` repository, which consumes this flake via `mynix.lib`.
@@ -63,7 +63,8 @@ The important split is:
 
 - Hyprland desktop setup with Waybar, Walker, Mako, Hyprlock, Hypridle, and Wlogout
 - `greetd` + `tuigreet` login flow for the Linux desktop profile
-- `sops-nix` secrets for both system and Home Manager configs
+- `disko` + LUKS + btrfs + TPM2 auto-unlock for the `dahlia` laptop
+- `sops-nix` secrets unified at the system layer; host SSH key decryption is the default for every host
 - Input remapping with `kanata` (Linux) and Karabiner-Elements (macOS)
 - Shared Tokyo Night Storm theme wiring
 - NUR overlay usage for custom packages such as `oneaws`, `ccusage`, `gogcli`, and `kagiana`
@@ -115,13 +116,14 @@ nix run .#dahlia-vm
 
 ## Secrets
 
-This repo expects `sops-nix` with age keys available on the target machine.
+This repo expects `sops-nix` with the host's SSH host key available for decryption (derived to age via `ssh-to-age`); each host's public key is registered in `.sops.yaml`.
 
 - host/system-specific secrets live in `secrets/hosts/<hostname>.yaml`
 - Home Manager identity secrets use `secrets/roles/personal.yaml` by default
 - shared Home Manager values, such as service endpoints or API keys, live in `secrets/common.yaml`
+- both system and Home Manager secrets are wired through the system-layer `sops-nix` module
 
-Builds may evaluate without secrets in some cases, but activation on real machines assumes the corresponding key material exists.
+Builds may evaluate without secrets in some cases, but activation on real machines assumes the corresponding host SSH key exists.
 
 ## CI
 
