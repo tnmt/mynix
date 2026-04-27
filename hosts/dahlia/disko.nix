@@ -12,7 +12,7 @@
             content = {
               type = "filesystem";
               format = "vfat";
-              mountpoint = "/boot";
+              mountpoint = "/efi";
               mountOptions = [
                 "fmask=0077"
                 "dmask=0077"
