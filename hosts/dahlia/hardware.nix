@@ -1,8 +1,16 @@
 # Hardware configuration for dahlia (ThinkPad X13 Gen1)
 # AMD Ryzen 5 PRO 4650U, AMD Renoir GPU, 256GB NVMe
 # Filesystems / swap are declared in ./disko.nix
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
+  environment.systemPackages = [ pkgs.tpm2-tools ];
+
+  security.tpm2 = {
+    enable = true;
+    pkcs11.enable = true;
+    tctiEnvironment.enable = true;
+  };
+
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -11,6 +19,8 @@
         efiSysMountPoint = "/efi";
       };
     };
+
+    initrd.systemd.enable = true;
 
     initrd.availableKernelModules = [
       "nvme"
