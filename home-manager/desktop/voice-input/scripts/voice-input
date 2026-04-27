@@ -14,7 +14,7 @@ AUDIO="/tmp/voice-input.wav"
 MODEL_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/whisper-models"
 MODEL="$MODEL_DIR/ggml-medium.bin"
 MODEL_URL="https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin"
-API_KEY_FILE=$(find "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"/secrets.d -name voice_input_openrouter_api_key 2>/dev/null | head -1)
+API_KEY_FILE="/run/secrets/voice_input_openrouter_api_key"
 
 ensure_model() {
   if [[ ! -f "$MODEL" ]]; then

@@ -9,6 +9,8 @@
     ./sops.nix
     ./sudo.nix
     ./user.nix
+    ./user-templates-link.nix
+    ../../../profiles/common/user-sops.nix
   ];
 
   programs.zsh.enable = true;

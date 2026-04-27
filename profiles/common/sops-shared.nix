@@ -8,10 +8,17 @@ let
     owner: secrets: builtins.mapAttrs (_: secret: secret // { inherit owner; }) secrets;
 
   mkCoreSecrets =
-    { commonSopsFile }:
     {
-      git_email = { };
-      git_name = { };
+      commonSopsFile,
+      gitSopsFile,
+    }:
+    {
+      git_email = {
+        sopsFile = gitSopsFile;
+      };
+      git_name = {
+        sopsFile = gitSopsFile;
+      };
       atuin_sync_address = {
         sopsFile = commonSopsFile;
       };
