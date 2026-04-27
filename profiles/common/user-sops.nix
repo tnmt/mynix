@@ -32,6 +32,16 @@ in
       description = "Render atuin config.toml.";
     };
 
+    atuinSync = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = ''
+        Include sync_address from sops in atuin config.toml.
+        Set false on hosts without sops keys to render config without
+        sync_address (auto_sync = false).
+      '';
+    };
+
     voiceInput = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -83,6 +93,7 @@ in
       sopsShared.mkCoreSecrets {
         inherit commonSopsFile;
         gitSopsFile = homeSopsFile;
+        includeAtuinSync = cfg.atuin && cfg.atuinSync;
       }
       // (lib.optionalAttrs cfg.gitPersonal (
         sopsShared.mkPersonalGitSecrets { inherit personalSopsFile; }
@@ -102,7 +113,7 @@ in
         "atuin-config" = {
           owner = username;
           content = sopsShared.mkAtuinConfigTemplate {
-            syncAddressPlaceholder = config.sops.placeholder.atuin_sync_address;
+            syncAddressPlaceholder = if cfg.atuinSync then config.sops.placeholder.atuin_sync_address else null;
           };
         };
       })

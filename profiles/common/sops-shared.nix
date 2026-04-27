@@ -11,6 +11,7 @@ let
     {
       commonSopsFile,
       gitSopsFile,
+      includeAtuinSync ? true,
     }:
     {
       git_email = {
@@ -19,10 +20,17 @@ let
       git_name = {
         sopsFile = gitSopsFile;
       };
-      atuin_sync_address = {
-        sopsFile = commonSopsFile;
-      };
-    };
+    }
+    // (
+      if includeAtuinSync then
+        {
+          atuin_sync_address = {
+            sopsFile = commonSopsFile;
+          };
+        }
+      else
+        { }
+    );
 
   mkPersonalGitSecrets =
     { personalSopsFile }:
@@ -62,16 +70,18 @@ let
     '';
 
   mkAtuinConfigTemplate =
-    { syncAddressPlaceholder }:
+    {
+      syncAddressPlaceholder ? null,
+    }:
     ''
-      auto_sync = true
+      auto_sync = ${if syncAddressPlaceholder == null then "false" else "true"}
       sync_frequency = "20m"
       search_mode = "fuzzy"
       filter_mode = "global"
       inline_height = 20
       enter_accept = false
-      sync_address = "${syncAddressPlaceholder}"
-    '';
+    ''
+    + (if syncAddressPlaceholder == null then "" else ''sync_address = "${syncAddressPlaceholder}"'');
 
   mkSshPrivateTemplate =
     {
