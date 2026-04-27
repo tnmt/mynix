@@ -1,6 +1,7 @@
 keys:
   - &tnmt age124qtmtc34yg8jsre09m6lyf35u4heemwd0jm6609j94ygnrn4p4q7vkg5x
   - &dahlia age1x83l95gqyu5r5d5wjlkfm44q0ggj2tr79njuhgqlqdvlqdgcwvpqmsxgnl
+  - &sunflower age1avnkg4hjnprjsn2f8ehj8nzgzutj930tdx67f9t66gf85k24c3mq0n89jf
 
 creation_rules:
   - path_regex: secrets/hosts/dahlia\.yaml$
@@ -8,11 +9,17 @@ creation_rules:
       - age:
           - *tnmt
           - *dahlia
+  - path_regex: secrets/hosts/sunflower\.yaml$
+    key_groups:
+      - age:
+          - *tnmt
+          - *sunflower
   - path_regex: secrets/(roles|common).*\.yaml$
     key_groups:
       - age:
           - *tnmt
           - *dahlia
+          - *sunflower
   - path_regex: secrets/.*\.yaml$
     key_groups:
       - age:
