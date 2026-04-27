@@ -52,7 +52,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        host: [sunflower, dahlia, work_vm]
+        host: [sunflower, dahlia]
     steps:
       - uses: actions/checkout@v5
       - uses: DeterminateSystems/nix-installer-action@main
@@ -65,5 +65,7 @@ jobs:
   # NOTE: The following targets are excluded from CI:
   #
   # darwinConfigurations (need macOS runner / aarch64-darwin):
-  #   - work_mac
   #   - hydrangea
+  #
+  # work_mac / work_vm have moved to tnmt-work-flake (private repo) and
+  # are validated there.

@@ -25,10 +25,8 @@ Standalone `homeConfigurations` outputs are currently kept only for compatibilit
 ### `nixosConfigurations`
 - `sunflower`: WSL-based NixOS host
 - `dahlia`: personal NixOS laptop with Hyprland
-- `work_vm`: NixOS on a work OpenStack instance
 
 ### `darwinConfigurations`
-- `work_mac`: work macOS machine
 - `hydrangea`: personal macOS machine
 
 ### At a glance
@@ -37,9 +35,9 @@ Standalone `homeConfigurations` outputs are currently kept only for compatibilit
 | --- | --- | --- |
 | `sunflower` | NixOS / WSL | personal Linux-on-WSL environment |
 | `dahlia` | NixOS | personal laptop with Hyprland |
-| `work_vm` | NixOS | work OpenStack VM |
-| `work_mac` | nix-darwin | work macOS machine |
 | `hydrangea` | nix-darwin | personal macOS machine |
+
+Work-related hosts (`work_mac`, `work_vm`) live in the private `tnmt-work-flake` repository, which consumes this flake via `mynix.lib`.
 
 ## Repository Layout
 
@@ -120,7 +118,7 @@ nix run .#dahlia-vm
 This repo expects `sops-nix` with age keys available on the target machine.
 
 - host/system-specific secrets live in `secrets/hosts/<hostname>.yaml`
-- Home Manager identity secrets use `secrets/roles/personal.yaml` by default, with work-specific values in `secrets/roles/work.yaml`
+- Home Manager identity secrets use `secrets/roles/personal.yaml` by default
 - shared Home Manager values, such as service endpoints or API keys, live in `secrets/common.yaml`
 
 Builds may evaluate without secrets in some cases, but activation on real machines assumes the corresponding key material exists.
@@ -130,7 +128,7 @@ Builds may evaluate without secrets in some cases, but activation on real machin
 GitHub Actions currently checks:
 - formatting via `nix fmt`
 - lint via `deadnix` and `statix`
-- NixOS builds for `sunflower`, `dahlia`, and `work_vm`
+- NixOS builds for `sunflower` and `dahlia`
 
 Darwin system and Home Manager targets are excluded from CI because they require macOS runners.
 
