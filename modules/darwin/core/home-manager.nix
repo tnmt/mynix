@@ -1,8 +1,6 @@
 {
   commonOverlays,
-  homeSopsFile,
   inputs,
-  sopsShared,
   username,
   ...
 }:
@@ -19,9 +17,7 @@ in
     useUserPackages = true;
     extraSpecialArgs = {
       inherit
-        homeSopsFile
         inputs
-        sopsShared
         username
         ;
       theme = (import ../../../themes) "tokyonight-storm";
@@ -33,12 +29,9 @@ in
         overlays = commonOverlays;
       };
       imports = [
-        inputs.sops-nix.homeManagerModules.sops
         (import ../../../home-manager/defaults.nix {
           inherit
             homeDirectory
-            homeSopsFile
-            sopsShared
             username
             ;
         })

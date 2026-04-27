@@ -9,10 +9,5 @@
     ../../profiles/home-manager/ssh-agent-keychain.nix
   ];
 
-  profiles.sshPrivate = {
-    role = "client";
-    tier = "laptop";
-  };
-
   home.packages = [ pkgs.btrfs-progs ];
 }

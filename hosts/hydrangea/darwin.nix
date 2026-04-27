@@ -21,6 +21,14 @@ in
     hosts.work_mac
   ];
 
+  profiles.userTemplates = {
+    enable = true;
+    sshPrivate = {
+      role = "client";
+      tier = "laptop";
+    };
+  };
+
   # Host-specific Home Manager entrypoint.
   home-manager.users."${username}" = import ./home-manager.nix;
 }

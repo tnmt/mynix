@@ -1,7 +1,5 @@
 {
   homeDirectory,
-  homeSopsFile,
-  sopsShared,
   username,
 }:
 {
@@ -14,8 +12,6 @@
     (import ./common-init.nix {
       inherit
         homeDirectory
-        homeSopsFile
-        sopsShared
         username
         ;
     })

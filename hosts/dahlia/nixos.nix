@@ -25,6 +25,15 @@ in
   # Host-local networking and access.
   services.tailscale.enable = true;
 
+  profiles.userTemplates = {
+    enable = true;
+    voiceInput = true;
+    sshPrivate = {
+      role = "client";
+      tier = "laptop";
+    };
+  };
+
   users.users."${username}" = {
     extraGroups = [
       "wheel"
