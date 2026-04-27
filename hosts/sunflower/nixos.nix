@@ -1,5 +1,4 @@
 {
-  lib,
   username,
   ...
 }:
@@ -25,11 +24,6 @@ in
 
   # Host-local build cache key.
   nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
-
-  # Use host SSH key for sops; avoids /home dependency at boot time.
-  # WSL profile sets age.keyFile to a /home path, so force-override.
-  sops.age.keyFile = lib.mkForce null;
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
   services.openssh.ports = [ 2222 ];
 
