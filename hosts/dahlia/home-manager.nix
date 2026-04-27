@@ -1,4 +1,5 @@
 {
+  pkgs,
   ...
 }:
 {
@@ -11,4 +12,6 @@
     role = "client";
     tier = "laptop";
   };
+
+  home.packages = [ pkgs.btrfs-progs ];
 }
