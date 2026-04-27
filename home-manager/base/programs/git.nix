@@ -13,10 +13,9 @@ in
 
       includes = [
         { path = "~/.config/git/identity"; }
-        {
-          path = "~/.config/git/personal-identity";
-          condition = "gitdir:~/ghq/github.com/";
-        }
+        # personal/work identity の振り分けは host のデフォルト identity が
+        # multitenant な場合のみ必要 (work hosts)。各 flake の home-manager
+        # モジュール側で includeIf を宣言する。
         { path = "${themeSrc}/${theme.extras.delta}"; }
       ];
 
