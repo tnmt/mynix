@@ -17,10 +17,10 @@ Host-specific configurations for different machines.
 
 **Current hosts:**
 - `sunflower`: WSL NixOS system (x86_64-linux)
-- `vps02`: Server environment (x86_64-linux)  
-- `work_mac`: Work macOS setup (aarch64-darwin)
-- `work_ubuntu`: Work Ubuntu environment (x86_64-linux)
+- `dahlia`: Personal NixOS laptop with Hyprland (x86_64-linux)
 - `hydrangea`: Personal macOS setup (aarch64-darwin)
+
+Work hosts (`work_mac`, `work_ubuntu`/`work_vm`) live in the private `tnmt-work-flake` repository.
 
 ### `/home-manager/`
 Modular Home Manager configurations organized by environment type.

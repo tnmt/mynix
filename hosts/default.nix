@@ -1,150 +1,16 @@
 inputs:
 let
-  sopsShared = import ../profiles/common/sops-shared.nix;
+  lib = import ../lib { inherit inputs; };
 
-  commonOverlays = [
-    inputs.nur.overlays.default
-    (final: prev: {
-      inherit (final.nur.repos.tnmt) oneaws;
-      inherit (final.nur.repos.tnmt) ccusage;
-      inherit (final.nur.repos.tnmt) gogcli;
-      inherit (final.nur.repos.tnmt) kagiana;
-      inherit (final.nur.repos.tnmt) ccpocket-bridge;
-      tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
-        tweakVariants = [ "storm" ];
-        colorVariants = [ "dark" ];
-        iconVariants = [ "Dark" ];
-      };
-    })
-  ];
-
-  mkSpecialArgs =
-    {
-      homeSopsFile ? null,
-      hostname ? null,
-      systemSopsFile ? null,
-      username,
-    }:
-    {
-      inherit
-        commonOverlays
-        inputs
-        sopsShared
-        username
-        ;
-    }
-    // inputs.nixpkgs.lib.optionalAttrs (hostname != null) {
-      inherit hostname;
-    }
-    // inputs.nixpkgs.lib.optionalAttrs (homeSopsFile != null) {
-      inherit homeSopsFile;
-    }
-    // inputs.nixpkgs.lib.optionalAttrs (systemSopsFile != null) {
-      inherit systemSopsFile;
-    };
-
-  mkPkgs =
-    {
-      nixpkgs,
-      system,
-      overlays ? commonOverlays,
-    }:
-    import nixpkgs {
-      inherit system overlays;
-      config.allowUnfree = true;
-    };
-
-  mkHomeDirectory =
-    username: system: if system == "aarch64-darwin" then "/Users/${username}" else "/home/${username}";
-
-  mkSystem =
-    builder:
-    {
-      system,
-      hostname,
-      username,
-      modules,
-      homeSopsFile ? ../secrets/roles/personal.yaml,
-      systemSopsFile ? ../secrets/hosts/${hostname}.yaml,
-    }:
-    builder {
-      inherit system;
-      modules = modules ++ [
-        { nixpkgs.overlays = commonOverlays; }
-      ];
-      specialArgs = mkSpecialArgs {
-        inherit
-          homeSopsFile
-          hostname
-          systemSopsFile
-          username
-          ;
-      };
-    };
-
-  mkNixosSystem = mkSystem inputs.nixpkgs.lib.nixosSystem;
-  mkDarwinSystem = mkSystem inputs.darwin.lib.darwinSystem;
-
-  mkHomeManagerConfiguration =
-    {
-      system,
-      username,
-      overlays ? commonOverlays,
-      modules,
-      homeSopsFile ? ../secrets/roles/personal.yaml,
-    }:
-    let
-      homeDirectory = mkHomeDirectory username system;
-    in
-    inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = mkPkgs {
-        inherit (inputs) nixpkgs;
-        inherit system overlays;
-      };
-      extraSpecialArgs =
-        (mkSpecialArgs {
-          inherit
-            homeSopsFile
-            username
-            ;
-        })
-        // {
-          theme = (import ../themes) "tokyonight-storm";
-        };
-      modules = modules ++ [
-        inputs.sops-nix.homeManagerModules.sops
-        (import ../home-manager/defaults.nix {
-          inherit
-            homeDirectory
-            homeSopsFile
-            sopsShared
-            username
-            ;
-        })
-      ];
-    };
-
-  mkHostConfigurations =
-    builder: hosts:
-    inputs.nixpkgs.lib.mapAttrs (
-      hostname: args:
-      builder (
-        args
-        // {
-          inherit hostname;
-        }
-      )
-    ) hosts;
-
-  mkNamedConfigurations = builder: hosts: inputs.nixpkgs.lib.mapAttrs (_: builder) hosts;
+  inherit (lib)
+    mkDarwinSystem
+    mkHomeManagerConfiguration
+    mkHostConfigurations
+    mkNamedConfigurations
+    mkNixosSystem
+    ;
 
   darwinHosts = {
-    work_mac = {
-      system = "aarch64-darwin";
-      username = "tsunematsu";
-      homeSopsFile = ../secrets/roles/work.yaml;
-      modules = [ ./work_mac/darwin.nix ];
-    };
     hydrangea = {
       system = "aarch64-darwin";
       username = "tnmt";
@@ -174,12 +40,6 @@ let
           system.stateVersion = "25.05";
         }
       ];
-    };
-    work_vm = {
-      system = "x86_64-linux";
-      username = "tnmt";
-      homeSopsFile = ../secrets/roles/work.yaml;
-      modules = [ ./work_vm/nixos.nix ];
     };
   };
 

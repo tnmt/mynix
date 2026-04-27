@@ -52,6 +52,8 @@
       forAllSystems = inputs.nixpkgs.lib.genAttrs allSystems;
     in
     {
+      lib = import ./lib { inherit inputs; };
+
       nixosConfigurations = (import ./hosts inputs).nixos;
       darwinConfigurations = (import ./hosts inputs).darwin;
       homeConfigurations = (import ./hosts inputs).home-manager;
