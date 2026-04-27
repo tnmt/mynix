@@ -3,10 +3,6 @@ keys:
   - &dahlia age1x83l95gqyu5r5d5wjlkfm44q0ggj2tr79njuhgqlqdvlqdgcwvpqmsxgnl
   - &sunflower age1avnkg4hjnprjsn2f8ehj8nzgzutj930tdx67f9t66gf85k24c3mq0n89jf
   - &hydrangea age1c3w7yxyym205xxuz0slfuh405vn9u69zr5tumenlggcrdjvupaksz424j6
-  # Retained so that work_vm / work_mac (managed in tnmt-work-flake) can
-  # still decrypt shared secrets (roles/personal.yaml, common.yaml).
-  - &work_vm age10huk33p52heg6rwltktc9ews6enjaluvqe9lly3pwgehz6jqhf8swkvtq3
-  - &work_mac age1t73ldrule2ccx63a2hz229ea54tlgc664gqzhm8tq24zr4ur63usp7ekqd
 
 creation_rules:
   - path_regex: secrets/hosts/dahlia\.yaml$
@@ -31,8 +27,6 @@ creation_rules:
           - *dahlia
           - *sunflower
           - *hydrangea
-          - *work_vm
-          - *work_mac
   - path_regex: secrets/.*\.yaml$
     key_groups:
       - age:
