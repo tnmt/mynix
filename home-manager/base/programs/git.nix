@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  sopsShared,
   theme,
   ...
 }:
@@ -108,22 +106,7 @@ in
   };
 
   home.packages = with pkgs; [ git-trim ];
-
-  sops.templates = {
-    "git-identity" = {
-      content = sopsShared.mkGitIdentityTemplate {
-        emailPlaceholder = config.sops.placeholder.git_email;
-        namePlaceholder = config.sops.placeholder.git_name;
-      };
-      path = "${config.xdg.configHome}/git/identity";
-    };
-
-    "git-personal-identity" = {
-      content = sopsShared.mkGitIdentityTemplate {
-        emailPlaceholder = config.sops.placeholder.git_personal_email;
-        namePlaceholder = config.sops.placeholder.git_personal_name;
-      };
-      path = "${config.xdg.configHome}/git/personal-identity";
-    };
-  };
+  # ~/.config/git/{identity,personal-identity} are rendered at the
+  # NixOS/darwin system layer (profiles/common/user-sops.nix) and
+  # symlinked into ~/.config/git/.
 }
