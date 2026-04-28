@@ -15,3 +15,6 @@ if [ -n "$nix_staged" ]; then
   nix run nixpkgs#deadnix -- --fail .
   nix run nixpkgs#statix -- check .
 fi
+
+# Secret scan on staged changes
+gitleaks protect --staged --redact --verbose --no-banner

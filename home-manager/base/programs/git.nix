@@ -104,7 +104,10 @@ in
     };
   };
 
-  home.packages = with pkgs; [ git-trim ];
+  home.packages = with pkgs; [
+    git-trim
+    gitleaks
+  ];
   # ~/.config/git/{identity,personal-identity} are rendered at the
   # NixOS/darwin system layer (profiles/common/user-sops.nix) and
   # symlinked into ~/.config/git/.
