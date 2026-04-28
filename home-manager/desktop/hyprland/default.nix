@@ -10,7 +10,7 @@
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix
-    ./kanshi.nix
+    ./shikane.nix
     ./waybar.nix
     ./walker.nix
     ./swayosd.nix
