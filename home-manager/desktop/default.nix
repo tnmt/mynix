@@ -10,6 +10,7 @@ in
   imports = [
     ./maestral.nix
     ./vesktop.nix
+    ./vimiv.nix
     ./yazi.nix
   ];
   home.packages = with pkgs; [
