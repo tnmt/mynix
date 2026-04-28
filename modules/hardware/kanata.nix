@@ -1,9 +1,11 @@
-# Japanese keyboard remapping via kanata
+# Keyboard remapping via kanata
+# Common:
 # - CapsLock -> Left Control
+# - Left Super: hold -> Super / tap -> Muhenkan (IME off)
+# - Right Super: hold -> Super / tap -> Henkan (IME on)
+# JIS (built-in laptop):
 # - Yen (¥) -> Backslash (\)
 # - Ro (ろ) -> Grave (`)
-# - Left Alt: hold -> Alt / tap -> Muhenkan (IME off)
-# - Right Alt: hold -> Alt / tap -> Henkan (IME on)
 {
   systemd.services.kanata-default = {
     serviceConfig = {
@@ -21,21 +23,21 @@
           caps
           yen
           ro
-          lalt
-          ralt
+          lmet
+          rmet
         )
 
         (defalias
-          lalt (tap-hold 200 200 muhenkan lalt)
-          ralt (tap-hold 200 200 henkan ralt)
+          lmet (tap-hold-press 200 200 muhenkan lmet)
+          rmet (tap-hold-press 200 200 henkan rmet)
         )
 
         (deflayer default
           lctl
           \
           grv
-          @lalt
-          @ralt
+          @lmet
+          @rmet
         )
       '';
     };
