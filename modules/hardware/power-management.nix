@@ -4,6 +4,15 @@
 { pkgs, ... }:
 {
   services = {
+    logind = {
+      # Keep the system awake when the laptop lid is closed while docked
+      # or driving an external display.
+      settings.Login = {
+        HandleLidSwitch = "suspend";
+        HandleLidSwitchDocked = "ignore";
+      };
+    };
+
     power-profiles-daemon.enable = true;
     upower.enable = true;
 
