@@ -40,6 +40,11 @@
       url = "github:tnmt/nur-packages";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprdynamicmonitors = {
+      url = "github:fiffeek/hyprdynamicmonitors";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

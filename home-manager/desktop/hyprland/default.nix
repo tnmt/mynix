@@ -10,7 +10,7 @@
     ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix
-    ./shikane.nix
+    ./hyprdynamicmonitors.nix
     ./waybar.nix
     ./walker.nix
     ./swayosd.nix
