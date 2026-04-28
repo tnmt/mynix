@@ -50,6 +50,7 @@ in
           ll = ''log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'';
           undo = "reset --soft HEAD^";
           aicommitjp = ''!f() { COMMITMSG=$(claude -p 'Generate ONLY a one-line Git commit message in Japanese. Start with one of these prefixes: feat:, fix:, refactor:, chore:, or docs: based on the type of change. The prefix should be in English, but the rest of the message should be in Japanese. Summarize what was changed and why, based strictly on the contents of `git diff --cached`. Do not add explanation or a body. Output only the commit summary line.'); git commit -m "$COMMITMSG" ; }; f'';
+          aicommit = ''!f() { COMMITMSG=$(claude -p 'Generate ONLY a one-line Git commit message in English. Start with one of these prefixes: feat:, fix:, refactor:, chore:, or docs: based on the type of change. Summarize what was changed and why, based strictly on the contents of `git diff --cached`. Do not add explanation or a body. Output only the commit summary line.'); git commit -m "$COMMITMSG" ; }; f'';
         };
 
         diff = {
