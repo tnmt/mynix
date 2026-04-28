@@ -3,8 +3,12 @@
   home.packages = [ pkgs.maestral ];
 
   home.activation.dropboxCoW = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    if [ ! -d "$HOME/Dropbox" ]; then
-      $DRY_RUN_CMD mkdir -p "$HOME/Dropbox"
+    if [ ! -e "$HOME/Dropbox" ]; then
+      if [ "$(${pkgs.coreutils}/bin/stat -f -c %T "$HOME" 2>/dev/null)" = "btrfs" ]; then
+        $DRY_RUN_CMD ${pkgs.btrfs-progs}/bin/btrfs subvolume create "$HOME/Dropbox"
+      else
+        $DRY_RUN_CMD mkdir -p "$HOME/Dropbox"
+      fi
       $DRY_RUN_CMD ${pkgs.e2fsprogs}/bin/chattr +C "$HOME/Dropbox" || true
     fi
   '';

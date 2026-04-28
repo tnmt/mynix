@@ -3,7 +3,10 @@
 # Filesystems / swap are declared in ./disko.nix
 { lib, pkgs, ... }:
 {
-  environment.systemPackages = [ pkgs.tpm2-tools ];
+  environment.systemPackages = [
+    pkgs.tpm2-tools
+    pkgs.e2fsprogs
+  ];
 
   security.tpm2 = {
     enable = true;
