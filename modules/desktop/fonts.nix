@@ -9,6 +9,15 @@
     ];
     fontDir.enable = true;
     fontconfig = {
+      antialias = true;
+      hinting = {
+        enable = true;
+        style = "slight";
+      };
+      subpixel = {
+        rgba = "rgb";
+        lcdfilter = "default";
+      };
       defaultFonts = {
         serif = [
           "Noto Serif CJK JP"
