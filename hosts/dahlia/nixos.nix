@@ -25,6 +25,12 @@ in
   # Host-local networking and access.
   services.tailscale.enable = true;
 
+  # Dropbox LANSync: TCP=peer転送, UDP=ブロードキャスト発見
+  networking.firewall = {
+    allowedTCPPorts = [ 17500 ];
+    allowedUDPPorts = [ 17500 ];
+  };
+
   profiles.userTemplates = {
     enable = true;
     voiceInput = true;

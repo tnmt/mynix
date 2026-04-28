@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 {
-  home.packages = [ pkgs.maestral ];
+  home.packages = [ pkgs.dropbox ];
 
   home.activation.dropboxCoW = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -e "$HOME/Dropbox" ]; then
@@ -13,17 +13,19 @@
     fi
   '';
 
-  systemd.user.services.maestral = {
+  systemd.user.services.dropbox = {
     Unit = {
-      Description = "Maestral Dropbox client";
+      Description = "Dropbox official daemon";
       After = [ "network-online.target" ];
       Wants = [ "network-online.target" ];
     };
     Service = {
-      ExecStart = "${pkgs.maestral}/bin/maestral start -f";
-      ExecStop = "${pkgs.maestral}/bin/maestral stop";
+      Type = "simple";
+      ExecStart = "${pkgs.dropbox}/bin/dropbox";
+      ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+      KillMode = "control-group";
       Restart = "on-failure";
-      Type = "notify";
+      Nice = "10";
     };
     Install.WantedBy = [ "default.target" ];
   };

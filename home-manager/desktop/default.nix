@@ -8,7 +8,7 @@ in
 {
 
   imports = [
-    ./maestral.nix
+    ./dropbox.nix
     ./vesktop.nix
     ./vimiv.nix
     ./yazi.nix
