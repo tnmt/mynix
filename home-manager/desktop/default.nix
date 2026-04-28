@@ -1,4 +1,10 @@
 { pkgs, theme, ... }:
+let
+  chromiumFlags = ''
+    --enable-wayland-ime
+    --wayland-text-input-version=3
+  '';
+in
 {
 
   imports = [
@@ -75,6 +81,16 @@
       [General]
       theme=Tokyo-Night-Storm
     '';
+    "brave-flags.conf".text = chromiumFlags;
+    "microsoft-edge-flags.conf".text = chromiumFlags;
+    "chromium-flags.conf".text = chromiumFlags;
+    "electron-flags.conf".text = chromiumFlags;
+    "code-flags.conf".text = chromiumFlags;
+    "obsidian-flags.conf".text = chromiumFlags;
+    "slack-flags.conf".text = chromiumFlags;
+    "discord-flags.conf".text = chromiumFlags;
+    "vesktop-flags.conf".text = chromiumFlags;
+    "1password-flags.conf".text = chromiumFlags;
   };
 
   programs.chromium = {
