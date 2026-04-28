@@ -8,6 +8,7 @@ in
 {
 
   imports = [
+    ./maestral.nix
     ./vesktop.nix
     ./yazi.nix
   ];
