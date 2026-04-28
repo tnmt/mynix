@@ -22,5 +22,8 @@
     nixd
     python3
     nodejs
+
+    # CLI utilities
+    pueue
   ];
 }

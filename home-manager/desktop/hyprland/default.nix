@@ -30,6 +30,7 @@
     swayosd
     grim
     slurp
+    swappy
     hyprpicker
     pavucontrol
     pulseaudio

@@ -35,6 +35,10 @@ in
     # cui image viewer
     chafa
 
+    # gui image viewer
+    vimiv-qt
+    mcomix
+
     # video player
     mpv
 

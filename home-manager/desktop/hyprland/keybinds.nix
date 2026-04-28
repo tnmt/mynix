@@ -149,6 +149,7 @@
       ''$mainMod SHIFT, P, Screenshot fullscreen to clipboard, exec, grim - | wl-copy && notify-send "Screenshot" "Copied to clipboard" -t 2000''
       ''$mainMod ALT, P, Screenshot region to file, exec, mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000''
       ''$mainMod ALT SHIFT, P, Screenshot fullscreen to file, exec, mkdir -p ~/Pictures/Screenshots && grim ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000''
+      ''$mainMod CTRL, P, Screenshot region edit (swappy), exec, mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" - | swappy -f -''
 
       # Settings / Controls
       "$mainMod ALT, SPACE, Settings menu, exec, launch-settings"
