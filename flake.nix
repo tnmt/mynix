@@ -45,6 +45,8 @@
       url = "github:fiffeek/hyprdynamicmonitors";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-claude-code.url = "github:ryoppippi/nix-claude-code";
   };
 
   outputs =

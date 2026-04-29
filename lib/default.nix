@@ -8,6 +8,7 @@ let
 
   commonOverlays = [
     inputs.nur.overlays.default
+    inputs.nix-claude-code.overlays.default
     (final: prev: {
       inherit (final.nur.repos.tnmt) oneaws;
       inherit (final.nur.repos.tnmt) ccusage;
