@@ -58,6 +58,8 @@
       forgejo-cli
       gh
       ghq
+      git-wt
+      roots
       ripgrep
       fd
       tig

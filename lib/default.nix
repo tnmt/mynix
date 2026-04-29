@@ -15,6 +15,8 @@ let
       inherit (final.nur.repos.tnmt) gogcli;
       inherit (final.nur.repos.tnmt) kagiana;
       inherit (final.nur.repos.tnmt) ccpocket-bridge;
+      inherit (final.nur.repos.tnmt) roots;
+      inherit (final.nur.repos.tnmt) git-wt;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];
