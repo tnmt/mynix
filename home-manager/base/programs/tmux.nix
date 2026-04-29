@@ -31,10 +31,9 @@ in
           src = pkgs.fetchFromGitHub {
             owner = "janoamaral";
             repo = "tokyo-night-tmux";
-            rev = "v1.7.0";
-            sha256 = "sha256-nbQ0yefjhxr6d4SJeGtY7zLnHLgSouwQrlHDo9N3QeY=";
+            rev = "v1.8.1";
+            sha256 = "sha256-tmS0MBANSsTg53E2GB0TnjwGcZXboTRFNeDE6Ehn+bM=";
           };
-          patches = [ ./tokyo-night-tmux-battery-status.patch ];
         };
         extraConfig = ''
           set -g @tokyo-night-tmux_theme storm
