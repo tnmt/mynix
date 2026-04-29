@@ -78,6 +78,19 @@ Before switching a host, make sure the target machine has:
 - `nh` available if you want to use the recommended commands below
 - the corresponding `age` key material required by `sops-nix`
 
+### Switch (auto-detect)
+
+`nix run .#switch` reads the current hostname and dispatches to the matching `nh os` / `nh darwin` command, so you don't need to remember the platform or host flag.
+
+```bash
+# Rebuild & activate the current host
+nix run .#switch
+
+# Pass extra args through to nh (after `--`)
+nix run .#switch -- --dry
+nix run .#switch -- -H sunflower
+```
+
 ### NixOS
 
 ```bash
