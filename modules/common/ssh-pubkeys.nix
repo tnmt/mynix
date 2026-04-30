@@ -26,7 +26,7 @@
     dahlia = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPzvOWsFZvqwisafP0yU9X4xOl432dwl2t5tG/JqeKKE tnmt@dahlia";
     sunflower = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINIK98Iy+8/zRYoc4VRxc2dYCwkhz3i7RVz6DfaQuEN4 tnmt@sunflower";
     hydrangea = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICUZO2rriQloQ/mQADud1tIJRpvcyq8NngULwVTsIqm8 tnmt@hydrangea";
-    work_mac = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEbttselTEO+niVdO0fLRoC8qFRslEVtPpFgsGa7xUQ work_mac";
+    work_mac = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMEbttselTEO+niVdO0fLRoC8qFRslEVtPpFgsGa7xUQ tnmt@work_mac";
   };
 
   # Mobile app keys. All entries assumed to share the SSH Term-family
