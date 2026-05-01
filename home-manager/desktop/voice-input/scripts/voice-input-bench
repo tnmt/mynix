@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+# Benchmark whisper.cpp models on a corpus of (wav, txt) pairs.
+# Outputs CSV with model, sample, duration_s, infer_s, rtf, cer.
+#
+# Layout:
+#   $SAMPLES_DIR/foo.wav
+#   $SAMPLES_DIR/foo.txt   # ground-truth transcription (UTF-8, no trailing newline ok)
+#
+# Usage:
+#   voice-input-bench [--samples DIR] [--out FILE] [--models "name1=path1 name2=path2 ..."]
+#
+# Defaults:
+#   --samples ${XDG_DATA_HOME:-$HOME/.local/share}/voice-input-bench/samples
+#   --out     ./voice-input-bench.csv
+#   --models  medium=$MODEL_DIR/ggml-medium.bin
+
+set -euo pipefail
+
+MODEL_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/whisper-models"
+SAMPLES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/voice-input-bench/samples"
+OUT="./voice-input-bench.csv"
+MODELS_ARG="medium=$MODEL_DIR/ggml-medium.bin"
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --samples) SAMPLES_DIR="$2"; shift 2 ;;
+    --out)     OUT="$2"; shift 2 ;;
+    --models)  MODELS_ARG="$2"; shift 2 ;;
+    -h|--help)
+      sed -n '2,12p' "$0"; exit 0 ;;
+    *) echo "unknown arg: $1" >&2; exit 2 ;;
+  esac
+done
+
+if ! compgen -G "$SAMPLES_DIR/*.wav" >/dev/null; then
+  echo "no .wav files under $SAMPLES_DIR" >&2
+  exit 1
+fi
+
+echo "model,sample,duration_s,infer_s,rtf,cer" > "$OUT"
+
+cer_py() {
+  python3 - "$1" "$2" <<'PY'
+import sys
+from jiwer import cer
+ref = open(sys.argv[1], encoding="utf-8").read().strip()
+hyp = open(sys.argv[2], encoding="utf-8").read().strip()
+print(f"{cer(ref, hyp):.4f}")
+PY
+}
+
+for spec in $MODELS_ARG; do
+  name="${spec%%=*}"
+  path="${spec#*=}"
+  if [[ ! -f "$path" ]]; then
+    echo "skip $name: model not found at $path" >&2
+    continue
+  fi
+
+  for wav in "$SAMPLES_DIR"/*.wav; do
+    base="${wav%.wav}"
+    ref_txt="${base}.txt"
+    if [[ ! -f "$ref_txt" ]]; then
+      echo "skip $(basename "$wav"): missing ${base}.txt" >&2
+      continue
+    fi
+
+    duration=$(soxi -D "$wav")
+    hyp_file=$(mktemp)
+
+    t0=$(date +%s.%N)
+    whisper-cli -m "$path" -l ja --no-timestamps -f "$wav" 2>/dev/null \
+      | sed '/^$/d; s/^ *//; s/ *$//' \
+      | tr -d '\n' > "$hyp_file"
+    t1=$(date +%s.%N)
+
+    infer=$(echo "$t1 - $t0" | bc -l)
+    rtf=$(echo "$infer / $duration" | bc -l)
+    cer_val=$(cer_py "$ref_txt" "$hyp_file")
+
+    printf "%s,%s,%.3f,%.3f,%.3f,%s\n" \
+      "$name" "$(basename "$wav")" "$duration" "$infer" "$rtf" "$cer_val" \
+      | tee -a "$OUT"
+
+    rm -f "$hyp_file"
+  done
+done
+
+echo
+echo "=== summary (median per model) ==="
+python3 - "$OUT" <<'PY'
+import csv, statistics, sys
+from collections import defaultdict
+rows = list(csv.DictReader(open(sys.argv[1])))
+by = defaultdict(lambda: {"rtf": [], "cer": []})
+for r in rows:
+    by[r["model"]]["rtf"].append(float(r["rtf"]))
+    by[r["model"]]["cer"].append(float(r["cer"]))
+print(f"{'model':<20} {'median_rtf':>12} {'median_cer':>12} {'n':>4}")
+for m, v in by.items():
+    print(f"{m:<20} {statistics.median(v['rtf']):>12.3f} {statistics.median(v['cer']):>12.4f} {len(v['rtf']):>4}")
+PY
