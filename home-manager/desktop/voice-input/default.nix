@@ -11,9 +11,11 @@ in
     jq
     curl
     bc
-    benchPython
 
     (pkgs.writeShellScriptBin "voice-input" (builtins.readFile ./scripts/voice-input))
-    (pkgs.writeShellScriptBin "voice-input-bench" (builtins.readFile ./scripts/voice-input-bench))
+    (pkgs.writeShellScriptBin "voice-input-bench" ''
+      export PATH=${benchPython}/bin:$PATH
+      ${builtins.readFile ./scripts/voice-input-bench}
+    '')
   ];
 }

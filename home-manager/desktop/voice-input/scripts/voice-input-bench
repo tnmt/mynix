@@ -32,7 +32,9 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if ! compgen -G "$SAMPLES_DIR/*.wav" >/dev/null; then
+shopt -s nullglob
+_wavs=("$SAMPLES_DIR"/*.wav)
+if [[ ${#_wavs[@]} -eq 0 ]]; then
   echo "no .wav files under $SAMPLES_DIR" >&2
   exit 1
 fi
