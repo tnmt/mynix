@@ -10,6 +10,7 @@ in
   imports = [
     ./hardware.nix
     ./disko.nix
+    ./network.nix
 
     # Shared system roles.
     ../../modules/nixos/core
@@ -18,7 +19,6 @@ in
     ../../modules/programs/virtualisation.nix
     ../../modules/hardware/power-management.nix
     ../../profiles/nixos/desktop-hyprland.nix
-    ../../profiles/nixos/homelab-wifi-static.nix
     ../../modules/hardware/kanata.nix
   ];
 
