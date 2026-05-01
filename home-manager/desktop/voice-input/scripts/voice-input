@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Toggle voice input: press once to start recording, again to stop and transcribe.
-# Uses whisper.cpp with the medium model for Japanese speech-to-text.
+# Transcription goes through a locally lazy-launched whisper-server (medium, ja)
+# so the model stays warm in GPU memory across invocations.
 # With --refine flag, post-processes via OpenRouter LLM API.
 
 set -euo pipefail
@@ -15,6 +16,10 @@ MODEL_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/whisper-models"
 MODEL="$MODEL_DIR/ggml-medium.bin"
 MODEL_URL="https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin"
 API_KEY_FILE="/run/secrets/voice_input_openrouter_api_key"
+WHISPER_HOST="127.0.0.1"
+WHISPER_PORT="8080"
+WHISPER_URL="http://${WHISPER_HOST}:${WHISPER_PORT}"
+WHISPER_LOG="/tmp/whisper-server.log"
 
 ensure_model() {
   if [[ ! -f "$MODEL" ]]; then
@@ -23,6 +28,24 @@ ensure_model() {
     curl -L -o "$MODEL" "$MODEL_URL"
     notify-send "Voice Input" "Model download complete" -t 3000
   fi
+}
+
+ensure_server() {
+  if curl -s -o /dev/null --max-time 1 "${WHISPER_URL}/" 2>/dev/null; then
+    return 0
+  fi
+  ensure_model
+  nohup whisper-server -m "$MODEL" -l ja --port "$WHISPER_PORT" -nt \
+    >"$WHISPER_LOG" 2>&1 &
+  disown
+  for _ in $(seq 1 60); do
+    sleep 0.5
+    if curl -s -o /dev/null --max-time 1 "${WHISPER_URL}/" 2>/dev/null; then
+      return 0
+    fi
+  done
+  notify-send "Voice Input" "whisper-server failed to start" -t 3000
+  return 1
 }
 
 refine_text() {
@@ -63,7 +86,7 @@ $raw"
 }
 
 start_recording() {
-  ensure_model
+  ensure_server &
   if [[ "$REFINE" == true ]]; then
     echo "refine" > "$MODEFILE"
     notify-send "Voice Input (LLM)" "Recording... Press Super+Shift+M to stop" -t 2000
@@ -91,9 +114,15 @@ stop_and_transcribe() {
   fi
 
   notify-send "Voice Input" "Transcribing..." -t 2000
+  ensure_server
 
   local text
-  text=$(whisper-cli -m "$MODEL" -l ja --no-timestamps -f "$AUDIO" 2>/dev/null \
+  text=$(curl -s --max-time 30 \
+    -F "file=@$AUDIO" \
+    -F "language=ja" \
+    -F "response_format=text" \
+    -F "no_timestamps=true" \
+    "${WHISPER_URL}/inference" \
     | sed '/^$/d; s/^ *//; s/ *$//' \
     | tr -d '\n')
 
