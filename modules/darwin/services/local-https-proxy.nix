@@ -85,7 +85,7 @@ in
 
     launchd.daemons.caddy = {
       serviceConfig = {
-        Label = "com.tnmt.caddy";
+        Label = "info.tnmt.caddy";
         ProgramArguments = [
           "${pkgs.caddy}/bin/caddy"
           "run"
