@@ -3,7 +3,7 @@
   ...
 }:
 let
-  services = import ../../modules/services;
+  services = import ../../modules/nixos/services;
   pubkeys = import ../../modules/common/ssh-pubkeys.nix;
 in
 {
@@ -19,11 +19,21 @@ in
     ../../modules/programs/virtualisation.nix
     ../../modules/hardware/power-management.nix
     ../../profiles/nixos/desktop-hyprland.nix
+    ../../profiles/nixos/givy.nix
     ../../modules/hardware/kanata.nix
   ];
 
   # Host-local networking and access.
   services.tailscale.enable = true;
+
+  mynix.profiles.givy = {
+    enable = true;
+    instances.github = {
+      root = "/home/${username}/ghq/github.com";
+      port = 6271;
+    };
+    trustedRootCAFile = ./caddy-local-ca.crt;
+  };
 
   # Dropbox LANSync: TCP=peer転送, UDP=ブロードキャスト発見
   networking.firewall = {

@@ -3,7 +3,7 @@
   ...
 }:
 let
-  services = import ../../modules/services;
+  services = import ../../modules/nixos/services;
   pubkeys = import ../../modules/common/ssh-pubkeys.nix;
 in
 {

@@ -27,10 +27,10 @@ in
 {
   sops = {
     secrets.anthropic_api_key = {
-      sopsFile = ../../secrets/common.yaml;
+      sopsFile = ../../../secrets/common.yaml;
     };
     secrets.ccpocket_bridge_api_key = {
-      sopsFile = ../../secrets/common.yaml;
+      sopsFile = ../../../secrets/common.yaml;
     };
     templates."ccpocket-bridge-env" = {
       content = ''

@@ -30,7 +30,7 @@
   };
 
   # Mobile app keys. All entries assumed to share the SSH Term-family
-  # MAC-algorithm limitation (see modules/services/openssh.nix). If a
+  # MAC-algorithm limitation (see modules/nixos/services/openssh.nix). If a
   # future mobile app supports ETM MACs natively, move it out of this
   # attrset so the workaround does not apply.
   mobile = {

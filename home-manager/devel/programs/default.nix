@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./givy.nix
     ./neovim.nix
   ];
 

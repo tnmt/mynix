@@ -5,7 +5,7 @@
   ...
 }:
 let
-  pubkeys = import ../common/ssh-pubkeys.nix;
+  pubkeys = import ../../common/ssh-pubkeys.nix;
   authorizedHostKeys =
     lib.attrByPath
       [
