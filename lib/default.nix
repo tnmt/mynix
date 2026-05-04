@@ -18,6 +18,9 @@ let
       inherit (final.nur.repos.tnmt) roots;
       inherit (final.nur.repos.tnmt) git-wt;
       inherit (final.nur.repos.tnmt) givy;
+      # TODO: switch to `final.nur.repos.tnmt.mo` once the NUR snapshot
+      # picks up the package; sourced directly from nur-tnmt for now.
+      inherit (inputs.nur-tnmt.packages.${final.stdenv.hostPlatform.system}) mo;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];

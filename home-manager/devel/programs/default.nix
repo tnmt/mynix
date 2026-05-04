@@ -16,6 +16,9 @@
     gws
     gogcli
 
+    # docs / preview
+    mo
+
     # Build/lang
     gnumake
     yamlfmt
