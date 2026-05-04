@@ -20,7 +20,6 @@ in
     ../../modules/hardware/power-management.nix
     ../../profiles/nixos/desktop-hyprland.nix
     ../../profiles/nixos/givy.nix
-    ../../profiles/nixos/mo.nix
     ../../modules/hardware/kanata.nix
   ];
 
@@ -35,8 +34,6 @@ in
     };
     trustedRootCAFile = ./caddy-local-ca.crt;
   };
-
-  mynix.profiles.mo.enable = true;
 
   # Dropbox LANSync: TCP=peer転送, UDP=ブロードキャスト発見
   networking.firewall = {
