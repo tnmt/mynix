@@ -16,6 +16,7 @@
     ./swayosd.nix
     ./webapps.nix
     ./wlogout.nix
+    ./zen-browser.nix
   ];
 
   wayland.windowManager.hyprland = {

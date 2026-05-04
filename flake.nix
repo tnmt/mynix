@@ -47,6 +47,11 @@
     };
 
     nix-claude-code.url = "github:ryoppippi/nix-claude-code";
+
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
