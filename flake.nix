@@ -48,6 +48,11 @@
 
     nix-claude-code.url = "github:ryoppippi/nix-claude-code";
 
+    nix-steipete-tools = {
+      url = "github:openclaw/nix-steipete-tools";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";

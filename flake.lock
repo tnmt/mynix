@@ -196,6 +196,26 @@
         "type": "github"
       }
     },
+    "nix-steipete-tools": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777863905,
+        "narHash": "sha256-rauT666mn+6vsRPsMqjcuXX0Dfacaruc56DnmCxtBD8=",
+        "owner": "openclaw",
+        "repo": "nix-steipete-tools",
+        "rev": "c94e18bc152da905aa2f9b48a6d73db6e62e4f2e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "openclaw",
+        "repo": "nix-steipete-tools",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1777796046,
@@ -356,6 +376,7 @@
         "home-manager-darwin": "home-manager-darwin",
         "hyprdynamicmonitors": "hyprdynamicmonitors",
         "nix-claude-code": "nix-claude-code",
+        "nix-steipete-tools": "nix-steipete-tools",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",

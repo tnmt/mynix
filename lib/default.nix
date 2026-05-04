@@ -9,10 +9,12 @@ let
   commonOverlays = [
     inputs.nur.overlays.default
     inputs.nix-claude-code.overlays.default
+    (final: _prev: {
+      inherit (inputs.nix-steipete-tools.packages.${final.stdenv.hostPlatform.system}) gogcli;
+    })
     (final: prev: {
       inherit (final.nur.repos.tnmt) oneaws;
       inherit (final.nur.repos.tnmt) ccusage;
-      inherit (final.nur.repos.tnmt) gogcli;
       inherit (final.nur.repos.tnmt) kagiana;
       inherit (final.nur.repos.tnmt) ccpocket-bridge;
       inherit (final.nur.repos.tnmt) roots;
