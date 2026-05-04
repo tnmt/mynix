@@ -6,7 +6,7 @@ Personal Nix configurations for Linux and macOS hosts, built as a single flake.
 
 This repository contains:
 - NixOS system definitions for a desktop machine and a WSL machine
-- nix-darwin system definitions for two macOS hosts
+- a nix-darwin system definition for one macOS host
 - shared modules for core settings, desktop features, services, and user programs
 - secrets management with `sops-nix`
 
@@ -44,10 +44,11 @@ Work-related hosts (`work_mac`, `work_vm`) live in the private `tnmt-work-flake`
 ```text
 .
 ├── flake.nix              # Flake inputs, outputs, devShell, formatter, helper app
+├── lib/                   # Reusable host/HM builders, exposed as `mynix.lib`
 ├── hosts/                 # Concrete host entrypoints
 ├── home-manager/          # Reusable Home Manager modules
 ├── modules/               # Reusable NixOS and cross-host modules
-├── profiles/              # Role-based profiles (nixos, home-manager, darwin)
+├── profiles/              # Role-based profiles (common, nixos, home-manager, darwin)
 ├── secrets/               # sops-encrypted secret files
 ├── themes/                # Shared theme definitions
 └── treefmt.toml           # Formatter configuration
@@ -57,7 +58,8 @@ The important split is:
 - `hosts/` selects a machine and wires modules together
 - `modules/` holds lower-level reusable system pieces
 - `home-manager/` holds reusable user-level pieces
-- `profiles/` bundles opinionated groups of modules per layer (nixos, home-manager, darwin)
+- `profiles/` bundles opinionated groups of modules per layer (common, nixos, home-manager, darwin)
+- `lib/` exposes the host builders (`mkNixosSystem`, `mkDarwinSystem`, `mkHomeManagerConfiguration`, …) reused by downstream flakes such as `tnmt-work-flake`
 
 ## Notable Features
 
@@ -67,7 +69,7 @@ The important split is:
 - `sops-nix` secrets unified at the system layer; host SSH key decryption is the default for every host
 - Input remapping with `kanata` (Linux) and Karabiner-Elements (macOS)
 - Shared Tokyo Night Storm theme wiring
-- NUR overlay usage for custom packages such as `oneaws`, `ccusage`, `gogcli`, and `kagiana`
+- NUR overlay usage for custom packages from [`nur-tnmt`](https://github.com/tnmt/nur-packages)
 
 ## Usage
 
@@ -76,7 +78,7 @@ The important split is:
 Before switching a host, make sure the target machine has:
 - Nix with flakes enabled
 - `nh` available if you want to use the recommended commands below
-- the corresponding `age` key material required by `sops-nix`
+- an SSH host key registered in `.sops.yaml` so `sops-nix` can decrypt secrets at activation time
 
 ### Switch (auto-detect)
 
