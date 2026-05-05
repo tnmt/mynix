@@ -1,4 +1,5 @@
 {
+  config,
   username,
   ...
 }:
@@ -25,6 +26,21 @@ in
 
   # Host-local networking and access.
   services.tailscale.enable = true;
+  services.netbird.clients.dahlia = {
+    port = 51820;
+    interface = "nb-dahlia";
+    hardened = true;
+    openFirewall = true;
+    openInternalFirewall = true;
+    environment = {
+      NB_MANAGEMENT_URL = "https://netbird.tnmt.info";
+      NB_ADMIN_URL = "https://netbird.tnmt.info";
+    };
+    login = {
+      enable = true;
+      setupKeyFile = config.sops.secrets.netbird_setup_key.path;
+    };
+  };
 
   mynix.profiles.givy = {
     enable = true;
@@ -49,6 +65,8 @@ in
       tier = "laptop";
     };
   };
+
+  sops.secrets.netbird_setup_key = { };
 
   users.users."${username}" = {
     extraGroups = [
