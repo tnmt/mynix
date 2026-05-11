@@ -4,6 +4,7 @@
     ./home-manager.nix
     ./i18n.nix
     ./kernel-hardening.nix
+    ./netbird.nix
     ./network.nix
     ./nix.nix
     ./sops.nix
