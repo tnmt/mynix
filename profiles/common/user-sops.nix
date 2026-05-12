@@ -73,11 +73,6 @@ in
         default = null;
         description = ''Required when role = "client".'';
       };
-      includeTailscale = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-        description = "Include Tailscale -ts host aliases (requires MagicDNS on this host).";
-      };
     };
   };
 
@@ -141,7 +136,7 @@ in
           content = sopsShared.mkSshPrivateTemplate {
             lanPrefixPlaceholder = config.sops.placeholder.lan_prefix;
             vps01HostPlaceholder = config.sops.placeholder.vps01_host;
-            inherit (cfg.sshPrivate) tier includeTailscale;
+            inherit (cfg.sshPrivate) tier;
           };
         };
       });

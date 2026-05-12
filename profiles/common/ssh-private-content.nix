@@ -4,17 +4,17 @@
 # private subnet) and the vps01 FQDN are substituted from sops secrets
 # at activation time via config.sops.placeholder.<name>, so only
 # non-identifying tokens (host-suffix octets, local aliases, ports)
-# live in plaintext Nix. Tailscale -ts aliases resolve via MagicDNS.
+# live in plaintext Nix. Short host names (e.g. `dahlia`) resolve via
+# the NetBird search domain (netbird.selfhosted) added by
+# modules/nixos/core/netbird.nix.
 #
 # tier = "laptop":      public path only — github, vps01, and the
-#                       sunflower entrypoint blocks (jump via vps01 on
-#                       Tailscale miss). Tailscale aliases limited to
-#                       sunflower variants.
+#                       sunflower entrypoint blocks (jump via vps01
+#                       when the NetBird peer is unreachable).
 # tier = "workstation": the LAN hub itself. Self-reference sunflower
 #                       blocks are dropped (useless on the hub), and
 #                       LAN peers (dahlia, obsync, silvea) are reached
-#                       directly instead of via ProxyJump. Tailscale
-#                       aliases also include the LAN peers.
+#                       directly instead of via ProxyJump.
 #
 # The hub-is-workstation coupling is intentional: there is no current
 # use case for a non-hub workstation. If one appears, re-introduce a
@@ -23,7 +23,6 @@
   lanPrefix,
   vps01Host,
   tier,
-  includeTailscale,
 }:
 let
   header = ''
@@ -47,8 +46,8 @@ let
         LocalForward 13389 sunflower:3389
 
     # === sunflower (Windows SSH, port 22) ===
-    # Probe via Tailscale MagicDNS (direct peer). Fall back to vps01
-    # jump when the peer is unreachable (e.g. Tailscale down).
+    # Probe the direct NetBird peer first. Fall back to a vps01 jump
+    # when the peer is unreachable (e.g. NetBird app stopped).
     Match host sunflower !exec "nc -z -w2 sunflower 22 2>/dev/null"
         ProxyJump vps01
     Host sunflower
@@ -85,36 +84,9 @@ let
         ControlMaster no
   '';
 
-  tailscaleSunflower = ''
-
-    # === Tailscale (MagicDNS) ===
-    Host sunflower-ts
-        HostName sunflower
-        Port 22
-
-    Host sunflower-wsl-ts
-        HostName sunflower
-        Port 2222
-  '';
-
-  tailscaleLan = ''
-
-    Host dahlia-ts
-        HostName dahlia
-
-    Host obsync-ts
-        HostName obsync
-  '';
-
   laptopPart = sunflowerBlocks;
   workstationPart = lanHosts;
 
   tierPart = if tier == "workstation" then workstationPart else laptopPart;
-
-  tailscalePart =
-    if includeTailscale then
-      tailscaleSunflower + (if tier == "workstation" then tailscaleLan else "")
-    else
-      "";
 in
-header + tierPart + tailscalePart
+header + tierPart

@@ -88,12 +88,11 @@ let
       lanPrefixPlaceholder,
       vps01HostPlaceholder,
       tier,
-      includeTailscale ? true,
     }:
     import ./ssh-private-content.nix {
       lanPrefix = lanPrefixPlaceholder;
       vps01Host = vps01HostPlaceholder;
-      inherit tier includeTailscale;
+      inherit tier;
     };
 in
 {
