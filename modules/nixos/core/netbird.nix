@@ -16,7 +16,7 @@
 # loopback address is stable, satisfies nixpkgs' capability condition
 # (so CAP_NET_BIND_SERVICE is granted automatically), and host-local
 # DNS queries return correctly because src/dst differ.
-{ lib, ... }:
+{ config, lib, ... }:
 {
   options.services.netbird.clients = lib.mkOption {
     type = lib.types.attrsOf (
@@ -24,5 +24,13 @@
         config.dns-resolver.address = lib.mkDefault "127.0.0.1";
       }
     );
+  };
+
+  # Append the NetBird zone to the resolver search list on hosts that
+  # run a NetBird client. Lets the operator address peers by their
+  # short hostname (`ssh dahlia`) instead of the full FQDN, mirroring
+  # the convenience Tailscale MagicDNS provided.
+  config = lib.mkIf (config.services.netbird.clients != { }) {
+    networking.search = [ "netbird.selfhosted" ];
   };
 }

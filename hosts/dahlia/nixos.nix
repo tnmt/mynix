@@ -25,7 +25,15 @@ in
   ];
 
   # Host-local networking and access.
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    # Hand DNS control back to systemd-resolved so the NetBird-managed
+    # search domain and resolver (127.0.0.1) own the host's resolution
+    # path. Tailscale's MagicDNS short names go away — peers are now
+    # addressed as `<peer>.netbird.selfhosted` (or just `<peer>` via
+    # the NetBird search domain added by modules/nixos/core/netbird.nix).
+    extraSetFlags = [ "--accept-dns=false" ];
+  };
   mynix.profiles.netbird.enable = true;
 
   mynix.profiles.givy = {
