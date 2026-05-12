@@ -1,4 +1,5 @@
 {
+  lib,
   username,
   ...
 }:
@@ -34,6 +35,14 @@ in
     # the NetBird search domain added by modules/nixos/core/netbird.nix).
     extraSetFlags = [ "--accept-dns=false" ];
   };
+  # Tailscale stays installed but no longer auto-starts at boot.
+  # NetBird is the primary mesh; run `systemctl start tailscaled` only
+  # when a Tailscale-only path is needed for ad-hoc troubleshooting.
+  # tailscaled-set is also detached because nixpkgs wires it as
+  # Wants=tailscaled.service from multi-user.target, which would
+  # otherwise drag tailscaled up at boot.
+  systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
+  systemd.services.tailscaled-set.wantedBy = lib.mkForce [ ];
   mynix.profiles.netbird.enable = true;
 
   mynix.profiles.givy = {
