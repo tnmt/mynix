@@ -33,6 +33,16 @@ in
         sops secret declared by this profile.
       '';
     };
+
+    setupKeySopsFile = lib.mkOption {
+      type = lib.types.nullOr lib.types.path;
+      default = null;
+      description = ''
+        Override the sops YAML file that holds `netbird_setup_key`.
+        Useful when a fleet shares one multi-use key from a common
+        secrets file instead of carrying a per-host secret.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -51,6 +61,8 @@ in
       };
     };
 
-    sops.secrets.netbird_setup_key = { };
+    sops.secrets.netbird_setup_key = lib.optionalAttrs (cfg.setupKeySopsFile != null) {
+      sopsFile = cfg.setupKeySopsFile;
+    };
   };
 }
