@@ -70,7 +70,7 @@ in
       NB_ADMIN_URL = cfg.managementUrl;
     };
 
-    security.sudo.extraConfig = ''
+    security.sudo-rs.extraConfig = ''
       Defaults env_keep += "NB_MANAGEMENT_URL NB_ADMIN_URL"
     '';
 
