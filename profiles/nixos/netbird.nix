@@ -61,6 +61,19 @@ in
       };
     };
 
+    # Daemon picks up NB_MANAGEMENT_URL via its systemd unit, but the
+    # `netbird-<name>` CLI wrapper does not. Set it in the shell env and
+    # whitelist it through sudo so `sudo netbird-<name> login` targets
+    # the self-hosted control plane without an explicit flag.
+    environment.variables = {
+      NB_MANAGEMENT_URL = cfg.managementUrl;
+      NB_ADMIN_URL = cfg.managementUrl;
+    };
+
+    security.sudo.extraConfig = ''
+      Defaults env_keep += "NB_MANAGEMENT_URL NB_ADMIN_URL"
+    '';
+
     sops.secrets.netbird_setup_key = lib.optionalAttrs (cfg.setupKeySopsFile != null) {
       sopsFile = cfg.setupKeySopsFile;
     };
