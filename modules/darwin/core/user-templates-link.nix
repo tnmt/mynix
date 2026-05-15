@@ -49,7 +49,7 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    system.activationScripts.sopsLinkUserConfigs.text = ''
+    system.activationScripts.postActivation.text = lib.mkAfter ''
       ${mkdirCmds}
       ${lnCmds}
     '';
