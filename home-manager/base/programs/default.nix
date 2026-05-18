@@ -59,6 +59,7 @@
       gh
       ghq
       git-wt
+      herdr
       roots
       ripgrep
       fd
