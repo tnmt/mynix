@@ -40,6 +40,9 @@ in
     vimiv-qt
     mcomix
 
+    # screenshot
+    flameshot
+
     # video player
     mpv
 
