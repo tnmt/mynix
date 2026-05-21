@@ -21,6 +21,7 @@ _: {
       "claude"
       "discord"
       "dropbox"
+      "element"
       "firefox"
       "ghostty"
       "google-chrome"

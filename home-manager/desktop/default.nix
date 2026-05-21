@@ -25,6 +25,7 @@ in
 
     # chat
     slack
+    element-desktop
 
     # wine
     #wine-wayland
@@ -99,6 +100,7 @@ in
     "slack-flags.conf".text = chromiumFlags;
     "discord-flags.conf".text = chromiumFlags;
     "vesktop-flags.conf".text = chromiumFlags;
+    "element-desktop-flags.conf".text = chromiumFlags;
     "1password-flags.conf".text = chromiumFlags;
   };
 
