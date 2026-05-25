@@ -20,7 +20,7 @@ let
       inherit (final.nur.repos.tnmt) roots;
       inherit (final.nur.repos.tnmt) git-wt;
       inherit (final.nur.repos.tnmt) givy;
-      inherit (inputs.nur-tnmt.legacyPackages.${final.stdenv.hostPlatform.system}) herdr;
+      inherit (final.nur.repos.tnmt) herdr;
       inherit (final.nur.repos.tnmt) mo;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
