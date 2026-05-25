@@ -11,6 +11,7 @@
     ./btop.nix
     ./eza.nix
     ./git.nix
+    ./herdr.nix
     ./ssh.nix
     ./starship
     ./tmux.nix
@@ -60,7 +61,6 @@
       gh
       ghq
       git-wt
-      herdr
       roots
       ripgrep
       fd
