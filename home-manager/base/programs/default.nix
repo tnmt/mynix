@@ -1,5 +1,6 @@
 {
   lib,
+  osConfig ? null,
   pkgs,
   ...
 }:
@@ -93,5 +94,15 @@
     ]
     ++ lib.optionals pkgs.stdenv.isLinux [
       bubblewrap
+    ]
+    ++ lib.optionals (!(osConfig.wsl.enable or false)) [
+      # opencode: Bun製単一バイナリがWSL2でSIGSEGV (autoPatchelf相性問題)
+      opencode
     ];
+
+  # WSL2では公式インストーラ (curl https://opencode.ai/install) で
+  # ~/.opencode/bin に導入したバイナリを nix-ld 経由で実行する。
+  home.sessionPath = lib.optionals (osConfig.wsl.enable or false) [
+    "$HOME/.opencode/bin"
+  ];
 }
