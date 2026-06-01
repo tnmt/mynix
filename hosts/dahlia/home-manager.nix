@@ -9,5 +9,8 @@
     ../../profiles/home-manager/ssh-agent-keychain.nix
   ];
 
-  home.packages = [ pkgs.btrfs-progs ];
+  home.packages = [
+    pkgs.btrfs-progs
+    pkgs.symbol-desktop-wallet
+  ];
 }

@@ -22,6 +22,7 @@ let
       inherit (final.nur.repos.tnmt) givy;
       inherit (final.nur.repos.tnmt) herdr;
       inherit (final.nur.repos.tnmt) mo;
+      inherit (final.nur.repos.tnmt) symbol-desktop-wallet;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];
