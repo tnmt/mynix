@@ -1,5 +1,6 @@
 {
   inputs,
+  theme,
   username,
   ...
 }:
@@ -14,9 +15,9 @@
     extraSpecialArgs = {
       inherit
         inputs
+        theme
         username
         ;
-      theme = (import ../../../themes) "tokyonight-storm";
     };
   };
 }

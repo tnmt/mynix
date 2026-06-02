@@ -45,6 +45,7 @@ let
         sopsShared
         username
         ;
+      theme = (import ../themes) "tokyonight-storm";
     }
     // inputs.nixpkgs.lib.optionalAttrs (hostname != null) {
       inherit hostname;
@@ -120,16 +121,12 @@ let
         inherit (inputs) nixpkgs;
         inherit system overlays;
       };
-      extraSpecialArgs =
-        (mkSpecialArgs {
-          inherit
-            homeSopsFile
-            username
-            ;
-        })
-        // {
-          theme = (import ../themes) "tokyonight-storm";
-        };
+      extraSpecialArgs = mkSpecialArgs {
+        inherit
+          homeSopsFile
+          username
+          ;
+      };
       modules = modules ++ [
         (import ../home-manager/defaults.nix {
           inherit

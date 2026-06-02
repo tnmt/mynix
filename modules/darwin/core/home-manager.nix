@@ -1,6 +1,7 @@
 {
   commonOverlays,
   inputs,
+  theme,
   username,
   ...
 }:
@@ -18,9 +19,9 @@ in
     extraSpecialArgs = {
       inherit
         inputs
+        theme
         username
         ;
-      theme = (import ../../../themes) "tokyonight-storm";
     };
     users."${username}" = {
       _module.args.pkgsPath = inputs.nixpkgs-darwin;
