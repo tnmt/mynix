@@ -4,20 +4,20 @@
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks."1password" = lib.mkIf pkgs.stdenv.isLinux {
-      match = ''exec "[ -z \"$SSH_CONNECTION\" ] && [ -S $HOME/.1password/agent.sock ]"'';
-      identityAgent = "~/.1password/agent.sock";
-    };
+    settings = {
+      "1password" = lib.mkIf pkgs.stdenv.isLinux {
+        header = ''Match exec "[ -z \"$SSH_CONNECTION\" ] && [ -S $HOME/.1password/agent.sock ]"'';
+        IdentityAgent = "~/.1password/agent.sock";
+      };
 
-    matchBlocks."*" = {
-      controlMaster = "auto";
-      controlPersist = "60m";
-      serverAliveInterval = 60;
-      serverAliveCountMax = 5;
-      hashKnownHosts = true;
-      forwardAgent = true;
-      user = "tnmt";
-      extraOptions = {
+      "*" = {
+        ControlMaster = "auto";
+        ControlPersist = "60m";
+        ServerAliveInterval = 60;
+        ServerAliveCountMax = 5;
+        HashKnownHosts = true;
+        ForwardAgent = true;
+        User = "tnmt";
         StrictHostKeyChecking = "no";
         AddKeysToAgent = "yes";
       }
