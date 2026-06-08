@@ -34,6 +34,11 @@ in
             rev = "v1.8.1";
             sha256 = "sha256-tmS0MBANSsTg53E2GB0TnjwGcZXboTRFNeDE6Ehn+bM=";
           };
+          # macOS /bin/bash は 3.2 で declare -A 非対応。スクリプトを Nix bash で起動させる。
+          postPatch = ''
+            find . \( -name "*.sh" -o -name "*.tmux" \) -exec \
+              sed -i 's|#!/usr/bin/env bash|#!${pkgs.bash}/bin/bash|' {} +
+          '';
         };
         extraConfig = ''
           set -g @tokyo-night-tmux_theme storm
