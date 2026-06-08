@@ -35,6 +35,8 @@ _: {
     onActivation = {
       autoUpdate = true;
       cleanup = "uninstall";
+      # homebrew-bundle 新仕様: --cleanup は --force / --force-cleanup / $HOMEBREW_ASK のいずれか必須
+      extraFlags = [ "--force-cleanup" ];
     };
   };
 }
