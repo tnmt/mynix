@@ -28,8 +28,7 @@
 
   # Append the NetBird zone to the resolver search list on hosts that
   # run a NetBird client. Lets the operator address peers by their
-  # short hostname (`ssh dahlia`) instead of the full FQDN, mirroring
-  # the convenience Tailscale MagicDNS provided.
+  # short hostname (`ssh dahlia`) instead of the full FQDN.
   config = lib.mkIf (config.services.netbird.clients != { }) {
     networking.search = [ "netbird.selfhosted" ];
   };

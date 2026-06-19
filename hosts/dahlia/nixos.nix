@@ -1,5 +1,4 @@
 {
-  lib,
   username,
   ...
 }:
@@ -25,24 +24,9 @@ in
     ../../modules/hardware/kanata.nix
   ];
 
-  # Host-local networking and access.
-  services.tailscale = {
-    enable = true;
-    # Hand DNS control back to systemd-resolved so the NetBird-managed
-    # search domain and resolver (127.0.0.1) own the host's resolution
-    # path. Tailscale's MagicDNS short names go away — peers are now
-    # addressed as `<peer>.netbird.selfhosted` (or just `<peer>` via
-    # the NetBird search domain added by modules/nixos/core/netbird.nix).
-    extraSetFlags = [ "--accept-dns=false" ];
-  };
-  # Tailscale stays installed but no longer auto-starts at boot.
-  # NetBird is the primary mesh; run `systemctl start tailscaled` only
-  # when a Tailscale-only path is needed for ad-hoc troubleshooting.
-  # tailscaled-set is also detached because nixpkgs wires it as
-  # Wants=tailscaled.service from multi-user.target, which would
-  # otherwise drag tailscaled up at boot.
-  systemd.services.tailscaled.wantedBy = lib.mkForce [ ];
-  systemd.services.tailscaled-set.wantedBy = lib.mkForce [ ];
+  # Host-local networking and access. NetBird is the sole mesh; peers
+  # are addressed as `<peer>.netbird.selfhosted` (or just `<peer>` via
+  # the NetBird search domain added by modules/nixos/core/netbird.nix).
   mynix.profiles.netbird.enable = true;
 
   mynix.profiles.givy = {

@@ -14,11 +14,10 @@ in
   networking.firewall = {
     enable = lib.mkDefault true;
 
-    # Trust mesh-VPN interfaces (Tailscale, NetBird) so peers can reach
-    # any service this host exposes without per-port rules. Peer-to-peer
-    # access control is enforced by each control plane (Tailscale ACLs /
-    # NetBird Dashboard policies), not the host firewall.
-    trustedInterfaces = lib.optional config.services.tailscale.enable "tailscale0" ++ netbirdInterfaces;
+    # Trust NetBird mesh interfaces so peers can reach any service this
+    # host exposes without per-port rules. Peer-to-peer access control
+    # is enforced by NetBird Dashboard policies, not the host firewall.
+    trustedInterfaces = netbirdInterfaces;
   };
 
   # Disable reverse-path filtering on NetBird tunnel interfaces. With the

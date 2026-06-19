@@ -8,9 +8,9 @@
 #
 # Scope is deliberately narrow. Broader sysctl / AppArmor / audit
 # hardening was considered against this fleet's threat model
-# (single-admin home lab, publickey-only SSH behind NAT or
-# Tailscale) and declined as not worth the additional surface in
-# the repo. See memory/project_hardening_roadmap.md for that
+# (single-admin home lab, publickey-only SSH behind NAT or the
+# NetBird mesh) and declined as not worth the additional surface
+# in the repo. See memory/project_hardening_roadmap.md for that
 # analysis.
 {
   boot.blacklistedKernelModules = [
