@@ -5,7 +5,7 @@
 
     "$terminal" = "ghostty";
     "$menu" = "walker";
-    "$browser" = "brave";
+    "$browser" = "brave-origin";
 
     env = [
       "XCURSOR_SIZE, 24"

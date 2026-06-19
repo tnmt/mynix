@@ -15,7 +15,7 @@ in
   ];
   home.packages = with pkgs; [
     # browser
-    brave
+    brave-origin
     microsoft-edge
     firefox
 
@@ -91,7 +91,7 @@ in
       [General]
       theme=Tokyo-Night-Storm
     '';
-    "brave-flags.conf".text = chromiumFlags;
+    "brave-origin-flags.conf".text = chromiumFlags;
     "microsoft-edge-flags.conf".text = chromiumFlags;
     "chromium-flags.conf".text = chromiumFlags;
     "electron-flags.conf".text = chromiumFlags;

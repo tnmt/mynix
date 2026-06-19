@@ -13,6 +13,7 @@ let
       inherit (inputs.nix-steipete-tools.packages.${final.stdenv.hostPlatform.system}) gogcli;
     })
     (final: prev: {
+      inherit (final.nur.repos.tnmt) brave-origin;
       inherit (final.nur.repos.tnmt) oneaws;
       inherit (final.nur.repos.tnmt) ccusage;
       inherit (final.nur.repos.tnmt) kagiana;
