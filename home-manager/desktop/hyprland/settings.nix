@@ -8,8 +8,6 @@
     "$browser" = "brave-origin";
 
     env = [
-      "XCURSOR_SIZE, 24"
-      "HYPRCURSOR_SIZE, 24"
       "GDK_BACKEND, wayland,x11,*"
       "QT_QPA_PLATFORM, wayland;xcb"
       "QT_QPA_PLATFORMTHEME, kvantum"
