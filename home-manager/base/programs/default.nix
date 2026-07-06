@@ -29,6 +29,7 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      historyWidget.command = "";
     };
 
     zoxide = {
