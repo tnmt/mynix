@@ -17,26 +17,39 @@ in
     ];
   };
 
-  system.defaults = {
-    dock = {
-      autohide = true;
-    };
+  system = {
+    defaults = {
+      dock = {
+        autohide = true;
+      };
 
-    finder = {
-      FXPreferredViewStyle = "icnv";
-    };
+      finder = {
+        FXPreferredViewStyle = "icnv";
+      };
 
-    NSGlobalDomain = {
-      AppleInterfaceStyle = "Dark";
-      InitialKeyRepeat = 30;
-      KeyRepeat = 2;
-      NSAutomaticCapitalizationEnabled = false;
-      NSAutomaticPeriodSubstitutionEnabled = false;
-    };
+      NSGlobalDomain = {
+        AppleInterfaceStyle = "Dark";
+        InitialKeyRepeat = 30;
+        KeyRepeat = 2;
+        NSAutomaticCapitalizationEnabled = false;
+        NSAutomaticPeriodSubstitutionEnabled = false;
+      };
 
-    # Hot corners: bottom-left = Lock Screen, bottom-right = Quick Note
-    dock.wvous-bl-corner = 13;
-    dock.wvous-br-corner = 14;
+      # Hot corners: bottom-left = Lock Screen, bottom-right = Quick Note
+      dock.wvous-bl-corner = 13;
+      dock.wvous-br-corner = 14;
+    };
+    stateVersion = 6;
+
+    # Workaround: nix-darwin (rev a1fa429) doc/manual/default.nix invokes
+    # `nixos-render-docs manual html --toc-depth`, which recent nixpkgs
+    # replaced with `--sidebar-depth`, breaking the darwin-manual-html
+    # build. Disabling darwin-uninstaller stops its internal eval-config
+    # from dragging manualHTML into the system closure; the paired
+    # `documentation.doc.enable = false` below drops helpScript /
+    # manualHTML from systemPackages. Revert once upstream fixes it.
+    tools.darwin-uninstaller.enable = false;
   };
-  system.stateVersion = 6;
+
+  documentation.doc.enable = false;
 }
