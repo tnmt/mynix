@@ -22,7 +22,6 @@ let
         ccusage
         git-wt
         givy
-        herdr
         kagiana
         mo
         oneaws
