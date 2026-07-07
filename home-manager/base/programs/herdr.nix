@@ -28,22 +28,24 @@
     [theme]
     name = "tokyo-night"
 
+    # キーは prefix 押下後に入力する単独キーとして書く（"prefix+" を付けると invalid になる）
     [keys]
     prefix = "ctrl+t"
 
-    focus_pane_left = "prefix+h"
-    focus_pane_down = "prefix+j"
-    focus_pane_up = "prefix+k"
-    focus_pane_right = "prefix+l"
+    focus_pane_left = "h"
+    focus_pane_down = "j"
+    focus_pane_up = "k"
+    focus_pane_right = "l"
 
-    split_vertical = "prefix+|"       # 左右分割 (tmux: bind | split-window -h)
-    split_horizontal = "prefix+minus" # 上下分割 (tmux: bind - split-window -v)
+    split_vertical = "|"    # 左右分割 (tmux: bind | split-window -h)
+    split_horizontal = "-"  # 上下分割 (tmux: bind - split-window -v)
 
-    close_pane = "prefix+x"
-    new_tab = "prefix+c"
-    previous_tab = "prefix+ctrl+p"    # tmux: bind -r C-p previous-window
-    next_tab = "prefix+ctrl+n"        # tmux: bind -r C-n next-window
-    detach = "prefix+d"
-    zoom = "prefix+z"
+    close_pane = "x"
+    new_tab = "c"
+    new_workspace = "ctrl+n" # デフォルトの n は next_tab に譲る
+    previous_tab = "p"
+    next_tab = "n"
+    detach = "d"
+    zoom = "z"
   '';
 }
