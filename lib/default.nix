@@ -7,24 +7,28 @@ let
   sopsShared = import ../profiles/common/sops-shared.nix;
 
   commonOverlays = [
-    inputs.nur.overlays.default
     inputs.nix-claude-code.overlays.default
     (final: _prev: {
       inherit (inputs.nix-steipete-tools.packages.${final.stdenv.hostPlatform.system}) gogcli;
     })
     (final: prev: {
-      inherit (final.nur.repos.tnmt) brave-origin;
-      inherit (final.nur.repos.tnmt) oneaws;
-      inherit (final.nur.repos.tnmt) ccusage;
-      inherit (final.nur.repos.tnmt) kagiana;
-      inherit (final.nur.repos.tnmt) ccpocket-bridge;
-      inherit (final.nur.repos.tnmt) roots;
-      inherit (final.nur.repos.tnmt) git-wt;
-      inherit (final.nur.repos.tnmt) givy;
-      # herdr は NUR アグリゲータの取り込みを待たず直接参照で更新する
-      inherit (inputs.nur-tnmt.packages.${final.stdenv.hostPlatform.system}) herdr;
-      inherit (final.nur.repos.tnmt) mo;
-      inherit (final.nur.repos.tnmt) symbol-desktop-wallet;
+      # 自作パッケージは NUR アグリゲータの取り込み（数時間遅れ）を待たず
+      # nur-tnmt input の直接参照で更新する。flake の packages 出力ではなく
+      # NUR 規約の default.nix { pkgs } を使い、ホストの pkgs
+      # (allowUnfree 等の config と overlay 込み) で評価する。
+      inherit (import inputs.nur-tnmt { pkgs = final; })
+        brave-origin
+        ccpocket-bridge
+        ccusage
+        git-wt
+        givy
+        herdr
+        kagiana
+        mo
+        oneaws
+        roots
+        symbol-desktop-wallet
+        ;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];
