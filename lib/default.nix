@@ -21,7 +21,8 @@ let
       inherit (final.nur.repos.tnmt) roots;
       inherit (final.nur.repos.tnmt) git-wt;
       inherit (final.nur.repos.tnmt) givy;
-      inherit (final.nur.repos.tnmt) herdr;
+      # herdr は NUR アグリゲータの取り込みを待たず直接参照で更新する
+      inherit (inputs.nur-tnmt.packages.${final.stdenv.hostPlatform.system}) herdr;
       inherit (final.nur.repos.tnmt) mo;
       inherit (final.nur.repos.tnmt) symbol-desktop-wallet;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
