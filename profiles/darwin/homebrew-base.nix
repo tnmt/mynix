@@ -2,10 +2,21 @@
 _: {
   homebrew = {
     enable = true;
+    # Homebrew 6.0 から third-party tap は trust 必須 (HOMEBREW_REQUIRE_TAP_TRUST)。
+    # trusted = true で Brewfile に `trusted: true` が付き、activation 時に許可される。
     taps = [
-      "k1LoW/tap"
-      "nikitabobko/tap"
-      "takai/tap"
+      {
+        name = "k1LoW/tap";
+        trusted = true;
+      }
+      {
+        name = "nikitabobko/tap";
+        trusted = true;
+      }
+      {
+        name = "takai/tap";
+        trusted = true;
+      }
     ];
     brews = [
       "k1low/tap/mo"
