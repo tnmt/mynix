@@ -75,6 +75,45 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "gitignore": {
+      "inputs": {
+        "nixpkgs": [
+          "msgvault",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1762808025,
+        "narHash": "sha256-XmjITeZNMTQXGhhww6ed/Wacy2KzD6svioyCX7pkUu4=",
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "rev": "cb5e3fdca1de58ccbc3ef53de65bd372b48f567c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "gitignore.nix",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -154,6 +193,28 @@
       "original": {
         "owner": "fiffeek",
         "repo": "hyprdynamicmonitors",
+        "type": "github"
+      }
+    },
+    "msgvault": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "gitignore": "gitignore",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783555938,
+        "narHash": "sha256-PP6YmvPoJDFL86WB5Ql/h61rdByc7o4fO9u9muRJtII=",
+        "owner": "kenn-io",
+        "repo": "msgvault",
+        "rev": "e3ede8c5af629bab16d124f20c72e5d7575b94b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kenn-io",
+        "repo": "msgvault",
         "type": "github"
       }
     },
@@ -333,6 +394,7 @@
         "home-manager": "home-manager",
         "home-manager-darwin": "home-manager-darwin",
         "hyprdynamicmonitors": "hyprdynamicmonitors",
+        "msgvault": "msgvault",
         "nix-claude-code": "nix-claude-code",
         "nix-steipete-tools": "nix-steipete-tools",
         "nixos-hardware": "nixos-hardware",
@@ -365,6 +427,21 @@
       }
     },
     "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

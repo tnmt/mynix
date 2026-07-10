@@ -55,6 +55,11 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    msgvault = {
+      url = "github:kenn-io/msgvault";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

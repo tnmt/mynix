@@ -10,6 +10,7 @@ let
     inputs.nix-claude-code.overlays.default
     (final: _prev: {
       inherit (inputs.nix-steipete-tools.packages.${final.stdenv.hostPlatform.system}) gogcli;
+      inherit (inputs.msgvault.packages.${final.stdenv.hostPlatform.system}) msgvault;
     })
     (final: prev: {
       # 自作パッケージは NUR アグリゲータの取り込み（数時間遅れ）を待たず

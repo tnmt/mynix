@@ -11,6 +11,7 @@
 
   home.packages = [
     pkgs.btrfs-progs
+    pkgs.msgvault
     pkgs.symbol-desktop-wallet
   ];
 }
