@@ -44,6 +44,11 @@ in
     allowedUDPPorts = [ 17500 ];
   };
 
+  # Protonmail Bridge (127.0.0.1:1143 STARTTLS) の自己署名 CA。
+  # msgvault 等が daemon 経由でシステム CA ストアを見るため、
+  # 個別に SSL_CERT_FILE を渡さずに済むよう system-wide で信頼させる。
+  security.pki.certificateFiles = [ ./protonmail-bridge-ca.crt ];
+
   profiles.userTemplates = {
     enable = true;
     voiceInput = true;
