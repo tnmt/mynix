@@ -10,7 +10,6 @@ in
     settings = {
       general = {
         hide_cursor = true;
-        grace = 5;
       };
 
       background = [
