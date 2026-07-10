@@ -18,6 +18,7 @@ let
       # NUR 規約の default.nix { pkgs } を使い、ホストの pkgs
       # (allowUnfree 等の config と overlay 込み) で評価する。
       inherit (import inputs.nur-tnmt { pkgs = final; })
+        ax
         brave-origin
         ccpocket-bridge
         ccusage
