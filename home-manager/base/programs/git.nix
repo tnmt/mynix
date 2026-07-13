@@ -19,9 +19,10 @@ in
           path = "~/.config/git/github-identity";
           condition = "hasconfig:remote.*.url:https://github.com/**";
         }
+        # scp 形式は ":**" だと wildmatch で不正パターン扱いになるため ":*/**" にする
         {
           path = "~/.config/git/github-identity";
-          condition = "hasconfig:remote.*.url:git@github.com:**";
+          condition = "hasconfig:remote.*.url:git@github.com:*/**";
         }
         {
           path = "~/.config/git/github-identity";
