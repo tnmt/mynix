@@ -121,6 +121,13 @@ in
   xdg.configFile."git/github-identity".text = ''
     [user]
       email = 56112+tnmt@users.noreply.github.com
+      signingkey = ~/.ssh/id_ed25519.pub
+    [gpg]
+      format = ssh
+    [commit]
+      gpgsign = true
+    [tag]
+      gpgsign = true
   '';
 
   home.packages = with pkgs; [
