@@ -13,7 +13,21 @@ in
 
       includes = [
         { path = "~/.config/git/identity"; }
-        # 追加の identity 振り分け (includeIf) が必要な場合は、
+        # github.com リモートを持つリポジトリでは user.email を GitHub noreply に上書き。
+        # 中身は下の xdg.configFile."git/github-identity" で生成 (公開情報のため平文)。
+        {
+          path = "~/.config/git/github-identity";
+          condition = "hasconfig:remote.*.url:https://github.com/**";
+        }
+        {
+          path = "~/.config/git/github-identity";
+          condition = "hasconfig:remote.*.url:git@github.com:**";
+        }
+        {
+          path = "~/.config/git/github-identity";
+          condition = "hasconfig:remote.*.url:ssh://git@github.com/**";
+        }
+        # さらに追加の identity 振り分け (includeIf) が必要な場合は、
         # 利用側 flake の home-manager モジュールで宣言する。
         { path = "${themeSrc}/${theme.extras.delta}"; }
       ];
@@ -103,6 +117,11 @@ in
       theme = builtins.readFile "${themeSrc}/${theme.extras.gitui}";
     };
   };
+
+  xdg.configFile."git/github-identity".text = ''
+    [user]
+      email = 56112+tnmt@users.noreply.github.com
+  '';
 
   home.packages = with pkgs; [
     git-trim
