@@ -7,7 +7,7 @@
     };
     themes = {
       ${theme.bat.name} = {
-        src = pkgs.fetchFromGitHub theme.src;
+        src = theme.srcDrv pkgs;
         inherit (theme.bat) file;
       };
     };

@@ -6,7 +6,7 @@
   ...
 }:
 let
-  themeSrc = pkgs.fetchFromGitHub theme.src;
+  themeSrc = theme.srcDrv pkgs;
 in
 {
   home.packages = lib.optionals pkgs.stdenv.isLinux [ pkgs.foot ];

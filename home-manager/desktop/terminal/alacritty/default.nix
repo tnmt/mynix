@@ -6,7 +6,7 @@
   ...
 }:
 let
-  themeSrc = pkgs.fetchFromGitHub theme.src;
+  themeSrc = theme.srcDrv pkgs;
   themeColors = builtins.fromTOML (builtins.readFile "${themeSrc}/${theme.extras.alacritty}");
 in
 {

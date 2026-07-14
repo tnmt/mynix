@@ -5,7 +5,7 @@
   ...
 }:
 let
-  themeSrc = pkgs.fetchFromGitHub theme.src;
+  themeSrc = theme.srcDrv pkgs;
 in
 {
   programs.kitty = {

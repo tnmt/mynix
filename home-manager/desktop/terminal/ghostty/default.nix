@@ -6,7 +6,7 @@
 }:
 let
   inherit (pkgs.stdenv) isDarwin;
-  themeSrc = pkgs.fetchFromGitHub theme.src;
+  themeSrc = theme.srcDrv pkgs;
 in
 {
   programs.ghostty = {

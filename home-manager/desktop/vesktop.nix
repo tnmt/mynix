@@ -1,6 +1,6 @@
 { pkgs, theme, ... }:
 let
-  themeSrc = pkgs.fetchFromGitHub theme.src;
+  themeSrc = theme.srcDrv pkgs;
 in
 {
   home.packages = [ pkgs.vesktop ];
