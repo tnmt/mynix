@@ -12,6 +12,7 @@ in
     ./vesktop.nix
     ./vimiv.nix
     ./yazi.nix
+    ./zathura.nix
   ];
   home.packages = with pkgs; [
     # browser
@@ -30,6 +31,9 @@ in
     # wine
     #wine-wayland
     #winetricks
+
+    # pdf
+    pdfarranger
 
     # filer
     ranger
