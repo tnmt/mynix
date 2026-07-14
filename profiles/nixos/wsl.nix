@@ -20,7 +20,7 @@
   # self-reference sunflower blocks are skipped and LAN peers resolve
   # directly. sunflower is currently the only WSL host and also the
   # sole workstation; re-parameterise if that changes.
-  profiles.userTemplates = {
+  mynix.profiles.userTemplates = {
     enable = true;
     voiceInput = false;
     sshPrivate = {

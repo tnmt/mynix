@@ -11,7 +11,7 @@
   ...
 }:
 let
-  cfg = config.profiles.userTemplates;
+  cfg = config.mynix.profiles.userTemplates;
   homeDir = "/Users/${username}";
 
   links =

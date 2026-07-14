@@ -21,7 +21,7 @@ in
     hosts.work_mac
   ];
 
-  profiles.userTemplates = {
+  mynix.profiles.userTemplates = {
     enable = true;
     sshPrivate = {
       role = "client";

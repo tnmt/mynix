@@ -24,18 +24,29 @@ in
     ../../modules/hardware/kanata.nix
   ];
 
-  # Host-local networking and access. NetBird is the sole mesh; peers
-  # are addressed as `<peer>.netbird.selfhosted` (or just `<peer>` via
-  # the NetBird search domain added by modules/nixos/core/netbird.nix).
-  mynix.profiles.netbird.enable = true;
+  mynix.profiles = {
+    # Host-local networking and access. NetBird is the sole mesh; peers
+    # are addressed as `<peer>.netbird.selfhosted` (or just `<peer>` via
+    # the NetBird search domain added by modules/nixos/core/netbird.nix).
+    netbird.enable = true;
 
-  mynix.profiles.givy = {
-    enable = true;
-    instances.github = {
-      root = "/home/${username}/ghq/github.com";
-      port = 6271;
+    givy = {
+      enable = true;
+      instances.github = {
+        root = "/home/${username}/ghq/github.com";
+        port = 6271;
+      };
+      trustedRootCAFile = ./caddy-local-ca.crt;
     };
-    trustedRootCAFile = ./caddy-local-ca.crt;
+
+    userTemplates = {
+      enable = true;
+      voiceInput = true;
+      sshPrivate = {
+        role = "client";
+        tier = "laptop";
+      };
+    };
   };
 
   # Dropbox LANSync: TCP=peer転送, UDP=ブロードキャスト発見
@@ -48,15 +59,6 @@ in
   # msgvault 等が daemon 経由でシステム CA ストアを見るため、
   # 個別に SSL_CERT_FILE を渡さずに済むよう system-wide で信頼させる。
   security.pki.certificateFiles = [ ./protonmail-bridge-ca.crt ];
-
-  profiles.userTemplates = {
-    enable = true;
-    voiceInput = true;
-    sshPrivate = {
-      role = "client";
-      tier = "laptop";
-    };
-  };
 
   users.users."${username}" = {
     extraGroups = [

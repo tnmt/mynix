@@ -12,12 +12,12 @@
   ...
 }:
 let
-  cfg = config.profiles.userTemplates;
+  cfg = config.mynix.profiles.userTemplates;
   commonSopsFile = ../../secrets/common.yaml;
   personalSopsFile = ../../secrets/roles/personal.yaml;
 in
 {
-  options.profiles.userTemplates = {
+  options.mynix.profiles.userTemplates = {
     enable = lib.mkEnableOption "user-owned sops templates rendered at the system layer";
 
     gitPersonal = lib.mkOption {
@@ -80,7 +80,7 @@ in
     assertions = [
       {
         assertion = cfg.sshPrivate.role != "client" || cfg.sshPrivate.tier != null;
-        message = ''profiles.userTemplates.sshPrivate.tier must be set when role = "client"'';
+        message = ''mynix.profiles.userTemplates.sshPrivate.tier must be set when role = "client"'';
       }
     ];
 
