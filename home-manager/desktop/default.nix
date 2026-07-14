@@ -1,5 +1,6 @@
 { pkgs, theme, ... }:
 let
+  fonts = import ./fonts.nix;
   chromiumFlags = ''
     --enable-wayland-ime
     --wayland-text-input-version=3
@@ -116,7 +117,7 @@ in
   gtk = {
     enable = true;
     font = {
-      name = "Noto Sans CJK JP";
+      name = fonts.sans;
       size = 11;
     };
     theme = {

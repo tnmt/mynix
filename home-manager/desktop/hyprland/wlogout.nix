@@ -16,7 +16,7 @@ in
     }
 
     window {
-      background-color: rgba(29, 32, 47, 0.9);
+      background-color: alpha(${theme.color0}, 0.9);
     }
 
     button {
