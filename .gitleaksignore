@@ -1,0 +1,8 @@
+# Historical Forgejo JWT secrets committed in plaintext and later moved
+# to sops (file removed in 763e56f). The values remain in public git
+# history — rotate them on the Forgejo side (git.tnmt.info) if the
+# instance still uses them. Recorded 2026-07-14.
+45a76ac8b9b5353b5c30df6806d297f0e54902b3:modules/selfhosted/forgejo.nix:generic-api-key:26
+c2e65f11f0dcc43cc9942635b8d7f04dd1e7b591:modules/selfhosted/forgejo.nix:generic-api-key:26
+45a76ac8b9b5353b5c30df6806d297f0e54902b3:modules/selfhosted/forgejo.nix:generic-api-key:30
+c2e65f11f0dcc43cc9942635b8d7f04dd1e7b591:modules/selfhosted/forgejo.nix:generic-api-key:30

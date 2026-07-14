@@ -68,6 +68,12 @@
         "aarch64-darwin" # 64-bit ARM macOS
       ];
       forAllSystems = inputs.nixpkgs.lib.genAttrs allSystems;
+      pkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
+      formattersFor =
+        pkgs: with pkgs; [
+          nixfmt
+          taplo
+        ];
     in
     {
       lib = import ./lib { inherit inputs; };
@@ -79,7 +85,7 @@
       apps = forAllSystems (
         system:
         let
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
+          pkgs = pkgsFor system;
           rebuildCmd = if pkgs.lib.hasSuffix "darwin" system then "darwin" else "os";
           switch = pkgs.writeShellApplication {
             name = "switch";
@@ -112,11 +118,8 @@
       devShells = forAllSystems (
         system:
         let
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
-          formatters = with pkgs; [
-            nixfmt
-            taplo
-          ];
+          pkgs = pkgsFor system;
+          formatters = formattersFor pkgs;
           scripts = [
             (pkgs.writeScriptBin "update-input" ''
               nix flake lock --override-input "$1" "$2"
@@ -138,11 +141,8 @@
       formatter = forAllSystems (
         system:
         let
-          pkgs = inputs.nixpkgs.legacyPackages.${system};
-          formatters = with pkgs; [
-            nixfmt
-            taplo
-          ];
+          pkgs = pkgsFor system;
+          formatters = formattersFor pkgs;
           format = pkgs.writeScriptBin "format" ''
             #!${pkgs.runtimeShell}
             PATH=$PATH:${pkgs.lib.makeBinPath formatters}

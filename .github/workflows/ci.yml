@@ -5,13 +5,11 @@ on:
     branches: [main]
     paths-ignore:
       - "**.md"
-      - "secrets/**"
       - ".gitignore"
       - "LICENSE"
   pull_request:
     paths-ignore:
       - "**.md"
-      - "secrets/**"
       - ".gitignore"
       - "LICENSE"
 
@@ -47,6 +45,21 @@ jobs:
       - name: statix
         run: nix run nixpkgs#statix -- check .
 
+  # The pre-commit hook runs `gitleaks protect --staged`, but that is
+  # bypassable with --no-verify; scan the full history here as a backstop.
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
+      - name: gitleaks
+        run: nix run nixpkgs#gitleaks -- detect --source . --no-banner
+
   build-nixos:
     runs-on: ubuntu-latest
     strategy:
@@ -62,10 +75,18 @@ jobs:
       - name: Build NixOS (${{ matrix.host }})
         run: nix build '.#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel' --no-link
 
-  # NOTE: The following targets are excluded from CI:
-  #
-  # darwinConfigurations (need macOS runner / aarch64-darwin):
-  #   - hydrangea
-  #
-  # work_mac / work_vm have moved to tnmt-work-flake (private repo) and
-  # are validated there.
+  # hydrangea cannot be *built* without a macOS runner, but evaluating
+  # the full darwin system catches option/module errors on a Linux runner.
+  eval-darwin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+        with:
+          use-flakehub: false
+      - name: Evaluate darwin (hydrangea)
+        run: nix eval '.#darwinConfigurations.hydrangea.config.system.build.toplevel.drvPath'
+
+  # NOTE: work_mac / work_vm have moved to tnmt-work-flake (private repo)
+  # and are validated there.
