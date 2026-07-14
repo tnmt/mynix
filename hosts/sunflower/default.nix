@@ -16,6 +16,9 @@ in
     ../../modules/nixos/remotebuild/builder.nix
   ];
 
+  system.stateVersion = "25.05";
+  wsl.enable = true;
+
   # Host-local filesystem layout.
   fileSystems."/" = {
     device = "/dev/sdd";

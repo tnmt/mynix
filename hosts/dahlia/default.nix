@@ -24,6 +24,8 @@ in
     ../../modules/hardware/kanata.nix
   ];
 
+  system.stateVersion = "25.05";
+
   mynix.profiles = {
     # Host-local networking and access. NetBird is the sole mesh; peers
     # are addressed as `<peer>.netbird.selfhosted` (or just `<peer>` via

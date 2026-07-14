@@ -10,35 +10,28 @@ let
     mkNixosSystem
     ;
 
+  username = "tnmt";
+
   darwinHosts = {
     hydrangea = {
       system = "aarch64-darwin";
-      username = "tnmt";
-      modules = [ ./hydrangea/darwin.nix ];
+      inherit username;
+      modules = [ ./hydrangea ];
     };
   };
 
   nixosHosts = {
     sunflower = {
       system = "x86_64-linux";
-      username = "tnmt";
-      modules = [
-        ./sunflower/nixos.nix
-        {
-          system.stateVersion = "25.05";
-          wsl.enable = true;
-        }
-      ];
+      inherit username;
+      modules = [ ./sunflower ];
     };
     dahlia = {
       system = "x86_64-linux";
-      username = "tnmt";
+      inherit username;
       modules = [
         inputs.disko.nixosModules.disko
-        ./dahlia/nixos.nix
-        {
-          system.stateVersion = "25.05";
-        }
+        ./dahlia
       ];
     };
   };
