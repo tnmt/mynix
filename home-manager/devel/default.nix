@@ -5,8 +5,8 @@
   ];
 
   home = {
+    # EDITOR=nvim comes from programs.neovim.defaultEditor (devel/programs/neovim.nix)
     sessionVariables = {
-      EDITOR = "nvim";
       GOPATH = "$HOME/.go";
     };
 

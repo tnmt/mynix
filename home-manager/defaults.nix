@@ -17,6 +17,5 @@
     })
   ];
 
-  home.stateVersion = "26.05";
   nix.package = lib.mkDefault pkgs.nix;
 }
