@@ -32,17 +32,14 @@
   # Btop (theme name matches extras/btop/*.theme basename)
   btop = "tokyonight_storm";
 
-  # Neovim
-  neovim = {
-    plugin = "folke/tokyonight.nvim";
-    colorscheme = "tokyonight-storm";
-  };
+  # Vim (neovim hardcodes its colorscheme in lua — see neovim/config/lua/plugins/ui.lua)
+  vim = "tokyonight-storm";
 
-  # Ghostty
-  ghostty = "TokyoNight Storm";
+  # Ghostty (theme name = basename of extras.ghostty placed under ghostty/themes/)
+  ghostty = "tokyonight_storm";
 
-  # Kitty
-  kitty = "tokyo_night_storm";
+  # Kitty (conf name = basename of extras.kitty placed under kitty/)
+  kitty = "tokyonight_storm";
 
   # GTK
   gtk = "Tokyonight-Dark-Storm";

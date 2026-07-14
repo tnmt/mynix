@@ -13,7 +13,7 @@ in
     enable = true;
     package = if isDarwin then null else pkgs.ghostty;
     settings = {
-      theme = "tokyonight_storm";
+      theme = theme.ghostty;
       font-size = terminal.font.size;
       font-family = [
         terminal.font.name
@@ -30,5 +30,5 @@ in
     };
   };
 
-  xdg.configFile."ghostty/themes/tokyonight_storm".source = "${themeSrc}/${theme.extras.ghostty}";
+  xdg.configFile."ghostty/themes/${theme.ghostty}".source = "${themeSrc}/${theme.extras.ghostty}";
 }

@@ -10,10 +10,10 @@ in
   home = {
     packages = [ pkgs.vim ];
 
-    file.".vim/colors/tokyonight-storm.vim".source = "${themeSrc}/${theme.extras.vim}";
+    file.".vim/colors/${theme.vim}.vim".source = "${themeSrc}/${theme.extras.vim}";
     file.".vimrc".text = ''
       set termguicolors
-      colorscheme tokyonight-storm
+      colorscheme ${theme.vim}
     '';
   };
 }

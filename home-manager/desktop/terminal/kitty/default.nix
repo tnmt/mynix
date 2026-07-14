@@ -14,8 +14,8 @@ in
       inherit (terminal.font) name;
       inherit (terminal.font) size;
     };
-    extraConfig = "include tokyonight_storm.conf";
+    extraConfig = "include ${theme.kitty}.conf";
   };
 
-  xdg.configFile."kitty/tokyonight_storm.conf".source = "${themeSrc}/${theme.extras.kitty}";
+  xdg.configFile."kitty/${theme.kitty}.conf".source = "${themeSrc}/${theme.extras.kitty}";
 }

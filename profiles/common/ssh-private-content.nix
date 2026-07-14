@@ -1,6 +1,6 @@
 # Shared content builder for ~/.ssh/conf.d/private.config.
-# Consumed by home-manager/base/programs/ssh-private.nix and
-# profiles/nixos/wsl.nix. The LAN prefix (first three octets of the
+# Consumed by profiles/common/sops-shared.nix (mkSshPrivateTemplate).
+# The LAN prefix (first three octets of the
 # private subnet) and the vps01 FQDN are substituted from sops secrets
 # at activation time via config.sops.placeholder.<name>, so only
 # non-identifying tokens (host-suffix octets, local aliases, ports)
