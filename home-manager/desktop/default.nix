@@ -1,10 +1,28 @@
-{ pkgs, theme, ... }:
+{
+  lib,
+  pkgs,
+  theme,
+  ...
+}:
 let
   fonts = import ./fonts.nix;
   chromiumFlags = ''
     --enable-wayland-ime
     --wayland-text-input-version=3
   '';
+  chromiumApps = [
+    "brave-origin"
+    "microsoft-edge"
+    "chromium"
+    "electron"
+    "code"
+    "obsidian"
+    "slack"
+    "discord"
+    "vesktop"
+    "element-desktop"
+    "1password"
+  ];
 in
 {
 
@@ -96,18 +114,10 @@ in
       [General]
       theme=Tokyo-Night-Storm
     '';
-    "brave-origin-flags.conf".text = chromiumFlags;
-    "microsoft-edge-flags.conf".text = chromiumFlags;
-    "chromium-flags.conf".text = chromiumFlags;
-    "electron-flags.conf".text = chromiumFlags;
-    "code-flags.conf".text = chromiumFlags;
-    "obsidian-flags.conf".text = chromiumFlags;
-    "slack-flags.conf".text = chromiumFlags;
-    "discord-flags.conf".text = chromiumFlags;
-    "vesktop-flags.conf".text = chromiumFlags;
-    "element-desktop-flags.conf".text = chromiumFlags;
-    "1password-flags.conf".text = chromiumFlags;
-  };
+  }
+  // lib.genAttrs (map (app: "${app}-flags.conf") chromiumApps) (_: {
+    text = chromiumFlags;
+  });
 
   programs.chromium = {
     enable = true;

@@ -1,5 +1,6 @@
 {
   pkgs,
+  terminal,
   theme,
   ...
 }:
@@ -17,7 +18,7 @@ in
       force_keyboard_focus = true
       selection_wrap = true
       hide_action_hints = true
-      terminal = "ghostty"
+      terminal = "${terminal.default}"
       theme = "current"
 
       [placeholders]
