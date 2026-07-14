@@ -32,4 +32,13 @@
       "~/.colima/ssh_config"
     ];
   };
+
+  # ssh CLI 用の IdentityAgent 指定に加え、SSH_AUTH_SOCK 環境変数自体も
+  # 1Password agent に向ける。ssh-keygen -Y sign (git commit の SSH 署名)
+  # は IdentityAgent を見ず SSH_AUTH_SOCK を honor するため、これを設定しないと
+  # 通常シェルからの署名付き commit が Apple 既定 agent (identity 空) で hang する。
+  # Linux は hyprland 側の env 設定で対応しているのでここでは darwin のみ。
+  home.sessionVariables = lib.mkIf pkgs.stdenv.isDarwin {
+    SSH_AUTH_SOCK = "$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock";
+  };
 }
