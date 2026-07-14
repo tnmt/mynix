@@ -13,6 +13,4 @@
     ./user-templates-link.nix
     ../../../profiles/common/user-sops.nix
   ];
-
-  programs.zsh.enable = true;
 }

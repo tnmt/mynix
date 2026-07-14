@@ -12,4 +12,6 @@
     group = "users";
     extraGroups = lib.mkDefault [ "wheel" ];
   };
+
+  programs.zsh.enable = true;
 }
