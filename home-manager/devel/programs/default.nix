@@ -17,7 +17,7 @@
     gogcli
 
     # docs / preview
-    mo
+    mo-viewer
 
     # Build/lang
     gnumake

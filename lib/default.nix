@@ -40,11 +40,8 @@ let
         ax
         brave-origin
         ccpocket-bridge
-        ccusage
-        git-wt
         givy
         kagiana
-        mo
         oneaws
         roots
         symbol-desktop-wallet

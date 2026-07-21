@@ -6,10 +6,6 @@ _: {
     # trusted = true で Brewfile に `trusted: true` が付き、activation 時に許可される。
     taps = [
       {
-        name = "k1LoW/tap";
-        trusted = true;
-      }
-      {
         name = "nikitabobko/tap";
         trusted = true;
       }
@@ -19,7 +15,6 @@ _: {
       }
     ];
     brews = [
-      "k1low/tap/mo"
       "takai/tap/git-ai-commit"
     ];
     casks = [
