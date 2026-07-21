@@ -22,7 +22,14 @@ let
 
     ${loadKeychainAgent}
 
+    config="$(${pkgs.coreutils}/bin/readlink -f "$HOME/.ssh/config" 2>/dev/null || true)"
+    configArgs=()
+    if [ -n "$config" ] && [ -r "$config" ]; then
+      configArgs=(-F "$config")
+    fi
+
     exec ${pkgs.openssh}/bin/ssh \
+      "''${configArgs[@]}" \
       -o IdentityAgent=SSH_AUTH_SOCK \
       -o IdentitiesOnly=yes \
       "$@"
