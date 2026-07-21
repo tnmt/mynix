@@ -6,7 +6,7 @@
 
     settings = {
       "1password" = lib.mkIf pkgs.stdenv.isLinux {
-        header = ''Match exec "[ -z \"$SSH_CONNECTION\" ] && [ -S $HOME/.1password/agent.sock ]"'';
+        header = ''Match exec "[ -z \"$DISABLE_1PASSWORD_SSH_AGENT\" ] && [ -z \"$SSH_CONNECTION\" ] && [ -S $HOME/.1password/agent.sock ]"'';
         IdentityAgent = "~/.1password/agent.sock";
       };
 

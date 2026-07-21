@@ -5,9 +5,7 @@
   ...
 }:
 let
-  ccpocketGitSsh = pkgs.writeShellScript "ccpocket-git-ssh" ''
-    set -eu
-
+  loadKeychainAgent = ''
     state="$HOME/.keychain/$(hostname)-sh"
     if [ -r "$state" ]; then
       . "$state"
@@ -17,6 +15,12 @@ let
       echo "ccpocket-bridge: keychain agent unavailable" >&2
       exit 1
     fi
+  '';
+
+  ccpocketSsh = pkgs.writeShellScriptBin "ssh" ''
+    set -eu
+
+    ${loadKeychainAgent}
 
     exec ${pkgs.openssh}/bin/ssh \
       -o IdentityAgent=SSH_AUTH_SOCK \
@@ -55,8 +59,9 @@ in
       EnvironmentFile = config.sops.templates."ccpocket-bridge-env".path;
       Environment = [
         "HOME=/home/${username}"
-        "PATH=/etc/profiles/per-user/${username}/bin:/run/current-system/sw/bin"
-        "GIT_SSH_COMMAND=${ccpocketGitSsh}"
+        "PATH=${ccpocketSsh}/bin:/etc/profiles/per-user/${username}/bin:/run/current-system/sw/bin"
+        "GIT_SSH_COMMAND=${ccpocketSsh}/bin/ssh"
+        "DISABLE_1PASSWORD_SSH_AGENT=1"
       ];
     };
   };
