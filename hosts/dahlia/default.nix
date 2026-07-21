@@ -76,6 +76,7 @@ in
       hosts.work_mac
       hosts.sunflower
       hosts.hydrangea
+      mobile.moshiAndroid
       mobile.zfold7SshTerm
       mobile.iphone13miniSshTerm
     ];

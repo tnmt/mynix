@@ -36,5 +36,6 @@
   mobile = {
     zfold7SshTerm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBiX6l6ZOU+EtRG668IEGd4WcVl6cNslyxu8yZIXS68q tnmt@zfold7-ssh-term";
     iphone13miniSshTerm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPpdh8qwkp4MQ236cZQEdeJHzPBZxDR2mauNRYVVZrn3 tnmt@iphone13mini-ssh-term";
+    moshiAndroid = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK1tJnUMMNbEwS1u9CrZeC7V+la/kqkKJWJsd3mWtRxy tnmt@moshi";
   };
 }

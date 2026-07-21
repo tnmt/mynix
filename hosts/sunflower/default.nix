@@ -37,6 +37,7 @@ in
     # route switch when outside the home network) can authenticate
     # directly to sunflower without relying on agent forwarding.
     hosts.work_mac
+    mobile.moshiAndroid
     mobile.zfold7SshTerm
     mobile.iphone13miniSshTerm
   ];
