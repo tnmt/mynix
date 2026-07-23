@@ -7,7 +7,7 @@
   src = {
     owner = "folke";
     repo = "tokyonight.nvim";
-    rev = "v4.14.1";
+    rev = "545d72cde6400835d895160ecb5853874fd5156d"; # v4.14.1
     hash = "sha256-kQsV0x8/ycFp3+S6YKyiKFsAG5taOdQmx/dMuDqGyEQ=";
   };
 
