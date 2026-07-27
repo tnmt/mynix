@@ -25,12 +25,11 @@ let
   ];
 in
 {
-
+  # OS 非依存の個別アプリは ./apps.nix に分離し、darwin からも import できるようにした。
+  # ここに残すのは Linux 専用のパッケージ・テーマ (qt/gtk/kvantum)・chromium・カーソル等。
   imports = [
     ./dropbox.nix
-    ./vesktop.nix
     ./vimiv.nix
-    ./yazi.nix
     ./zathura.nix
   ];
   home.packages = with pkgs; [

@@ -24,7 +24,6 @@ _: {
       "chatgpt"
       "choosy"
       "claude"
-      "discord"
       "dropbox"
       "element"
       "firefox"
