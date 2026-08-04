@@ -74,7 +74,7 @@ in
     # so it is safe to roll this out before cleaning up the manual file.
     openssh.authorizedKeys.keys = with pubkeys; [
       hosts.work_mac
-      hosts.sunflower
+      hosts.sunflower_wsl
       hosts.hydrangea
       mobile.moshiAndroid
       mobile.zfold7SshTerm
