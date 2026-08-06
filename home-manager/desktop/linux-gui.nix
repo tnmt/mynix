@@ -6,6 +6,50 @@
 }:
 let
   fonts = import ./fonts.nix;
+  # nixpkgs で 'tokyonight-gtk-theme' が削除されたため (gtk-engine-murrine 依存の GTK2 エンジンが
+  # unmaintained につき削除). GTK2/murrine 依存部分を除き、上流リポジトリから直接ビルドする。
+  # ref: https://github.com/NixOS/nixpkgs/commit/659574ec9405f015bfdf35bd258e586b00d9f7fc
+  tokyonightGtkTheme = pkgs.stdenvNoCC.mkDerivation {
+    pname = "tokyonight-gtk-theme";
+    version = "0-unstable-2025-10-23";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "Fausto-Korpsvart";
+      repo = "Tokyonight-GTK-Theme";
+      rev = "6c340e058e84c1975a038a8e5d1e384477225dc0";
+      hash = "sha256-7H2n9wTaW8Db1RejWK071ITV1j5KIuzfql0Tx9WT6zM=";
+    };
+
+    nativeBuildInputs = [
+      pkgs.gnome-shell
+      pkgs.sassc
+    ];
+    buildInputs = [ pkgs.gnome-themes-extra ];
+
+    dontBuild = true;
+
+    postPatch = ''
+      patchShebangs themes/install.sh
+    '';
+
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out/share/themes
+      cd themes
+      ./install.sh -n Tokyonight -d "$out/share/themes"
+      cd ../icons
+      mkdir -p $out/share/icons
+      cp -a Tokyonight-Dark Tokyonight-Dark-Cyan Tokyonight-Light Tokyonight-Moon $out/share/icons/
+      runHook postInstall
+    '';
+
+    meta = {
+      description = "GTK theme based on the Tokyo Night colour palette";
+      homepage = "https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme";
+      license = lib.licenses.gpl3Plus;
+      platforms = lib.platforms.unix;
+    };
+  };
   chromiumFlags = ''
     --enable-wayland-ime
     --wayland-text-input-version=3
@@ -131,12 +175,12 @@ in
     };
     theme = {
       name = theme.gtk;
-      package = pkgs.tokyonight-gtk-theme;
+      package = tokyonightGtkTheme;
     };
     gtk4.theme = null;
     iconTheme = {
       name = theme.gtkIcon;
-      package = pkgs.tokyonight-gtk-theme;
+      package = tokyonightGtkTheme;
     };
   };
 

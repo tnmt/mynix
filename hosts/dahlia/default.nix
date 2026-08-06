@@ -7,6 +7,27 @@ let
   pubkeys = import ../../modules/common/ssh-pubkeys.nix;
 in
 {
+  # hyprland: nixos-unstable の現行チャンネル (2026-08-04 時点, e72e4f299401) では
+  # glaze 依存が壊れており、CMake の FetchContent がサンドボックス内のネットワーク
+  # アクセス不可で失敗しビルドできない。修正 (NixOS/nixpkgs#549253) は 2026-08-05 に
+  # master へ merge 済みだが、まだ nixos-unstable チャンネルには昇格していない。
+  # チャンネルが追いつくまでの間、hyprland だけ修正後のコミットから個別取得する。
+  # `nix flake update` で hyprland が正常ビルドされるようになったら削除してよい。
+  nixpkgs.overlays = [
+    (_final: prev: {
+      hyprland =
+        let
+          fixedPkgs = import (prev.fetchFromGitHub {
+            owner = "NixOS";
+            repo = "nixpkgs";
+            rev = "266bfbbe1512c1eb671ae9ec8ae85a5a25039a0b";
+            hash = "sha256-wKPUiiTxPJBRiRQFCOq2wQ2ccl1YFUgM89U1BeJ0KIk=";
+          }) { inherit (prev) system; };
+        in
+        fixedPkgs.hyprland;
+    })
+  ];
+
   imports = [
     ./hardware.nix
     ./disko.nix
