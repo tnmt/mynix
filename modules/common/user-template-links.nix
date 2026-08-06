@@ -36,6 +36,16 @@ let
         target = config.sops.templates."ssh-private-config".path;
         link = "${homeDir}/.ssh/conf.d/private.config";
       }
+    ])
+    ++ (lib.optionals cfg.tnmtInfo [
+      {
+        target = config.sops.secrets.tnmt_info_mask_dict.path;
+        link = "${homeDir}/.config/tnmt-info/journal-import/mask-dict.yaml";
+      }
+      {
+        target = config.sops.secrets.tnmt_info_ai_policy.path;
+        link = "${homeDir}/.config/tnmt-info/journal-import/ai-policy.md";
+      }
     ]);
 in
 {

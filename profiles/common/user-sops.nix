@@ -48,6 +48,8 @@ in
       description = "Expose voice_input_openrouter_api_key as a user-owned system secret.";
     };
 
+    tnmtInfo = lib.mkEnableOption "tnmt.info journal-import mask-dict/ai-policy files";
+
     sshPrivate = {
       role = lib.mkOption {
         type = lib.types.nullOr (
@@ -99,6 +101,16 @@ in
       // (lib.optionalAttrs cfg.voiceInput {
         voice_input_openrouter_api_key = {
           sopsFile = commonSopsFile;
+        };
+      })
+      // (lib.optionalAttrs cfg.tnmtInfo {
+        tnmt_info_mask_dict = {
+          sopsFile = ../../secrets/apps/tnmt-info/mask-dict.yaml;
+          format = "binary";
+        };
+        tnmt_info_ai_policy = {
+          sopsFile = ../../secrets/apps/tnmt-info/ai-policy.md;
+          format = "binary";
         };
       })
     );

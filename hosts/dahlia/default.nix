@@ -69,6 +69,7 @@ in
         role = "client";
         tier = "laptop";
       };
+      tnmtInfo = true;
     };
   };
 
