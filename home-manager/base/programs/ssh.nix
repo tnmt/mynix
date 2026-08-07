@@ -5,11 +5,14 @@
     enableDefaultConfig = false;
 
     settings = {
-      "1password" = lib.mkIf pkgs.stdenv.isLinux {
-        header = ''Match exec "[ -z \"$DISABLE_1PASSWORD_SSH_AGENT\" ] && [ -z \"$SSH_CONNECTION\" ] && [ -S $HOME/.1password/agent.sock ]"'';
-        IdentityAgent = "~/.1password/agent.sock";
-      };
-
+      # Linux では git/ssh の agent を keychain
+      # (profiles/home-manager/ssh-agent-keychain.nix) に一本化する。
+      # かつて `Match exec "... [ -z $SSH_CONNECTION ] ..."` で 1Password agent を
+      # IdentityAgent に指定していたが、herdr 等ローカル起動のセッションに
+      # リモートSSHからアタッチすると SSH_CONNECTION が空のままで「ローカル」と
+      # 誤判定され、IdentityAgent(SSH_AUTH_SOCK より優先)が 1Password に固定 →
+      # hyprlock でロック中は署名がハングして git が固まっていた。
+      # darwin は従来どおり 1Password agent を使う。
       "*" = {
         ControlMaster = "auto";
         ControlPersist = "60m";
