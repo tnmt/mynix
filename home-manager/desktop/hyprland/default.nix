@@ -23,7 +23,7 @@
     enable = true;
     xwayland.enable = true;
     systemd.enable = false;
-    configType = "hyprlang";
+    configType = "lua";
   };
 
   home.packages = with pkgs; [

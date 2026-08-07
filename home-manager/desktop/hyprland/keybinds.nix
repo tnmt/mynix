@@ -1,185 +1,298 @@
 {
-  wayland.windowManager.hyprland.settings = {
-    "$mainMod" = "SUPER";
+  lib,
+  terminal,
+  ...
+}:
+let
+  # Hyprland 0.55+ Lua binds. Helpers keep the `description` flag from repeating.
+  # keys: a Lua key string ("SUPER + W"); disp: a raw Lua dispatcher expression.
+  b =
+    keys: desc: disp:
+    ''hl.bind("${keys}", ${disp}, { description = "${desc}" })'';
+  # locked: also fires while an input inhibitor (lockscreen) is active.
+  bl =
+    keys: desc: disp:
+    ''hl.bind("${keys}", ${disp}, { description = "${desc}", locked = true })'';
+  # locked + repeating (held keys repeat).
+  bel =
+    keys: desc: disp:
+    ''hl.bind("${keys}", ${disp}, { description = "${desc}", locked = true, repeating = true })'';
+  # mouse bind (interactive drag/resize).
+  bm =
+    keys: desc: disp:
+    ''hl.bind("${keys}", ${disp}, { description = "${desc}", mouse = true })'';
 
-    bindd = [
-      # Close windows
-      "$mainMod, W, Close window, killactive,"
+  binds = [
+    # Close windows
+    (b "SUPER + W" "Close window" "hl.dsp.window.close()")
 
-      # Control tiling
-      "$mainMod, J, Toggle window split, layoutmsg, togglesplit"
-      "$mainMod, P, Pseudo window, pseudo,"
-      "$mainMod, T, Toggle window floating/tiling, togglefloating,"
-      "$mainMod, O, Pop out window (float + pin), exec, window-pop"
-      "$mainMod, F, Full screen, fullscreen, 0"
-      "$mainMod CTRL, F, Tiled full screen, fullscreenstate, 0 2"
-      "$mainMod ALT, F, Full width, fullscreen, 1"
+    # Control tiling
+    (b "SUPER + J" "Toggle window split" ''hl.dsp.layout("togglesplit")'')
+    (b "SUPER + P" "Pseudo window" "hl.dsp.window.pseudo()")
+    (b "SUPER + T" "Toggle window floating/tiling" "hl.dsp.window.float()")
+    (b "SUPER + O" "Pop out window (float + pin)" ''hl.dsp.exec_cmd("window-pop")'')
+    (b "SUPER + F" "Full screen" ''hl.dsp.window.fullscreen({ mode = "fullscreen" })'')
+    (b "SUPER + CTRL + F" "Tiled full screen"
+      ''hl.dsp.window.fullscreen_state({ internal = 0, client = 2, action = "toggle" })''
+    )
+    (b "SUPER + ALT + F" "Full width" ''hl.dsp.window.fullscreen({ mode = "maximized" })'')
 
-      # Move focus with SUPER + arrow keys
-      "$mainMod, LEFT, Move window focus left, movefocus, l"
-      "$mainMod, RIGHT, Move window focus right, movefocus, r"
-      "$mainMod, UP, Move window focus up, movefocus, u"
-      "$mainMod, DOWN, Move window focus down, movefocus, d"
+    # Move focus with SUPER + arrow keys
+    (b "SUPER + LEFT" "Move window focus left" ''hl.dsp.focus({ direction = "l" })'')
+    (b "SUPER + RIGHT" "Move window focus right" ''hl.dsp.focus({ direction = "r" })'')
+    (b "SUPER + UP" "Move window focus up" ''hl.dsp.focus({ direction = "u" })'')
+    (b "SUPER + DOWN" "Move window focus down" ''hl.dsp.focus({ direction = "d" })'')
 
-      # Switch workspaces with SUPER + [1-9; 0]
-      "$mainMod, code:10, Switch to workspace 1, workspace,1"
-      "$mainMod, code:11, Switch to workspace 2, workspace,2"
-      "$mainMod, code:12, Switch to workspace 3, workspace,3"
-      "$mainMod, code:13, Switch to workspace 4, workspace,4"
-      "$mainMod, code:14, Switch to workspace 5, workspace,5"
-      "$mainMod, code:15, Switch to workspace 6, workspace,6"
-      "$mainMod, code:16, Switch to workspace 7, workspace,7"
-      "$mainMod, code:17, Switch to workspace 8, workspace,8"
-      "$mainMod, code:18, Switch to workspace 9, workspace,9"
-      "$mainMod, code:19, Switch to workspace 10, workspace,10"
+    # Switch workspaces with SUPER + [1-9; 0]
+    (b "SUPER + code:10" "Switch to workspace 1" "hl.dsp.focus({ workspace = 1 })")
+    (b "SUPER + code:11" "Switch to workspace 2" "hl.dsp.focus({ workspace = 2 })")
+    (b "SUPER + code:12" "Switch to workspace 3" "hl.dsp.focus({ workspace = 3 })")
+    (b "SUPER + code:13" "Switch to workspace 4" "hl.dsp.focus({ workspace = 4 })")
+    (b "SUPER + code:14" "Switch to workspace 5" "hl.dsp.focus({ workspace = 5 })")
+    (b "SUPER + code:15" "Switch to workspace 6" "hl.dsp.focus({ workspace = 6 })")
+    (b "SUPER + code:16" "Switch to workspace 7" "hl.dsp.focus({ workspace = 7 })")
+    (b "SUPER + code:17" "Switch to workspace 8" "hl.dsp.focus({ workspace = 8 })")
+    (b "SUPER + code:18" "Switch to workspace 9" "hl.dsp.focus({ workspace = 9 })")
+    (b "SUPER + code:19" "Switch to workspace 10" "hl.dsp.focus({ workspace = 10 })")
 
-      # Move active window to a workspace with SUPER + SHIFT + [1-9; 0]
-      "$mainMod SHIFT, code:10, Move window to workspace 1, movetoworkspace,1"
-      "$mainMod SHIFT, code:11, Move window to workspace 2, movetoworkspace,2"
-      "$mainMod SHIFT, code:12, Move window to workspace 3, movetoworkspace,3"
-      "$mainMod SHIFT, code:13, Move window to workspace 4, movetoworkspace,4"
-      "$mainMod SHIFT, code:14, Move window to workspace 5, movetoworkspace,5"
-      "$mainMod SHIFT, code:15, Move window to workspace 6, movetoworkspace,6"
-      "$mainMod SHIFT, code:16, Move window to workspace 7, movetoworkspace,7"
-      "$mainMod SHIFT, code:17, Move window to workspace 8, movetoworkspace,8"
-      "$mainMod SHIFT, code:18, Move window to workspace 9, movetoworkspace,9"
-      "$mainMod SHIFT, code:19, Move window to workspace 10, movetoworkspace,10"
+    # Move active window to a workspace with SUPER + SHIFT + [1-9; 0]
+    (b "SUPER + SHIFT + code:10" "Move window to workspace 1"
+      "hl.dsp.window.move({ workspace = 1, follow = true })"
+    )
+    (b "SUPER + SHIFT + code:11" "Move window to workspace 2"
+      "hl.dsp.window.move({ workspace = 2, follow = true })"
+    )
+    (b "SUPER + SHIFT + code:12" "Move window to workspace 3"
+      "hl.dsp.window.move({ workspace = 3, follow = true })"
+    )
+    (b "SUPER + SHIFT + code:13" "Move window to workspace 4"
+      "hl.dsp.window.move({ workspace = 4, follow = true })"
+    )
+    (b "SUPER + SHIFT + code:14" "Move window to workspace 5"
+      "hl.dsp.window.move({ workspace = 5, follow = true })"
+    )
+    (b "SUPER + SHIFT + code:15" "Move window to workspace 6"
+      "hl.dsp.window.move({ workspace = 6, follow = true })"
+    )
+    (b "SUPER + SHIFT + code:16" "Move window to workspace 7"
+      "hl.dsp.window.move({ workspace = 7, follow = true })"
+    )
+    (b "SUPER + SHIFT + code:17" "Move window to workspace 8"
+      "hl.dsp.window.move({ workspace = 8, follow = true })"
+    )
+    (b "SUPER + SHIFT + code:18" "Move window to workspace 9"
+      "hl.dsp.window.move({ workspace = 9, follow = true })"
+    )
+    (b "SUPER + SHIFT + code:19" "Move window to workspace 10"
+      "hl.dsp.window.move({ workspace = 10, follow = true })"
+    )
 
-      # Move active window silently to a workspace
-      "$mainMod SHIFT ALT, code:10, Move window silently to workspace 1, movetoworkspacesilent,1"
-      "$mainMod SHIFT ALT, code:11, Move window silently to workspace 2, movetoworkspacesilent,2"
-      "$mainMod SHIFT ALT, code:12, Move window silently to workspace 3, movetoworkspacesilent,3"
-      "$mainMod SHIFT ALT, code:13, Move window silently to workspace 4, movetoworkspacesilent,4"
-      "$mainMod SHIFT ALT, code:14, Move window silently to workspace 5, movetoworkspacesilent,5"
-      "$mainMod SHIFT ALT, code:15, Move window silently to workspace 6, movetoworkspacesilent,6"
-      "$mainMod SHIFT ALT, code:16, Move window silently to workspace 7, movetoworkspacesilent,7"
-      "$mainMod SHIFT ALT, code:17, Move window silently to workspace 8, movetoworkspacesilent,8"
-      "$mainMod SHIFT ALT, code:18, Move window silently to workspace 9, movetoworkspacesilent,9"
-      "$mainMod SHIFT ALT, code:19, Move window silently to workspace 10, movetoworkspacesilent,10"
+    # Move active window silently to a workspace
+    (b "SUPER + SHIFT + ALT + code:10" "Move window silently to workspace 1"
+      "hl.dsp.window.move({ workspace = 1, follow = false })"
+    )
+    (b "SUPER + SHIFT + ALT + code:11" "Move window silently to workspace 2"
+      "hl.dsp.window.move({ workspace = 2, follow = false })"
+    )
+    (b "SUPER + SHIFT + ALT + code:12" "Move window silently to workspace 3"
+      "hl.dsp.window.move({ workspace = 3, follow = false })"
+    )
+    (b "SUPER + SHIFT + ALT + code:13" "Move window silently to workspace 4"
+      "hl.dsp.window.move({ workspace = 4, follow = false })"
+    )
+    (b "SUPER + SHIFT + ALT + code:14" "Move window silently to workspace 5"
+      "hl.dsp.window.move({ workspace = 5, follow = false })"
+    )
+    (b "SUPER + SHIFT + ALT + code:15" "Move window silently to workspace 6"
+      "hl.dsp.window.move({ workspace = 6, follow = false })"
+    )
+    (b "SUPER + SHIFT + ALT + code:16" "Move window silently to workspace 7"
+      "hl.dsp.window.move({ workspace = 7, follow = false })"
+    )
+    (b "SUPER + SHIFT + ALT + code:17" "Move window silently to workspace 8"
+      "hl.dsp.window.move({ workspace = 8, follow = false })"
+    )
+    (b "SUPER + SHIFT + ALT + code:18" "Move window silently to workspace 9"
+      "hl.dsp.window.move({ workspace = 9, follow = false })"
+    )
+    (b "SUPER + SHIFT + ALT + code:19" "Move window silently to workspace 10"
+      "hl.dsp.window.move({ workspace = 10, follow = false })"
+    )
 
-      # Scratchpad
-      "$mainMod, S, Toggle scratchpad, togglespecialworkspace, scratchpad"
-      "$mainMod ALT, S, Move window to scratchpad, movetoworkspacesilent, special:scratchpad"
+    # Scratchpad
+    (b "SUPER + S" "Toggle scratchpad" ''hl.dsp.workspace.toggle_special("scratchpad")'')
+    (b "SUPER + ALT + S" "Move window to scratchpad"
+      ''hl.dsp.window.move({ workspace = "special:scratchpad" })''
+    )
 
-      # TAB between workspaces
-      "$mainMod, TAB, Next workspace, workspace,e+1"
-      "$mainMod SHIFT, TAB, Previous workspace, workspace,e-1"
-      "$mainMod CTRL, TAB, Former workspace, workspace,previous"
+    # TAB between workspaces
+    (b "SUPER + TAB" "Next workspace" ''hl.dsp.focus({ workspace = "e+1" })'')
+    (b "SUPER + SHIFT + TAB" "Previous workspace" ''hl.dsp.focus({ workspace = "e-1" })'')
+    (b "SUPER + CTRL + TAB" "Former workspace" ''hl.dsp.focus({ workspace = "previous" })'')
 
-      # Move workspaces to other monitors
-      "$mainMod SHIFT ALT, LEFT, Move workspace to left monitor, movecurrentworkspacetomonitor, l"
-      "$mainMod SHIFT ALT, RIGHT, Move workspace to right monitor, movecurrentworkspacetomonitor, r"
-      "$mainMod SHIFT ALT, UP, Move workspace to up monitor, movecurrentworkspacetomonitor, u"
-      "$mainMod SHIFT ALT, DOWN, Move workspace to down monitor, movecurrentworkspacetomonitor, d"
+    # Move workspaces to other monitors
+    (b "SUPER + SHIFT + ALT + LEFT" "Move workspace to left monitor"
+      ''hl.dsp.workspace.move({ monitor = "l" })''
+    )
+    (b "SUPER + SHIFT + ALT + RIGHT" "Move workspace to right monitor"
+      ''hl.dsp.workspace.move({ monitor = "r" })''
+    )
+    (b "SUPER + SHIFT + ALT + UP" "Move workspace to up monitor"
+      ''hl.dsp.workspace.move({ monitor = "u" })''
+    )
+    (b "SUPER + SHIFT + ALT + DOWN" "Move workspace to down monitor"
+      ''hl.dsp.workspace.move({ monitor = "d" })''
+    )
 
-      # Swap active window
-      "$mainMod SHIFT, LEFT, Swap window to the left, swapwindow, l"
-      "$mainMod SHIFT, RIGHT, Swap window to the right, swapwindow, r"
-      "$mainMod SHIFT, UP, Swap window up, swapwindow, u"
-      "$mainMod SHIFT, DOWN, Swap window down, swapwindow, d"
+    # Swap active window
+    (b "SUPER + SHIFT + LEFT" "Swap window to the left" ''hl.dsp.window.swap({ direction = "l" })'')
+    (b "SUPER + SHIFT + RIGHT" "Swap window to the right" ''hl.dsp.window.swap({ direction = "r" })'')
+    (b "SUPER + SHIFT + UP" "Swap window up" ''hl.dsp.window.swap({ direction = "u" })'')
+    (b "SUPER + SHIFT + DOWN" "Swap window down" ''hl.dsp.window.swap({ direction = "d" })'')
 
-      # Cycle through windows
-      "ALT, TAB, Cycle to next window, cyclenext"
-      "ALT SHIFT, TAB, Cycle to prev window, cyclenext, prev"
-      "ALT, TAB, Reveal active window on top, bringactivetotop"
-      "ALT SHIFT, TAB, Reveal active window on top, bringactivetotop"
+    # Cycle through windows
+    (b "ALT + TAB" "Cycle to next window" "hl.dsp.window.cycle_next()")
+    (b "ALT + SHIFT + TAB" "Cycle to prev window" "hl.dsp.window.cycle_next({ next = false })")
+    (b "ALT + TAB" "Reveal active window on top" ''hl.dsp.window.alter_zorder({ mode = "top" })'')
+    (b "ALT + SHIFT + TAB" "Reveal active window on top"
+      ''hl.dsp.window.alter_zorder({ mode = "top" })''
+    )
 
-      # Resize active window
-      "$mainMod, code:20, Expand window left, resizeactive, -100 0"
-      "$mainMod, code:21, Shrink window left, resizeactive, 100 0"
-      "$mainMod SHIFT, code:20, Shrink window up, resizeactive, 0 -100"
-      "$mainMod SHIFT, code:21, Expand window down, resizeactive, 0 100"
+    # Resize active window
+    (b "SUPER + code:20" "Expand window left"
+      "hl.dsp.window.resize({ x = -100, y = 0, relative = true })"
+    )
+    (b "SUPER + code:21" "Shrink window left"
+      "hl.dsp.window.resize({ x = 100, y = 0, relative = true })"
+    )
+    (b "SUPER + SHIFT + code:20" "Shrink window up"
+      "hl.dsp.window.resize({ x = 0, y = -100, relative = true })"
+    )
+    (b "SUPER + SHIFT + code:21" "Expand window down"
+      "hl.dsp.window.resize({ x = 0, y = 100, relative = true })"
+    )
 
-      # Scroll through workspaces
-      "$mainMod, mouse_down, Scroll active workspace forward, workspace,e+1"
-      "$mainMod, mouse_up, Scroll active workspace backward, workspace,e-1"
+    # Scroll through workspaces
+    (b "SUPER + mouse_down" "Scroll active workspace forward" ''hl.dsp.focus({ workspace = "e+1" })'')
+    (b "SUPER + mouse_up" "Scroll active workspace backward" ''hl.dsp.focus({ workspace = "e-1" })'')
 
-      # Toggle groups
-      "$mainMod, G, Toggle window grouping, togglegroup"
-      "$mainMod ALT, G, Move active window out of group, moveoutofgroup"
+    # Toggle groups
+    (b "SUPER + G" "Toggle window grouping" "hl.dsp.group.toggle()")
+    (b "SUPER + ALT + G" "Move active window out of group"
+      "hl.dsp.window.move({ out_of_group = true })"
+    )
 
-      # Join groups
-      "$mainMod ALT, LEFT, Move window to group on left, moveintogroup, l"
-      "$mainMod ALT, RIGHT, Move window to group on right, moveintogroup, r"
-      "$mainMod ALT, UP, Move window to group on top, moveintogroup, u"
-      "$mainMod ALT, DOWN, Move window to group on bottom, moveintogroup, d"
+    # Join groups
+    (b "SUPER + ALT + LEFT" "Move window to group on left" ''hl.dsp.window.move({ into_group = "l" })'')
+    (b "SUPER + ALT + RIGHT" "Move window to group on right"
+      ''hl.dsp.window.move({ into_group = "r" })''
+    )
+    (b "SUPER + ALT + UP" "Move window to group on top" ''hl.dsp.window.move({ into_group = "u" })'')
+    (b "SUPER + ALT + DOWN" "Move window to group on bottom"
+      ''hl.dsp.window.move({ into_group = "d" })''
+    )
 
-      # Navigate grouped windows
-      "$mainMod ALT, TAB, Next window in group, changegroupactive, f"
-      "$mainMod ALT SHIFT, TAB, Previous window in group, changegroupactive, b"
-      "$mainMod CTRL, LEFT, Move grouped window focus left, changegroupactive, b"
-      "$mainMod CTRL, RIGHT, Move grouped window focus right, changegroupactive, f"
-      "$mainMod ALT, mouse_down, Next window in group, changegroupactive, f"
-      "$mainMod ALT, mouse_up, Previous window in group, changegroupactive, b"
+    # Navigate grouped windows
+    (b "SUPER + ALT + TAB" "Next window in group" "hl.dsp.group.next()")
+    (b "SUPER + ALT + SHIFT + TAB" "Previous window in group" "hl.dsp.group.prev()")
+    (b "SUPER + CTRL + LEFT" "Move grouped window focus left" "hl.dsp.group.prev()")
+    (b "SUPER + CTRL + RIGHT" "Move grouped window focus right" "hl.dsp.group.next()")
+    (b "SUPER + ALT + mouse_down" "Next window in group" "hl.dsp.group.next()")
+    (b "SUPER + ALT + mouse_up" "Previous window in group" "hl.dsp.group.prev()")
 
-      # Activate window in group by number
-      "$mainMod ALT, code:10, Switch to group window 1, changegroupactive, 1"
-      "$mainMod ALT, code:11, Switch to group window 2, changegroupactive, 2"
-      "$mainMod ALT, code:12, Switch to group window 3, changegroupactive, 3"
-      "$mainMod ALT, code:13, Switch to group window 4, changegroupactive, 4"
-      "$mainMod ALT, code:14, Switch to group window 5, changegroupactive, 5"
+    # Activate window in group by number
+    (b "SUPER + ALT + code:10" "Switch to group window 1" "hl.dsp.group.active({ index = 1 })")
+    (b "SUPER + ALT + code:11" "Switch to group window 2" "hl.dsp.group.active({ index = 2 })")
+    (b "SUPER + ALT + code:12" "Switch to group window 3" "hl.dsp.group.active({ index = 3 })")
+    (b "SUPER + ALT + code:13" "Switch to group window 4" "hl.dsp.group.active({ index = 4 })")
+    (b "SUPER + ALT + code:14" "Switch to group window 5" "hl.dsp.group.active({ index = 5 })")
 
-      # Copy / Paste
-      "$mainMod, C, Universal copy, sendshortcut, CTRL, Insert,"
-      "$mainMod, V, Universal paste, sendshortcut, SHIFT, Insert,"
-      "$mainMod, X, Universal cut, sendshortcut, CTRL, X,"
-      "$mainMod SHIFT, C, Clipboard manager, exec, walker -m clipboard"
+    # Copy / Paste
+    (b "SUPER + C" "Universal copy" ''hl.dsp.send_shortcut({ mods = "CTRL", key = "Insert" })'')
+    (b "SUPER + V" "Universal paste" ''hl.dsp.send_shortcut({ mods = "SHIFT", key = "Insert" })'')
+    (b "SUPER + X" "Universal cut" ''hl.dsp.send_shortcut({ mods = "CTRL", key = "X" })'')
+    (b "SUPER + SHIFT + C" "Clipboard manager" ''hl.dsp.exec_cmd("walker -m clipboard")'')
 
-      # Menus
-      "$mainMod, SPACE, Launch apps, exec, launch-walker"
-      "$mainMod CTRL, E, Emoji picker, exec, launch-walker -m symbols"
+    # Menus
+    (b "SUPER + SPACE" "Launch apps" ''hl.dsp.exec_cmd("launch-walker")'')
+    (b "SUPER + CTRL + E" "Emoji picker" ''hl.dsp.exec_cmd("launch-walker -m symbols")'')
 
-      # Application bindings
-      "$mainMod, RETURN, Terminal, exec, $terminal"
-      "$mainMod ALT, RETURN, Tmux, exec, $terminal bash -c 'tmux attach || tmux new -s Work' "
-      "$mainMod SHIFT, RETURN, Browser, exec, launch-browser"
-      "$mainMod SHIFT, B, Browser, exec, launch-browser"
-      "$mainMod SHIFT ALT, B, Browser (private), exec, launch-browser --private"
-      "$mainMod SHIFT, SLASH, Passwords, exec, 1password"
+    # Application bindings
+    (b "SUPER + RETURN" "Terminal" ''hl.dsp.exec_cmd("${terminal.default}")'')
+    (b "SUPER + ALT + RETURN" "Tmux"
+      ''hl.dsp.exec_cmd("${terminal.default} bash -c 'tmux attach || tmux new -s Work'")''
+    )
+    (b "SUPER + SHIFT + RETURN" "Browser" ''hl.dsp.exec_cmd("launch-browser")'')
+    (b "SUPER + SHIFT + B" "Browser" ''hl.dsp.exec_cmd("launch-browser")'')
+    (b "SUPER + SHIFT + ALT + B" "Browser (private)" ''hl.dsp.exec_cmd("launch-browser --private")'')
+    (b "SUPER + SHIFT + SLASH" "Passwords" ''hl.dsp.exec_cmd("1password")'')
 
-      # Window transparency toggle
-      ''$mainMod, BACKSPACE, Toggle window transparency, exec, hyprctl dispatch setprop "address:$(hyprctl activewindow -j | jq -r '.address')" opaque toggle''
+    # Window transparency toggle
+    (b "SUPER + BACKSPACE" "Toggle window transparency"
+      ''hl.dsp.exec_cmd([[hyprctl dispatch setprop "address:$(hyprctl activewindow -j | jq -r '.address')" opaque toggle]])''
+    )
 
-      # Zoom
-      "$mainMod CTRL, Z, Zoom in, exec, hyprctl keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '.float + 1')"
-      "$mainMod CTRL ALT, Z, Reset zoom, exec, hyprctl keyword cursor:zoom_factor 1"
+    # Zoom
+    (b "SUPER + CTRL + Z" "Zoom in"
+      "hl.dsp.exec_cmd([[hyprctl keyword cursor:zoom_factor $(hyprctl getoption cursor:zoom_factor -j | jq '.float + 1')]])"
+    )
+    (b "SUPER + CTRL + ALT + Z" "Reset zoom"
+      ''hl.dsp.exec_cmd("hyprctl keyword cursor:zoom_factor 1")''
+    )
 
-      # Screenshot (P = Print)
-      ''$mainMod, P, Screenshot region to clipboard, exec, grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot" "Copied to clipboard" -t 2000''
-      ''$mainMod SHIFT, P, Screenshot fullscreen to clipboard, exec, grim - | wl-copy && notify-send "Screenshot" "Copied to clipboard" -t 2000''
-      ''$mainMod ALT, P, Screenshot region to file, exec, mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000''
-      ''$mainMod ALT SHIFT, P, Screenshot fullscreen to file, exec, mkdir -p ~/Pictures/Screenshots && grim ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000''
-      ''$mainMod CTRL, P, Screenshot region edit (swappy), exec, mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" - | swappy -f -''
+    # Screenshot (P = Print)
+    (b "SUPER + P" "Screenshot region to clipboard"
+      ''hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot" "Copied to clipboard" -t 2000]])''
+    )
+    (b "SUPER + SHIFT + P" "Screenshot fullscreen to clipboard"
+      ''hl.dsp.exec_cmd([[grim - | wl-copy && notify-send "Screenshot" "Copied to clipboard" -t 2000]])''
+    )
+    (b "SUPER + ALT + P" "Screenshot region to file"
+      ''hl.dsp.exec_cmd([[mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000]])''
+    )
+    (b "SUPER + ALT + SHIFT + P" "Screenshot fullscreen to file"
+      ''hl.dsp.exec_cmd([[mkdir -p ~/Pictures/Screenshots && grim ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000]])''
+    )
+    (b "SUPER + CTRL + P" "Screenshot region edit (swappy)"
+      ''hl.dsp.exec_cmd([[mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" - | swappy -f -]])''
+    )
 
-      # Settings / Controls
-      "$mainMod ALT, SPACE, Settings menu, exec, launch-settings"
-      "$mainMod SHIFT, A, Switch audio output, exec, switch-audio"
+    # Settings / Controls
+    (b "SUPER + ALT + SPACE" "Settings menu" ''hl.dsp.exec_cmd("launch-settings")'')
+    (b "SUPER + SHIFT + A" "Switch audio output" ''hl.dsp.exec_cmd("switch-audio")'')
 
-      # Voice input
-      "$mainMod, M, Toggle voice input, exec, voice-input"
-      "$mainMod SHIFT, M, Toggle voice input (LLM refine), exec, voice-input --refine"
+    # Voice input
+    (b "SUPER + M" "Toggle voice input" ''hl.dsp.exec_cmd("voice-input")'')
+    (b "SUPER + SHIFT + M" "Toggle voice input (LLM refine)"
+      ''hl.dsp.exec_cmd("voice-input --refine")''
+    )
 
-      # System
-      "$mainMod, ESCAPE, System menu, exec, wlogout -b 3 -c 20 -r 20"
-    ];
+    # System
+    (b "SUPER + ESCAPE" "System menu" ''hl.dsp.exec_cmd("wlogout -b 3 -c 20 -r 20")'')
 
-    bindmd = [
-      "$mainMod, mouse:272, Move window, movewindow"
-      "$mainMod, mouse:273, Resize window, resizewindow"
-    ];
+    # Mouse binds
+    (bm "SUPER + mouse:272" "Move window" "hl.dsp.window.drag()")
+    (bm "SUPER + mouse:273" "Resize window" "hl.dsp.window.resize()")
 
-    bindld = [
-      ", XF86AudioPlay, Play, exec, playerctl play-pause"
-      ", XF86AudioPrev, Previous track, exec, playerctl previous"
-      ", XF86AudioNext, Next track, exec, playerctl next"
-      ", XF86AudioMute, Mute, exec, swayosd-client --output-volume mute-toggle"
-    ];
+    # Media keys (locked so they work on the lockscreen)
+    (bl "XF86AudioPlay" "Play" ''hl.dsp.exec_cmd("playerctl play-pause")'')
+    (bl "XF86AudioPrev" "Previous track" ''hl.dsp.exec_cmd("playerctl previous")'')
+    (bl "XF86AudioNext" "Next track" ''hl.dsp.exec_cmd("playerctl next")'')
+    (bl "XF86AudioMute" "Mute" ''hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle")'')
 
-    bindeld = [
-      ", XF86AudioRaiseVolume, Volume up, exec, swayosd-client --output-volume raise"
-      ", XF86AudioLowerVolume, Volume down, exec, swayosd-client --output-volume lower"
-      ", XF86MonBrightnessUp, Brightness up, exec, swayosd-client --brightness raise"
-      ", XF86MonBrightnessDown, Brightness down, exec, swayosd-client --brightness lower"
-    ];
-  };
+    # Volume / brightness (locked + repeating)
+    (bel "XF86AudioRaiseVolume" "Volume up" ''hl.dsp.exec_cmd("swayosd-client --output-volume raise")'')
+    (bel "XF86AudioLowerVolume" "Volume down"
+      ''hl.dsp.exec_cmd("swayosd-client --output-volume lower")''
+    )
+    (bel "XF86MonBrightnessUp" "Brightness up" ''hl.dsp.exec_cmd("swayosd-client --brightness raise")'')
+    (bel "XF86MonBrightnessDown" "Brightness down"
+      ''hl.dsp.exec_cmd("swayosd-client --brightness lower")''
+    )
+  ];
+in
+{
+  wayland.windowManager.hyprland.extraConfig = lib.mkOrder 900 (
+    "-- Keybinds\n" + lib.concatStringsSep "\n" binds + "\n"
+  );
 }
