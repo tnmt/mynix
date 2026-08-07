@@ -36,7 +36,11 @@ let
       runHook preInstall
       mkdir -p $out/share/themes
       cd themes
-      ./install.sh -n Tokyonight -d "$out/share/themes"
+      # `--tweaks storm` を付けないと ctype サフィックス (-Storm) が付かず、
+      # theme.gtk = "Tokyonight-Dark-Storm" に一致するテーマが生成されない
+      # (install.sh の THEME_DIR = name+theme+color+size+ctype)。
+      # これを付け忘れるとシステム全体のダークテーマ指定がフォールバックしてしまう。
+      ./install.sh -n Tokyonight -c dark --tweaks storm -d "$out/share/themes"
       cd ../icons
       mkdir -p $out/share/icons
       cp -a Tokyonight-Dark Tokyonight-Dark-Cyan Tokyonight-Light Tokyonight-Moon $out/share/icons/
