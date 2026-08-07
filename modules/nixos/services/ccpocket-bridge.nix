@@ -68,7 +68,6 @@ in
         "HOME=/home/${username}"
         "PATH=${ccpocketSsh}/bin:/etc/profiles/per-user/${username}/bin:/run/current-system/sw/bin"
         "GIT_SSH_COMMAND=${ccpocketSsh}/bin/ssh"
-        "DISABLE_1PASSWORD_SSH_AGENT=1"
       ];
     };
   };
