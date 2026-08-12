@@ -18,15 +18,6 @@ in
       ];
     };
 
-    chatgpt = {
-      name = "ChatGPT";
-      comment = "ChatGPT Web App";
-      exec = "launch-webapp https://chatgpt.com/";
-      icon = icon "chatgpt";
-      terminal = false;
-      categories = [ "Network" ];
-    };
-
     claude = {
       name = "Claude";
       comment = "Claude Web App";

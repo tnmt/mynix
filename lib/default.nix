@@ -46,6 +46,9 @@ let
         roots
         symbol-desktop-wallet
         ;
+      # nixpkgs の `chatgpt` は darwin 専用 (homebrew cask 経由なので未使用)。
+      # NUR 版 (Linux 公式 .deb の再パッケージ) と名前が衝突するため別名にする。
+      chatgpt-linux = (import inputs.nur-tnmt { pkgs = final; }).chatgpt;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];

@@ -13,6 +13,7 @@
 
   home.packages = [
     pkgs.btrfs-progs
+    pkgs.chatgpt-linux
     pkgs.msgvault
     pkgs.symbol-desktop-wallet
   ];
