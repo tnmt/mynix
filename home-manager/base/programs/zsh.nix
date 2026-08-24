@@ -6,8 +6,8 @@
   ...
 }:
 let
-  inherit (pkgs.stdenv) isDarwin;
-  inherit (pkgs.stdenv) isLinux;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+  inherit (pkgs.stdenv.hostPlatform) isLinux;
   themeSrc = theme.srcDrv pkgs;
 in
 {

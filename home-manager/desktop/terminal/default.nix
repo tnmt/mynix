@@ -6,7 +6,7 @@ let
     default = "ghostty";
     font = {
       name = fonts.monospace;
-      size = if pkgs.stdenv.isDarwin then 16 else 13;
+      size = if pkgs.stdenv.hostPlatform.isDarwin then 16 else 13;
     };
   };
 in

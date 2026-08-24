@@ -9,10 +9,10 @@ let
   themeSrc = theme.srcDrv pkgs;
 in
 {
-  home.packages = lib.optionals pkgs.stdenv.isLinux [ pkgs.foot ];
+  home.packages = lib.optionals pkgs.stdenv.hostPlatform.isLinux [ pkgs.foot ];
 
   xdg.configFile."foot/foot.ini" = {
-    enable = pkgs.stdenv.isLinux;
+    enable = pkgs.stdenv.hostPlatform.isLinux;
     text = ''
       [main]
       font=${terminal.font.name}:size=${toString terminal.font.size}

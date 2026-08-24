@@ -11,7 +11,7 @@
   # が含まれず見つからない。~/.local/bin に nix-store の herdr を symlink
   # して、herdr 本体が想定する remote 配置位置に Nix 管理バイナリを露出する。
   # `herdr update` での自動更新は不可 — nixpkgs 由来なので flake update で上げる。
-  home.file = lib.optionalAttrs pkgs.stdenv.isLinux {
+  home.file = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
     ".local/bin/herdr".source = "${pkgs.herdr}/bin/herdr";
   };
 
