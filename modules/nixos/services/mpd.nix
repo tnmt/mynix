@@ -15,7 +15,8 @@
   };
 
   systemd.services.mpd.environment = {
-    # User-id must match above user
+    # This is a system service, not a --user unit, so XDG_RUNTIME_DIR is not
+    # set automatically; mpd needs it to reach the user's PipeWire socket.
     XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.${username}.uid}";
   };
 }

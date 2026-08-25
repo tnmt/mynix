@@ -33,7 +33,6 @@ in
     ./disko.nix
     ./network.nix
 
-    # Shared system roles.
     ../../modules/nixos/core
     services.openssh
     services.ccpocket-bridge
@@ -104,6 +103,5 @@ in
     ];
   };
 
-  # Host-specific Home Manager entrypoint.
   home-manager.users."${username}" = import ./home-manager.nix;
 }

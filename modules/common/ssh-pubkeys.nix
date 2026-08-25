@@ -1,7 +1,7 @@
 # Catalog of SSH public keys for tnmt's machines.
 #
-# All entries are *public* keys — safe to commit unencrypted. (See
-# memory/security-hardening.md for why user keys are not stored in sops.)
+# All entries are *public* keys — safe to commit unencrypted. sops
+# encryption would add no confidentiality value here and only add friction.
 #
 # Structure:
 #   hosts.<machine>   — per-machine key (one private key that lives only on

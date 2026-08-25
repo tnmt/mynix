@@ -10,18 +10,15 @@
       };
 
       listener = [
-        # 300s: dim the screen
         {
           timeout = 300;
           on-timeout = "${pkgs.brightnessctl}/bin/brightnessctl -s set 10%";
           on-resume = "${pkgs.brightnessctl}/bin/brightnessctl -r";
         }
-        # 600s: lock the screen
         {
           timeout = 600;
           on-timeout = "loginctl lock-session";
         }
-        # 900s: turn off display
         {
           timeout = 900;
           on-timeout = "hyprctl dispatch dpms off";

@@ -64,8 +64,8 @@
     inputs@{ self, ... }:
     let
       allSystems = [
-        "x86_64-linux" # 64-bit x86 Linux
-        "aarch64-darwin" # 64-bit ARM macOS
+        "x86_64-linux"
+        "aarch64-darwin"
       ];
       forAllSystems = inputs.nixpkgs.lib.genAttrs allSystems;
       pkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
@@ -98,7 +98,7 @@
           };
         in
         {
-          # Run with: nix run .#switch -- [extra nh args]
+          # Extra args after `--` pass through to nh.
           switch = {
             type = "app";
             program = "${switch}/bin/switch";
@@ -106,7 +106,6 @@
           };
         }
         // pkgs.lib.optionalAttrs (system == "x86_64-linux") {
-          # Run with: nix run .#dahlia-vm
           dahlia-vm = {
             type = "app";
             program = "${self.nixosConfigurations.dahlia.config.system.build.vm}/bin/run-dahlia-vm";

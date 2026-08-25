@@ -23,7 +23,6 @@ let
     ''hl.bind("${keys}", ${disp}, { description = "${desc}", mouse = true })'';
 
   binds = [
-    # Close windows
     (b "SUPER + W" "Close window" "hl.dsp.window.close()")
 
     # Control tiling
@@ -227,7 +226,6 @@ let
     (b "SUPER + SHIFT + ALT + B" "Browser (private)" ''hl.dsp.exec_cmd("launch-browser --private")'')
     (b "SUPER + SHIFT + SLASH" "Passwords" ''hl.dsp.exec_cmd("1password")'')
 
-    # Window transparency toggle
     (b "SUPER + BACKSPACE" "Toggle window transparency"
       ''hl.dsp.exec_cmd([[hyprctl dispatch setprop "address:$(hyprctl activewindow -j | jq -r '.address')" opaque toggle]])''
     )

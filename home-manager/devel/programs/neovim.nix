@@ -43,6 +43,5 @@
     recursive = true;
   };
 
-  # Ensure backup directory exists
   home.file.".vimbackup/.keep".text = "";
 }

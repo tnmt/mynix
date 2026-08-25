@@ -11,7 +11,6 @@
     hash = "sha256-kQsV0x8/ycFp3+S6YKyiKFsAG5taOdQmx/dMuDqGyEQ=";
   };
 
-  # Extras file paths (relative to src)
   extras = {
     alacritty = "extras/alacritty/tokyonight_storm.toml";
     delta = "extras/delta/tokyonight_storm.gitconfig";
@@ -41,20 +40,16 @@
   # Kitty (conf name = basename of extras.kitty placed under kitty/)
   kitty = "tokyonight_storm";
 
-  # GTK
   gtk = "Tokyonight-Dark-Storm";
   gtkIcon = "Tokyonight-Dark";
 
-  # Bat
   bat = {
     name = "tokyonight_storm";
     file = "extras/sublime/tokyonight_storm.tmTheme";
   };
 
-  # Delta
   delta = "tokyonight_storm";
 
-  # Base colors
   background = "#24283b";
   foreground = "#c0caf5";
   accent = "#7aa2f7";

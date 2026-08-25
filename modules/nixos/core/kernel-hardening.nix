@@ -10,8 +10,7 @@
 # hardening was considered against this fleet's threat model
 # (single-admin home lab, publickey-only SSH behind NAT or the
 # NetBird mesh) and declined as not worth the additional surface
-# in the repo. See memory/project_hardening_roadmap.md for that
-# analysis.
+# in the repo.
 {
   boot.blacklistedKernelModules = [
     "sctp"

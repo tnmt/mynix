@@ -18,7 +18,8 @@
       login.enableGnomeKeyring = true;
       greetd.enableGnomeKeyring = true;
 
-      # wayland display lockers (e.g. swaylock) needs this
+      # Without a dedicated PAM service file, swaylock falls back to PAM's
+      # "other" policy, which denies all auth and locks out password entry.
       swaylock.text = "auth include login";
     };
   };
