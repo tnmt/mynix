@@ -54,6 +54,15 @@ let
         colorVariants = [ "dark" ];
         iconVariants = [ "Dark" ];
       };
+      # tmux 3.7c は macOS の configure で --enable-jemalloc/--disable-jemalloc の
+      # 明示指定を必須化したが、このリビジョンの nixpkgs derivation には未反映のため失敗する。
+      tmux = prev.tmux.overrideAttrs (old: {
+        configureFlags =
+          (old.configureFlags or [ ])
+          ++ final.lib.optionals final.stdenv.hostPlatform.isDarwin [
+            "--disable-jemalloc"
+          ];
+      });
     })
   ];
 
