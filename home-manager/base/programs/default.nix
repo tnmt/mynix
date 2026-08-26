@@ -90,7 +90,6 @@
       claude-code
       ax
       ccusage
-      gemini-cli
       codex
       rtk
     ]
