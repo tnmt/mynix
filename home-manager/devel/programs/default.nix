@@ -25,6 +25,7 @@
     nkf
     nixd
     python3
+    uv
     nodejs
 
     # CLI utilities
