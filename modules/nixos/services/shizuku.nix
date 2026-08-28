@@ -16,6 +16,12 @@ in
   imports = [ ../../common/shizuku.nix ];
 
   config = lib.mkIf cfg.enable {
+    # shizuku-server runs `uv sync`, which fetches prebuilt Python wheels
+    # (numpy, torch, etc.) linked against FHS-standard paths like
+    # libstdc++.so.6. NixOS has no such paths, so their C extensions fail
+    # to import without nix-ld providing a compatible dynamic linker.
+    programs.nix-ld.enable = true;
+
     systemd.user.services.shizuku = {
       description = "shizuku local memory server";
       wantedBy = [ "default.target" ];
