@@ -29,6 +29,12 @@ in
         SHIZUKU_REPO = cfg.repoPath;
         SHIZUKU_HOST = cfg.host;
         SHIZUKU_PORT = toString cfg.port;
+        # NixOS only exports NIX_LD*/environment.variables to login-shell
+        # sessions (via /etc/set-environment), not to the systemd --user
+        # manager's own environment. Set them explicitly here so this unit
+        # doesn't depend on systemd --user having been restarted since the
+        # last activation that enabled nix-ld.
+        inherit (config.environment.variables) NIX_LD NIX_LD_LIBRARY_PATH;
       };
       serviceConfig = {
         Type = "exec";
