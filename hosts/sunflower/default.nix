@@ -1,6 +1,4 @@
 {
-  inputs,
-  pkgs,
   username,
   ...
 }:
@@ -13,15 +11,9 @@ in
     ../../modules/nixos/core
     services.openssh
     services.ccpocket-bridge
-    services.shizuku
     ../../profiles/nixos/wsl.nix
     ../../modules/nixos/remotebuild/builder.nix
   ];
-
-  mynix.services.shizuku = {
-    enable = true;
-    package = inputs.shizuku.packages.${pkgs.system}.default;
-  };
 
   system.stateVersion = "25.05";
   wsl.enable = true;
