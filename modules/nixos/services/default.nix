@@ -4,4 +4,5 @@
   mackerel-agent = ./mackerel-agent.nix;
   mpd = ./mpd.nix;
   openssh = ./openssh.nix;
+  shizuku = ./shizuku.nix;
 }
