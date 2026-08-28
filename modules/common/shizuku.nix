@@ -10,10 +10,13 @@
 {
   config,
   lib,
+  pkgs,
+  username,
   ...
 }:
 let
   cfg = config.mynix.services.shizuku;
+  homePrefix = if pkgs.stdenv.hostPlatform.isDarwin then "/Users" else "/home";
 in
 {
   options.mynix.services.shizuku = {
@@ -30,12 +33,14 @@ in
 
     repoPath = lib.mkOption {
       type = lib.types.str;
-      example = "/Users/tsunematsu/ghq/github.com/tnmt/shizuku";
+      default = "${homePrefix}/${username}/ghq/github.com/tnmt/shizuku";
+      defaultText = lib.literalExpression ''"$HOME/ghq/github.com/tnmt/shizuku"'';
       description = ''
         Absolute path to a shizuku working tree (where `pyproject.toml`
         lives). `shizuku-server` cd's into this directory and runs
-        `uv sync --locked` from it. The path is not baked into the
-        derivation so each host may keep the checkout wherever it likes.
+        `uv sync --locked` from it. Defaults to the ghq layout under
+        the target user's home; override when the checkout lives
+        elsewhere.
       '';
     };
 

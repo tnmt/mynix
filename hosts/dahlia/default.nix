@@ -1,4 +1,6 @@
 {
+  inputs,
+  pkgs,
   username,
   ...
 }:
@@ -36,6 +38,7 @@ in
     ../../modules/nixos/core
     services.openssh
     services.ccpocket-bridge
+    services.shizuku
     ../../modules/programs/virtualisation.nix
     ../../modules/hardware/power-management.nix
     ../../profiles/nixos/desktop-hyprland.nix
@@ -45,6 +48,11 @@ in
   ];
 
   system.stateVersion = "25.05";
+
+  mynix.services.shizuku = {
+    enable = true;
+    package = inputs.shizuku.packages.${pkgs.system}.default;
+  };
 
   mynix.profiles = {
     # Host-local networking and access. NetBird is the sole mesh; peers

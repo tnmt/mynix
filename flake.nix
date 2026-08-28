@@ -58,6 +58,15 @@
       url = "github:kenn-io/msgvault";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Private repo: shizuku (local memory server). Plain github.com URL
+    # is fine on the single-key mynix hosts (sunflower/dahlia). Downstream
+    # flakes with multi-account SSH (e.g. tnmt-work-flake) declare their
+    # own shizuku input via an alias URL.
+    shizuku = {
+      url = "git+ssh://git@github.com/tnmt/shizuku";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
