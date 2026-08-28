@@ -7,6 +7,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -16,12 +17,6 @@ in
   imports = [ ../../common/shizuku.nix ];
 
   config = lib.mkIf cfg.enable {
-    # shizuku-server runs `uv sync`, which fetches prebuilt Python wheels
-    # (numpy, torch, etc.) linked against FHS-standard paths like
-    # libstdc++.so.6. NixOS has no such paths, so their C extensions fail
-    # to import without nix-ld providing a compatible dynamic linker.
-    programs.nix-ld.enable = true;
-
     systemd.user.services.shizuku = {
       description = "shizuku local memory server";
       wantedBy = [ "default.target" ];
@@ -29,12 +24,15 @@ in
         SHIZUKU_REPO = cfg.repoPath;
         SHIZUKU_HOST = cfg.host;
         SHIZUKU_PORT = toString cfg.port;
-        # NixOS only exports NIX_LD*/environment.variables to login-shell
-        # sessions (via /etc/set-environment), not to the systemd --user
-        # manager's own environment. Set them explicitly here so this unit
-        # doesn't depend on systemd --user having been restarted since the
-        # last activation that enabled nix-ld.
-        inherit (config.environment.variables) NIX_LD NIX_LD_LIBRARY_PATH;
+        # shizuku-server's wrapper pins UV_PYTHON to a Nix-built interpreter
+        # (UV_PYTHON_PREFERENCE=only-system), so `uv sync` runs under a
+        # genuine Nix Python rather than an FHS-assuming portable build —
+        # nix-ld's interpreter shim never enters the picture. But the PyPI
+        # wheels it installs (numpy, transformers, ...) still ship manylinux
+        # C extensions that dlopen() libstdc++.so.6 at import time, which
+        # isn't part of that Python's closure. Point dlopen at one via
+        # LD_LIBRARY_PATH.
+        LD_LIBRARY_PATH = lib.makeLibraryPath [ pkgs.stdenv.cc.cc.lib ];
       };
       serviceConfig = {
         Type = "exec";
