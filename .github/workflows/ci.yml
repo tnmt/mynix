@@ -72,8 +72,16 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@main
         with:
           use-flakehub: false
+      # dahlia wires mynix.services.shizuku.package to the private
+      # tnmt/shizuku repo over git+ssh; CI runners have no SSH key for it.
+      # Swap in a stub flake with a trivial `packages.<system>.default` so
+      # the build doesn't need to fetch the private source.
       - name: Build NixOS (${{ matrix.host }})
-        run: nix build '.#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel' --no-link
+        run: |
+          nix build '.#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel' \
+            --no-link \
+            --no-write-lock-file \
+            --override-input shizuku path:./.github/ci-stubs/shizuku
 
   # hydrangea cannot be *built* without a macOS runner, but evaluating
   # the full darwin system catches option/module errors on a Linux runner.
