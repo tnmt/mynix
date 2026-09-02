@@ -21,6 +21,7 @@ _: {
       "1password-cli"
       "antinote"
       "appcleaner"
+      "brave-origin"
       "chatgpt"
       "choosy"
       "claude"
