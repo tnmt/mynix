@@ -13,6 +13,7 @@ in
   # hydrangea 固有に手動インストールしていたアプリを移管。
   # motu-m-series は cask はあるが Audio Interface のドライバ pkg で、
   # onActivation.cleanup = "uninstall" の対象にすると誤って剥がれるため見送り。
+  # xld は cask はあるが Gatekeeper 非対応で 2026-09-01 付けで disabled 済みのため見送り。
   homebrew = {
     casks = [
       "android-file-transfer"
@@ -20,7 +21,6 @@ in
       "calibre"
       "iina"
       "vlc"
-      "xld"
     ];
     masApps = {
       "1Password for Safari" = 1569813296;
