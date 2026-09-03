@@ -36,6 +36,7 @@ _: {
       "raycast"
       "slack"
       "vimr"
+      "windows-app"
       "zoom"
     ];
     onActivation = {
