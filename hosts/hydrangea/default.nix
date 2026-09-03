@@ -10,6 +10,27 @@ in
     ../../profiles/darwin/homebrew-base.nix
   ];
 
+  # hydrangea 固有に手動インストールしていたアプリを移管。
+  # motu-m-series は cask はあるが Audio Interface のドライバ pkg で、
+  # onActivation.cleanup = "uninstall" の対象にすると誤って剥がれるため見送り。
+  homebrew = {
+    casks = [
+      "android-file-transfer"
+      "audacity"
+      "calibre"
+      "iina"
+      "vlc"
+      "xld"
+    ];
+    masApps = {
+      "1Password for Safari" = 1569813296;
+      "Day One" = 1055511498;
+      "Habitify" = 1111447047;
+      "Kindle" = 302584613;
+      "Skitch" = 425955336;
+    };
+  };
+
   # Bring the system sshd under nix-darwin so Remote Login stays on
   # and the authorizedKeysCommand drop-in at
   # /etc/ssh/sshd_config.d/101-authorized-keys.conf is installed.
