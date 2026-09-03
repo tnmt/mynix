@@ -39,6 +39,10 @@ _: {
       "windows-app"
       "zoom"
     ];
+    # cask が存在しない Mac App Store 専売アプリ。要 App Store サインイン。
+    masApps = {
+      "Reeder Classic" = 1529448980;
+    };
     onActivation = {
       autoUpdate = true;
       cleanup = "uninstall";
