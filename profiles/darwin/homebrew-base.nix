@@ -20,7 +20,6 @@ _: {
     casks = [
       "1password"
       "1password-cli"
-      "amazon-music"
       "antinote"
       "appcleaner"
       "brave-origin"
@@ -30,7 +29,6 @@ _: {
       "dropbox"
       "element"
       "firefox"
-      "flameshot"
       "ghostty"
       "google-chrome"
       "grandperspective"
