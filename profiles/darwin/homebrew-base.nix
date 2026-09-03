@@ -18,7 +18,9 @@ _: {
       "takai/tap/git-ai-commit"
     ];
     casks = [
+      "1password"
       "1password-cli"
+      "amazon-music"
       "antinote"
       "appcleaner"
       "brave-origin"
@@ -28,10 +30,13 @@ _: {
       "dropbox"
       "element"
       "firefox"
+      "flameshot"
       "ghostty"
       "google-chrome"
+      "grandperspective"
       "iterm2"
       "karabiner-elements"
+      "logi-options+"
       "obsidian"
       "raycast"
       "slack"
@@ -41,6 +46,7 @@ _: {
     ];
     # cask が存在しない Mac App Store 専売アプリ。要 App Store サインイン。
     masApps = {
+      "LINE" = 539883307;
       "Reeder Classic" = 1529448980;
     };
     onActivation = {
