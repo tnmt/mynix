@@ -54,6 +54,10 @@ in
         wifi = {
           ssid = "$WIFI_HOMELAB_SSID";
           mode = "infrastructure";
+          # APはW52固定運用のため5GHz固定。省電力はレイテンシ悪化と
+          # フォールバック経路としての即応性低下を招くため無効化。
+          band = "a";
+          powersave = 2;
         };
         wifi-security = {
           key-mgmt = "wpa-psk";
