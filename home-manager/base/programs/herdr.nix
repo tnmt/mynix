@@ -4,16 +4,17 @@
   ...
 }:
 {
-  home.packages = [ pkgs.herdr ];
-
-  # `herdr --remote <host>` は ssh 非対話 shell で `command -v herdr` を
-  # 走らせるが、Linux の envExtra PATH には /etc/profiles/per-user/$USER/bin
-  # が含まれず見つからない。~/.local/bin に nix-store の herdr を symlink
-  # して、herdr 本体が想定する remote 配置位置に Nix 管理バイナリを露出する。
-  # `herdr update` での自動更新は不可 — nixpkgs 由来なので flake update で上げる。
-  home.file = lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
-    ".local/bin/herdr".source = "${pkgs.herdr}/bin/herdr";
-  };
+  # herdr 本体の管理方針:
+  # - Nix が管理するのは設定ファイル（下の config.toml）のみ。
+  # - Linux ホストの herdr 本体（~/.local/bin/herdr）は imperative 管理。
+  #   クライアントの `herdr --remote` 時の自動インストールと `herdr update` で更新される。
+  #   過去に ~/.local/bin/herdr を Nix 管理 symlink にしていたが、herdr の
+  #   remote install（バージョン不一致時に同パスへ実バイナリを上書き）と取り合いになり
+  #   home-manager activation が clobber エラーで壊れるため廃止した（2026-09-04）。
+  # - darwin（--remote の起点となるクライアント側）だけ Nix パッケージを入れる。
+  #   Linux にも入れると /etc/profiles/per-user/$USER/bin/herdr（Nix 版）と
+  #   ~/.local/bin/herdr（imperative 版）が併存しバージョン混乱の元になる。
+  home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [ pkgs.herdr ];
 
   # tmux (home-manager/base/programs/tmux.nix) の prefix/操作感に合わせたキーバインド。
   # prefix: tmux は shortcut = "t" なので ctrl+t に統一。
