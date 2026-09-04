@@ -1,14 +1,25 @@
-{ username, ... }:
+{
+  inputs,
+  pkgs,
+  username,
+  ...
+}:
 let
   pubkeys = import ../../modules/common/ssh-pubkeys.nix;
 in
 {
   imports = [
     ../../modules/darwin/core
+    ../../modules/darwin/services/shizuku.nix
 
     ../../profiles/darwin/system-common.nix
     ../../profiles/darwin/homebrew-base.nix
   ];
+
+  mynix.services.shizuku = {
+    enable = true;
+    package = inputs.shizuku.packages.${pkgs.system}.default;
+  };
 
   # hydrangea 固有に手動インストールしていたアプリを移管。
   # motu-m-series は cask はあるが Audio Interface のドライバ pkg で、
