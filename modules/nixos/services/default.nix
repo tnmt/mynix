@@ -5,4 +5,5 @@
   mpd = ./mpd.nix;
   openssh = ./openssh.nix;
   shizuku = ./shizuku.nix;
+  wayvnc = ./wayvnc.nix;
 }

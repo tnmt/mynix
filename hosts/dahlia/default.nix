@@ -39,6 +39,7 @@ in
     services.openssh
     services.ccpocket-bridge
     services.shizuku
+    services.wayvnc
     ../../modules/programs/virtualisation.nix
     ../../modules/hardware/power-management.nix
     ../../profiles/nixos/desktop-hyprland.nix
