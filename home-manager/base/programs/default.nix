@@ -62,6 +62,7 @@
       gh
       ghq
       git-wt
+      mdhq
       roots
       ripgrep
       fd

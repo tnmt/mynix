@@ -42,6 +42,7 @@ let
         ccpocket-bridge
         givy
         kagiana
+        mdhq
         oneaws
         roots
         symbol-desktop-wallet
