@@ -93,8 +93,13 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@main
         with:
           use-flakehub: false
+      # hydrangea also wires mynix.services.shizuku.package to the private
+      # tnmt/shizuku repo; same stub override as build-nixos.
       - name: Evaluate darwin (hydrangea)
-        run: nix eval '.#darwinConfigurations.hydrangea.config.system.build.toplevel.drvPath'
+        run: |
+          nix eval '.#darwinConfigurations.hydrangea.config.system.build.toplevel.drvPath' \
+            --no-write-lock-file \
+            --override-input shizuku path:./.github/ci-stubs/shizuku
 
   # NOTE: work_mac / work_vm have moved to tnmt-work-flake (private repo)
   # and are validated there.
