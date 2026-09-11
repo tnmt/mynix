@@ -4,7 +4,7 @@
 
 ### pre-commit フック
 
-コミット時に `nix fmt` を自動実行する pre-commit フックを使用している。
+コミット時に `nix fmt`・`deadnix`/`statix`・`gitleaks protect` を自動実行する pre-commit フックを使用している。
 コミット前に以下を確認し、未設定なら実行すること。
 
 ```bash
@@ -32,3 +32,17 @@ git config core.hooksPath .githooks  # 未設定の場合
 
 - フォントを使うモジュールは `let fonts = import ../fonts.nix;`（パスは相対）で直接インポートする
 - `_module.args` 経由では渡さない — 各モジュールが自己完結的にインポートする方針
+
+## 自作パッケージ
+
+自作パッケージは [nur-tnmt](https://github.com/tnmt/nur-packages) input を直接参照する overlay で提供している（NUR アグリゲータは経由しない）。
+
+- パッケージを追加・削除する場合は `lib/default.nix` の overlay 内 `inherit` リストを編集する
+- flake の `packages` 出力ではなく NUR 規約の `default.nix { pkgs }` でインポートし、ホストの pkgs（allowUnfree 等の config と overlay 込み）で評価する
+
+## Private flake input
+
+`shizuku` のような private リポジトリの input は CI ランナーから fetch できない。
+
+- CI の build/eval では `.github/ci-stubs/` 配下のスタブ flake を `--override-input` で差し替えている
+- private input を追加する場合は、同様にスタブを用意して `.github/workflows/ci.yml` の全対象ジョブに override を追加すること
