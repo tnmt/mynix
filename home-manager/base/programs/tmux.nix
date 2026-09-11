@@ -31,8 +31,8 @@ in
           src = pkgs.fetchFromGitHub {
             owner = "janoamaral";
             repo = "tokyo-night-tmux";
-            rev = "v1.8.1";
-            sha256 = "sha256-tmS0MBANSsTg53E2GB0TnjwGcZXboTRFNeDE6Ehn+bM=";
+            rev = "v1.9.0";
+            sha256 = "sha256-uVS8o6OdsdoBJz6khqI9Q5NvbeoV4lZtcAokGnF0ud4=";
           };
           # macOS /bin/bash は 3.2 で declare -A 非対応。スクリプトを Nix bash で起動させる。
           postPatch = ''
