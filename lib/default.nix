@@ -12,9 +12,14 @@ let
       inherit (inputs.nix-steipete-tools.packages.${final.stdenv.hostPlatform.system}) gogcli;
       # msgvault は TUI/CLI の時刻表示が DB 格納値 (UTC) のままなので、
       # 人間向け表示箇所にだけ .Local() を挟んでシステム TZ (JST) 表示にする。
-      # JSON 出力 (RFC3339) は UTC のまま維持。upstream に TZ 設定は無い (v0.18.0 時点)。
+      # JSON 出力 (RFC3339) は UTC のまま維持。upstream に TZ 設定は無い (v0.19.3 時点)。
+      # パッケージ本体は nur-tnmt/pkgs/msgvault (upstream が Nix flake
+      # packaging を廃止したため vendor 化、kenn-io/msgvault#767)。
       msgvault =
-        inputs.msgvault.packages.${final.stdenv.hostPlatform.system}.msgvault.overrideAttrs
+        (import inputs.nur-tnmt {
+          pkgs = final;
+          bun2nix = inputs.bun2nix.packages.${final.stdenv.hostPlatform.system}.default;
+        }).msgvault.overrideAttrs
           (old: {
             postPatch = ''
               ${old.postPatch or ""}

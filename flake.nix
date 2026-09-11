@@ -54,8 +54,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    msgvault = {
-      url = "github:kenn-io/msgvault";
+    # msgvault is packaged in nur-tnmt (upstream dropped its own Nix flake
+    # in kenn-io/msgvault#767). Only bun2nix (for the web frontend build)
+    # needs to be wired through from here.
+    bun2nix = {
+      url = "github:nix-community/bun2nix/2.1.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
