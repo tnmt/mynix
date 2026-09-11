@@ -63,13 +63,16 @@ The important split is:
 
 ## Notable Features
 
-- Hyprland desktop setup with Waybar, Walker, Mako, Hyprlock, Hypridle, and Wlogout
+- Hyprland desktop setup with Waybar, Walker, Mako, Hyprlock, Hypridle, Wlogout, and `hyprdynamicmonitors` (config generated as Lua for Hyprland 0.55+)
 - `greetd` + `tuigreet` login flow for the Linux desktop profile
-- `disko` + LUKS + btrfs + TPM2 auto-unlock for the `dahlia` laptop
+- `disko` + LUKS + btrfs + TPM2 auto-unlock for the `dahlia` laptop; `wayvnc` for remote access to its running Hyprland session
+- NetBird mesh VPN enrolment via `mynix.profiles.netbird` on NixOS hosts (replaced Tailscale)
+- `mynix.services.shizuku` local memory server, sourced from a private `shizuku` flake input and enabled on `dahlia` and `hydrangea`
 - `sops-nix` secrets unified at the system layer; host SSH key decryption is the default for every host
 - Input remapping with `kanata` (Linux) and Karabiner-Elements (macOS)
 - Shared Tokyo Night Storm theme wiring
-- NUR overlay usage for custom packages from [`nur-tnmt`](https://github.com/tnmt/nur-packages)
+- Custom packages pulled directly from the [`nur-tnmt`](https://github.com/tnmt/nur-packages) input via overlay (no NUR aggregator)
+- Declarative Homebrew casks and Mac App Store apps (`masApps`) on the darwin host
 
 ## Usage
 
@@ -79,6 +82,7 @@ Before switching a host, make sure the target machine has:
 - Nix with flakes enabled
 - `nh` available if you want to use the recommended commands below
 - an SSH host key registered in `.sops.yaml` so `sops-nix` can decrypt secrets at activation time
+- SSH access to the private `shizuku` repository, since it is a `git+ssh` flake input (CI swaps it for a stub via `--override-input`)
 
 ### Switch (auto-detect)
 
@@ -129,6 +133,14 @@ update-input nixpkgs github:NixOS/nixpkgs/nixos-unstable
 nix run .#dahlia-vm
 ```
 
+For local development, enable the repo's git hooks once:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+The pre-commit hook formats staged files with `nix fmt`, lints with `deadnix` / `statix`, and scans staged changes with `gitleaks protect`.
+
 ## Secrets
 
 This repo expects `sops-nix` with the host's SSH host key available for decryption (derived to age via `ssh-to-age`); each host's public key is registered in `.sops.yaml`.
@@ -136,6 +148,7 @@ This repo expects `sops-nix` with the host's SSH host key available for decrypti
 - host/system-specific secrets live in `secrets/hosts/<hostname>.yaml`
 - Home Manager identity secrets use `secrets/roles/personal.yaml` by default
 - shared Home Manager values, such as service endpoints or API keys, live in `secrets/common.yaml`
+- application-specific secrets live under `secrets/apps/<app>/`
 - both system and Home Manager secrets are wired through the system-layer `sops-nix` module
 
 Builds may evaluate without secrets in some cases, but activation on real machines assumes the corresponding host SSH key exists.
@@ -145,9 +158,11 @@ Builds may evaluate without secrets in some cases, but activation on real machin
 GitHub Actions currently checks:
 - formatting via `nix fmt`
 - lint via `deadnix` and `statix`
+- secret scan via `gitleaks` over the full history
 - NixOS builds for `sunflower` and `dahlia`
+- darwin evaluation for `hydrangea` (evaluates the full system on a Linux runner to catch option/module errors; actual builds require a macOS runner)
 
-Darwin system and Home Manager targets are excluded from CI because they require macOS runners.
+CI runners have no SSH key for the private `shizuku` input, so builds and evals override it with a stub flake under `.github/ci-stubs/`.
 
 ## License
 
