@@ -1,4 +1,5 @@
 {
+  homeDirectory,
   inputs,
   theme,
   username,
@@ -14,6 +15,7 @@
     useUserPackages = true;
     extraSpecialArgs = {
       inherit
+        homeDirectory
         inputs
         theme
         username

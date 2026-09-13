@@ -18,7 +18,7 @@ in
 
   mynix.services.shizuku = {
     enable = true;
-    package = inputs.shizuku.packages.${pkgs.system}.default;
+    package = inputs.shizuku.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
 
   # hydrangea 固有に手動インストールしていたアプリを移管。

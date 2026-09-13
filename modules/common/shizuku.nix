@@ -9,6 +9,9 @@
 # to the shizuku input leaks into this repository.
 {
   config,
+  homeDirectory ? (
+    if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}"
+  ),
   lib,
   pkgs,
   username,
@@ -16,7 +19,6 @@
 }:
 let
   cfg = config.mynix.services.shizuku;
-  homePrefix = if pkgs.stdenv.hostPlatform.isDarwin then "/Users" else "/home";
 in
 {
   options.mynix.services.shizuku = {
@@ -33,7 +35,7 @@ in
 
     repoPath = lib.mkOption {
       type = lib.types.str;
-      default = "${homePrefix}/${username}/ghq/github.com/tnmt/shizuku";
+      default = "${homeDirectory}/ghq/github.com/tnmt/shizuku";
       defaultText = lib.literalExpression ''"$HOME/ghq/github.com/tnmt/shizuku"'';
       description = ''
         Absolute path to a shizuku working tree (where `pyproject.toml`

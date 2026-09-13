@@ -1,13 +1,11 @@
 {
   commonOverlays,
+  homeDirectory,
   inputs,
   theme,
   username,
   ...
 }:
-let
-  homeDirectory = "/Users/${username}";
-in
 {
   imports = [
     inputs.home-manager-darwin.darwinModules.home-manager
@@ -18,6 +16,7 @@ in
     useUserPackages = true;
     extraSpecialArgs = {
       inherit
+        homeDirectory
         inputs
         theme
         username

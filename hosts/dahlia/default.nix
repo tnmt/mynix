@@ -1,4 +1,5 @@
 {
+  homeDirectory,
   inputs,
   pkgs,
   username,
@@ -31,7 +32,7 @@ in
 
   mynix.services.shizuku = {
     enable = true;
-    package = inputs.shizuku.packages.${pkgs.system}.default;
+    package = inputs.shizuku.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
 
   mynix.profiles = {
@@ -43,7 +44,7 @@ in
     givy = {
       enable = true;
       instances.github = {
-        root = "/home/${username}/ghq/github.com";
+        root = "${homeDirectory}/ghq/github.com";
         port = 6271;
       };
       trustedRootCAFile = ./caddy-local-ca.crt;

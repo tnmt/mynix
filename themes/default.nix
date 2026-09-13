@@ -14,7 +14,7 @@ theme
   # Fetch the upstream theme repo via the Nix evaluator's builtin fetcher rather
   # than pkgs.fetchFromGitHub. Modules read extras/ files with builtins.readFile,
   # which turns the source into an IFD (import from derivation). A fetchFromGitHub
-  # source is a fixed-output derivation bound to pkgs.system, so evaluating the
+  # source is a fixed-output derivation bound to the host platform, so evaluating the
   # darwin config on a linux CI runner tries to *build* an aarch64-darwin FOD and
   # fails with "platform mismatch". builtins.fetchTree is platform-independent.
   srcDrv =

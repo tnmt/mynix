@@ -3,6 +3,7 @@
 # The link set comes from modules/common/user-template-links.nix.
 {
   config,
+  homeDirectory,
   lib,
   username,
   ...
@@ -13,14 +14,16 @@ let
   inherit
     (import ../../common/user-template-links.nix {
       inherit config lib;
-      homeDir = "/home/${username}";
+      homeDir = homeDirectory;
     })
     links
     parents
     ;
 
-  mkdirCmds = lib.concatMapStringsSep "\n" (d: "mkdir -p ${d}") parents;
-  lnCmds = lib.concatMapStringsSep "\n" (l: "ln -sf ${l.target} ${l.link}") links;
+  mkdirCmds = lib.concatMapStringsSep "\n" (d: "mkdir -p ${lib.escapeShellArg d}") parents;
+  lnCmds = lib.concatMapStringsSep "\n" (
+    l: "ln -sf ${lib.escapeShellArg l.target} ${lib.escapeShellArg l.link}"
+  ) links;
 in
 {
   config = lib.mkIf cfg.enable {

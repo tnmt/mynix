@@ -81,6 +81,7 @@
       ];
       forAllSystems = inputs.nixpkgs.lib.genAttrs allSystems;
       pkgsFor = system: inputs.nixpkgs.legacyPackages.${system};
+      hostConfigurations = import ./hosts inputs;
       formattersFor =
         pkgs: with pkgs; [
           nixfmt
@@ -90,9 +91,9 @@
     {
       lib = import ./lib { inherit inputs; };
 
-      nixosConfigurations = (import ./hosts inputs).nixos;
-      darwinConfigurations = (import ./hosts inputs).darwin;
-      homeConfigurations = (import ./hosts inputs).home-manager;
+      nixosConfigurations = hostConfigurations.nixos;
+      darwinConfigurations = hostConfigurations.darwin;
+      homeConfigurations = hostConfigurations.home-manager;
 
       apps = forAllSystems (
         system:
@@ -161,6 +162,32 @@
           '';
         in
         format
+      );
+
+      checks = forAllSystems (
+        system:
+        let
+          pkgs = pkgsFor system;
+          mynixLib = import ./lib { inherit inputs; };
+          platformAssertions =
+            assert mynixLib.mkHomeDirectory "test" "x86_64-linux" == "/home/test";
+            assert mynixLib.mkHomeDirectory "test" "x86_64-darwin" == "/Users/test";
+            assert mynixLib.mkHomeDirectory "test" "aarch64-darwin" == "/Users/test";
+            true;
+          givyAssertions =
+            if system == "x86_64-linux" then
+              assert !self.nixosConfigurations.sunflower.config.home-manager.users.tnmt.programs.givy.enable;
+              assert self.nixosConfigurations.dahlia.config.home-manager.users.tnmt.programs.givy.enable;
+              true
+            else
+              true;
+        in
+        {
+          architecture =
+            assert platformAssertions;
+            assert givyAssertions;
+            pkgs.runCommand "mynix-architecture-check" { } "touch $out";
+        }
       );
     };
 }

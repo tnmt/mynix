@@ -5,7 +5,7 @@
   ...
 }:
 let
-  pkgsUnstable = import inputs.nixpkgs { system = "aarch64-darwin"; };
+  pkgsUnstable = import inputs.nixpkgs { inherit (pkgs.stdenv.hostPlatform) system; };
 in
 {
   nix.package = pkgsUnstable.nixVersions.latest;

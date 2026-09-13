@@ -1,13 +1,16 @@
 # Common home-manager baseline for NixOS-integrated hosts.
 # Standalone home-manager hosts get the baseline via
 # mkHomeManagerConfiguration instead.
-{ username, ... }:
+{
+  homeDirectory,
+  username,
+  ...
+}:
 {
   imports = [
     ../base
     (import ../common-init.nix {
-      homeDirectory = "/home/${username}";
-      inherit username;
+      inherit homeDirectory username;
     })
   ];
 }

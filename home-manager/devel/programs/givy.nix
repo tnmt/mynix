@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.programs.givy;
+  inherit (import ../../../lib/givy.nix { inherit lib; }) instanceType;
 
   args = inst: [
     (lib.getExe pkgs.givy)
@@ -16,36 +17,42 @@ let
   ];
 in
 {
-  options.programs.givy.instances = lib.mkOption {
-    type = lib.types.attrsOf (
-      lib.types.submodule {
-        options = {
-          root = lib.mkOption {
-            type = lib.types.str;
-            description = "Directory served by this givy instance.";
-          };
-          port = lib.mkOption {
-            type = lib.types.port;
-            description = "TCP port the instance listens on.";
-          };
-        };
-      }
-    );
-    default = {
-      github = {
-        root = "${config.home.homeDirectory}/ghq/github.com";
-        port = 6271;
-      };
+  options.programs.givy = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = cfg.instances != { };
+      defaultText = lib.literalExpression "config.programs.givy.instances != { }";
+      description = "Whether to run configured givy instances.";
     };
-    description = ''
-      Map of instance names to roots/ports. Each instance becomes a
-      `givy-<name>` user service (systemd on Linux, launchd on Darwin),
-      paired with a Caddy virtual host at `givy-<name>.lvh.me` on the
-      system side.
-    '';
+
+    instances = lib.mkOption {
+      type = lib.types.attrsOf instanceType;
+      default = { };
+      example = lib.literalExpression ''
+        {
+          github = {
+            root = config.home.homeDirectory + "/ghq/github.com";
+            port = 6271;
+          };
+        }
+      '';
+      description = ''
+        Map of instance names to roots/ports. Each instance becomes a
+        `givy-<name>` user service (systemd on Linux, launchd on Darwin),
+        paired with a Caddy virtual host at `givy-<name>.lvh.me` when the
+        system-side givy profile is enabled.
+      '';
+    };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = cfg.instances != { };
+        message = "programs.givy.instances must not be empty when givy is enabled.";
+      }
+    ];
+
     home.packages = [ pkgs.givy ];
 
     systemd.user.services = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (

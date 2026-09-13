@@ -9,12 +9,13 @@
 # top of that network-level trust.
 {
   config,
+  homeDirectory,
   pkgs,
   username,
   ...
 }:
 let
-  stateDir = "/home/${username}/.local/state/wayvnc";
+  stateDir = "${homeDirectory}/.local/state/wayvnc";
 
   # TLS/RSA key material is regenerated locally on first start rather than
   # kept in sops: it only needs to exist, not be escrowed, and self-signed

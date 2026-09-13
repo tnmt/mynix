@@ -10,19 +10,7 @@
 }:
 let
   cfg = config.mynix.profiles.givy;
-
-  instanceType = lib.types.submodule {
-    options = {
-      root = lib.mkOption {
-        type = lib.types.str;
-        description = "Directory served by this givy instance.";
-      };
-      port = lib.mkOption {
-        type = lib.types.port;
-        description = "TCP port the instance listens on.";
-      };
-    };
-  };
+  inherit (import ../../lib/givy.nix { inherit lib; }) instanceType;
 in
 {
   options.mynix.profiles.givy = {
@@ -51,6 +39,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = cfg.instances != { };
+        message = "mynix.profiles.givy.instances must not be empty when givy is enabled.";
+      }
+    ];
+
     mynix.services.localHttpsProxy = {
       enable = true;
       virtualHosts = lib.mapAttrs' (
@@ -62,6 +57,9 @@ in
       inherit (cfg) trustedRootCAFile;
     };
 
-    home-manager.users.${username}.programs.givy.instances = cfg.instances;
+    home-manager.users.${username}.programs.givy = {
+      enable = true;
+      inherit (cfg) instances;
+    };
   };
 }

@@ -1,5 +1,6 @@
 {
   lib,
+  homeDirectory,
   pkgs,
   username,
   ...
@@ -7,7 +8,7 @@
 {
   users.users."${username}" = {
     isNormalUser = true;
-    home = "/home/${username}";
+    home = homeDirectory;
     shell = pkgs.zsh;
     group = "users";
     extraGroups = lib.mkDefault [ "wheel" ];

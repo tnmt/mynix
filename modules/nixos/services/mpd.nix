@@ -1,9 +1,14 @@
-{ config, username, ... }:
+{
+  config,
+  homeDirectory,
+  username,
+  ...
+}:
 {
   services.mpd = {
     enable = true;
     user = username;
-    musicDirectory = "/home/${username}/Music/";
+    musicDirectory = "${homeDirectory}/Music/";
     network.listenAddress = "any";
     startWhenNeeded = true;
     extraConfig = ''

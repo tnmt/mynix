@@ -47,7 +47,8 @@ Work-related hosts (`work_mac`, `work_vm`) live in the private `tnmt-work-flake`
 ├── lib/                   # Reusable host/HM builders, exposed as `mynix.lib`
 ├── hosts/                 # Concrete host entrypoints
 ├── home-manager/          # Reusable Home Manager modules
-├── modules/               # Reusable NixOS and cross-host modules
+├── modules/               # Reusable system modules and OS-specific backends
+├── packages/              # Repository-local package definitions
 ├── profiles/              # Role-based profiles (common, nixos, home-manager, darwin)
 ├── secrets/               # sops-encrypted secret files
 ├── themes/                # Shared theme definitions
@@ -59,7 +60,7 @@ The important split is:
 - `modules/` holds lower-level reusable system pieces
 - `home-manager/` holds reusable user-level pieces
 - `profiles/` bundles opinionated groups of modules per layer (common, nixos, home-manager, darwin)
-- `lib/` exposes the host builders (`mkNixosSystem`, `mkDarwinSystem`, `mkHomeManagerConfiguration`, …) reused by downstream flakes such as `tnmt-work-flake`
+- `lib/` exposes host builders (`mkNixosSystem`, `mkDarwinSystem`, `mkHomeManagerConfiguration`, …), overlays, and shared option schemas reused by downstream flakes such as `tnmt-work-flake`
 
 ## Notable Features
 
