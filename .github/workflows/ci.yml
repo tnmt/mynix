@@ -76,6 +76,10 @@ jobs:
         with:
           name: tnmt
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          # Free plan is capped at 5GB. Skip fetched sources and bun2nix's
+          # per-package tarballs (download-only, no build cost) to leave
+          # room for actually expensive builds (e.g. tokyonight-gtk-theme).
+          pushFilter: "(-source$)|(\\.tgz$)|(\\.tar\\.gz$)"
       # dahlia wires mynix.services.shizuku.package to the private
       # tnmt/shizuku repo over git+ssh; CI runners have no SSH key for it.
       # Swap in a stub flake with a trivial `packages.<system>.default` so
