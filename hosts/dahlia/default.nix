@@ -76,6 +76,7 @@ in
       "wheel"
       "networkmanager"
       "docker"
+      "libvirtd"
     ];
     linger = true;
     # Declarative authorized_keys. Lives at /etc/ssh/authorized_keys.d/<user>;
