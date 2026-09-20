@@ -35,7 +35,6 @@
     {
       inherit (nurPackages)
         ax
-        brave-origin
         ccpocket-bridge
         givy
         kagiana
