@@ -86,8 +86,6 @@
 
       # search
       platinum-searcher
-
-      # AI tooling lives in home-manager/base/ai
     ]
     ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       bubblewrap

@@ -5,7 +5,7 @@
     inherit (inputs.nix-steipete-tools.packages.${final.stdenv.hostPlatform.system}) gogcli;
 
     # ax は CLI と Agent Skill (skills/ax/SKILL.md) が同じツリーに入っている。
-    # home-manager/base/ai/skills.nix が同じ inputs.ax を参照するので、
+    # home-manager/devel/ai/skills.nix が同じ inputs.ax を参照するので、
     # CLI と skill の revision は flake.lock 上で必ず一致する。
     # upstream flake の packages 出力ではなくホストの pkgs で package.nix を
     # 評価する（bun2nix の rev は upstream flake.lock と同一）。

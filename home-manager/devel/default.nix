@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./ai
     ./programs
   ];
 

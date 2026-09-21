@@ -42,7 +42,7 @@ git config core.hooksPath .githooks  # 未設定の場合
 
 ## AI agent tooling
 
-`home-manager/base/ai/` で AI coding agent 向けの構成をレイヤーごとに分けている。
+`home-manager/devel/ai/` で AI coding agent 向けの構成をレイヤーごとに分けている。開発機向けなので `home-manager/base` ではなく `home-manager/devel` に置く（サーバーは `base-nixos` だけを import する）。
 
 | ファイル | 責務 |
 | --- | --- |
