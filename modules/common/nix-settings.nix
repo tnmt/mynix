@@ -25,7 +25,7 @@
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "tnmt.cachix.org-1:ltL0U0LV282XSvIREE16kjheJ19KJyeiQUHo/zjV0qQ="
+      "tnmt.cachix.org-1:Is5B3NCA5/nP8irF+1fcJXBlQqL1NrPLZuTQ9VcqlvI="
     ];
   };
 }
