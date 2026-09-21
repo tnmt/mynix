@@ -43,7 +43,7 @@ in
     secrets.ccpocket_bridge_api_key = {
       sopsFile = ../../../secrets/common.yaml;
     };
-    templates."ccpocket-bridge-env" = {
+    templates.ccpocketBridgeEnv = {
       content = ''
         ANTHROPIC_API_KEY=${config.sops.placeholder.anthropic_api_key}
         BRIDGE_API_KEY=${config.sops.placeholder.ccpocket_bridge_api_key}
@@ -63,7 +63,7 @@ in
       ExecStart = "${pkgs.ccpocket-bridge}/bin/ccpocket-bridge";
       Restart = "on-failure";
       RestartSec = 10;
-      EnvironmentFile = config.sops.templates."ccpocket-bridge-env".path;
+      EnvironmentFile = config.sops.templates.ccpocketBridgeEnv.path;
       Environment = [
         "HOME=/home/${username}"
         "PATH=${ccpocketSsh}/bin:/etc/profiles/per-user/${username}/bin:/run/current-system/sw/bin"

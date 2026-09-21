@@ -7,7 +7,7 @@
   users.groups.mackerel-agent = { };
 
   sops.secrets.mackerel_api_key = { };
-  sops.templates."mackerel-agent-apikey" = {
+  sops.templates.mackerelAgentApiKey = {
     content = ''
       apikey = "${config.sops.placeholder.mackerel_api_key}"
     '';
@@ -17,6 +17,6 @@
 
   services.mackerel-agent = {
     enable = true;
-    apiKeyFile = config.sops.templates."mackerel-agent-apikey".path;
+    apiKeyFile = config.sops.templates.mackerelAgentApiKey.path;
   };
 }

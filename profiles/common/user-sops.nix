@@ -131,7 +131,7 @@ in
 
     sops.templates =
       (lib.optionalAttrs cfg.atuin {
-        "atuin-config" = {
+        atuinConfig = {
           owner = username;
           content = sopsShared.mkAtuinConfigTemplate {
             syncAddressPlaceholder = if cfg.atuinSync then config.sops.placeholder.atuin_sync_address else null;
@@ -139,7 +139,7 @@ in
         };
       })
       // {
-        "git-identity" = {
+        gitIdentity = {
           owner = username;
           content = sopsShared.mkGitIdentityTemplate {
             emailPlaceholder = config.sops.placeholder.git_email;
@@ -158,7 +158,7 @@ in
         };
       })
       // (lib.optionalAttrs cfg.gitPersonal {
-        "git-personal-identity" = {
+        gitPersonalIdentity = {
           owner = username;
           content = sopsShared.mkGitIdentityTemplate {
             emailPlaceholder = config.sops.placeholder.git_personal_email;
@@ -167,7 +167,7 @@ in
         };
       })
       // (lib.optionalAttrs (cfg.sshPrivate.role == "client") {
-        "ssh-private-config" = {
+        sshPrivateConfig = {
           owner = username;
           content = sopsShared.mkSshPrivateTemplate {
             lanPrefixPlaceholder = config.sops.placeholder.lan_prefix;

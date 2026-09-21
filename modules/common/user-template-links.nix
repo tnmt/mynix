@@ -15,25 +15,25 @@ let
   links =
     (lib.optionals cfg.atuin [
       {
-        target = config.sops.templates."atuin-config".path;
+        target = config.sops.templates.atuinConfig.path;
         link = "${homeDir}/.config/atuin/config.toml";
       }
     ])
     ++ [
       {
-        target = config.sops.templates."git-identity".path;
+        target = config.sops.templates.gitIdentity.path;
         link = "${homeDir}/.config/git/identity";
       }
     ]
     ++ (lib.optionals cfg.gitPersonal [
       {
-        target = config.sops.templates."git-personal-identity".path;
+        target = config.sops.templates.gitPersonalIdentity.path;
         link = "${homeDir}/.config/git/personal-identity";
       }
     ])
     ++ (lib.optionals (cfg.sshPrivate.role == "client") [
       {
-        target = config.sops.templates."ssh-private-config".path;
+        target = config.sops.templates.sshPrivateConfig.path;
         link = "${homeDir}/.ssh/conf.d/private.config";
       }
     ])

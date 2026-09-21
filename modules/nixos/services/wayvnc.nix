@@ -39,7 +39,7 @@ in
 {
   sops.secrets.wayvnc_password = { };
 
-  sops.templates."wayvnc-config" = {
+  sops.templates.wayvncConfig = {
     owner = username;
     content = ''
       address=0.0.0.0
@@ -61,7 +61,7 @@ in
     serviceConfig = {
       Type = "exec";
       ExecStartPre = "${ensureTls}/bin/wayvnc-ensure-tls";
-      ExecStart = "${pkgs.wayvnc}/bin/wayvnc -C ${config.sops.templates."wayvnc-config".path}";
+      ExecStart = "${pkgs.wayvnc}/bin/wayvnc -C ${config.sops.templates.wayvncConfig.path}";
       Restart = "on-failure";
       RestartSec = "5s";
     };

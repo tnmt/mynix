@@ -21,7 +21,7 @@ in
   networking.networkmanager = {
     enable = true;
     ensureProfiles.environmentFiles = [
-      config.sops.templates."homelab-env".path
+      config.sops.templates.homelabEnv.path
     ];
     ensureProfiles.profiles = {
       homelab-wired = {
@@ -98,7 +98,7 @@ in
         sopsFile = ../../secrets/roles/personal.yaml;
       };
     };
-    templates."homelab-env" = {
+    templates.homelabEnv = {
       content = ''
         WIFI_HOMELAB_SSID=${config.sops.placeholder.wifi_homelab_ssid}
         WIFI_HOMELAB_PSK=${config.sops.placeholder.wifi_homelab_psk}
