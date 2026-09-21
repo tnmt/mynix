@@ -145,9 +145,9 @@ in
     hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 3, bezier = "md3_decel", style = "slidevert" })
 
     -- Layer rules
-    hl.layer_rule({ match = { namespace = "walker" }, blur = true })
-    hl.layer_rule({ match = { namespace = "waybar" }, blur = true })
-    hl.layer_rule({ match = { namespace = "notifications" }, blur = true })
+    -- Noctalia's layer-shell surfaces (bar/panels/notifications/OSD/wallpaper) all
+    -- use a "noctalia-*" namespace (src/wayland/layer_surface.h and friends).
+    hl.layer_rule({ match = { namespace = "noctalia-.*" }, blur = true })
 
     -- Window rules
     hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
@@ -159,10 +159,7 @@ in
     hl.window_rule({ match = { class = "^(fcitx)$" }, pseudo = true })
     hl.window_rule({ match = { class = "^(fcitx)$" }, no_blur = true })
 
-    -- Autostart
-    hl.on("hyprland.start", function()
-      hl.exec_cmd("elephant")
-      hl.exec_cmd("walker --gapplication-service")
-    end)
+    -- Noctalia is started via its home-manager systemd user service
+    -- (programs.noctalia.systemd.enable), so no exec-once entry is needed here.
   '';
 }
