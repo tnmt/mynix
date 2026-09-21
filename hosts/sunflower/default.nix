@@ -27,7 +27,10 @@ in
 
   services.openssh.ports = [ 2222 ];
 
-  mynix.profiles.userTemplates.tnmtInfo = true;
+  mynix.profiles.userTemplates = {
+    typesafe = true;
+    tnmtInfo = true;
+  };
 
   users.users."${username}".openssh.authorizedKeys.keys = with pubkeys; [
     hosts.dahlia

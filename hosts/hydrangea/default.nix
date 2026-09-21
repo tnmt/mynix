@@ -53,6 +53,7 @@ in
 
   mynix.profiles.userTemplates = {
     enable = true;
+    typesafe = true;
     sshPrivate = {
       role = "client";
       tier = "laptop";

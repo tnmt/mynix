@@ -72,6 +72,7 @@ The important split is:
 - `sops-nix` secrets unified at the system layer; host SSH key decryption is the default for every host
 - Input remapping with `kanata` (Linux) and Karabiner-Elements (macOS)
 - Shared Tokyo Night Storm theme wiring
+- AI coding agent tooling layered in `home-manager/base/ai/` (CLI packages, Agent Skills under `~/.agents/skills`, agent-specific integrations, sops-backed API keys); skill sources are pinned as flake inputs
 - Custom packages pulled directly from the [`nur-tnmt`](https://github.com/tnmt/nur-packages) input via overlay (no NUR aggregator)
 - Declarative Homebrew casks and Mac App Store apps (`masApps`) on the darwin host
 

@@ -4,6 +4,15 @@
   (final: _prev: {
     inherit (inputs.nix-steipete-tools.packages.${final.stdenv.hostPlatform.system}) gogcli;
 
+    # ax は CLI と Agent Skill (skills/ax/SKILL.md) が同じツリーに入っている。
+    # home-manager/base/ai/skills.nix が同じ inputs.ax を参照するので、
+    # CLI と skill の revision は flake.lock 上で必ず一致する。
+    # upstream flake の packages 出力ではなくホストの pkgs で package.nix を
+    # 評価する（bun2nix の rev は upstream flake.lock と同一）。
+    ax = final.callPackage "${inputs.ax}/package.nix" {
+      bun2nix = inputs.bun2nix.packages.${final.stdenv.hostPlatform.system}.default;
+    };
+
     # msgvault は TUI/CLI の時刻表示が DB 格納値 (UTC) のままなので、
     # 人間向け表示箇所にだけ .Local() を挟んでシステム TZ (JST) 表示にする。
     msgvault =
@@ -34,7 +43,6 @@
     in
     {
       inherit (nurPackages)
-        ax
         ccpocket-bridge
         givy
         kagiana

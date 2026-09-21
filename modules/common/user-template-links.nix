@@ -37,6 +37,12 @@ let
         link = "${homeDir}/.ssh/conf.d/private.config";
       }
     ])
+    ++ (lib.optionals cfg.typesafe [
+      {
+        target = config.sops.templates.typesafeEnv.path;
+        link = "${homeDir}/.config/typesafe/env";
+      }
+    ])
     ++ (lib.optionals cfg.tnmtInfo [
       {
         target = config.sops.secrets.tnmt_info_mask_dict.path;

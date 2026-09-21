@@ -48,6 +48,15 @@ in
       description = "Expose voice_input_openrouter_api_key as a user-owned system secret.";
     };
 
+    typesafe = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = ''
+        Render ~/.config/typesafe/env with TYPESAFE_API_KEY for the TypeSafe
+        agent skill. Requires typesafe_api_key in secrets/common.yaml.
+      '';
+    };
+
     tnmtInfo = lib.mkEnableOption "tnmt.info journal-import mask-dict/ai-policy files";
 
     sshPrivate = {
@@ -103,6 +112,11 @@ in
           sopsFile = commonSopsFile;
         };
       })
+      // (lib.optionalAttrs cfg.typesafe {
+        typesafe_api_key = {
+          sopsFile = commonSopsFile;
+        };
+      })
       // (lib.optionalAttrs cfg.tnmtInfo {
         tnmt_info_mask_dict = {
           sopsFile = ../../secrets/apps/tnmt-info/mask-dict.yaml;
@@ -133,6 +147,16 @@ in
           };
         };
       }
+      // (lib.optionalAttrs cfg.typesafe {
+        # Agent skill 本体 (Nix store) には key を入れず、
+        # shell から source する env ファイルとしてだけ渡す。
+        typesafeEnv = {
+          owner = username;
+          content = ''
+            export TYPESAFE_API_KEY=${config.sops.placeholder.typesafe_api_key}
+          '';
+        };
+      })
       // (lib.optionalAttrs cfg.gitPersonal {
         "git-personal-identity" = {
           owner = username;

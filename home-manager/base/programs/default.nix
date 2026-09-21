@@ -87,12 +87,7 @@
       # search
       platinum-searcher
 
-      # AI
-      claude-code
-      ax
-      ccusage
-      codex
-      rtk
+      # AI tooling lives in home-manager/base/ai
     ]
     ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
       bubblewrap

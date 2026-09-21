@@ -40,6 +40,24 @@ git config core.hooksPath .githooks  # 未設定の場合
 - パッケージを追加・削除する場合は `lib/default.nix` の overlay 内 `inherit` リストを編集する
 - flake の `packages` 出力ではなく NUR 規約の `default.nix { pkgs }` でインポートし、ホストの pkgs（allowUnfree 等の config と overlay 込み）で評価する
 
+## AI agent tooling
+
+`home-manager/base/ai/` で AI coding agent 向けの構成をレイヤーごとに分けている。
+
+| ファイル | 責務 |
+| --- | --- |
+| `packages.nix` | CLI 本体 (ax / rtk / codex / claude-code / ccusage) |
+| `skills.nix` | Agent Skill の配置 |
+| `integrations.nix` | agent 固有の hook / instructions 生成 (RTK) |
+| `secrets.nix` | skill から分離した API key の読み込み |
+
+- Agent Skill の共通配置先は `~/.agents/skills/<name>`。まだ `~/.agents` を読まない agent には、同じ Nix store path への symlink を agent 固有ディレクトリ (`~/.claude/skills/<name>`) にも張る。skill の実体は store 上に 1 つだけ。
+- skill の source は flake input で pin する。ax のように CLI と skill が同じ repository にある場合は input を 1 つにして revision を一致させる。
+- skill を追加する前に、その repository がベンダー自身の org かを確認する。ベンダーのドメインに似た第三者サイトが、自前の課金プロキシへ API key を送らせる skill を配布している例がある（`codaaiteam/jev-skill` → `jevtypesafeai.com`）。公式は `typesafe-ai/skills`。
+- プロジェクト固有の skill はここに入れず、各 repository の `.agents/skills` で管理する。
+- RTK のように agent の hook/instructions を書き換える installer を持つツールは、生成物を Nix にコピーせず activation から pin した本体を idempotent に実行する。生成先のパス (`$CODEX_HOME/AGENTS.md` 等) を `home.file` で管理すると衝突するので管理しないこと。
+- API key は skill definition に入れない。system layer の sops で復号し `~/.config/<app>/env` へ symlink したものを shell から source する。
+
 ## Private flake input
 
 `shizuku` のような private リポジトリの input は CI ランナーから fetch できない。

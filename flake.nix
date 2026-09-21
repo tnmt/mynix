@@ -62,6 +62,26 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # AI coding agent tooling. ax ships both its package definition and
+    # skills/ax/SKILL.md in one tree, so a single pinned input keeps the CLI
+    # and the skill on the same revision. Imported as a plain source (not via
+    # the flake outputs) so the package is evaluated with the host pkgs —
+    # same convention as the nur-tnmt packages.
+    ax = {
+      url = "github:yusukebe/ax";
+      flake = false;
+    };
+
+    # TypeSafe (System One / Jev) の公式 agent skill。skill definition のみで
+    # CLI はない。TYPESAFE_API_KEY は skill tree に入れず sops 経由で渡す
+    # (profiles/common/user-sops.nix)。
+    # 非公式ミラー codaaiteam/jev-skill は jevtypesafeai.com という別ドメインの
+    # 課金プロキシへ鍵を送らせる内容なので使わないこと。
+    typesafe-skills = {
+      url = "github:typesafe-ai/skills";
+      flake = false;
+    };
+
     # Private repo: shizuku (local memory server). Plain github.com URL
     # is fine on the single-key mynix hosts (sunflower/dahlia). Downstream
     # flakes with multi-account SSH (e.g. tnmt-work-flake) declare their
