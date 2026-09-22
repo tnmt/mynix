@@ -28,6 +28,15 @@ in
 
       shell = {
         font_family = fonts.sans;
+        lang = "en";
+        show_location = false;
+      };
+
+      location.auto_locate = true;
+
+      widget.clock = {
+        format = "{:%Y-%m-%d %H:%M:%S}";
+        timezone = "Asia/Tokyo";
       };
 
       wallpaper = {
