@@ -8,6 +8,9 @@
   services.mpd = {
     enable = true;
     musicDirectory = "${config.home.homeDirectory}/Dropbox/Music/";
+    # netbird (trustedInterfaces) と LAN の両方から到達できるよう全interfaceでlisten。
+    # ポート開放は hosts/dahlia/default.nix の allowedTCPPorts 側で管理。
+    network.listenAddress = "any";
     extraConfig = ''
       audio_output {
         type "pipewire"

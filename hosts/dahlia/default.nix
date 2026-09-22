@@ -63,8 +63,12 @@ in
   };
 
   # Dropbox LANSync: TCP=peer転送, UDP=ブロードキャスト発見
+  # 6600: MPD (netbird + LAN からのアクセスを許可)
   networking.firewall = {
-    allowedTCPPorts = [ 17500 ];
+    allowedTCPPorts = [
+      17500
+      6600
+    ];
     allowedUDPPorts = [ 17500 ];
   };
 
