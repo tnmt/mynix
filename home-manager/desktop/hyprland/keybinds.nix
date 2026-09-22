@@ -285,8 +285,8 @@ let
     # Volume / brightness (locked + repeating)
     (bel "XF86AudioRaiseVolume" "Volume up" ''hl.dsp.exec_cmd("noctalia msg volume-up")'')
     (bel "XF86AudioLowerVolume" "Volume down" ''hl.dsp.exec_cmd("noctalia msg volume-down")'')
-    (bel "XF86MonBrightnessUp" "Brightness up" ''hl.dsp.exec_cmd("noctalia msg brightness-up")'')
-    (bel "XF86MonBrightnessDown" "Brightness down" ''hl.dsp.exec_cmd("noctalia msg brightness-down")'')
+    (bel "XF86MonBrightnessUp" "Brightness up" ''hl.dsp.exec_cmd("brightness-adjust up")'')
+    (bel "XF86MonBrightnessDown" "Brightness down" ''hl.dsp.exec_cmd("brightness-adjust down")'')
   ];
 in
 {

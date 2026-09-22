@@ -46,6 +46,7 @@
         (pkgs.writeShellScriptBin "launch-wifi" (builtins.readFile ./scripts/launch-wifi))
         (pkgs.writeShellScriptBin "launch-audio" (builtins.readFile ./scripts/launch-audio))
         (pkgs.writeShellScriptBin "switch-audio" (builtins.readFile ./scripts/switch-audio))
+        (pkgs.writeShellScriptBin "brightness-adjust" (builtins.readFile ./scripts/brightness-adjust))
         (pkgs.writeShellScriptBin "launch-webapp" (builtins.readFile ./scripts/launch-webapp))
         (pkgs.writeShellScriptBin "window-pop" (builtins.readFile ./scripts/window-pop))
       ];
