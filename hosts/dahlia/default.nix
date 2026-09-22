@@ -79,6 +79,7 @@ in
       "networkmanager"
       "docker"
       "libvirtd"
+      "video" # backlight brightness write access (see modules/hardware/power-management.nix)
     ];
     linger = true;
     # Declarative authorized_keys. Lives at /etc/ssh/authorized_keys.d/<user>;

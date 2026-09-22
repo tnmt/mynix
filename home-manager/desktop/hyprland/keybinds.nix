@@ -210,11 +210,13 @@ let
     (b "SUPER + C" "Universal copy" ''hl.dsp.send_shortcut({ mods = "CTRL", key = "Insert" })'')
     (b "SUPER + V" "Universal paste" ''hl.dsp.send_shortcut({ mods = "SHIFT", key = "Insert" })'')
     (b "SUPER + X" "Universal cut" ''hl.dsp.send_shortcut({ mods = "CTRL", key = "X" })'')
-    (b "SUPER + SHIFT + C" "Clipboard manager" ''hl.dsp.exec_cmd("walker -m clipboard")'')
+    (b "SUPER + SHIFT + C" "Clipboard manager"
+      ''hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard")''
+    )
 
     # Menus
-    (b "SUPER + SPACE" "Launch apps" ''hl.dsp.exec_cmd("launch-walker")'')
-    (b "SUPER + CTRL + E" "Emoji picker" ''hl.dsp.exec_cmd("launch-walker -m symbols")'')
+    (b "SUPER + SPACE" "Launch apps" ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher")'')
+    (b "SUPER + CTRL + E" "Emoji picker" ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher /emo")'')
 
     # Application bindings
     (b "SUPER + RETURN" "Terminal" ''hl.dsp.exec_cmd("${terminal.default}")'')
@@ -256,7 +258,9 @@ let
     )
 
     # Settings / Controls
-    (b "SUPER + ALT + SPACE" "Settings menu" ''hl.dsp.exec_cmd("launch-settings")'')
+    (b "SUPER + ALT + SPACE" "Control center"
+      ''hl.dsp.exec_cmd("noctalia msg panel-toggle control-center")''
+    )
     (b "SUPER + SHIFT + A" "Switch audio output" ''hl.dsp.exec_cmd("switch-audio")'')
 
     # Voice input
@@ -266,7 +270,7 @@ let
     )
 
     # System
-    (b "SUPER + ESCAPE" "System menu" ''hl.dsp.exec_cmd("wlogout -b 3 -c 20 -r 20")'')
+    (b "SUPER + ESCAPE" "System menu" ''hl.dsp.exec_cmd("noctalia msg panel-toggle session")'')
 
     # Mouse binds
     (bm "SUPER + mouse:272" "Move window" "hl.dsp.window.drag()")
@@ -276,17 +280,13 @@ let
     (bl "XF86AudioPlay" "Play" ''hl.dsp.exec_cmd("playerctl play-pause")'')
     (bl "XF86AudioPrev" "Previous track" ''hl.dsp.exec_cmd("playerctl previous")'')
     (bl "XF86AudioNext" "Next track" ''hl.dsp.exec_cmd("playerctl next")'')
-    (bl "XF86AudioMute" "Mute" ''hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle")'')
+    (bl "XF86AudioMute" "Mute" ''hl.dsp.exec_cmd("noctalia msg volume-mute")'')
 
     # Volume / brightness (locked + repeating)
-    (bel "XF86AudioRaiseVolume" "Volume up" ''hl.dsp.exec_cmd("swayosd-client --output-volume raise")'')
-    (bel "XF86AudioLowerVolume" "Volume down"
-      ''hl.dsp.exec_cmd("swayosd-client --output-volume lower")''
-    )
-    (bel "XF86MonBrightnessUp" "Brightness up" ''hl.dsp.exec_cmd("swayosd-client --brightness raise")'')
-    (bel "XF86MonBrightnessDown" "Brightness down"
-      ''hl.dsp.exec_cmd("swayosd-client --brightness lower")''
-    )
+    (bel "XF86AudioRaiseVolume" "Volume up" ''hl.dsp.exec_cmd("noctalia msg volume-up")'')
+    (bel "XF86AudioLowerVolume" "Volume down" ''hl.dsp.exec_cmd("noctalia msg volume-down")'')
+    (bel "XF86MonBrightnessUp" "Brightness up" ''hl.dsp.exec_cmd("brightness-adjust up")'')
+    (bel "XF86MonBrightnessDown" "Brightness down" ''hl.dsp.exec_cmd("brightness-adjust down")'')
   ];
 in
 {

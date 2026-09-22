@@ -5,17 +5,10 @@
 {
   imports = [
     ./keybinds.nix
-    ./mako.nix
     ./settings.nix
-    ./hypridle.nix
-    ./hyprlock.nix
-    ./hyprpaper.nix
     ./hyprdynamicmonitors.nix
-    ./waybar.nix
-    ./walker.nix
-    ./swayosd.nix
+    ./noctalia.nix
     ./webapps.nix
-    ./wlogout.nix
     ./zen-browser.nix
   ];
 
@@ -29,7 +22,7 @@
   home.packages = with pkgs; [
     brightnessctl
     bluetui
-    swayosd
+    fuzzel
     grim
     slurp
     swappy
@@ -43,7 +36,6 @@
     wev
     wf-recorder
     wl-clipboard
-    wlogout
 
     (pkgs.symlinkJoin {
       name = "hypr-scripts";
@@ -53,9 +45,8 @@
         (pkgs.writeShellScriptBin "launch-bluetooth" (builtins.readFile ./scripts/launch-bluetooth))
         (pkgs.writeShellScriptBin "launch-wifi" (builtins.readFile ./scripts/launch-wifi))
         (pkgs.writeShellScriptBin "launch-audio" (builtins.readFile ./scripts/launch-audio))
-        (pkgs.writeShellScriptBin "launch-walker" (builtins.readFile ./scripts/launch-walker))
         (pkgs.writeShellScriptBin "switch-audio" (builtins.readFile ./scripts/switch-audio))
-        (pkgs.writeShellScriptBin "launch-settings" (builtins.readFile ./scripts/launch-settings))
+        (pkgs.writeShellScriptBin "brightness-adjust" (builtins.readFile ./scripts/brightness-adjust))
         (pkgs.writeShellScriptBin "launch-webapp" (builtins.readFile ./scripts/launch-webapp))
         (pkgs.writeShellScriptBin "window-pop" (builtins.readFile ./scripts/window-pop))
       ];

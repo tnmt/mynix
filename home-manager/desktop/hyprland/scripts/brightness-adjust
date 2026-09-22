@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Change display brightness via brightnessctl, then mirror the result into Noctalia's
+# OSD. Noctalia's own brightness IPC (`noctalia msg brightness-up/down`) writes sysfs
+# directly and needs a logind session it cannot resolve for a process launched under
+# UWSM ("NoSessionForPID"), so it always fails with "brightness control unavailable"
+# here; brightnessctl doesn't hit that path and works.
+
+case "$1" in
+  up) delta="+5%" ;;
+  down) delta="5%-" ;;
+  *)
+    echo "usage: brightness-adjust <up|down>" >&2
+    exit 1
+    ;;
+esac
+
+pct=$(brightnessctl -m set "$delta" | cut -d, -f4 | tr -d '%')
+noctalia msg brightness-osd "$pct"

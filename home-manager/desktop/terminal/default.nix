@@ -2,7 +2,7 @@
 let
   fonts = import ../fonts.nix;
   terminal = {
-    # Default terminal emulator, referenced by hyprland/walker configs.
+    # Default terminal emulator, referenced by hyprland configs.
     default = "ghostty";
     font = {
       name = fonts.monospace;

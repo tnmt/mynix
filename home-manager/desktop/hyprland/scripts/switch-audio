@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Switch audio output device via Walker or launch pulsemixer TUI.
+# Switch audio output device via fuzzel dmenu, or launch pulsemixer TUI.
 # Lists PipeWire sinks with a marker for the current default,
 # plus an option to open the full mixer.
 
@@ -15,7 +15,7 @@ menu=$(
   echo -e "  Open Mixer\t__mixer__"
 )
 
-selected=$(echo "$menu" | walker --dmenu -p "Audio Output")
+selected=$(echo "$menu" | fuzzel --dmenu --prompt "Audio Output: ")
 
 [ -z "$selected" ] && exit 0
 
