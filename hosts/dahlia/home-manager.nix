@@ -9,6 +9,7 @@
     ../../profiles/home-manager/ssh-agent-keychain.nix
     # Dahlia 固有: ProtonMail Bridge を systemd user service として常駐
     ../../home-manager/desktop/protonmail-bridge.nix
+    ../../home-manager/desktop/mpd.nix
   ];
 
   home.packages = [
