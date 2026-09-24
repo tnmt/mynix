@@ -158,6 +158,10 @@ in
     hl.window_rule({ match = { class = "^(tui-float)$" }, size = { 875, 600 } })
     hl.window_rule({ match = { class = "^(fcitx)$" }, pseudo = true })
     hl.window_rule({ match = { class = "^(fcitx)$" }, no_blur = true })
+    -- Float + center Thunar so opening it doesn't tile-split the current workspace
+    hl.window_rule({ match = { class = "^(thunar)$" }, float = true })
+    hl.window_rule({ match = { class = "^(thunar)$" }, center = true })
+    hl.window_rule({ match = { class = "^(thunar)$" }, size = { 1100, 700 } })
 
     -- Noctalia is started via its home-manager systemd user service
     -- (programs.noctalia.systemd.enable), so no exec-once entry is needed here.
