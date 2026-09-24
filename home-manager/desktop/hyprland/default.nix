@@ -40,7 +40,6 @@
         (pkgs.writeShellScriptBin "launch-browser" (builtins.readFile ./scripts/launch-browser))
         (pkgs.writeShellScriptBin "switch-audio" (builtins.readFile ./scripts/switch-audio))
         (pkgs.writeShellScriptBin "brightness-adjust" (builtins.readFile ./scripts/brightness-adjust))
-        (pkgs.writeShellScriptBin "launch-webapp" (builtins.readFile ./scripts/launch-webapp))
         (pkgs.writeShellScriptBin "window-pop" (builtins.readFile ./scripts/window-pop))
       ];
     })
