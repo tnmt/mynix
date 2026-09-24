@@ -1,0 +1,25 @@
+# Open the newest screenshot or screen recording.
+capture_dirs=()
+[[ -d "$HOME/Pictures/Screenshots" ]] && capture_dirs+=("$HOME/Pictures/Screenshots")
+[[ -d "$HOME/Videos" ]] && capture_dirs+=("$HOME/Videos")
+
+if (( ${#capture_dirs[@]} == 0 )); then
+  notify-send "Captures" "No capture directories found"
+  exit 0
+fi
+
+latest=$(
+  find "${capture_dirs[@]}" -type f \
+    \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.mp4' -o -iname '*.mkv' -o -iname '*.webm' \) \
+    -printf '%T@ %p\n' \
+    | sort -nr \
+    | head -n 1 \
+    | cut -d' ' -f2-
+)
+
+if [[ -z "$latest" ]]; then
+  notify-send "Captures" "No screenshots or recordings found"
+  exit 0
+fi
+
+exec xdg-open "$latest"

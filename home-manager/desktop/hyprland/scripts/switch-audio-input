@@ -1,0 +1,27 @@
+# Switch the default PipeWire microphone via fuzzel dmenu.
+default_source=$(pactl -f json info | jq -r '.default_source_name')
+
+menu=$(
+  pactl -f json list sources | jq -r --arg default "$default_source" '
+    .[]
+    | select((.name | endswith(".monitor")) | not)
+    | (if .name == $default then "✓ " else "  " end)
+      + (.properties."node.nick" // .description) + "\t" + .name
+  '
+  printf '  Open Mixer\t__mixer__\n'
+)
+
+selected=$(printf '%s\n' "$menu" | fuzzel --dmenu --prompt='Audio Input: ' || true)
+[[ -n "$selected" ]] || exit 0
+
+source_name=${selected##*$'\t'}
+if [[ "$source_name" == "__mixer__" ]]; then
+  terminal=${TERMINAL:-ghostty}
+  "$terminal" -e wiremix -v input >/dev/null 2>&1 &
+  exit 0
+fi
+
+pactl set-default-source "$source_name"
+description=$(printf '%s\n' "$selected" | sed 's/^[✓ ]*//' | awk -F'\t' '{print $1}')
+notify-send "Audio Input" "$description" -t 2000
+noctalia msg mic-volume-osd >/dev/null

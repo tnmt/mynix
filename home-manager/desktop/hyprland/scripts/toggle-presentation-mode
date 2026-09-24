@@ -1,0 +1,62 @@
+# Toggle a reversible presentation mode: inhibit idle, silence notifications,
+# and temporarily use a neutral screen temperature.
+runtime_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+state_dir="$runtime_dir/mynix-presentation-$UID"
+state_file="$state_dir/state"
+log_file="$state_dir/wlinhibit.log"
+
+install -d -m 700 "$state_dir"
+
+is_inhibitor_pid() {
+  local pid=$1 executable
+  executable=$(readlink -f "/proc/$pid/exe" 2>/dev/null || true)
+  [[ "${executable##*/}" == "wlinhibit" ]]
+}
+
+if [[ -f "$state_file" ]]; then
+  mapfile -t state <"$state_file"
+  saved_dnd=${state[0]:-off}
+  saved_temperature=${state[1]:-}
+  inhibitor_pid=${state[2]:-}
+
+  if [[ "$inhibitor_pid" =~ ^[0-9]+$ ]] && is_inhibitor_pid "$inhibitor_pid"; then
+    kill "$inhibitor_pid" 2>/dev/null || true
+  fi
+  if [[ "$saved_temperature" =~ ^[0-9]+$ ]]; then
+    hyprctl hyprsunset temperature "$saved_temperature" >/dev/null
+  fi
+  noctalia msg notification-dnd-set "$saved_dnd" >/dev/null
+  rm -f "$state_file"
+  notify-send "Presentation mode" "Disabled"
+  exit 0
+fi
+
+saved_dnd=$(noctalia msg notification-dnd-status)
+if [[ "$saved_dnd" != "on" && "$saved_dnd" != "off" ]]; then
+  notify-send -u critical "Presentation mode" "Could not read notification state"
+  exit 1
+fi
+
+saved_temperature=$(
+  hyprctl hyprsunset temperature 2>/dev/null \
+    | grep -oE '[0-9]+' \
+    | head -n 1 \
+    || true
+)
+
+setsid wlinhibit >"$log_file" 2>&1 &
+inhibitor_pid=$!
+sleep 0.2
+if ! is_inhibitor_pid "$inhibitor_pid"; then
+  notify-send -u critical "Presentation mode" "Could not start idle inhibitor"
+  exit 1
+fi
+
+printf '%s\n%s\n%s\n' "$saved_dnd" "$saved_temperature" "$inhibitor_pid" >"$state_file"
+chmod 600 "$state_file"
+
+if [[ "$saved_temperature" =~ ^[0-9]+$ ]]; then
+  hyprctl hyprsunset temperature 6000 >/dev/null
+fi
+notify-send "Presentation mode" "Enabled; idle and notifications are inhibited"
+noctalia msg notification-dnd-set on >/dev/null

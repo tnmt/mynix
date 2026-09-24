@@ -224,6 +224,7 @@ let
     # Menus
     (b "SUPER + SPACE" "Launch apps" ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher")'')
     (b "SUPER + CTRL + E" "Emoji picker" ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher /emo")'')
+    (b "SUPER + K" "Show key bindings" ''hl.dsp.exec_cmd("show-keybindings")'')
 
     # Application bindings
     (b "SUPER + RETURN" "Terminal in current directory"
@@ -270,16 +271,17 @@ let
     (b "SUPER + PRINT" "Pick color" ''hl.dsp.exec_cmd("pkill hyprpicker || hyprpicker -a")'')
     (b "SUPER + CTRL + PRINT" "Extract text from selection" ''hl.dsp.exec_cmd("ocr-selection")'')
     (b "ALT + PRINT" "Toggle screen recording" ''hl.dsp.exec_cmd("screen-record")'')
+    (b "SUPER + ALT + COMMA" "Open latest capture" ''hl.dsp.exec_cmd("open-latest-capture")'')
 
     # Settings / Controls
     (b "SUPER + ALT + SPACE" "Control center"
       ''hl.dsp.exec_cmd("noctalia msg panel-toggle control-center")''
     )
     (b "SUPER + SHIFT + A" "Switch audio output" ''hl.dsp.exec_cmd("switch-audio")'')
-    (b "SUPER + CTRL + N" "Toggle night light"
-      ''hl.dsp.exec_cmd("noctalia msg nightlight-force-toggle")''
-    )
+    (b "SUPER + SHIFT + I" "Switch audio input" ''hl.dsp.exec_cmd("switch-audio-input")'')
+    (b "SUPER + CTRL + N" "Toggle night light" ''hl.dsp.exec_cmd("toggle-nightlight")'')
     (b "SUPER + CTRL + I" "Toggle idle inhibition" ''hl.dsp.exec_cmd("noctalia msg caffeine-toggle")'')
+    (b "SUPER + CTRL + P" "Toggle presentation mode" ''hl.dsp.exec_cmd("toggle-presentation-mode")'')
 
     # Voice input
     (b "SUPER + M" "Toggle voice input" ''hl.dsp.exec_cmd("voice-input")'')

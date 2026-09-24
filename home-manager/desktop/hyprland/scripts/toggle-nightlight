@@ -1,0 +1,17 @@
+# Toggle hyprsunset between the configured night temperature and neutral color.
+current_temperature=$(
+  hyprctl hyprsunset temperature 2>/dev/null \
+    | grep -oE '[0-9]+' \
+    | head -n 1
+)
+
+if [[ "$current_temperature" == "4000" ]]; then
+  temperature=6000
+  label="Daylight"
+else
+  temperature=4000
+  label="Night light"
+fi
+
+hyprctl hyprsunset temperature "$temperature" >/dev/null
+notify-send -u low "$label" "${temperature}K"

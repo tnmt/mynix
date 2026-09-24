@@ -102,6 +102,59 @@
           ];
           text = builtins.readFile ./scripts/screen-record;
         })
+        (pkgs.writeShellApplication {
+          name = "show-keybindings";
+          runtimeInputs = [
+            pkgs.fuzzel
+            pkgs.hyprland
+            pkgs.jq
+          ];
+          text = builtins.readFile ./scripts/show-keybindings;
+        })
+        (pkgs.writeShellApplication {
+          name = "toggle-presentation-mode";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.gnugrep
+            pkgs.hyprland
+            pkgs.libnotify
+            pkgs.util-linux
+            pkgs.wlinhibit
+          ];
+          text = builtins.readFile ./scripts/toggle-presentation-mode;
+        })
+        (pkgs.writeShellApplication {
+          name = "switch-audio-input";
+          runtimeInputs = [
+            pkgs.fuzzel
+            pkgs.gawk
+            pkgs.jq
+            pkgs.libnotify
+            pkgs.pulseaudio
+            pkgs.gnused
+          ];
+          text = builtins.readFile ./scripts/switch-audio-input;
+        })
+        (pkgs.writeShellApplication {
+          name = "open-latest-capture";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.findutils
+            pkgs.libnotify
+            pkgs.xdg-utils
+          ];
+          text = builtins.readFile ./scripts/open-latest-capture;
+        })
+        (pkgs.writeShellApplication {
+          name = "toggle-nightlight";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.gnugrep
+            pkgs.hyprland
+            pkgs.libnotify
+          ];
+          text = builtins.readFile ./scripts/toggle-nightlight;
+        })
       ];
     })
   ];
