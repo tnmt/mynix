@@ -14,9 +14,15 @@
 # 注意: rtk 0.47.0 (nixpkgs) の --codex は AGENTS.md + RTK.md のみを生成する。
 # Codex の PreToolUse hook ($CODEX_HOME/hooks.json / `rtk hook codex`) は
 # この版には存在しない。
+#
+# stdin を /dev/null にするのは、初回実行時の telemetry 同意プロンプト
+# (Enable anonymous telemetry? [y/N]) 対策。stdin が TTY だと入力待ちで
+# activation ごと固まる。非 TTY ならプロンプト自体が出ず exit 0 で完走する
+# (rtk 0.47.0 で検証済み)。telemetry の同意は各ユーザーが一度 `rtk init` を
+# 手動実行して答えれば config.toml に永続化される。
 { lib, pkgs, ... }:
 {
   home.activation.rtkCodexInit = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    $DRY_RUN_CMD ${pkgs.rtk}/bin/rtk init -g --codex
+    $DRY_RUN_CMD ${pkgs.rtk}/bin/rtk init -g --codex < /dev/null
   '';
 }
