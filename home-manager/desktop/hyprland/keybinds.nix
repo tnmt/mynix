@@ -219,7 +219,9 @@ let
     # Menus
     (b "SUPER + SPACE" "Launch apps" ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher")'')
     (b "SUPER + CTRL + E" "Emoji picker" ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher /emo")'')
-    (b "SUPER + K" "Show key bindings" ''hl.dsp.exec_cmd("show-keybindings")'')
+    (b "SUPER + K" "Show key bindings"
+      ''hl.dsp.exec_cmd("noctalia msg panel-toggle kenn/keybind-cheatsheet:cheatsheet")''
+    )
     (b "SUPER + CTRL + R" "Set quick reminder" ''hl.dsp.exec_cmd("quick-reminder")'')
 
     # Application bindings

@@ -422,6 +422,38 @@
         "type": "github"
       }
     },
+    "noctalia-community-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790253248,
+        "narHash": "sha256-EgNDLlPCgz3meSx2XvWB5Pbxt6xWamHbAKgxzZm0AQo=",
+        "owner": "noctalia-dev",
+        "repo": "community-plugins",
+        "rev": "2d44a073b47f904cc9d3626d35532ebb9902834a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "community-plugins",
+        "type": "github"
+      }
+    },
+    "noctalia-official-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790080799,
+        "narHash": "sha256-D3KIaKkicssbVM8lLXBNTKhsXArXBr55NVZJ+a5Inc8=",
+        "owner": "noctalia-dev",
+        "repo": "official-plugins",
+        "rev": "f36c62aae9bb5d7aa463730139aa19c569a355f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "official-plugins",
+        "type": "github"
+      }
+    },
     "nur-tnmt": {
       "inputs": {
         "bun2nix": "bun2nix_2",
@@ -458,6 +490,8 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-darwin": "nixpkgs-darwin",
         "noctalia": "noctalia",
+        "noctalia-community-plugins": "noctalia-community-plugins",
+        "noctalia-official-plugins": "noctalia-official-plugins",
         "nur-tnmt": "nur-tnmt",
         "shizuku": "shizuku",
         "sops-nix": "sops-nix",

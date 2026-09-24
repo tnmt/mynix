@@ -43,16 +43,61 @@ in
 
       location.auto_locate = true;
 
-      plugins.enabled = [ "noctalia/screen_recorder" ];
+      plugins = {
+        enabled = [
+          "kenn/keybind-cheatsheet"
+          "mindnbytes/nix-status"
+          "nightwatch75/file-search"
+          "noctalia/screen_recorder"
+        ];
+        auto_update = "none";
+        source = [
+          {
+            name = "official-pinned";
+            kind = "path";
+            location = "${inputs.noctalia-official-plugins}";
+            enabled = true;
+          }
+          {
+            name = "community-pinned";
+            kind = "path";
+            location = "${inputs.noctalia-community-plugins}";
+            enabled = true;
+          }
+        ];
+      };
 
-      # The official recorder widget also adopts recordings started by the
-      # existing screen-record helper. Keep it hidden until a recording is
-      # active; while active it becomes a red, clickable stop button.
-      plugin_settings."noctalia/screen_recorder".hide_inactive = true;
+      plugin_settings = {
+        # The official recorder widget also adopts recordings started by the
+        # existing screen-record helper. Keep it hidden until a recording is
+        # active; while active it becomes a red, clickable stop button.
+        "noctalia/screen_recorder".hide_inactive = true;
+
+        "kenn/keybind-cheatsheet" = {
+          compositor = "hyprland";
+          hyprland_parser = "lua";
+          columns = 3;
+          show_undescribed = false;
+          show_actions = false;
+        };
+
+        "mindnbytes/nix-status" = {
+          flake_dir = "${config.home.homeDirectory}/ghq/github.com/tnmt/mynix";
+          nixos_configuration = "dahlia";
+        };
+
+        "nightwatch75/file-search" = {
+          search_folder = config.home.homeDirectory;
+          exclude_dirs = ".git, node_modules, .cache, .venv, Steam";
+          show_hidden = false;
+          max_results = 50;
+        };
+      };
 
       bar.default.end = [
         "media"
         "tray"
+        "nix-status"
         "screen-recorder"
         "notifications"
         "clipboard"
@@ -86,14 +131,18 @@ in
 
       osd.kinds.keyboard_layout = false;
 
-      widget.clock = {
-        format = "{:%Y-%m-%d %H:%M:%S}";
-        timezone = "Asia/Tokyo";
-      };
+      widget = {
+        clock = {
+          format = "{:%Y-%m-%d %H:%M:%S}";
+          timezone = "Asia/Tokyo";
+        };
 
-      widget.screen-recorder = {
-        type = "noctalia/screen_recorder:recorder";
-        actions.middle = "none";
+        screen-recorder = {
+          type = "noctalia/screen_recorder:recorder";
+          actions.middle = "none";
+        };
+
+        nix-status.type = "mindnbytes/nix-status:status";
       };
 
       wallpaper = {

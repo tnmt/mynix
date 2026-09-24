@@ -49,6 +49,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Pin plugin sources alongside Noctalia instead of letting the shell fetch
+    # and update executable plugin code outside the flake lock.
+    noctalia-official-plugins = {
+      url = "github:noctalia-dev/official-plugins";
+      flake = false;
+    };
+
+    noctalia-community-plugins = {
+      url = "github:noctalia-dev/community-plugins";
+      flake = false;
+    };
+
     hyprdynamicmonitors = {
       url = "github:fiffeek/hyprdynamicmonitors";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -23,7 +23,9 @@
   home.packages = with pkgs; [
     brightnessctl
     bluetui
+    findutils
     fuzzel
+    glib
     hyprpicker
     pavucontrol
     pulseaudio
@@ -34,6 +36,8 @@
     wev
     wf-recorder
     wl-clipboard
+    util-linux
+    xdg-utils
 
     (pkgs.symlinkJoin {
       name = "hypr-scripts";
@@ -101,15 +105,6 @@
             pkgs.slurp
           ];
           text = builtins.readFile ./scripts/screen-record;
-        })
-        (pkgs.writeShellApplication {
-          name = "show-keybindings";
-          runtimeInputs = [
-            pkgs.fuzzel
-            pkgs.hyprland
-            pkgs.jq
-          ];
-          text = builtins.readFile ./scripts/show-keybindings;
         })
         (pkgs.writeShellApplication {
           name = "toggle-presentation-mode";
