@@ -39,6 +39,8 @@ in
       cat = "bat";
       ls = "eza --icons --color=auto --group-directories-first --time-style=full-iso";
       l = "eza --icons -lah --color=auto --group-directories-first --time-style=full-iso";
+      ff = "fzf --preview 'bat --style=numbers --color=always {}'";
+      eff = ''$EDITOR "$(ff)"'';
     };
 
     sessionVariables = {
@@ -46,6 +48,8 @@ in
       LC_TIME = "C";
       PAGER = "less";
       LESS = "-R -X";
+      MANROFFOPT = "-c";
+      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     };
 
     envExtra = ''
@@ -146,6 +150,10 @@ in
       # Fcitx5 (Japanese input)
       export XMODIFIERS=@im=fcitx
       export INPUT_METHOD=fcitx
+
+      open() (
+        xdg-open "$@" >/dev/null 2>&1 &
+      )
     '';
 
   };
