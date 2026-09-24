@@ -15,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: DeterminateSystems/nix-installer-action@main
+      - name: Set date
+        id: date
+        run: echo "today=$(TZ=Asia/Tokyo date +%F)" >> "$GITHUB_OUTPUT"
       - uses: DeterminateSystems/update-flake-lock@main
         id: update
         with:
@@ -25,11 +28,15 @@ jobs:
             nixpkgs nixpkgs-darwin darwin home-manager home-manager-darwin
             nixos-wsl disko sops-nix nur-tnmt hyprdynamicmonitors
             nix-claude-code nix-steipete-tools zen-browser bun2nix
-          pr-title: "flake.lock: update"
+          commit-msg: "flake.lock: Update ${{ steps.date.outputs.today }}"
+          pr-title: "flake.lock: Update ${{ steps.date.outputs.today }}"
       # Merges once ci.yml's required status checks pass on the PR;
       # see main branch protection settings.
       - name: Enable auto-merge
         if: steps.update.outputs.pull-request-number
         env:
           GH_TOKEN: ${{ secrets.FLAKE_UPDATE_PAT }}
-        run: gh pr merge --auto --squash "${{ steps.update.outputs.pull-request-number }}"
+        run: >-
+          gh pr merge --auto --squash
+          --subject "flake.lock: Update ${{ steps.date.outputs.today }}"
+          "${{ steps.update.outputs.pull-request-number }}"
