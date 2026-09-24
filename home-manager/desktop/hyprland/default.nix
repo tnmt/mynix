@@ -7,6 +7,7 @@
     ./keybinds.nix
     ./settings.nix
     ./hyprdynamicmonitors.nix
+    ./hyprsunset.nix
     ./noctalia.nix
     ./webapps.nix
     ./zen-browser.nix
