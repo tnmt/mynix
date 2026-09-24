@@ -10,6 +10,7 @@ let
   chromiumFlags = ''
     --enable-wayland-ime
     --wayland-text-input-version=3
+    --enable-features=TouchpadOverscrollHistoryNavigation
   '';
   chromiumApps = [
     "brave-origin"
