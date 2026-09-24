@@ -65,7 +65,7 @@ refine_text() {
 $raw"
 
   local payload
-  payload=$(jq -n --arg model "anthropic/claude-3-haiku" --arg content "$prompt" \
+  payload=$(jq -n --arg model "anthropic/claude-haiku-4.5" --arg content "$prompt" \
     '{model: $model, messages: [{role: "user", content: $content}]}')
 
   local response
