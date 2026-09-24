@@ -3,7 +3,7 @@
 # - CapsLock -> Left Control
 # - Left Super: hold -> Super / tap -> Muhenkan (IME off)
 # - Right Super: hold -> Super / tap -> Henkan (IME on)
-# JIS (built-in laptop):
+# JIS keys (applies to all keyboards; no-op on US layouts without these keys):
 # - Yen (¥) -> Backslash (\)
 # - Ro (ろ) -> Grave (`)
 {
