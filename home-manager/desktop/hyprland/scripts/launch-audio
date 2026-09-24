@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# Launch audio controls (pavucontrol).
-
-launch-or-focus pavucontrol

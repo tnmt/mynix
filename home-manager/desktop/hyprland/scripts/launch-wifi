@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Launch wifi controls TUI (nmtui).
-
-rfkill unblock wifi
-launch-or-focus nmtui "alacritty --class tui-float -e nmtui"

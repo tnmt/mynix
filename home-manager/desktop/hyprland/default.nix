@@ -37,11 +37,7 @@
     (pkgs.symlinkJoin {
       name = "hypr-scripts";
       paths = [
-        (pkgs.writeShellScriptBin "launch-or-focus" (builtins.readFile ./scripts/launch-or-focus))
         (pkgs.writeShellScriptBin "launch-browser" (builtins.readFile ./scripts/launch-browser))
-        (pkgs.writeShellScriptBin "launch-bluetooth" (builtins.readFile ./scripts/launch-bluetooth))
-        (pkgs.writeShellScriptBin "launch-wifi" (builtins.readFile ./scripts/launch-wifi))
-        (pkgs.writeShellScriptBin "launch-audio" (builtins.readFile ./scripts/launch-audio))
         (pkgs.writeShellScriptBin "switch-audio" (builtins.readFile ./scripts/switch-audio))
         (pkgs.writeShellScriptBin "brightness-adjust" (builtins.readFile ./scripts/brightness-adjust))
         (pkgs.writeShellScriptBin "launch-webapp" (builtins.readFile ./scripts/launch-webapp))
