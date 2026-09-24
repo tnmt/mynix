@@ -30,6 +30,7 @@ let
     (b "SUPER + P" "Pseudo window" "hl.dsp.window.pseudo()")
     (b "SUPER + T" "Toggle window floating/tiling" "hl.dsp.window.float()")
     (b "SUPER + O" "Pop out window (float + pin)" ''hl.dsp.exec_cmd("window-pop")'')
+    (b "SUPER + L" "Toggle workspace layout" ''hl.dsp.exec_cmd("toggle-workspace-layout")'')
     (b "SUPER + F" "Full screen" ''hl.dsp.window.fullscreen({ mode = "fullscreen" })'')
     (b "SUPER + CTRL + F" "Tiled full screen"
       ''hl.dsp.window.fullscreen_state({ internal = 0, client = 2, action = "toggle" })''
@@ -234,7 +235,10 @@ let
     (b "SUPER + SHIFT + RETURN" "Browser" ''hl.dsp.exec_cmd("launch-browser")'')
     (b "SUPER + SHIFT + B" "Browser" ''hl.dsp.exec_cmd("launch-browser")'')
     (b "SUPER + SHIFT + ALT + B" "Browser (private)" ''hl.dsp.exec_cmd("launch-browser --private")'')
-    (b "SUPER + SHIFT + SLASH" "Passwords" ''hl.dsp.exec_cmd("1password")'')
+    (b "SUPER + SHIFT + F" "File manager in current directory"
+      ''hl.dsp.exec_cmd([[thunar "$(terminal-cwd)"]])''
+    )
+    (b "SUPER + SHIFT + SLASH" "Passwords" "hl.dsp.exec_cmd([[launch-or-focus 1password 1password]])")
 
     (b "SUPER + BACKSPACE" "Toggle window transparency"
       ''hl.dsp.exec_cmd([[hyprctl dispatch setprop "address:$(hyprctl activewindow -j | jq -r '.address')" opaque toggle]])''
@@ -265,6 +269,7 @@ let
     )
     (b "SUPER + PRINT" "Pick color" ''hl.dsp.exec_cmd("pkill hyprpicker || hyprpicker -a")'')
     (b "SUPER + CTRL + PRINT" "Extract text from selection" ''hl.dsp.exec_cmd("ocr-selection")'')
+    (b "ALT + PRINT" "Toggle screen recording" ''hl.dsp.exec_cmd("screen-record")'')
 
     # Settings / Controls
     (b "SUPER + ALT + SPACE" "Control center"

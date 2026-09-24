@@ -1,0 +1,123 @@
+# Toggle a GPU-accelerated screen recording with selectable capture and audio modes.
+runtime_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
+state_dir="$runtime_dir/mynix-screen-record-$UID"
+pid_file="$state_dir/pid"
+output_file="$state_dir/output"
+log_file="$state_dir/log"
+
+install -d -m 700 "$state_dir"
+
+is_recorder_pid() {
+  local pid=$1 executable
+  executable=$(readlink -f "/proc/$pid/exe" 2>/dev/null || true)
+  [[ "${executable##*/}" == "gpu-screen-recorder" ]]
+}
+
+stop_recording() {
+  local pid output count
+  pid=$(<"$pid_file")
+  output=$(<"$output_file")
+
+  kill -INT "$pid" 2>/dev/null || true
+  count=0
+  while kill -0 "$pid" 2>/dev/null && (( count < 50 )); do
+    sleep 0.1
+    (( count += 1 ))
+  done
+
+  if kill -0 "$pid" 2>/dev/null; then
+    kill -KILL "$pid" 2>/dev/null || true
+    notify-send -u critical "Screen recording" "Recorder did not stop cleanly; the video may be corrupted"
+  elif [[ -f "$output" ]]; then
+    notify-send "Screen recording saved" "$output"
+  else
+    notify-send -u critical "Screen recording" "Recording stopped without an output file"
+  fi
+
+  rm -f "$pid_file" "$output_file"
+}
+
+if [[ -f "$pid_file" ]]; then
+  active_pid=$(<"$pid_file")
+  if [[ "$active_pid" =~ ^[0-9]+$ ]] && is_recorder_pid "$active_pid"; then
+    stop_recording
+    exit 0
+  fi
+  rm -f "$pid_file" "$output_file"
+fi
+
+capture_mode=$(printf 'Region\nFocused monitor\n' | fuzzel --dmenu --prompt='Record: ' || true)
+[[ -n "$capture_mode" ]] || exit 0
+
+audio_mode=$(printf 'No audio\nDesktop audio\nMicrophone\nDesktop + microphone\n' \
+  | fuzzel --dmenu --prompt='Audio: ' || true)
+[[ -n "$audio_mode" ]] || exit 0
+
+capture_args=()
+case "$capture_mode" in
+  Region)
+    freeze_pid=""
+    cleanup_freeze() {
+      if [[ -n "$freeze_pid" ]]; then
+        kill "$freeze_pid" 2>/dev/null || true
+      fi
+    }
+    trap cleanup_freeze EXIT INT TERM
+
+    hyprpicker -r -z >/dev/null 2>&1 &
+    freeze_pid=$!
+    sleep 0.1
+    selection=$(slurp 2>/dev/null || true)
+    cleanup_freeze
+    freeze_pid=""
+    trap - EXIT INT TERM
+
+    if [[ ! "$selection" =~ ^(-?[0-9]+),(-?[0-9]+)[[:space:]]([0-9]+)x([0-9]+)$ ]]; then
+      exit 0
+    fi
+
+    x=${BASH_REMATCH[1]}
+    y=${BASH_REMATCH[2]}
+    width=${BASH_REMATCH[3]}
+    height=${BASH_REMATCH[4]}
+    [[ "$x" == -* ]] || x="+$x"
+    [[ "$y" == -* ]] || y="+$y"
+    capture_args=(-w region -region "${width}x${height}${x}${y}")
+    ;;
+  "Focused monitor")
+    monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
+    [[ -n "$monitor" ]] || exit 1
+    capture_args=(-w "$monitor")
+    ;;
+  *) exit 0 ;;
+esac
+
+audio_args=()
+case "$audio_mode" in
+  "No audio") ;;
+  "Desktop audio") audio_args=(-a default_output -ac aac) ;;
+  Microphone) audio_args=(-a default_input -ac aac) ;;
+  "Desktop + microphone") audio_args=(-a 'default_output|default_input' -ac aac) ;;
+  *) exit 0 ;;
+esac
+
+output_dir="${XDG_VIDEOS_DIR:-$HOME/Videos}"
+mkdir -p "$output_dir"
+filename="$output_dir/screen-recording-$(date +'%Y-%m-%d_%H-%M-%S').mp4"
+
+gpu-screen-recorder "${capture_args[@]}" "${audio_args[@]}" \
+  -k auto -f 60 -fm cfr -fallback-cpu-encoding yes -o "$filename" \
+  >"$log_file" 2>&1 &
+recorder_pid=$!
+
+printf '%s\n' "$recorder_pid" >"$pid_file"
+printf '%s\n' "$filename" >"$output_file"
+sleep 0.5
+
+if ! kill -0 "$recorder_pid" 2>/dev/null; then
+  rm -f "$pid_file" "$output_file"
+  notify-send -u critical "Screen recording failed" "See $log_file"
+  exit 1
+fi
+
+notify-send "Screen recording started" "Press Alt+Print to stop"

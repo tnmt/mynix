@@ -1,0 +1,12 @@
+# Toggle the active workspace between conventional and horizontal scrolling tiling.
+workspace=$(hyprctl activeworkspace -j)
+workspace_id=$(jq -r '.id' <<<"$workspace")
+current_layout=$(jq -r '.tiledLayout' <<<"$workspace")
+
+case "$current_layout" in
+  dwindle) new_layout="scrolling" ;;
+  *) new_layout="dwindle" ;;
+esac
+
+hyprctl keyword workspace "$workspace_id, layout:$new_layout"
+notify-send -u low "Workspace layout" "$new_layout"

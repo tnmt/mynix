@@ -70,6 +70,38 @@
           ];
           text = builtins.readFile ./scripts/terminal-cwd;
         })
+        (pkgs.writeShellApplication {
+          name = "launch-or-focus";
+          runtimeInputs = [
+            pkgs.hyprland
+            pkgs.jq
+            pkgs.util-linux
+          ];
+          text = builtins.readFile ./scripts/launch-or-focus;
+        })
+        (pkgs.writeShellApplication {
+          name = "toggle-workspace-layout";
+          runtimeInputs = [
+            pkgs.hyprland
+            pkgs.jq
+            pkgs.libnotify
+          ];
+          text = builtins.readFile ./scripts/toggle-workspace-layout;
+        })
+        (pkgs.writeShellApplication {
+          name = "screen-record";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.fuzzel
+            pkgs.gpu-screen-recorder
+            pkgs.hyprland
+            pkgs.hyprpicker
+            pkgs.jq
+            pkgs.libnotify
+            pkgs.slurp
+          ];
+          text = builtins.readFile ./scripts/screen-record;
+        })
       ];
     })
   ];
