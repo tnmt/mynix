@@ -1,0 +1,22 @@
+# Print the working directory of the shell in the active terminal window.
+terminal_pid=$(hyprctl activewindow -j 2>/dev/null | jq -r '.pid // empty' || true)
+
+if [[ -z "$terminal_pid" ]]; then
+  printf '%s\n' "$HOME"
+  exit 0
+fi
+
+child_pid=$(pgrep -P "$terminal_pid" | tail -n 1 || true)
+if [[ -z "$child_pid" ]]; then
+  printf '%s\n' "$HOME"
+  exit 0
+fi
+
+cwd=$(readlink -f "/proc/$child_pid/cwd" 2>/dev/null || true)
+shell=$(readlink -f "/proc/$child_pid/exe" 2>/dev/null || true)
+
+if [[ -n "$cwd" && -d "$cwd" && -n "$shell" ]] && grep -Fqx "$shell" /etc/shells; then
+  printf '%s\n' "$cwd"
+else
+  printf '%s\n' "$HOME"
+fi

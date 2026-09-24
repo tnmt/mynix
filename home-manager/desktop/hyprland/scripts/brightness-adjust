@@ -6,11 +6,19 @@
 # UWSM ("NoSessionForPID"), so it always fails with "brightness control unavailable"
 # here; brightnessctl doesn't hit that path and works.
 
+step="${2:-5}"
+case "$step" in
+  '' | *[!0-9]*)
+    echo "brightness step must be an integer" >&2
+    exit 1
+    ;;
+esac
+
 case "$1" in
-  up) delta="+5%" ;;
-  down) delta="5%-" ;;
+  up) delta="+${step}%" ;;
+  down) delta="${step}%-" ;;
   *)
-    echo "usage: brightness-adjust <up|down>" >&2
+    echo "usage: brightness-adjust <up|down> [step]" >&2
     exit 1
     ;;
 esac

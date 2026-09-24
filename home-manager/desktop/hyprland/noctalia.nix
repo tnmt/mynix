@@ -43,6 +43,25 @@ in
 
       location.auto_locate = true;
 
+      # Noctalia's native idle service respects Wayland idle inhibitors and the
+      # caffeine toggle. Lock first, then turn the displays off one minute later;
+      # activity restores display power automatically.
+      idle = {
+        pre_action_fade_seconds = 2.0;
+        behavior = {
+          lock = {
+            timeout = 600;
+            action = "lock";
+            enabled = true;
+          };
+          "screen-off" = {
+            timeout = 660;
+            action = "screen_off";
+            enabled = true;
+          };
+        };
+      };
+
       osd.kinds.keyboard_layout = false;
 
       widget.clock = {

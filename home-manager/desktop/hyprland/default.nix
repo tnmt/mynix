@@ -42,6 +42,34 @@
         (pkgs.writeShellScriptBin "switch-audio" (builtins.readFile ./scripts/switch-audio))
         (pkgs.writeShellScriptBin "brightness-adjust" (builtins.readFile ./scripts/brightness-adjust))
         (pkgs.writeShellScriptBin "window-pop" (builtins.readFile ./scripts/window-pop))
+        (pkgs.writeShellApplication {
+          name = "ocr-selection";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.grim
+            pkgs.hyprpicker
+            pkgs.libnotify
+            pkgs.slurp
+            (pkgs.tesseract.override {
+              enableLanguages = [
+                "eng"
+                "jpn"
+              ];
+            })
+            pkgs.wl-clipboard
+          ];
+          text = builtins.readFile ./scripts/ocr-selection;
+        })
+        (pkgs.writeShellApplication {
+          name = "terminal-cwd";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.hyprland
+            pkgs.jq
+            pkgs.procps
+          ];
+          text = builtins.readFile ./scripts/terminal-cwd;
+        })
       ];
     })
   ];

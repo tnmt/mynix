@@ -1,0 +1,34 @@
+# Extract text from a frozen screen region and copy it to the clipboard.
+freeze_pid=""
+
+cleanup() {
+  if [[ -n "$freeze_pid" ]]; then
+    kill "$freeze_pid" 2>/dev/null || true
+  fi
+}
+trap cleanup EXIT INT TERM
+
+hyprpicker -r -z >/dev/null 2>&1 &
+freeze_pid=$!
+sleep 0.1
+
+if ! selection=$(slurp 2>/dev/null) || [[ -z "$selection" ]]; then
+  exit 0
+fi
+
+if ! text=$(
+  grim -g "$selection" - \
+    | tesseract stdin stdout --oem 1 --psm 6 -l eng+jpn --dpi 300 \
+      -c preserve_interword_spaces=1 2>/dev/null
+); then
+  notify-send -u critical "OCR" "Text extraction failed"
+  exit 1
+fi
+
+if [[ -z "${text//[[:space:]]/}" ]]; then
+  notify-send "OCR" "No text found"
+  exit 0
+fi
+
+printf '%s' "$text" | wl-copy
+notify-send "OCR" "Copied extracted text to the clipboard"

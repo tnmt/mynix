@@ -129,6 +129,12 @@ let
     (b "SUPER + SHIFT + TAB" "Previous workspace" ''hl.dsp.focus({ workspace = "e-1" })'')
     (b "SUPER + CTRL + TAB" "Former workspace" ''hl.dsp.focus({ workspace = "previous" })'')
 
+    # Cycle keyboard focus across monitors
+    (b "CTRL + ALT + TAB" "Focus next monitor" ''hl.dsp.exec_cmd("hyprctl dispatch focusmonitor +1")'')
+    (b "CTRL + ALT + SHIFT + TAB" "Focus previous monitor"
+      ''hl.dsp.exec_cmd("hyprctl dispatch focusmonitor -1")''
+    )
+
     # Move workspaces to other monitors
     (b "SUPER + SHIFT + ALT + LEFT" "Move workspace to left monitor"
       ''hl.dsp.workspace.move({ monitor = "l" })''
@@ -219,7 +225,9 @@ let
     (b "SUPER + CTRL + E" "Emoji picker" ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher /emo")'')
 
     # Application bindings
-    (b "SUPER + RETURN" "Terminal" ''hl.dsp.exec_cmd("${terminal.default}")'')
+    (b "SUPER + RETURN" "Terminal in current directory"
+      ''hl.dsp.exec_cmd([[${terminal.default} --working-directory="$(terminal-cwd)"]])''
+    )
     (b "SUPER + ALT + RETURN" "Tmux"
       ''hl.dsp.exec_cmd("${terminal.default} bash -c 'tmux attach || tmux new -s Work'")''
     )
@@ -255,12 +263,18 @@ let
     (b "SUPER + CTRL + SHIFT + code:12" "Screenshot fullscreen (pick display)"
       ''hl.dsp.exec_cmd("noctalia msg screenshot-fullscreen pick")''
     )
+    (b "SUPER + PRINT" "Pick color" ''hl.dsp.exec_cmd("pkill hyprpicker || hyprpicker -a")'')
+    (b "SUPER + CTRL + PRINT" "Extract text from selection" ''hl.dsp.exec_cmd("ocr-selection")'')
 
     # Settings / Controls
     (b "SUPER + ALT + SPACE" "Control center"
       ''hl.dsp.exec_cmd("noctalia msg panel-toggle control-center")''
     )
     (b "SUPER + SHIFT + A" "Switch audio output" ''hl.dsp.exec_cmd("switch-audio")'')
+    (b "SUPER + CTRL + N" "Toggle night light"
+      ''hl.dsp.exec_cmd("noctalia msg nightlight-force-toggle")''
+    )
+    (b "SUPER + CTRL + I" "Toggle idle inhibition" ''hl.dsp.exec_cmd("noctalia msg caffeine-toggle")'')
 
     # Voice input
     (b "SUPER + M" "Toggle voice input" ''hl.dsp.exec_cmd("voice-input")'')
@@ -270,6 +284,7 @@ let
 
     # System
     (b "SUPER + ESCAPE" "System menu" ''hl.dsp.exec_cmd("noctalia msg panel-toggle session")'')
+    (b "SUPER + CTRL + L" "Lock system" ''hl.dsp.exec_cmd("noctalia msg session lock")'')
 
     # Mouse binds
     (bm "SUPER + mouse:272" "Move window" "hl.dsp.window.drag()")
@@ -280,12 +295,21 @@ let
     (bl "XF86AudioPrev" "Previous track" ''hl.dsp.exec_cmd("playerctl previous")'')
     (bl "XF86AudioNext" "Next track" ''hl.dsp.exec_cmd("playerctl next")'')
     (bl "XF86AudioMute" "Mute" ''hl.dsp.exec_cmd("noctalia msg volume-mute")'')
+    (bl "XF86AudioMicMute" "Mute microphone" ''hl.dsp.exec_cmd("noctalia msg mic-mute")'')
 
     # Volume / brightness (locked + repeating)
     (bel "XF86AudioRaiseVolume" "Volume up" ''hl.dsp.exec_cmd("noctalia msg volume-up")'')
     (bel "XF86AudioLowerVolume" "Volume down" ''hl.dsp.exec_cmd("noctalia msg volume-down")'')
+    (bel "ALT + XF86AudioRaiseVolume" "Volume up 1%" ''hl.dsp.exec_cmd("noctalia msg volume-up 1")'')
+    (bel "ALT + XF86AudioLowerVolume" "Volume down 1%"
+      ''hl.dsp.exec_cmd("noctalia msg volume-down 1")''
+    )
     (bel "XF86MonBrightnessUp" "Brightness up" ''hl.dsp.exec_cmd("brightness-adjust up")'')
     (bel "XF86MonBrightnessDown" "Brightness down" ''hl.dsp.exec_cmd("brightness-adjust down")'')
+    (bel "ALT + XF86MonBrightnessUp" "Brightness up 1%" ''hl.dsp.exec_cmd("brightness-adjust up 1")'')
+    (bel "ALT + XF86MonBrightnessDown" "Brightness down 1%"
+      ''hl.dsp.exec_cmd("brightness-adjust down 1")''
+    )
   ];
 in
 {
