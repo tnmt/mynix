@@ -27,6 +27,10 @@ in
       window-padding-y = 5;
       macos-titlebar-style = "transparent";
       term = "xterm-256color";
+      # デフォルトの ctrl+enter=toggle_fullscreen を解除し、アプリ側(herdr等)へキーを渡す
+      keybind = [
+        "ctrl+enter=unbind"
+      ];
     };
   };
 
