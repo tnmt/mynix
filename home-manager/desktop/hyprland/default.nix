@@ -155,6 +155,15 @@
           ];
           text = builtins.readFile ./scripts/toggle-nightlight;
         })
+        (pkgs.writeShellApplication {
+          name = "quick-reminder";
+          runtimeInputs = [
+            pkgs.coreutils
+            pkgs.libnotify
+            pkgs.systemd
+          ];
+          text = builtins.readFile ./scripts/quick-reminder;
+        })
       ];
     })
   ];

@@ -1,0 +1,24 @@
+# Schedule a one-shot desktop reminder with a user systemd timer.
+duration=$(printf '5m\n10m\n15m\n30m\n1h\n2h\n' | noctalia dmenu -p 'Remind in: ' || true)
+duration=${duration//[[:space:]]/}
+[[ -n "$duration" ]] || exit 0
+
+if [[ ! "$duration" =~ ^[1-9][0-9]*[smhd]$ ]]; then
+  notify-send -u critical "Reminder" "Use a duration such as 15m, 2h, or 1d"
+  exit 1
+fi
+
+message=$(printf 'Take a break\nJoin the meeting\nCheck the build\nFollow up\n' \
+  | noctalia dmenu -p 'Reminder: ' || true)
+[[ -n "$message" ]] || exit 0
+
+unit="quick-reminder-$(date +%s)-$RANDOM"
+notify_send=$(command -v notify-send)
+
+if systemd-run --user --quiet --collect --unit="$unit" --on-active="$duration" \
+  "$notify_send" -u critical "Reminder" "$message"; then
+  notify-send "Reminder scheduled" "$message · $duration"
+else
+  notify-send -u critical "Reminder" "Could not create the timer"
+  exit 1
+fi

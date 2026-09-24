@@ -43,6 +43,28 @@ in
 
       location.auto_locate = true;
 
+      plugins.enabled = [ "noctalia/screen_recorder" ];
+
+      # The official recorder widget also adopts recordings started by the
+      # existing screen-record helper. Keep it hidden until a recording is
+      # active; while active it becomes a red, clickable stop button.
+      plugin_settings."noctalia/screen_recorder".hide_inactive = true;
+
+      bar.default.end = [
+        "media"
+        "tray"
+        "screen-recorder"
+        "notifications"
+        "clipboard"
+        "network"
+        "bluetooth"
+        "volume"
+        "brightness"
+        "battery"
+        "control-center"
+        "session"
+      ];
+
       # Noctalia's native idle service respects Wayland idle inhibitors and the
       # caffeine toggle. Lock first, then turn the displays off one minute later;
       # activity restores display power automatically.
@@ -67,6 +89,11 @@ in
       widget.clock = {
         format = "{:%Y-%m-%d %H:%M:%S}";
         timezone = "Asia/Tokyo";
+      };
+
+      widget.screen-recorder = {
+        type = "noctalia/screen_recorder:recorder";
+        actions.middle = "none";
       };
 
       wallpaper = {

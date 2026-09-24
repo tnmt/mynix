@@ -156,13 +156,8 @@ let
     (b "SUPER + SHIFT + UP" "Swap window up" ''hl.dsp.window.swap({ direction = "u" })'')
     (b "SUPER + SHIFT + DOWN" "Swap window down" ''hl.dsp.window.swap({ direction = "d" })'')
 
-    # Cycle through windows
-    (b "ALT + TAB" "Cycle to next window" "hl.dsp.window.cycle_next()")
-    (b "ALT + SHIFT + TAB" "Cycle to prev window" "hl.dsp.window.cycle_next({ next = false })")
-    (b "ALT + TAB" "Reveal active window on top" ''hl.dsp.window.alter_zorder({ mode = "top" })'')
-    (b "ALT + SHIFT + TAB" "Reveal active window on top"
-      ''hl.dsp.window.alter_zorder({ mode = "top" })''
-    )
+    # Graphical window switcher; while open, Tab / Shift+Tab cycle and Alt release confirms.
+    (b "ALT + TAB" "Window switcher" ''hl.dsp.exec_cmd("noctalia msg window-switcher")'')
 
     # Resize active window
     (b "SUPER + code:20" "Expand window left"
@@ -225,6 +220,7 @@ let
     (b "SUPER + SPACE" "Launch apps" ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher")'')
     (b "SUPER + CTRL + E" "Emoji picker" ''hl.dsp.exec_cmd("noctalia msg panel-toggle launcher /emo")'')
     (b "SUPER + K" "Show key bindings" ''hl.dsp.exec_cmd("show-keybindings")'')
+    (b "SUPER + CTRL + R" "Set quick reminder" ''hl.dsp.exec_cmd("quick-reminder")'')
 
     # Application bindings
     (b "SUPER + RETURN" "Terminal in current directory"
@@ -282,6 +278,20 @@ let
     (b "SUPER + CTRL + N" "Toggle night light" ''hl.dsp.exec_cmd("toggle-nightlight")'')
     (b "SUPER + CTRL + I" "Toggle idle inhibition" ''hl.dsp.exec_cmd("noctalia msg caffeine-toggle")'')
     (b "SUPER + CTRL + P" "Toggle presentation mode" ''hl.dsp.exec_cmd("toggle-presentation-mode")'')
+
+    # Notifications
+    (b "SUPER + COMMA" "Invoke latest notification"
+      ''hl.dsp.exec_cmd("noctalia msg notification-invoke-latest")''
+    )
+    (b "SUPER + SHIFT + COMMA" "Dismiss active notifications"
+      ''hl.dsp.exec_cmd("noctalia msg notification-clear-active")''
+    )
+    (b "SUPER + CTRL + COMMA" "Toggle notification DND"
+      ''hl.dsp.exec_cmd("noctalia msg notification-dnd-toggle")''
+    )
+    (b "SUPER + ALT + N" "Notification history"
+      ''hl.dsp.exec_cmd("noctalia msg panel-toggle control-center notifications")''
+    )
 
     # Voice input
     (b "SUPER + M" "Toggle voice input" ''hl.dsp.exec_cmd("voice-input")'')
