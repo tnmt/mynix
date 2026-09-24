@@ -240,21 +240,20 @@ let
       ''hl.dsp.exec_cmd("hyprctl keyword cursor:zoom_factor 1")''
     )
 
-    # Screenshot (P = Print)
-    (b "SUPER + P" "Screenshot region to clipboard"
-      ''hl.dsp.exec_cmd([[grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot" "Copied to clipboard" -t 2000]])''
+    # Screenshot (Mac-style 3/4/5, but CTRL instead of SHIFT since SUPER+SHIFT+<digit>
+    # is already "move window to workspace N"). Output policy (save/clipboard) lives
+    # in Noctalia's [shell.screenshot] settings, not per-keybind.
+    (b "SUPER + CTRL + code:12" "Screenshot fullscreen"
+      ''hl.dsp.exec_cmd("noctalia msg screenshot-fullscreen")''
     )
-    (b "SUPER + SHIFT + P" "Screenshot fullscreen to clipboard"
-      ''hl.dsp.exec_cmd([[grim - | wl-copy && notify-send "Screenshot" "Copied to clipboard" -t 2000]])''
+    (b "SUPER + CTRL + code:13" "Screenshot region"
+      ''hl.dsp.exec_cmd("noctalia msg screenshot-region")''
     )
-    (b "SUPER + ALT + P" "Screenshot region to file"
-      ''hl.dsp.exec_cmd([[mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000]])''
+    (b "SUPER + CTRL + code:14" "Screenshot freeze & annotate"
+      ''hl.dsp.exec_cmd("noctalia msg screenshot-annotate")''
     )
-    (b "SUPER + ALT + SHIFT + P" "Screenshot fullscreen to file"
-      ''hl.dsp.exec_cmd([[mkdir -p ~/Pictures/Screenshots && grim ~/Pictures/Screenshots/$(date +%Y%m%d-%H%M%S).png && notify-send "Screenshot" "Saved to ~/Pictures/Screenshots" -t 2000]])''
-    )
-    (b "SUPER + CTRL + P" "Screenshot region edit (swappy)"
-      ''hl.dsp.exec_cmd([[mkdir -p ~/Pictures/Screenshots && grim -g "$(slurp)" - | swappy -f -]])''
+    (b "SUPER + CTRL + SHIFT + code:12" "Screenshot fullscreen (pick display)"
+      ''hl.dsp.exec_cmd("noctalia msg screenshot-fullscreen pick")''
     )
 
     # Settings / Controls

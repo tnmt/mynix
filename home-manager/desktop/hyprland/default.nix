@@ -23,9 +23,6 @@
     brightnessctl
     bluetui
     fuzzel
-    grim
-    slurp
-    swappy
     hyprpicker
     pavucontrol
     pulseaudio

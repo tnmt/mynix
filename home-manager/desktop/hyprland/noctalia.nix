@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   pkgs,
   ...
@@ -30,6 +31,14 @@ in
         font_family = fonts.sans;
         lang = "en";
         show_location = false;
+
+        # Mac-style screenshot flow: no per-shortcut save-vs-clipboard split,
+        # every capture both saves to file and copies to clipboard.
+        screenshot = {
+          save_to_file = true;
+          copy_to_clipboard = true;
+          directory = "${config.home.homeDirectory}/Pictures/Screenshots";
+        };
       };
 
       location.auto_locate = true;
