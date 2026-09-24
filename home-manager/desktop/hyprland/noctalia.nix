@@ -34,6 +34,8 @@ in
 
       location.auto_locate = true;
 
+      osd.kinds.keyboard_layout = false;
+
       widget.clock = {
         format = "{:%Y-%m-%d %H:%M:%S}";
         timezone = "Asia/Tokyo";
