@@ -21,7 +21,8 @@
       config = ''
         (defsrc
           caps
-          yen
+          ;; kanata parses the word "yen" as KEY_BACKSLASH, not the physical Yen key; only the ¥ glyph maps to KEY_YEN
+          ¥
           ro
           lmet
           rmet
