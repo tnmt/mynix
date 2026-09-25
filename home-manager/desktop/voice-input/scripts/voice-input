@@ -9,43 +9,40 @@ set -euo pipefail
 REFINE=false
 [[ "${1:-}" == "--refine" ]] && REFINE=true
 
-PIDFILE="/tmp/voice-input.pid"
-MODEFILE="/tmp/voice-input.mode"
-AUDIO="/tmp/voice-input.wav"
-MODEL_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/whisper-models"
-MODEL="$MODEL_DIR/ggml-medium.bin"
-MODEL_URL="https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-medium.bin"
+RUNTIME_DIR="${XDG_RUNTIME_DIR:-/tmp}/mynix-voice-input-$UID"
+PIDFILE="$RUNTIME_DIR/recorder.pid"
+MODEFILE="$RUNTIME_DIR/mode"
+AUDIO="$RUNTIME_DIR/recording.wav"
+MODEL=${VOICE_INPUT_MODEL:?VOICE_INPUT_MODEL must be set by the package wrapper}
 API_KEY_FILE="/run/secrets/voice_input_openrouter_api_key"
 WHISPER_HOST="127.0.0.1"
 WHISPER_PORT="8080"
 WHISPER_URL="http://${WHISPER_HOST}:${WHISPER_PORT}"
-WHISPER_LOG="/tmp/whisper-server.log"
 
-ensure_model() {
-  if [[ ! -f "$MODEL" ]]; then
-    mkdir -p "$MODEL_DIR"
-    notify-send "Voice Input" "Downloading whisper model (medium)..." -t 5000
-    curl -L -o "$MODEL" "$MODEL_URL"
-    notify-send "Voice Input" "Model download complete" -t 3000
-  fi
-}
+install -d -m 700 "$RUNTIME_DIR"
 
 ensure_server() {
   if curl -s -o /dev/null --max-time 1 "${WHISPER_URL}/" 2>/dev/null; then
     return 0
   fi
-  ensure_model
-  nohup whisper-server -m "$MODEL" -l ja --port "$WHISPER_PORT" -nt \
-    >"$WHISPER_LOG" 2>&1 &
-  disown
+  if [[ ! -f "$MODEL" ]]; then
+    notify-send "Voice Input" "Downloading whisper model (medium)..." -t 5000
+  fi
+  systemctl --user start voice-input-whisper.service
   for _ in $(seq 1 60); do
     sleep 0.5
     if curl -s -o /dev/null --max-time 1 "${WHISPER_URL}/" 2>/dev/null; then
       return 0
     fi
   done
-  notify-send "Voice Input" "whisper-server failed to start" -t 3000
+  notify-send "Voice Input" "whisper-server failed to start; check the user journal" -t 3000
   return 1
+}
+
+is_recorder_pid() {
+  local pid=$1 executable
+  executable=$(readlink -f "/proc/$pid/exe" 2>/dev/null || true)
+  [[ "${executable##*/}" == "sox" ]]
 }
 
 refine_text() {
@@ -95,7 +92,8 @@ start_recording() {
     notify-send "Voice Input" "Recording... Press Super+M to stop" -t 2000
   fi
   rec -q -r 16000 -c 1 -b 16 "$AUDIO" &
-  echo $! >"$PIDFILE"
+  printf '%s\n' "$!" >"$PIDFILE"
+  chmod 600 "$PIDFILE" "$MODEFILE"
 }
 
 stop_and_transcribe() {
@@ -142,9 +140,13 @@ stop_and_transcribe() {
   notify-send "Voice Input" "$text" -t 3000
 }
 
-if [[ -f "$PIDFILE" ]] && kill -0 "$(cat "$PIDFILE")" 2>/dev/null; then
-  stop_and_transcribe
-else
-  rm -f "$PIDFILE"
-  start_recording
+if [[ -f "$PIDFILE" ]]; then
+  recorder_pid=$(<"$PIDFILE")
+  if [[ "$recorder_pid" =~ ^[0-9]+$ ]] && is_recorder_pid "$recorder_pid"; then
+    stop_and_transcribe
+    exit 0
+  fi
+  rm -f "$PIDFILE" "$MODEFILE" "$AUDIO"
 fi
+
+start_recording
