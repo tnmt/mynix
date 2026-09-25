@@ -23,10 +23,10 @@
 let
   stateDir = "${homeDirectory}/.local/state/wayvnc";
   vncOutputName = "VNC-1";
-  # Matches hydrangea's usable desktop area (1680x1050 logical, minus the
-  # menu bar and TigerVNC's title bar) since TigerVNC draws 1 remote pixel
-  # per point with no client-side downscaling.
-  vncMode = "1680x992@60";
+  # Matches hydrangea's logical desktop resolution (1680x1050) since
+  # TigerVNC draws 1 remote pixel per point with no client-side downscaling.
+  # TigerVNC runs fullscreen there, so no allowance for a title/menu bar.
+  vncMode = "1680x1050@60";
   vncWorkspace = "99";
 
   ensureVncOutput = pkgs.writeShellApplication {
