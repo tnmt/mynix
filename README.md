@@ -44,6 +44,7 @@ Work-related hosts (`work_mac`, `work_vm`) live in the private `tnmt-work-flake`
 ```text
 .
 ├── flake.nix              # Flake inputs, outputs, devShell, formatter, helper app
+├── flake/                 # Apps, checks, development outputs, output assembly
 ├── lib/                   # Reusable host/HM builders, exposed as `mynix.lib`
 ├── hosts/                 # Concrete host entrypoints
 ├── home-manager/          # Reusable Home Manager modules
@@ -139,7 +140,7 @@ For local development, enable the repo's git hooks once:
 git config core.hooksPath .githooks
 ```
 
-The pre-commit hook formats staged files with `nix fmt`, lints with `deadnix` / `statix`, and scans staged changes with `gitleaks protect`.
+The pre-commit hook formats staged files with `nix fmt`, lints Nix and shell files with `deadnix` / `statix` / `shellcheck`, and scans staged changes with `gitleaks protect`.
 
 ## Secrets
 
@@ -157,7 +158,7 @@ Builds may evaluate without secrets in some cases, but activation on real machin
 
 GitHub Actions currently checks:
 - formatting via `nix fmt`
-- lint via `deadnix` and `statix`
+- lint via `deadnix`, `statix`, and the pinned `checks.<system>.shell` ShellCheck derivation
 - secret scan via `gitleaks` over the full history
 - NixOS builds for `sunflower` and `dahlia`
 - darwin evaluation for `hydrangea` (evaluates the full system on a Linux runner to catch option/module errors; actual builds require a macOS runner)

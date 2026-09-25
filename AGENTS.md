@@ -4,7 +4,7 @@
 
 ### pre-commit フック
 
-コミット時に `nix fmt`・`deadnix`/`statix`・`gitleaks protect` を自動実行する pre-commit フックを使用している。
+コミット時に `nix fmt`・`deadnix`/`statix`・`shellcheck`・`gitleaks protect` を自動実行する pre-commit フックを使用している。
 コミット前に以下を確認し、未設定なら実行すること。
 
 ```bash
