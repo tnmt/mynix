@@ -25,4 +25,21 @@
   home.activation.rtkCodexInit = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     $DRY_RUN_CMD ${pkgs.rtk}/bin/rtk init -g --codex < /dev/null
   '';
+
+  # Codex 自身が trust / plugin / MCP 等の状態を config.toml に追記するため、
+  # programs.codex.settings でファイル全体を read-only symlink にはしない。
+  # 自律動作に必要な permission 設定だけを宣言的に収束させる。
+  home.activation.codexApprovalDefaults =
+    lib.hm.dag.entryAfter
+      [
+        "rtkCodexInit"
+        "writeBoundary"
+      ]
+      ''
+        $DRY_RUN_CMD mkdir -p "$HOME/.codex"
+        $DRY_RUN_CMD touch "$HOME/.codex/config.toml"
+        $DRY_RUN_CMD ${pkgs.yq-go}/bin/yq -p toml -o toml -i \
+          '.approval_policy = "on-request" | .approvals_reviewer = "auto_review" | .sandbox_mode = "workspace-write"' \
+          "$HOME/.codex/config.toml"
+      '';
 }
