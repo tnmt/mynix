@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Change display brightness via brightnessctl, then mirror the result into Noctalia's
 # OSD. Noctalia's own brightness IPC (`noctalia msg brightness-up/down`) writes sysfs

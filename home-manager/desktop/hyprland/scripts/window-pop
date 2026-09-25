@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Toggle pop-out: float + center + pin a window, or restore it to tiling.
 
@@ -14,9 +14,9 @@ if [[ $pinned == "true" ]]; then
     "dispatch pin address:$addr;" \
     "dispatch togglefloating address:$addr;"
 elif [[ -n $addr ]]; then
-  hyprctl dispatch togglefloating address:$addr
-  hyprctl dispatch resizeactive exact $width $height address:$addr
-  hyprctl dispatch centerwindow address:$addr
+  hyprctl dispatch togglefloating "address:$addr"
+  hyprctl dispatch resizeactive exact "$width" "$height" "address:$addr"
+  hyprctl dispatch centerwindow "address:$addr"
   hyprctl -q --batch \
     "dispatch pin address:$addr;" \
     "dispatch alterzorder top address:$addr;"

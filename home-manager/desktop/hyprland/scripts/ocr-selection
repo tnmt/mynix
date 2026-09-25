@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Extract text from a frozen screen region and copy it to the clipboard.
 freeze_pid=""
 
@@ -17,8 +18,8 @@ if ! selection=$(slurp 2>/dev/null) || [[ -z "$selection" ]]; then
 fi
 
 if ! text=$(
-  grim -g "$selection" - \
-    | tesseract stdin stdout --oem 1 --psm 6 -l eng+jpn --dpi 300 \
+  grim -g "$selection" - |
+    tesseract stdin stdout --oem 1 --psm 6 -l eng+jpn --dpi 300 \
       -c preserve_interword_spaces=1 2>/dev/null
 ); then
   notify-send -u critical "OCR" "Text extraction failed"

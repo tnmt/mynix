@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Switch audio output device via fuzzel dmenu, or launch pulsemixer TUI.
 # Lists PipeWire sinks with a marker for the current default,

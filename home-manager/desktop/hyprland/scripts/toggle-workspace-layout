@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Toggle the active workspace between conventional and horizontal scrolling tiling.
 workspace=$(hyprctl activeworkspace -j)
 workspace_id=$(jq -r '.id' <<<"$workspace")

@@ -22,6 +22,33 @@ let
     keys: desc: disp:
     ''hl.bind("${keys}", ${disp}, { description = "${desc}", mouse = true })'';
 
+  workspaceBinds = lib.concatMap (
+    workspace:
+    let
+      code = toString (workspace + 9);
+      number = toString workspace;
+    in
+    [
+      (b "SUPER + code:${code}" "Switch to workspace ${number}" "hl.dsp.focus({ workspace = ${number} })")
+      (b "SUPER + SHIFT + code:${code}" "Move window to workspace ${number}"
+        "hl.dsp.window.move({ workspace = ${number}, follow = true })"
+      )
+      (b "SUPER + SHIFT + ALT + code:${code}" "Move window silently to workspace ${number}"
+        "hl.dsp.window.move({ workspace = ${number}, follow = false })"
+      )
+    ]
+  ) (lib.range 1 10);
+
+  groupNumberBinds = map (
+    index:
+    let
+      code = toString (index + 9);
+      number = toString index;
+    in
+    b "SUPER + ALT + code:${code}" "Switch to group window ${number}"
+      "hl.dsp.group.active({ index = ${number} })"
+  ) (lib.range 1 5);
+
   binds = [
     (b "SUPER + W" "Close window" "hl.dsp.window.close()")
 
@@ -43,81 +70,9 @@ let
     (b "SUPER + UP" "Move window focus up" ''hl.dsp.focus({ direction = "u" })'')
     (b "SUPER + DOWN" "Move window focus down" ''hl.dsp.focus({ direction = "d" })'')
 
-    # Switch workspaces with SUPER + [1-9; 0]
-    (b "SUPER + code:10" "Switch to workspace 1" "hl.dsp.focus({ workspace = 1 })")
-    (b "SUPER + code:11" "Switch to workspace 2" "hl.dsp.focus({ workspace = 2 })")
-    (b "SUPER + code:12" "Switch to workspace 3" "hl.dsp.focus({ workspace = 3 })")
-    (b "SUPER + code:13" "Switch to workspace 4" "hl.dsp.focus({ workspace = 4 })")
-    (b "SUPER + code:14" "Switch to workspace 5" "hl.dsp.focus({ workspace = 5 })")
-    (b "SUPER + code:15" "Switch to workspace 6" "hl.dsp.focus({ workspace = 6 })")
-    (b "SUPER + code:16" "Switch to workspace 7" "hl.dsp.focus({ workspace = 7 })")
-    (b "SUPER + code:17" "Switch to workspace 8" "hl.dsp.focus({ workspace = 8 })")
-    (b "SUPER + code:18" "Switch to workspace 9" "hl.dsp.focus({ workspace = 9 })")
-    (b "SUPER + code:19" "Switch to workspace 10" "hl.dsp.focus({ workspace = 10 })")
-
-    # Move active window to a workspace with SUPER + SHIFT + [1-9; 0]
-    (b "SUPER + SHIFT + code:10" "Move window to workspace 1"
-      "hl.dsp.window.move({ workspace = 1, follow = true })"
-    )
-    (b "SUPER + SHIFT + code:11" "Move window to workspace 2"
-      "hl.dsp.window.move({ workspace = 2, follow = true })"
-    )
-    (b "SUPER + SHIFT + code:12" "Move window to workspace 3"
-      "hl.dsp.window.move({ workspace = 3, follow = true })"
-    )
-    (b "SUPER + SHIFT + code:13" "Move window to workspace 4"
-      "hl.dsp.window.move({ workspace = 4, follow = true })"
-    )
-    (b "SUPER + SHIFT + code:14" "Move window to workspace 5"
-      "hl.dsp.window.move({ workspace = 5, follow = true })"
-    )
-    (b "SUPER + SHIFT + code:15" "Move window to workspace 6"
-      "hl.dsp.window.move({ workspace = 6, follow = true })"
-    )
-    (b "SUPER + SHIFT + code:16" "Move window to workspace 7"
-      "hl.dsp.window.move({ workspace = 7, follow = true })"
-    )
-    (b "SUPER + SHIFT + code:17" "Move window to workspace 8"
-      "hl.dsp.window.move({ workspace = 8, follow = true })"
-    )
-    (b "SUPER + SHIFT + code:18" "Move window to workspace 9"
-      "hl.dsp.window.move({ workspace = 9, follow = true })"
-    )
-    (b "SUPER + SHIFT + code:19" "Move window to workspace 10"
-      "hl.dsp.window.move({ workspace = 10, follow = true })"
-    )
-
-    # Move active window silently to a workspace
-    (b "SUPER + SHIFT + ALT + code:10" "Move window silently to workspace 1"
-      "hl.dsp.window.move({ workspace = 1, follow = false })"
-    )
-    (b "SUPER + SHIFT + ALT + code:11" "Move window silently to workspace 2"
-      "hl.dsp.window.move({ workspace = 2, follow = false })"
-    )
-    (b "SUPER + SHIFT + ALT + code:12" "Move window silently to workspace 3"
-      "hl.dsp.window.move({ workspace = 3, follow = false })"
-    )
-    (b "SUPER + SHIFT + ALT + code:13" "Move window silently to workspace 4"
-      "hl.dsp.window.move({ workspace = 4, follow = false })"
-    )
-    (b "SUPER + SHIFT + ALT + code:14" "Move window silently to workspace 5"
-      "hl.dsp.window.move({ workspace = 5, follow = false })"
-    )
-    (b "SUPER + SHIFT + ALT + code:15" "Move window silently to workspace 6"
-      "hl.dsp.window.move({ workspace = 6, follow = false })"
-    )
-    (b "SUPER + SHIFT + ALT + code:16" "Move window silently to workspace 7"
-      "hl.dsp.window.move({ workspace = 7, follow = false })"
-    )
-    (b "SUPER + SHIFT + ALT + code:17" "Move window silently to workspace 8"
-      "hl.dsp.window.move({ workspace = 8, follow = false })"
-    )
-    (b "SUPER + SHIFT + ALT + code:18" "Move window silently to workspace 9"
-      "hl.dsp.window.move({ workspace = 9, follow = false })"
-    )
-    (b "SUPER + SHIFT + ALT + code:19" "Move window silently to workspace 10"
-      "hl.dsp.window.move({ workspace = 10, follow = false })"
-    )
+  ]
+  ++ workspaceBinds
+  ++ [
 
     # Scratchpad
     (b "SUPER + S" "Toggle scratchpad" ''hl.dsp.workspace.toggle_special("scratchpad")'')
@@ -201,12 +156,9 @@ let
     (b "SUPER + ALT + mouse_down" "Next window in group" "hl.dsp.group.next()")
     (b "SUPER + ALT + mouse_up" "Previous window in group" "hl.dsp.group.prev()")
 
-    # Activate window in group by number
-    (b "SUPER + ALT + code:10" "Switch to group window 1" "hl.dsp.group.active({ index = 1 })")
-    (b "SUPER + ALT + code:11" "Switch to group window 2" "hl.dsp.group.active({ index = 2 })")
-    (b "SUPER + ALT + code:12" "Switch to group window 3" "hl.dsp.group.active({ index = 3 })")
-    (b "SUPER + ALT + code:13" "Switch to group window 4" "hl.dsp.group.active({ index = 4 })")
-    (b "SUPER + ALT + code:14" "Switch to group window 5" "hl.dsp.group.active({ index = 5 })")
+  ]
+  ++ groupNumberBinds
+  ++ [
 
     # Copy / Paste
     (b "SUPER + C" "Universal copy" ''hl.dsp.send_shortcut({ mods = "CTRL", key = "Insert" })'')

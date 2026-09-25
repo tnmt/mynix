@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Switch the default PipeWire microphone via fuzzel dmenu.
 default_source=$(pactl -f json info | jq -r '.default_source_name')
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Toggle a GPU-accelerated screen recording with selectable capture and audio modes.
 runtime_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
 state_dir="$runtime_dir/mynix-screen-record-$UID"
@@ -20,9 +21,9 @@ stop_recording() {
 
   kill -INT "$pid" 2>/dev/null || true
   count=0
-  while kill -0 "$pid" 2>/dev/null && (( count < 50 )); do
+  while kill -0 "$pid" 2>/dev/null && ((count < 50)); do
     sleep 0.1
-    (( count += 1 ))
+    ((count += 1))
   done
 
   if kill -0 "$pid" 2>/dev/null; then
@@ -49,8 +50,8 @@ fi
 capture_mode=$(printf 'Region\nFocused monitor\n' | fuzzel --dmenu --prompt='Record: ' || true)
 [[ -n "$capture_mode" ]] || exit 0
 
-audio_mode=$(printf 'No audio\nDesktop audio\nMicrophone\nDesktop + microphone\n' \
-  | fuzzel --dmenu --prompt='Audio: ' || true)
+audio_mode=$(printf 'No audio\nDesktop audio\nMicrophone\nDesktop + microphone\n' |
+  fuzzel --dmenu --prompt='Audio: ' || true)
 [[ -n "$audio_mode" ]] || exit 0
 
 capture_args=()

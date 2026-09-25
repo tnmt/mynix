@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Toggle a reversible presentation mode: inhibit idle, silence notifications,
 # and temporarily use a neutral screen temperature.
 runtime_dir="${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}"
@@ -38,10 +39,10 @@ if [[ "$saved_dnd" != "on" && "$saved_dnd" != "off" ]]; then
 fi
 
 saved_temperature=$(
-  hyprctl hyprsunset temperature 2>/dev/null \
-    | grep -oE '[0-9]+' \
-    | head -n 1 \
-    || true
+  hyprctl hyprsunset temperature 2>/dev/null |
+    grep -oE '[0-9]+' |
+    head -n 1 ||
+    true
 )
 
 setsid wlinhibit >"$log_file" 2>&1 &

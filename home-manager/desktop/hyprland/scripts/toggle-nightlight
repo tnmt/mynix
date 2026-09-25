@@ -1,8 +1,9 @@
+#!/usr/bin/env bash
 # Toggle hyprsunset between the configured night temperature and neutral color.
 current_temperature=$(
-  hyprctl hyprsunset temperature 2>/dev/null \
-    | grep -oE '[0-9]+' \
-    | head -n 1
+  hyprctl hyprsunset temperature 2>/dev/null |
+    grep -oE '[0-9]+' |
+    head -n 1
 )
 
 if [[ "$current_temperature" == "4000" ]]; then

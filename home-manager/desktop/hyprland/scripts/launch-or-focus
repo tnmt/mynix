@@ -1,5 +1,6 @@
+#!/usr/bin/env bash
 # Focus the first matching window, or launch the supplied command.
-if (( $# < 2 )); then
+if (($# < 2)); then
   echo "usage: launch-or-focus <window-pattern> <command> [args...]" >&2
   exit 2
 fi
@@ -8,8 +9,8 @@ pattern=$1
 shift
 
 address=$(
-  hyprctl clients -j \
-    | jq -r --arg pattern "$pattern" \
+  hyprctl clients -j |
+    jq -r --arg pattern "$pattern" \
       '[.[] | select((.class | test($pattern; "i")) or (.title | test($pattern; "i")))] | first | .address // empty'
 )
 
