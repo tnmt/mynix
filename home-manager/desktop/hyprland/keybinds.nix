@@ -229,7 +229,7 @@ let
       ''hl.dsp.exec_cmd([[${terminal.default} --working-directory="$(terminal-cwd)"]])''
     )
     (b "SUPER + ALT + RETURN" "Tmux"
-      ''hl.dsp.exec_cmd("${terminal.default} bash -c 'tmux attach || tmux new -s Work'")''
+      ''hl.dsp.exec_cmd("${terminal.default} -e bash -c 'tmux attach || tmux new -s Work'")''
     )
     (b "SUPER + SHIFT + RETURN" "Browser" ''hl.dsp.exec_cmd("launch-browser")'')
     (b "SUPER + SHIFT + B" "Browser" ''hl.dsp.exec_cmd("launch-browser")'')
