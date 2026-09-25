@@ -80,16 +80,11 @@ jobs:
           # per-package tarballs (download-only, no build cost) to leave
           # room for actually expensive builds (e.g. tokyonight-gtk-theme).
           pushFilter: "(-source$)|(\\.tgz$)|(\\.tar\\.gz$)"
-      # dahlia wires mynix.services.shizuku.package to the private
-      # tnmt/shizuku repo over git+ssh; CI runners have no SSH key for it.
-      # Swap in a stub flake with a trivial `packages.<system>.default` so
-      # the build doesn't need to fetch the private source.
       - name: Build NixOS (${{ matrix.host }})
         run: |
           nix build '.#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel' \
             --no-link \
-            --no-write-lock-file \
-            --override-input shizuku path:./.github/ci-stubs/shizuku
+            --no-write-lock-file
 
   # hydrangea cannot be *built* without a macOS runner, but evaluating
   # the full darwin system catches option/module errors on a Linux runner.
@@ -101,13 +96,10 @@ jobs:
       - uses: DeterminateSystems/magic-nix-cache-action@main
         with:
           use-flakehub: false
-      # hydrangea also wires mynix.services.shizuku.package to the private
-      # tnmt/shizuku repo; same stub override as build-nixos.
       - name: Evaluate darwin (hydrangea)
         run: |
           nix eval '.#darwinConfigurations.hydrangea.config.system.build.toplevel.drvPath' \
-            --no-write-lock-file \
-            --override-input shizuku path:./.github/ci-stubs/shizuku
+            --no-write-lock-file
 
   # NOTE: work_mac / work_vm have moved to tnmt-work-flake (private repo)
   # and are validated there.

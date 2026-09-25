@@ -22,8 +22,6 @@ jobs:
         id: update
         with:
           token: ${{ secrets.FLAKE_UPDATE_PAT }}
-          # shizuku is a private repo over git+ssh; CI has no key for it,
-          # so update only the public inputs explicitly.
           inputs: >-
             nixpkgs nixpkgs-darwin darwin home-manager home-manager-darwin
             nixos-wsl disko sops-nix nur-tnmt hyprdynamicmonitors

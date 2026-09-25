@@ -1,6 +1,4 @@
 {
-  inputs,
-  pkgs,
   username,
   ...
 }:
@@ -10,16 +8,10 @@ in
 {
   imports = [
     ../../modules/darwin/core
-    ../../modules/darwin/services/shizuku.nix
 
     ../../profiles/darwin/system-common.nix
     ../../profiles/darwin/homebrew-base.nix
   ];
-
-  mynix.services.shizuku = {
-    enable = true;
-    package = inputs.shizuku.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  };
 
   # hydrangea 固有に手動インストールしていたアプリを移管。
   # motu-m-series は cask はあるが Audio Interface のドライバ pkg で、

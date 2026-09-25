@@ -68,7 +68,6 @@ The important split is:
 - `greetd` + `tuigreet` login flow for the Linux desktop profile
 - `disko` + LUKS + btrfs + TPM2 auto-unlock for the `dahlia` laptop; `wayvnc` for remote access to its running Hyprland session
 - NetBird mesh VPN enrolment via `mynix.profiles.netbird` on NixOS hosts (replaced Tailscale)
-- `mynix.services.shizuku` local memory server, sourced from a private `shizuku` flake input and enabled on `dahlia` and `hydrangea`
 - `sops-nix` secrets unified at the system layer; host SSH key decryption is the default for every host
 - Input remapping with `kanata` (Linux) and Karabiner-Elements (macOS)
 - Shared Tokyo Night Storm theme wiring
@@ -84,7 +83,6 @@ Before switching a host, make sure the target machine has:
 - Nix with flakes enabled
 - `nh` available if you want to use the recommended commands below
 - an SSH host key registered in `.sops.yaml` so `sops-nix` can decrypt secrets at activation time
-- SSH access to the private `shizuku` repository, since it is a `git+ssh` flake input (CI swaps it for a stub via `--override-input`)
 
 ### Switch (auto-detect)
 
@@ -163,8 +161,6 @@ GitHub Actions currently checks:
 - secret scan via `gitleaks` over the full history
 - NixOS builds for `sunflower` and `dahlia`
 - darwin evaluation for `hydrangea` (evaluates the full system on a Linux runner to catch option/module errors; actual builds require a macOS runner)
-
-CI runners have no SSH key for the private `shizuku` input, so builds and evals override it with a stub flake under `.github/ci-stubs/`.
 
 ## License
 
