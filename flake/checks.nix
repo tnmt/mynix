@@ -27,5 +27,13 @@ forAllSystems (
       assert platformAssertions;
       assert givyAssertions;
       pkgs.runCommand "mynix-architecture-check" { } "touch $out";
+
+    shell = pkgs.runCommand "mynix-shellcheck" { nativeBuildInputs = [ pkgs.shellcheck ]; } ''
+      find ${self.outPath}/.githooks ${self.outPath}/home-manager -type f \
+        \( -name '*.sh' -o -path '*/scripts/*' -o -path '*/.githooks/*' \) \
+        ! -name '*.nix' \
+        -print0 | xargs -0 shellcheck
+      touch "$out"
+    '';
   }
 )

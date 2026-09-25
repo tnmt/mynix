@@ -45,11 +45,7 @@ jobs:
       - name: statix
         run: nix run nixpkgs#statix -- check .
       - name: shellcheck
-        run: |
-          find .githooks home-manager -type f \
-            \( -name '*.sh' -o -path '*/scripts/*' -o -path '.githooks/*' \) \
-            ! -name '*.nix' \
-            -print0 | xargs -0 nix run nixpkgs#shellcheck --
+        run: nix build .#checks.x86_64-linux.shell --no-link
 
   # The pre-commit hook runs `gitleaks protect --staged`, but that is
   # bypassable with --no-verify; scan the full history here as a backstop.
