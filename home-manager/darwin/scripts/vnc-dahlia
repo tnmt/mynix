@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# wayvnc on dahlia uses username/password (RA2/Plain) auth, which TigerVNC's
+# PasswordFile cannot hold; it only reads such credentials from the
+# VNC_USERNAME / VNC_PASSWORD environment variables.
+set -euo pipefail
+
+service="dahlia-vnc"
+account="tnmt"
+
+if ! password=$(security find-generic-password -s "$service" -a "$account" -w 2>/dev/null); then
+  echo "No Keychain item '$service' for '$account'. Register it with:" >&2
+  echo "  security add-generic-password -U -s $service -a $account -w \"\$(sops -d --extract '[\"wayvnc_password\"]' secrets/hosts/dahlia.yaml)\"" >&2
+  exit 1
+fi
+
+VNC_USERNAME="$account" VNC_PASSWORD="$password" \
+  exec /Applications/TigerVNC.app/Contents/MacOS/vncviewer FullScreen=1 100.67.91.5:5900 "$@"
