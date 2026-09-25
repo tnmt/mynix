@@ -31,6 +31,7 @@ in
       "audacity"
       "calibre"
       "iina"
+      "tigervnc"
       "vlc"
     ];
     masApps = {
