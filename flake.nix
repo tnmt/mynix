@@ -120,6 +120,7 @@
       formattersFor =
         pkgs: with pkgs; [
           nixfmt
+          shfmt
           taplo
         ];
     in
@@ -190,11 +191,13 @@
         let
           pkgs = pkgsFor system;
           formatters = formattersFor pkgs;
-          format = pkgs.writeScriptBin "format" ''
-            #!${pkgs.runtimeShell}
-            PATH=$PATH:${pkgs.lib.makeBinPath formatters}
-            ${pkgs.treefmt}/bin/treefmt --config-file ${./treefmt.toml}
-          '';
+          format = pkgs.writeShellApplication {
+            name = "format";
+            runtimeInputs = formatters ++ [ pkgs.treefmt ];
+            text = ''
+              exec treefmt --config-file ${./treefmt.toml} "$@"
+            '';
+          };
         in
         format
       );

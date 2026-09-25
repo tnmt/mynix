@@ -1,19 +1,38 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Run nix fmt on staged .nix and .toml files
-staged=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(nix|toml)$' || true)
+# Format only staged files; do not touch unrelated working-tree changes.
+mapfile -d '' staged < <(git diff --cached --name-only --diff-filter=ACM -z)
+format_files=()
+nix_files=()
+shell_files=()
 
-if [ -n "$staged" ]; then
-  nix fmt
-  echo "$staged" | xargs git add
+for file in "${staged[@]}"; do
+  case "$file" in
+    *.nix)
+      format_files+=("$file")
+      nix_files+=("$file")
+      ;;
+    *.toml) format_files+=("$file") ;;
+    *.sh | .githooks/* | */scripts/*)
+      format_files+=("$file")
+      shell_files+=("$file")
+      ;;
+  esac
+done
+
+if ((${#format_files[@]} > 0)); then
+  nix fmt -- "${format_files[@]}"
+  git add -- "${format_files[@]}"
 fi
 
-# Lint .nix files (only if any .nix is staged)
-nix_staged=$(echo "$staged" | grep -E '\.nix$' || true)
-if [ -n "$nix_staged" ]; then
+if ((${#nix_files[@]} > 0)); then
   nix run nixpkgs#deadnix -- --fail .
   nix run nixpkgs#statix -- check .
+fi
+
+if ((${#shell_files[@]} > 0)); then
+  nix run nixpkgs#shellcheck -- "${shell_files[@]}"
 fi
 
 # Secret scan on staged changes

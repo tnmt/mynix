@@ -88,14 +88,14 @@ $raw"
 start_recording() {
   ensure_server &
   if [[ "$REFINE" == true ]]; then
-    echo "refine" > "$MODEFILE"
+    echo "refine" >"$MODEFILE"
     notify-send "Voice Input (LLM)" "Recording... Press Super+Shift+M to stop" -t 2000
   else
-    echo "raw" > "$MODEFILE"
+    echo "raw" >"$MODEFILE"
     notify-send "Voice Input" "Recording... Press Super+M to stop" -t 2000
   fi
   rec -q -r 16000 -c 1 -b 16 "$AUDIO" &
-  echo $! > "$PIDFILE"
+  echo $! >"$PIDFILE"
 }
 
 stop_and_transcribe() {
@@ -122,9 +122,9 @@ stop_and_transcribe() {
     -F "language=ja" \
     -F "response_format=text" \
     -F "no_timestamps=true" \
-    "${WHISPER_URL}/inference" \
-    | sed '/^$/d; s/^ *//; s/ *$//' \
-    | tr -d '\n')
+    "${WHISPER_URL}/inference" |
+    sed '/^$/d; s/^ *//; s/ *$//' |
+    tr -d '\n')
 
   rm -f "$AUDIO"
 

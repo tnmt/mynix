@@ -6,3 +6,9 @@ includes = ["*.nix"]
 command = "taplo"
 options = ["format"]
 includes = ["*.toml"]
+
+[formatter.shell]
+command = "shfmt"
+options = ["-w", "-i", "2", "-ci"]
+includes = ["*.sh", ".githooks/*", "home-manager/**/scripts/*"]
+excludes = ["home-manager/**/scripts/*.nix"]
