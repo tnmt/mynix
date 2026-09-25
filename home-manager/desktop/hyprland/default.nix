@@ -92,6 +92,8 @@
           ];
           text = builtins.readFile ./scripts/toggle-workspace-layout;
         })
+        # gsr-kms-server の setcap wrapper は modules/programs/gpu-screen-recorder.nix
+        # (NixOS 側) で設定している。
         (pkgs.writeShellApplication {
           name = "screen-record";
           runtimeInputs = [

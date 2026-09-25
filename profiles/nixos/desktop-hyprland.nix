@@ -13,6 +13,7 @@
 {
   imports = [
     ../../modules/programs/hyprland.nix
+    ../../modules/programs/gpu-screen-recorder.nix
     ../../modules/hardware/bluetooth.nix
     ../../modules/desktop
     inputs.noctalia.nixosModules.default
