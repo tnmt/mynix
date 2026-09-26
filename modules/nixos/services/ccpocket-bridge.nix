@@ -8,6 +8,7 @@ let
   loadKeychainAgent = ''
     state="$HOME/.keychain/$(hostname)-sh"
     if [ -r "$state" ]; then
+      # shellcheck source=/dev/null
       . "$state"
     fi
 
@@ -17,23 +18,29 @@ let
     fi
   '';
 
-  ccpocketSsh = pkgs.writeShellScriptBin "ssh" ''
-    set -eu
+  ccpocketSsh = pkgs.writeShellApplication {
+    name = "ssh";
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.inetutils
+      pkgs.openssh
+    ];
+    text = ''
+      ${loadKeychainAgent}
 
-    ${loadKeychainAgent}
+      config="$(readlink -f "$HOME/.ssh/config" 2>/dev/null || true)"
+      configArgs=()
+      if [ -n "$config" ] && [ -r "$config" ]; then
+        configArgs=(-F "$config")
+      fi
 
-    config="$(${pkgs.coreutils}/bin/readlink -f "$HOME/.ssh/config" 2>/dev/null || true)"
-    configArgs=()
-    if [ -n "$config" ] && [ -r "$config" ]; then
-      configArgs=(-F "$config")
-    fi
-
-    exec ${pkgs.openssh}/bin/ssh \
-      "''${configArgs[@]}" \
-      -o IdentityAgent=SSH_AUTH_SOCK \
-      -o IdentitiesOnly=yes \
-      "$@"
-  '';
+      exec ssh \
+        "''${configArgs[@]}" \
+        -o IdentityAgent=SSH_AUTH_SOCK \
+        -o IdentitiesOnly=yes \
+        "$@"
+    '';
+  };
 in
 {
   sops = {

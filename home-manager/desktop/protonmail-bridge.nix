@@ -1,4 +1,22 @@
 { pkgs, ... }:
+let
+  waitForSecretService = pkgs.writeShellApplication {
+    name = "wait-for-secret-service";
+    runtimeInputs = [
+      pkgs.coreutils
+      pkgs.systemd
+    ];
+    text = ''
+      for _ in $(seq 1 30); do
+        if busctl --user status org.freedesktop.secrets >/dev/null 2>&1; then
+          exit 0
+        fi
+        sleep 1
+      done
+      echo "secret-service (org.freedesktop.secrets) not ready after 30s; starting bridge anyway" >&2
+    '';
+  };
+in
 {
   # secret-service (gnome-keyring) は system 側の modules/desktop/security.nix
   # で有効化済みなので、その D-Bus 経由で認証情報を保存する。
@@ -18,14 +36,6 @@
   # (2026-08-04 に実際に発生、アカウント情報が消失した)。
   # secret-service の準備を待ってから起動することでこのレースを避ける。
   systemd.user.services.protonmail-bridge.Service.ExecStartPre = [
-    "${pkgs.writeShellScript "wait-for-secret-service" ''
-      for i in $(${pkgs.coreutils}/bin/seq 1 30); do
-        if ${pkgs.systemd}/bin/busctl --user status org.freedesktop.secrets >/dev/null 2>&1; then
-          exit 0
-        fi
-        ${pkgs.coreutils}/bin/sleep 1
-      done
-      echo "secret-service (org.freedesktop.secrets) not ready after 30s; starting bridge anyway" >&2
-    ''}"
+    "${waitForSecretService}/bin/wait-for-secret-service"
   ];
 }
