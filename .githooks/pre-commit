@@ -22,6 +22,20 @@ for file in "${staged[@]}"; do
 done
 
 if ((${#format_files[@]} > 0)); then
+  partially_staged=()
+  for file in "${format_files[@]}"; do
+    if ! git diff --quiet -- "$file"; then
+      partially_staged+=("$file")
+    fi
+  done
+
+  if ((${#partially_staged[@]} > 0)); then
+    echo "pre-commit: refusing to format partially staged files:" >&2
+    printf '  %s\n' "${partially_staged[@]}" >&2
+    echo "stage or stash their remaining changes, then retry." >&2
+    exit 1
+  fi
+
   nix fmt -- "${format_files[@]}"
   git add -- "${format_files[@]}"
 fi
