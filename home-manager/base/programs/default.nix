@@ -78,6 +78,9 @@
       jq
       yq-go
 
+      # database
+      sqlite
+
       # SSH
       openssh
 
