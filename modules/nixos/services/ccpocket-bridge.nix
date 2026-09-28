@@ -6,7 +6,7 @@
 }:
 let
   loadKeychainAgent = ''
-    state="$HOME/.keychain/$(hostname)-sh"
+    state="$HOME/.keychain/$(uname -n)-sh"
     if [ -r "$state" ]; then
       # shellcheck source=/dev/null
       . "$state"
@@ -22,7 +22,6 @@ let
     name = "ssh";
     runtimeInputs = [
       pkgs.coreutils
-      pkgs.inetutils
       pkgs.openssh
     ];
     text = ''
