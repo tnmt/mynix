@@ -59,6 +59,11 @@ in
 
     tnmtInfo = lib.mkEnableOption "tnmt.info journal-import mask-dict/ai-policy files";
 
+    protonDriveBackup = lib.mkEnableOption ''
+      ~/.config/proton-drive-backup/include from the host sops file
+      (proton_drive_backup_include), read by the proton-drive-backup user service
+    '';
+
     sshPrivate = {
       role = lib.mkOption {
         type = lib.types.nullOr (
@@ -116,6 +121,9 @@ in
         typesafe_api_key = {
           sopsFile = commonSopsFile;
         };
+      })
+      // (lib.optionalAttrs cfg.protonDriveBackup {
+        proton_drive_backup_include = { };
       })
       // (lib.optionalAttrs cfg.tnmtInfo {
         tnmt_info_mask_dict = {

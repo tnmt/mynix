@@ -43,6 +43,12 @@ let
         link = "${homeDir}/.config/typesafe/env";
       }
     ])
+    ++ (lib.optionals cfg.protonDriveBackup [
+      {
+        target = config.sops.secrets.proton_drive_backup_include.path;
+        link = "${homeDir}/.config/proton-drive-backup/include";
+      }
+    ])
     ++ (lib.optionals cfg.tnmtInfo [
       {
         target = config.sops.secrets.tnmt_info_mask_dict.path;
