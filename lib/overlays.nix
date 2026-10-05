@@ -58,6 +58,13 @@
         colorVariants = [ "dark" ];
         iconVariants = [ "Dark" ];
       };
+      # 外部プロバイダによる Artist メタデータ取得が MusicBrainz Artist ID
+      # (MUSICBRAINZ_ARTISTID タグ) 必須になっており、タグ無しのライブラリでは
+      # 一度も取得されない。Last.fm 側は MBID 無しなら名前で引く実装なので、
+      # 条件を外すだけで取得できる。
+      euphonica = prev.euphonica.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [ ../packages/patches/euphonica-fetch-artist-without-mbid.patch ];
+      });
       tmux = prev.tmux.overrideAttrs (old: {
         configureFlags =
           (old.configureFlags or [ ])

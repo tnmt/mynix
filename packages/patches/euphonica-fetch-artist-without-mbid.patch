@@ -1,0 +1,11 @@
+--- a/src/cache/controller.rs
++++ b/src/cache/controller.rs
+@@ -979,7 +979,7 @@ impl Cache {
+             return Ok(Some(local_res));
+         }
+ 
+-        if external && artist.mbid.is_some() {
++        if external {
+             if !overwrite && let Ok(Some(local_res)) = self.get_local_artist_meta(artist).await {
+                 return Ok(Some(local_res));
+             }
