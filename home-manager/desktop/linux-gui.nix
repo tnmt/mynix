@@ -80,6 +80,7 @@ in
     # music player
     mpc
     cantata
+    euphonica
     mmtc
     ncmpcpp
 
