@@ -84,6 +84,9 @@ in
     mmtc
     ncmpcpp
 
+    # rss reader
+    newsflash
+
     # remote desktop
     remmina
 
