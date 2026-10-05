@@ -48,6 +48,7 @@
         kagiana
         mdhq
         oneaws
+        proton-drive-cli
         roots
         symbol-desktop-wallet
         ;
