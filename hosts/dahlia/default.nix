@@ -51,6 +51,7 @@ in
         tier = "laptop";
       };
       tnmtInfo = true;
+      protonDriveBackup = true;
     };
   };
 

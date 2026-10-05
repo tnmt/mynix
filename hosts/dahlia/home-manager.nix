@@ -10,6 +10,7 @@
     # Dahlia 固有: ProtonMail Bridge を systemd user service として常駐
     ../../home-manager/desktop/protonmail-bridge.nix
     ../../home-manager/desktop/mpd.nix
+    ../../home-manager/desktop/proton-drive-backup.nix
   ];
 
   home.packages = [
