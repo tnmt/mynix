@@ -1,4 +1,25 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
+let
+  # Laptop-only and external-only are never active together, so SUPER+1..0
+  # must resolve to the same workspaces on whichever output is live. Pinning
+  # them to the active output keeps window placement and numbering identical
+  # across profiles; otherwise Hyprland auto-assigns workspace IDs (11+) to
+  # the freshly enabled output.
+  workspaceRules =
+    output:
+    lib.concatMapStringsSep "\n" (
+      n:
+      ''hl.workspace_rule({ workspace = "${toString n}", monitor = "${output}", default = ${
+        if n == 1 then "true" else "false"
+      }, persistent = true })''
+    ) (lib.range 1 10);
+
+  # `hyprctl reload` (run on every profile switch) drops all rules, including
+  # the one wayvnc registers at start. Without it the headless VNC-1 output
+  # takes the lowest free workspace ID (e.g. 4), which then disappears from
+  # SUPER+1..0. Name and workspace must match modules/nixos/services/wayvnc.nix.
+  vncRule = ''hl.workspace_rule({ workspace = "99", monitor = "VNC-1", default = true })'';
+in
 {
   imports = [ inputs.hyprdynamicmonitors.homeManagerModules.default ];
 
@@ -44,15 +65,20 @@
   xdg.configFile = {
     "hyprdynamicmonitors/hyprconfigs/laptop_only.lua".text = ''
       hl.monitor({ output = "eDP-1", mode = "1920x1080@60", position = "0x0", scale = 1 })
+      ${workspaceRules "eDP-1"}
+      ${vncRule}
     '';
 
     "hyprdynamicmonitors/hyprconfigs/external.lua".text = ''
       hl.monitor({ output = "eDP-1", disabled = true })
       hl.monitor({ output = "DP-1", mode = "3840x2160@60", position = "0x0", scale = 1.25 })
+      ${workspaceRules "DP-1"}
+      ${vncRule}
     '';
 
     "hyprdynamicmonitors/hyprconfigs/fallback.lua".text = ''
       hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
+      ${vncRule}
     '';
   };
 }
