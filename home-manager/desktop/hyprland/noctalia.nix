@@ -132,6 +132,8 @@ in
       osd.kinds.keyboard_layout = false;
 
       widget = {
+        workspaces.hide_when_empty = true;
+
         clock = {
           format = "{:%Y-%m-%d %H:%M:%S}";
           timezone = "Asia/Tokyo";
