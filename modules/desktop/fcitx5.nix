@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  fonts = import ../../home-manager/desktop/fonts.nix;
+in
 {
   i18n.inputMethod = {
     enable = true;
@@ -29,8 +32,8 @@
           };
         };
         addons.classicui.globalSection = {
-          "Font" = "Noto Sans CJK JP 10";
-          "MenuFont" = "Noto Sans CJK JP 10";
+          "Font" = "${fonts.sans} 10";
+          "MenuFont" = "${fonts.sans} 10";
           "Theme" = "Tokyonight-Storm";
           "DarkTheme" = "Tokyonight-Storm";
           "UseDarkTheme" = true;

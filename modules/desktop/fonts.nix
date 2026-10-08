@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  fonts = import ../../home-manager/desktop/fonts.nix;
+in
 {
   fonts = {
     packages = with pkgs; [
@@ -21,18 +24,18 @@
       defaultFonts = {
         serif = [
           "Noto Serif CJK JP"
-          "Noto Color Emoji"
+          fonts.emoji
         ];
         sansSerif = [
-          "Noto Sans CJK JP"
-          "Noto Color Emoji"
+          fonts.sans
+          fonts.emoji
         ];
         monospace = [
-          "MesloLGS NF"
-          "Noto Sans CJK JP"
-          "Noto Color Emoji"
+          fonts.monospace
+          fonts.sans
+          fonts.emoji
         ];
-        emoji = [ "Noto Color Emoji" ];
+        emoji = [ fonts.emoji ];
       };
     };
   };
