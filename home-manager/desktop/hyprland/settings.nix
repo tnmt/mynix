@@ -172,6 +172,10 @@ in
     hl.window_rule({ match = { class = "^(slack)$" }, workspace = "4 silent" })
     hl.window_rule({ match = { class = "^(io.github.htkhiem.Euphonica)$" }, workspace = "5 silent" })
 
+    hl.on("hyprland.start", function()
+      hl.exec_cmd("${terminal.default}")
+    end)
+
     -- Noctalia is started via its home-manager systemd user service
     -- (programs.noctalia.systemd.enable), so no exec-once entry is needed here.
   '';
