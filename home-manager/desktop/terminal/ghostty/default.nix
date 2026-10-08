@@ -18,7 +18,6 @@ in
       font-size = terminal.font.size;
       font-family = [
         terminal.font.name
-        "Hiragino Kaku Gothic ProN"
         fonts.sans
       ];
       font-codepoint-map = [
