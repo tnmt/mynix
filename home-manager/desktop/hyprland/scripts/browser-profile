@@ -1,42 +1,94 @@
 #!/usr/bin/env bash
 
-# Pick a Brave Origin profile via fuzzel and open it, optionally with a URL.
+# Pick a browser profile via fuzzel and open it, optionally with a URL.
 # usage: browser-profile [url]   (url defaults to the clipboard when it holds http(s))
+#
+# 対応: Chromium 系 (Local State の info_cache) と Gecko 系 (profiles.ini)。
+# バイナリが PATH にあり、プロファイルのデータが存在するブラウザだけを列挙する。
 
-state="$HOME/.config/BraveSoftware/Brave-Origin/Local State"
 icon_dir="${XDG_CACHE_HOME:-$HOME/.cache}/browser-profile"
 mkdir -p "$icon_dir"
+
+# id|表示名|バイナリ|種別|データディレクトリ (: 区切りで複数候補)
+browsers=(
+  "brave-origin|Brave Origin|brave-origin|chromium|$HOME/.config/BraveSoftware/Brave-Origin"
+  "chromium|Chromium|chromium|chromium|$HOME/.config/chromium"
+  "firefox|Firefox|firefox|gecko|$HOME/.mozilla/firefox:$HOME/.config/mozilla/firefox"
+  "zen|Zen|zen-beta|gecko|$HOME/.config/zen"
+)
+
+# 「プロファイル名<TAB>起動時に渡す識別子」を出力する
+list_chromium() {
+  jq -r '.profile.info_cache | to_entries[] | "\(.value.name)\t\(.key)"' "$1/Local State"
+}
+
+list_gecko() {
+  awk -F= '
+    /^\[/ { if (name != "" && section ~ /^\[Profile/) print name "\t" name; section = $0; name = ""; next }
+    $1 == "Name" { name = substr($0, 6) }
+    END { if (name != "" && section ~ /^\[Profile/) print name "\t" name }
+  ' "$1/profiles.ini"
+}
 
 # Chromium の既定アバターは内部リソースで取り出せないため、名前から決めた色の
 # 円とイニシャルで SVG アイコンを生成する。
 make_icon() {
-  local name=$1 file=$2 hue
-  hue=$(($(printf '%s' "$name" | cksum | cut -d' ' -f1) % 360))
+  local seed=$1 initial=$2 file=$3 hue
+  hue=$(($(printf '%s' "$seed" | cksum | cut -d' ' -f1) % 360))
   cat >"$file" <<SVG
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
   <circle cx="32" cy="32" r="30" fill="hsl($hue,55%,45%)"/>
   <text x="32" y="43" font-size="32" font-family="sans-serif" font-weight="bold"
-        text-anchor="middle" fill="#ffffff">${name:0:1}</text>
+        text-anchor="middle" fill="#ffffff">${initial}</text>
 </svg>
 SVG
 }
 
-names=()
-dirs=()
-while IFS=$'\t' read -r name dir; do
-  names+=("$name")
-  dirs+=("$dir")
-  make_icon "${name^^}" "$icon_dir/${dir// /_}.svg"
-done < <(jq -r '.profile.info_cache | to_entries[] | "\(.value.name)\t\(.key)"' "$state")
+labels=()
+bins=()
+kinds=()
+ids=()
+icons=()
+for spec in "${browsers[@]}"; do
+  IFS='|' read -r id label bin kind paths <<<"$spec"
+  command -v "$bin" >/dev/null || continue
+
+  data=""
+  IFS=':' read -ra candidates <<<"$paths"
+  for candidate in "${candidates[@]}"; do
+    marker="$candidate/profiles.ini"
+    [[ $kind == chromium ]] && marker="$candidate/Local State"
+    if [[ -r $marker ]]; then
+      data=$candidate
+      break
+    fi
+  done
+  [[ -z $data ]] && continue
+
+  while IFS=$'\t' read -r name key; do
+    [[ -z $name ]] && continue
+    icon="$icon_dir/$(printf '%s' "$id/$key" | cksum | cut -d' ' -f1).svg"
+    make_icon "$id/$name" "${name:0:1}" "$icon"
+    labels+=("$label  ·  $name")
+    bins+=("$bin")
+    kinds+=("$kind")
+    ids+=("$key")
+    icons+=("$icon")
+  done < <("list_$kind" "$data")
+done
+
+if ((${#labels[@]} == 0)); then
+  echo "no browser profiles found" >&2
+  exit 1
+fi
 
 # NUL を含むため変数経由にせず直接 fuzzel へ流す
 index=$(
-  for i in "${!dirs[@]}"; do
-    printf '%s  ·  %s\0icon\x1f%s\n' "${names[i]}" "${dirs[i]}" "$icon_dir/${dirs[i]// /_}.svg"
+  for i in "${!labels[@]}"; do
+    printf '%s\0icon\x1f%s\n' "${labels[i]}" "${icons[i]}"
   done | fuzzel --dmenu --index --prompt='Profile: ' || true
 )
 [[ -z $index ]] && exit 0
-dir=${dirs[$index]}
 
 url=${1:-}
 if [[ -z $url ]]; then
@@ -44,6 +96,10 @@ if [[ -z $url ]]; then
   [[ $clip =~ ^https?://[^[:space:]]+$ ]] && url=$clip
 fi
 
-args=(--profile-directory="$dir")
+args=()
+case ${kinds[$index]} in
+  chromium) args+=(--profile-directory="${ids[$index]}") ;;
+  gecko) args+=(-P "${ids[$index]}") ;;
+esac
 [[ -n $url ]] && args+=("$url")
-exec setsid brave-origin "${args[@]}"
+exec setsid "${bins[$index]}" "${args[@]}"
