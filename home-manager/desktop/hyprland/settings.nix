@@ -174,6 +174,8 @@ in
 
     hl.on("hyprland.start", function()
       hl.exec_cmd("${terminal.default}")
+      hl.exec_cmd("brave-origin")
+      hl.exec_cmd("obsidian")
     end)
 
     -- Noctalia is started via its home-manager systemd user service
