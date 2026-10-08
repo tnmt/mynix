@@ -11,6 +11,7 @@ let
 in
 {
   imports = [
+    ./fuzzel.nix
     ./keybinds.nix
     ./settings.nix
     ./hyprdynamicmonitors.nix
@@ -30,7 +31,6 @@ in
     brightnessctl
     bluetui
     findutils
-    fuzzel
     glib
     hyprpicker
     pavucontrol

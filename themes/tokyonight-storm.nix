@@ -14,6 +14,7 @@
   extras = {
     delta = "extras/delta/tokyonight_storm.gitconfig";
     foot = "extras/foot/tokyonight_storm.ini";
+    fuzzel = "extras/fuzzel/tokyonight_storm.ini";
     fzf = "extras/fzf/tokyonight_storm.sh";
     eza = "extras/eza/tokyonight_storm.yml";
     yazi = "extras/yazi/tokyonight_storm.toml";
