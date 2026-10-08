@@ -23,5 +23,15 @@
         ];
       };
     };
+    # USB オーディオ I/F (MOTU M2) は優先度が Bluetooth より高く、接続の度に
+    # 既定シンクを奪うため、自動選択の対象から後ろへ回す。手動選択は可能。
+    wireplumber.extraConfig."51-motu-m2-low-priority" = {
+      "monitor.alsa.rules" = [
+        {
+          matches = [ { "node.name" = "~alsa_output.usb-MOTU_M2.*"; } ];
+          actions.update-props."priority.session" = 100;
+        }
+      ];
+    };
   };
 }
