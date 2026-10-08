@@ -7,6 +7,7 @@
 let
   inherit (pkgs.stdenv.hostPlatform) isDarwin;
   themeSrc = theme.srcDrv pkgs;
+  fonts = import ../../fonts.nix;
 in
 {
   programs.ghostty = {
@@ -18,6 +19,12 @@ in
       font-family = [
         terminal.font.name
         "Hiragino Kaku Gothic ProN"
+        fonts.sans
+      ];
+      font-codepoint-map = [
+        "U+3000-U+30FF=${fonts.sans}"
+        "U+4E00-U+9FFF=${fonts.sans}"
+        "U+FF00-U+FFEF=${fonts.sans}"
       ];
       copy-on-select = "clipboard";
       window-save-state = "always";

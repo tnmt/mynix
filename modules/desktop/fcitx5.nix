@@ -29,7 +29,7 @@
           };
         };
         addons.classicui.globalSection = {
-          "Font" = "MesloLGS NF 10";
+          "Font" = "Noto Sans CJK JP 10";
           "MenuFont" = "Noto Sans CJK JP 10";
           "Theme" = "Tokyonight-Storm";
           "DarkTheme" = "Tokyonight-Storm";
