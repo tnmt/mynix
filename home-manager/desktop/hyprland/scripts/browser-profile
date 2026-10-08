@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Pick a Brave Origin profile via fuzzel and open it, optionally with a URL.
+# usage: browser-profile [url]   (url defaults to the clipboard when it holds http(s))
+
+state="$HOME/.config/BraveSoftware/Brave-Origin/Local State"
+
+menu=$(jq -r '.profile.info_cache | to_entries[] | "\(.value.name)\t\(.key)"' "$state")
+selected=$(printf '%s\n' "$menu" | cut -f1 | fuzzel --dmenu --prompt='Profile: ' || true)
+[[ -z $selected ]] && exit 0
+
+dir=$(printf '%s\n' "$menu" | awk -F'\t' -v name="$selected" '$1 == name { print $2; exit }')
+
+url=${1:-}
+if [[ -z $url ]]; then
+  clip=$(wl-paste --no-newline 2>/dev/null || true)
+  [[ $clip =~ ^https?://[^[:space:]]+$ ]] && url=$clip
+fi
+
+args=(--profile-directory="$dir")
+[[ -n $url ]] && args+=("$url")
+exec setsid brave-origin "${args[@]}"

@@ -20,6 +20,14 @@ pkgs.symlinkJoin {
       pkgs.util-linux
       pkgs.xdg-utils
     ])
+    (mkScript "browser-profile" [
+      pkgs.coreutils
+      pkgs.fuzzel
+      pkgs.gawk
+      pkgs.jq
+      pkgs.util-linux
+      pkgs.wl-clipboard
+    ])
     (mkScript "switch-audio" [
       pkgs.coreutils
       pkgs.fuzzel

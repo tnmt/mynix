@@ -186,6 +186,7 @@ let
     (b "SUPER + SHIFT + RETURN" "Browser" ''hl.dsp.exec_cmd("launch-browser")'')
     (b "SUPER + SHIFT + B" "Browser" ''hl.dsp.exec_cmd("launch-browser")'')
     (b "SUPER + SHIFT + ALT + B" "Browser (private)" ''hl.dsp.exec_cmd("launch-browser --private")'')
+    (b "SUPER + CTRL + B" "Browser profile" ''hl.dsp.exec_cmd("browser-profile")'')
     (b "SUPER + SHIFT + F" "File manager in current directory"
       ''hl.dsp.exec_cmd([[thunar "$(terminal-cwd)"]])''
     )
