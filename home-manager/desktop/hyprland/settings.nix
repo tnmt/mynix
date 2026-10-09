@@ -153,10 +153,6 @@ in
     -- Window rules
     hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
     hl.window_rule({ match = { class = ".*" }, opacity = "0.97" })
-    -- Float + center for TUI popup windows
-    hl.window_rule({ match = { class = "^(tui-float)$" }, float = true })
-    hl.window_rule({ match = { class = "^(tui-float)$" }, center = true })
-    hl.window_rule({ match = { class = "^(tui-float)$" }, size = { 875, 600 } })
     hl.window_rule({ match = { class = "^(fcitx)$" }, pseudo = true })
     hl.window_rule({ match = { class = "^(fcitx)$" }, no_blur = true })
     -- Float + center Thunar so opening it doesn't tile-split the current workspace

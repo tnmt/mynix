@@ -16,7 +16,7 @@ git config core.hooksPath .githooks  # 未設定の場合
 
 カラーテーマは `themes/` ディレクトリで一元管理している。現在のテーマは TokyoNight Storm (`themes/tokyonight-storm.nix`)。
 
-- 各プログラム固有のテーマ名は `themes/tokyonight-storm.nix` 内にキーとして定義（例: `ghostty`, `kitty`）
+- 各プログラム固有のテーマ名は `themes/tokyonight-storm.nix` 内にキーとして定義（例: `ghostty`, `btop`）
 - 新しいプログラムにテーマを適用する場合、ハードコードせず `theme` 変数経由で参照すること
 - テーマを追加する場合は `themes/` にファイルを作り、`themes/default.nix` に登録する
 

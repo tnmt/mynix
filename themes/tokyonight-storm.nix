@@ -12,7 +12,6 @@
   };
 
   extras = {
-    alacritty = "extras/alacritty/tokyonight_storm.toml";
     delta = "extras/delta/tokyonight_storm.gitconfig";
     foot = "extras/foot/tokyonight_storm.ini";
     fzf = "extras/fzf/tokyonight_storm.sh";
@@ -20,7 +19,6 @@
     yazi = "extras/yazi/tokyonight_storm.toml";
     ghostty = "extras/ghostty/tokyonight_storm";
     gitui = "extras/gitui/tokyonight_storm.ron";
-    kitty = "extras/kitty/tokyonight_storm.conf";
     tmux = "extras/tmux/tokyonight_storm.tmux";
     discord = "extras/discord/tokyonight_storm.css";
     slack = "extras/slack/tokyonight_storm.txt";
@@ -36,9 +34,6 @@
 
   # Ghostty (theme name = basename of extras.ghostty placed under ghostty/themes/)
   ghostty = "tokyonight_storm";
-
-  # Kitty (conf name = basename of extras.kitty placed under kitty/)
-  kitty = "tokyonight_storm";
 
   gtk = "Tokyonight-Dark-Storm";
   gtkIcon = "Tokyonight-Dark";

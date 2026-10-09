@@ -14,9 +14,7 @@ in
   _module.args = { inherit terminal; };
 
   imports = [
-    ./alacritty
     ./ghostty
-    ./kitty
     ./foot
   ];
 }
