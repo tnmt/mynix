@@ -2,12 +2,12 @@
 set -euo pipefail
 
 # Format only staged files; do not touch unrelated working-tree changes.
-mapfile -d '' staged < <(git diff --cached --name-only --diff-filter=ACM -z)
 format_files=()
 nix_files=()
 shell_files=()
 
-for file in "${staged[@]}"; do
+# A read loop instead of mapfile keeps the hook working on macOS /bin/bash 3.2.
+while IFS= read -r -d '' file; do
   case "$file" in
     *.nix)
       format_files+=("$file")
@@ -19,7 +19,7 @@ for file in "${staged[@]}"; do
       shell_files+=("$file")
       ;;
   esac
-done
+done < <(git diff --cached --name-only --diff-filter=ACM -z)
 
 if ((${#format_files[@]} > 0)); then
   partially_staged=()
