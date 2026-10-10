@@ -265,6 +265,26 @@
         "type": "github"
       }
     },
+    "kiseki": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791640194,
+        "narHash": "sha256-G9K/3X5eg4TyhVKQMEJ9Y3EJn6whXkRQ/kVqEOtRxcY=",
+        "owner": "tnmt",
+        "repo": "kiseki",
+        "rev": "65eb41df5ab1dc58c276f422ca35fca54889279a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tnmt",
+        "repo": "kiseki",
+        "type": "github"
+      }
+    },
     "nix-claude-code": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -466,6 +486,7 @@
         "home-manager": "home-manager",
         "home-manager-darwin": "home-manager-darwin",
         "hyprdynamicmonitors": "hyprdynamicmonitors",
+        "kiseki": "kiseki",
         "nix-claude-code": "nix-claude-code",
         "nix-steipete-tools": "nix-steipete-tools",
         "nixos-wsl": "nixos-wsl",

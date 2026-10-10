@@ -52,6 +52,7 @@ in
       };
       tnmtInfo = true;
       protonDriveBackup = true;
+      kiseki = true;
     };
   };
 

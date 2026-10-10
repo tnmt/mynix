@@ -43,6 +43,12 @@ let
         link = "${homeDir}/.config/typesafe/env";
       }
     ])
+    ++ (lib.optionals cfg.kiseki [
+      {
+        target = config.sops.secrets.kiseki_server_url.path;
+        link = "${homeDir}/.config/kiseki/server";
+      }
+    ])
     ++ (lib.optionals cfg.protonDriveBackup [
       {
         target = config.sops.secrets.proton_drive_backup_include.path;

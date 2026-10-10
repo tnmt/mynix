@@ -30,6 +30,7 @@ in
   mynix.profiles.userTemplates = {
     typesafe = true;
     tnmtInfo = true;
+    kiseki = true;
   };
 
   users.users."${username}".openssh.authorizedKeys.keys = with pubkeys; [

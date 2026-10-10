@@ -57,6 +57,12 @@ in
       '';
     };
 
+    kiseki = lib.mkEnableOption ''
+      ~/.config/kiseki/server with the kiseki server URL (kiseki_server_url
+      in secrets/common.yaml), read by the kiseki agent so that the mesh
+      hostname stays out of this public repository
+    '';
+
     tnmtInfo = lib.mkEnableOption "tnmt.info journal-import mask-dict/ai-policy files";
 
     protonDriveBackup = lib.mkEnableOption ''
@@ -119,6 +125,11 @@ in
       })
       // (lib.optionalAttrs cfg.typesafe {
         typesafe_api_key = {
+          sopsFile = commonSopsFile;
+        };
+      })
+      // (lib.optionalAttrs cfg.kiseki {
+        kiseki_server_url = {
           sopsFile = commonSopsFile;
         };
       })

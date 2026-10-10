@@ -12,7 +12,10 @@
     ../../home-manager/desktop/mpd.nix
     ../../home-manager/desktop/euphonica.nix
     ../../home-manager/desktop/proton-drive-backup.nix
+    ../../home-manager/devel/kiseki.nix
   ];
+
+  programs.kiseki-agent.browserHistory.browsers = [ "brave-origin" ];
 
   home.packages = [
     pkgs.btrfs-progs

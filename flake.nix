@@ -105,6 +105,11 @@
       url = "github:typesafe-ai/skills";
       flake = false;
     };
+
+    kiseki = {
+      url = "github:tnmt/kiseki";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, ... }: import ./flake/outputs.nix { inherit inputs self; };
