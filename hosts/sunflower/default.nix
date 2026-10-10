@@ -11,6 +11,7 @@ in
     ../../modules/nixos/core
     services.openssh
     services.ccpocket-bridge
+    services.kiseki-agent
     ../../profiles/nixos/wsl.nix
     ../../modules/nixos/remotebuild/builder.nix
   ];

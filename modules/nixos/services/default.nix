@@ -1,5 +1,6 @@
 {
   ccpocket-bridge = ./ccpocket-bridge.nix;
+  kiseki-agent = ./kiseki-agent.nix;
   local-https-proxy = ./local-https-proxy.nix;
   mackerel-agent = ./mackerel-agent.nix;
   openssh = ./openssh.nix;
