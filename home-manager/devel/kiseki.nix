@@ -9,7 +9,7 @@
 {
   imports = [ inputs.kiseki.homeManagerModules.kiseki-agent ];
 
-  programs.kiseki-agent = {
+  services.kiseki-agent = {
     enable = true;
     serverFile = "${config.xdg.configHome}/kiseki/server";
     tokenFile = "${config.xdg.configHome}/kiseki/token";
