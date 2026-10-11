@@ -42,7 +42,6 @@ in
 
     # essential
     obsidian
-    _1password-gui
 
     # chat
     slack

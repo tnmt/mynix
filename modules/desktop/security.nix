@@ -1,7 +1,17 @@
-{ lib, ... }:
+{ lib, username, ... }:
 {
   services.gnome.gnome-keyring.enable = true;
-  programs.seahorse.enable = true;
+  programs = {
+    seahorse.enable = true;
+
+    # CLI (op) と GUI の連携 (生体認証 / アプリ解錠での signin) には、setgid ラッパーと
+    # polkit ポリシーが NixOS 側で必要になるため home.packages ではなくここで有効化する。
+    _1password.enable = true;
+    _1password-gui = {
+      enable = true;
+      polkitPolicyOwners = [ username ];
+    };
+  };
 
   # gnome-keyring の SSH agent 部分 (gcr-ssh-agent) を無効化する。
   # このユニットは ExecStartPost で systemd --user 既定の SSH_AUTH_SOCK を

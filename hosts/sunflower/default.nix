@@ -16,6 +16,8 @@ in
     ../../modules/nixos/remotebuild/builder.nix
   ];
 
+  programs._1password.enable = true;
+
   system.stateVersion = "25.05";
   wsl.enable = true;
 
