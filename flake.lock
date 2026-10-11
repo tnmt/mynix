@@ -272,11 +272,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791640194,
-        "narHash": "sha256-G9K/3X5eg4TyhVKQMEJ9Y3EJn6whXkRQ/kVqEOtRxcY=",
+        "lastModified": 1791737817,
+        "narHash": "sha256-/mWhv2qgYMLN5j8ZQeYmHg1VKZi0TYEvtpWS9/+dx78=",
         "owner": "tnmt",
         "repo": "kiseki",
-        "rev": "65eb41df5ab1dc58c276f422ca35fca54889279a",
+        "rev": "3b0b42136a4c08dda1700c264a766d0283a3d1ca",
         "type": "github"
       },
       "original": {

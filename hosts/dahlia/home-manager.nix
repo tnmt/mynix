@@ -16,6 +16,7 @@
   ];
 
   programs.kiseki-agent.browserHistory.browsers = [ "brave-origin" ];
+  programs.kiseki-agent.browserHistory.excludeProfiles = [ "brave-origin/Profile 4" ];
 
   home.packages = [
     pkgs.btrfs-progs
