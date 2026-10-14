@@ -3,6 +3,8 @@ keys:
   - &dahlia age1x83l95gqyu5r5d5wjlkfm44q0ggj2tr79njuhgqlqdvlqdgcwvpqmsxgnl
   - &sunflower age1avnkg4hjnprjsn2f8ehj8nzgzutj930tdx67f9t66gf85k24c3mq0n89jf
   - &hydrangea age1c3w7yxyym205xxuz0slfuh405vn9u69zr5tumenlggcrdjvupaksz424j6
+  # Server that publishes the name-masked Obsidian vault; reads only mask-dict.
+  - &obsidian_masker age1cqxdk6ulzk6c87nqlz8ss9rsv5e0dwe3x6dljedagxkcvstt99mq8e90m4
 
 creation_rules:
   - path_regex: secrets/hosts/dahlia\.yaml$
@@ -27,6 +29,14 @@ creation_rules:
           - *dahlia
           - *sunflower
           - *hydrangea
+  - path_regex: secrets/apps/tnmt-info/mask-dict\.yaml$
+    key_groups:
+      - age:
+          - *tnmt
+          - *dahlia
+          - *sunflower
+          - *hydrangea
+          - *obsidian_masker
   - path_regex: secrets/apps/.*$
     key_groups:
       - age:
