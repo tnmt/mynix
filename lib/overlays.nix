@@ -52,7 +52,13 @@
         roots
         symbol-desktop-wallet
         ;
-      chatgpt-linux = nurPackages.chatgpt;
+      # nixos-unstable チャンネルが nixpkgs ac7b1aaed0 (pnpm hash 修正) を含むまでの間、
+      # fixed-output の hash 不一致でビルドが落ちるのを避ける。
+      typescript-language-server = prev.typescript-language-server.overrideAttrs (old: {
+        pnpmDeps = old.pnpmDeps.overrideAttrs {
+          outputHash = "sha256-xR/EF60lVBsITKgH7wCM2wHM46PFQevD51KfCENSUH4=";
+        };
+      });
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
         tweakVariants = [ "storm" ];
         colorVariants = [ "dark" ];
