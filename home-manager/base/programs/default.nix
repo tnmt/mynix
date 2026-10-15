@@ -12,6 +12,7 @@
     ./git.nix
     ./herdr.nix
     ./opencode.nix
+    ./ssh-term.nix
     ./ssh.nix
     ./starship
     ./tmux.nix
