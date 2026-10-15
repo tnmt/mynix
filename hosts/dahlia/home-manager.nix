@@ -20,7 +20,16 @@
 
   home.packages = [
     pkgs.btrfs-progs
-    pkgs.chatgpt
+    # 4K/1.25 倍の DP-1 で既定の文字が小さいため Chromium 側で拡大する
+    (pkgs.symlinkJoin {
+      name = "chatgpt-scaled";
+      inherit (pkgs.chatgpt) meta;
+      paths = [ pkgs.chatgpt ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/chatgpt --add-flags "--force-device-scale-factor=1.5"
+      '';
+    })
     pkgs.msgvault
     pkgs.symbol-desktop-wallet
   ];
