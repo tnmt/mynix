@@ -133,6 +133,7 @@ in
 
       widget = {
         workspaces.hide_when_empty = true;
+        media.hide_when_idle = true;
 
         clock = {
           format = "{:%Y-%m-%d %H:%M:%S}";
