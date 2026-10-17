@@ -65,7 +65,6 @@
       gh
       ghq
       git-wt
-      glow
       mdhq
       roots
       ripgrep
