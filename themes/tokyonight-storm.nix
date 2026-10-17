@@ -71,6 +71,7 @@
   # Extended palette
   bg_dark = "#1f2335";
   bg_highlight = "#292e42";
+  bg_visual = "#2e3c64";
   comment = "#565f89";
   dark5 = "#737aa2";
   orange = "#ff9e64";

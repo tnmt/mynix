@@ -9,6 +9,7 @@
     ./bat.nix
     ./btop.nix
     ./eza.nix
+    ./tig.nix
     ./git.nix
     ./herdr.nix
     ./opencode.nix
