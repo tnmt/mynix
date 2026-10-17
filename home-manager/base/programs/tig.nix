@@ -1,4 +1,9 @@
-{ lib, theme, ... }:
+{
+  lib,
+  pkgs,
+  theme,
+  ...
+}:
 let
   # tig は hex を解釈できないため、テーマの色を xterm 256色の最寄り番号へ丸める
   to256 =
@@ -64,6 +69,8 @@ let
   c = hex: toString (to256 hex);
 in
 {
+  home.packages = [ pkgs.tig ];
+
   xdg.configFile."tig/config".text = ''
     color cursor ${c theme.foreground} ${c theme.bg_visual} bold
     color cursor-blur ${c theme.foreground} ${c theme.color8}

@@ -69,7 +69,6 @@
       roots
       ripgrep
       fd
-      tig
       wget
       rsync
       tree
