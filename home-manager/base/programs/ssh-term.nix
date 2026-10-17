@@ -56,5 +56,12 @@ in
     function codex { __stagent_wrap codex "$@"; }
     function omp { __stagent_wrap omp "$@"; }
     # <<< ssh-term stagent <<<
+
+    # herdr は前景プロセス名でエージェントを判定するため、stagent が前景に立つと
+    # claude を認識できず agents 一覧から消える。herdr 内ではラップを外す。
+    # ブロックは完全一致判定の対象なので、ブロックの外で関数を解除する。
+    if [ "''${HERDR_ENV:-}" = 1 ]; then
+      unset -f claude codex omp
+    fi
   '';
 }
