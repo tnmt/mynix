@@ -70,6 +70,7 @@ in
       plugins = {
         enabled = [
           "kenn/keybind-cheatsheet"
+          "lfdominguez/claude-sessions"
           "mindnbytes/nix-status"
           "nightwatch75/file-search"
           "noctalia/screen_recorder"
@@ -121,6 +122,7 @@ in
       bar.default.end = [
         "media"
         "tray"
+        "claude-sessions"
         "nix-status"
         "screen-recorder"
         "notifications"
@@ -169,6 +171,7 @@ in
           actions.middle = "none";
         };
 
+        claude-sessions.type = "lfdominguez/claude-sessions:bar";
         nix-status.type = "mindnbytes/nix-status:status";
       };
 
