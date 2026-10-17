@@ -9,6 +9,7 @@
     ./bat.nix
     ./btop.nix
     ./eza.nix
+    ./glow.nix
     ./tig.nix
     ./git.nix
     ./herdr.nix
