@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -9,6 +10,11 @@ let
 in
 {
   imports = [ inputs.noctalia.homeModules.default ];
+
+  # The brave-origin template hook renders theme images with `python3` + Pillow
+  # from the service PATH. hiPrio wins the bin/python3 collision with the plain
+  # python3 in devel.
+  home.packages = [ (lib.hiPrio (pkgs.python3.withPackages (ps: [ ps.pillow ]))) ];
 
   programs.noctalia = {
     enable = true;
