@@ -31,6 +31,7 @@ in
   # ここに残すのは Linux 専用のパッケージ・テーマ (qt/gtk/kvantum)・chromium・カーソル等。
   imports = [
     ./dropbox.nix
+    ./newsflash.nix
     ./vimiv.nix
     ./zathura.nix
   ];
@@ -82,9 +83,6 @@ in
     euphonica
     mmtc
     ncmpcpp
-
-    # rss reader
-    newsflash
 
     # remote desktop
     remmina
