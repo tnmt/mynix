@@ -37,7 +37,6 @@ in
           ];
           enable_community_templates = true;
           community_ids = [
-            "brave"
             "brave-origin"
             "zen-browser"
             "obsidian"
