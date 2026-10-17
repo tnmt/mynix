@@ -64,6 +64,8 @@ in
         font_family = fonts.sans;
         lang = "en";
         show_location = false;
+        clipboard_history_max_entries = 300;
+        launcher.category_icons_only = true;
 
         # Mac-style screenshot flow: no per-shortcut save-vs-clipboard split,
         # every capture both saves to file and copies to clipboard.
