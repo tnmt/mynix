@@ -16,6 +16,15 @@ in
   # python3 in devel.
   home.packages = [ (lib.hiPrio (pkgs.python3.withPackages (ps: [ ps.pillow ]))) ];
 
+  # herdr itself lives in ~/.local/bin (self-updating, not Nix-managed), which is
+  # not on the systemd user manager's PATH. The herdr plugin shells out to it.
+  systemd.user.services.noctalia.Service.ExecStart = lib.mkForce (
+    pkgs.writeShellScript "noctalia-start" ''
+      export PATH="$PATH:$HOME/.local/bin"
+      exec ${config.programs.noctalia.package}/bin/noctalia
+    ''
+  );
+
   programs.noctalia = {
     enable = true;
     package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
@@ -69,6 +78,7 @@ in
 
       plugins = {
         enabled = [
+          "hy4ri/herdr"
           "kenn/keybind-cheatsheet"
           "lfdominguez/claude-sessions"
           "mindnbytes/nix-status"
@@ -123,6 +133,7 @@ in
         "media"
         "tray"
         "claude-sessions"
+        "herdr"
         "nix-status"
         "screen-recorder"
         "notifications"
@@ -172,6 +183,7 @@ in
         };
 
         claude-sessions.type = "lfdominguez/claude-sessions:bar";
+        herdr.type = "hy4ri/herdr:bar";
         nix-status.type = "mindnbytes/nix-status:status";
       };
 
