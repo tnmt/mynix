@@ -12,6 +12,8 @@
     # ポート開放は hosts/dahlia/default.nix の allowedTCPPorts 側で管理。
     network.listenAddress = "any";
     extraConfig = ''
+      auto_update "yes"
+
       audio_output {
         type "pipewire"
         name "PipeWire Output"
