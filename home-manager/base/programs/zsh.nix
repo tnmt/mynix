@@ -98,6 +98,15 @@ in
       zle -N fzf-cd-ghq-repository
       bindkey '^]' fzf-cd-ghq-repository
 
+      # herdr 起動 (Ctrl+S)。先頭スペースで履歴に残さない
+      function launch-herdr() {
+        zle push-line
+        BUFFER=' herdr'
+        zle accept-line
+      }
+      zle -N launch-herdr
+      bindkey '^S' launch-herdr
+
       # Temp dir alias (needs to be a function, not alias, for date eval)
       function td() {
         local d=~/tmp/$(date '+%Y%m%d-%H%M')
