@@ -25,6 +25,25 @@ in
         # directly instead of fighting that layer.
         source = "community";
         community_palette = "Tokyo Night Storm";
+
+        # Only apps whose theme is not managed in Nix. Apps that exist on other
+        # platforms (bat, fzf, yazi, ghostty, ...) get Tokyo Night from themes/, and
+        # the template hooks cannot rewrite their read-only home-manager configs.
+        templates = {
+          enable_builtin_templates = true;
+          builtin_ids = [
+            "gtk3"
+            "gtk4"
+          ];
+          enable_community_templates = true;
+          community_ids = [
+            "brave"
+            "brave-origin"
+            "zen-browser"
+            "obsidian"
+            "fcitx5"
+          ];
+        };
       };
 
       shell = {
