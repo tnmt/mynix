@@ -23,8 +23,6 @@
       };
     };
 
-    initrd.systemd.enable = true;
-
     initrd.availableKernelModules = [
       "nvme"
       "xhci_pci"
