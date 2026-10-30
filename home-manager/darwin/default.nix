@@ -6,5 +6,7 @@ let
   };
 in
 {
+  imports = [ ./herdr-gpui.nix ];
+
   home.packages = [ vncDahlia ];
 }

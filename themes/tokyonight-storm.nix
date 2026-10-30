@@ -36,6 +36,9 @@
   # Ghostty (theme name = basename of extras.ghostty placed under ghostty/themes/)
   ghostty = "tokyonight_storm";
 
+  # herdr UI (compiled-in theme name shown in its Settings)
+  herdr-gpui = "TokyoNight Storm";
+
   gtk = "Tokyonight-Dark-Storm";
   gtkIcon = "Tokyonight-Dark";
 
