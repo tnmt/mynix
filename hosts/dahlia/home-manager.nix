@@ -11,6 +11,7 @@
     ../../home-manager/desktop/protonmail-bridge.nix
     ../../home-manager/desktop/mpd.nix
     ../../home-manager/desktop/euphonica.nix
+    ../../home-manager/desktop/herdr-gpui.nix
     ../../home-manager/desktop/proton-drive-backup.nix
     ../../home-manager/devel/kiseki.nix
   ];

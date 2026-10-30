@@ -5,6 +5,7 @@ in
 {
   fonts = {
     packages = with pkgs; [
+      hackgen-nf-font
       meslo-lgs-nf
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
