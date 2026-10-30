@@ -8,11 +8,12 @@
 let
   fonts = import ./fonts.nix;
   inherit (pkgs.stdenv.hostPlatform) isLinux;
-  # Herdr UI は fallback の日本語を等倍で描くので、Linux では半角 0.5em・
-  # 全角 1em の HackGen を使い、2 セルを全角幅に揃える。
-  # font-size は Ghostty が pt、Herdr UI が論理 px で、HackGen の半角は
-  # Meslo (0.6em) より細い。dahlia で読みやすい大きさを実測して係数にしている。
-  family = if isLinux then "HackGen Console NF" else terminal.font.name;
+  # Herdr UI は fallback の日本語を等倍で描くので、半角 0.5em・全角 1em の
+  # PlemolJP を使い、2 セルを全角幅に揃える。
+  # font-size は Ghostty が pt、Herdr UI が論理 px で、PlemolJP の半角は
+  # Meslo (0.6em) より細い。dahlia で読みやすい大きさを実測して係数にしている
+  # （係数は HackGen 時のもの）。
+  family = "PlemolJP Console NF";
   sizeScale = if isLinux then 1.5 else 1.0;
   lineHeight = if isLinux then 1.1 else 1.43;
 in
@@ -47,7 +48,7 @@ in
     enabled = true
   ''
   # 既定の DejaVu 系・12 だと小さく、日本語を含むタブ名やサイドバーが読みにくい。
-  # Noto Sans CJK JP の Regular は細くて薄く見えたので、端末と同じ HackGen にする。
+  # Noto Sans CJK JP の Regular は細くて薄く見えたので、端末と同じ PlemolJP にする。
   # darwin は既定の .SystemUIFont が読めるので指定しない。
   + lib.optionalString isLinux ''
 

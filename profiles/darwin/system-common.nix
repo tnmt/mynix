@@ -14,6 +14,7 @@ in
     packages = with pkgs; [
       meslo-lgs-nf
       nerd-fonts.fira-code
+      plemoljp-nf
       noto-fonts-cjk-sans
     ];
   };

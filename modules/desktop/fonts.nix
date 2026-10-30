@@ -6,6 +6,7 @@ in
   fonts = {
     packages = with pkgs; [
       hackgen-nf-font
+      plemoljp-nf
       meslo-lgs-nf
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
