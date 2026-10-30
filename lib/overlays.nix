@@ -45,6 +45,7 @@
       inherit (nurPackages)
         ccpocket-bridge
         givy
+        herdr-gpui
         kagiana
         mdhq
         oneaws
