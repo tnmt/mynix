@@ -14,7 +14,7 @@ let
   # Meslo (0.6em) より細い。dahlia で読みやすい大きさを実測して係数にしている
   # （係数は HackGen 時のもの）。
   family = "PlemolJP Console NF";
-  sizeScale = if isLinux then 1.5 else 1.0;
+  sizeScale = if isLinux then 1.5 else 1.125;
   lineHeight = if isLinux then 1.1 else 1.43;
 in
 {
