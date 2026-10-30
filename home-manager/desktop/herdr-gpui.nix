@@ -65,11 +65,11 @@ in
     size = 16
   ''
   # darwin のサイドバーは既定の Menlo 12 だと小さいので、端末と同じフォントにして
-  # Linux と同じ大きさにする。
+  # 大きくする。サイズは macOS の実機で見て 14 にした。
   + lib.optionalString (!isLinux) ''
 
     [sidebar]
     family = "${family}"
-    size = 16
+    size = 14
   '';
 }
