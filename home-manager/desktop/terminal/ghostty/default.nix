@@ -27,8 +27,8 @@ in
       ];
       copy-on-select = "clipboard";
       window-save-state = "always";
-      background-opacity = 0.95;
-      background-blur-radius = 20;
+      background-opacity = terminal.background.opacity;
+      background-blur-radius = terminal.background.blur;
       window-padding-x = 5;
       window-padding-y = 5;
       macos-titlebar-style = "transparent";
