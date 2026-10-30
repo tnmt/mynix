@@ -13,10 +13,11 @@ on:
       - ".gitignore"
       - "LICENSE"
 
-# Cancel in-progress runs for the same branch/PR
+# Cancel superseded PR runs. On main, let in-progress runs finish so that
+# long uncached builds (e.g. herdr-gpui) complete and reach cachix.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   format:
