@@ -8,13 +8,12 @@
 let
   fonts = import ./fonts.nix;
   inherit (pkgs.stdenv.hostPlatform) isLinux;
-  # Ghostty の font-size は pt、Herdr UI は論理 px。Linux では同じ数値だと
-  # Herdr UI が約 13% 小さくなるため、dahlia の実測（13 → 15）で補正する。
-  # Herdr UI は fallback の日本語を等倍で描くので、半角 0.5em・全角 1em の
-  # HackGen で 2 セルを全角幅に揃える。半角が Meslo (0.6em) より細い分、
-  # さらに 0.6/0.5 倍して 1 セルの幅を Ghostty に合わせる。
+  # Herdr UI は fallback の日本語を等倍で描くので、Linux では半角 0.5em・
+  # 全角 1em の HackGen を使い、2 セルを全角幅に揃える。
+  # font-size は Ghostty が pt、Herdr UI が論理 px で、HackGen の半角は
+  # Meslo (0.6em) より細い。dahlia で読みやすい大きさを実測して係数にしている。
   family = if isLinux then "HackGen Console NF" else terminal.font.name;
-  sizeScale = if isLinux then 15.0 / 13 * 0.6 / 0.5 else 1.0;
+  sizeScale = if isLinux then 1.5 else 1.0;
   lineHeight = if isLinux then 1.1 else 1.43;
 in
 {
@@ -28,6 +27,8 @@ in
     layout = "comfortable-rounded"
     remove_merged_worktrees = true
     theme = "${theme.herdr-gpui}"
+    # 淡い補助文字（ブランチ名など）を背景から 4.5:1 まで離す。
+    contrast = "high"
 
     [terminal]
     family = "${family}"
@@ -44,5 +45,22 @@ in
 
     [remote]
     enabled = true
+  ''
+  # 既定の DejaVu 系・12 だと小さく、日本語を含むタブ名やサイドバーが読みにくい。
+  # Noto Sans CJK JP の Regular は細くて薄く見えたので、端末と同じ HackGen にする。
+  # darwin は既定の .SystemUIFont が読めるので指定しない。
+  + lib.optionalString isLinux ''
+
+    [ui]
+    family = "${family}"
+    size = 16
+
+    [tabs]
+    family = "${family}"
+    size = 16
+
+    [sidebar]
+    family = "${family}"
+    size = 16
   '';
 }
