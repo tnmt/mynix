@@ -10,6 +10,10 @@ _: {
         trusted = true;
       }
       {
+        name = "penso/tap";
+        trusted = true;
+      }
+      {
         name = "takai/tap";
         trusted = true;
       }
@@ -36,6 +40,7 @@ _: {
       "karabiner-elements"
       "logi-options+"
       "obsidian"
+      "penso/tap/herdr-gpui"
       "raycast"
       "slack"
       "vimr"
