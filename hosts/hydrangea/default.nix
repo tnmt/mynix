@@ -43,6 +43,7 @@ in
   users.users."${username}".openssh.authorizedKeys.keys = with pubkeys; [
     hosts.work_mac
     hosts.dahlia
+    mobile.zfold7SshTerm
   ];
 
   mynix.profiles.userTemplates = {
