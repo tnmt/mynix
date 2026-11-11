@@ -18,6 +18,11 @@
       direnv = prev.direnv.overrideAttrs (_: {
         doCheck = false;
       });
+      # atuin 18.24.4 の e2e_ai_sessions (Agent::Pi ケース 2 件) が darwin で失敗する。
+      # キャッシュ未生成でローカルビルドになり、checkPhase で switch が止まる。
+      atuin = prev.atuin.overrideAttrs (_: {
+        doCheck = false;
+      });
     })
   ];
 }
