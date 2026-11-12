@@ -166,12 +166,14 @@ in
     hl.window_rule({ match = { class = "^(md.obsidian.Obsidian)$" }, workspace = "3 silent" })
     hl.window_rule({ match = { class = "^(vesktop)$" }, workspace = "4 silent" })
     hl.window_rule({ match = { class = "^(slack)$" }, workspace = "4 silent" })
+    hl.window_rule({ match = { class = "^(Chatgpt)$" }, workspace = "4 silent" })
     hl.window_rule({ match = { class = "^(io.github.htkhiem.Euphonica)$" }, workspace = "5 silent" })
 
     hl.on("hyprland.start", function()
       hl.exec_cmd("herdr-gpui")
       hl.exec_cmd("brave-origin")
       hl.exec_cmd("obsidian")
+      hl.exec_cmd("chatgpt")
     end)
 
     -- Noctalia is started via its home-manager systemd user service
