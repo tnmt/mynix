@@ -161,7 +161,7 @@ in
     hl.window_rule({ match = { class = "^(thunar)$" }, size = { 1100, 700 } })
 
     -- Pin apps to workspaces. "silent" opens them in the background without stealing focus.
-    hl.window_rule({ match = { class = "^(com.mitchellh.ghostty)$" }, workspace = "1 silent" })
+    hl.window_rule({ match = { class = "^(so.pen.herdr-gpui)$" }, workspace = "1 silent" })
     hl.window_rule({ match = { class = "^(brave-origin)$" }, workspace = "2 silent" })
     hl.window_rule({ match = { class = "^(md.obsidian.Obsidian)$" }, workspace = "3 silent" })
     hl.window_rule({ match = { class = "^(vesktop)$" }, workspace = "4 silent" })
@@ -169,7 +169,7 @@ in
     hl.window_rule({ match = { class = "^(io.github.htkhiem.Euphonica)$" }, workspace = "5 silent" })
 
     hl.on("hyprland.start", function()
-      hl.exec_cmd("${terminal.default}")
+      hl.exec_cmd("herdr-gpui")
       hl.exec_cmd("brave-origin")
       hl.exec_cmd("obsidian")
     end)
