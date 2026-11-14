@@ -6,7 +6,7 @@ let
   };
 in
 {
-  imports = [ ../desktop/herdr-gpui.nix ];
+  imports = [ ../desktop/sheprd.nix ];
 
   home.packages = [ vncDahlia ];
 }

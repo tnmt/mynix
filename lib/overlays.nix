@@ -45,12 +45,12 @@
       inherit (nurPackages)
         ccpocket-bridge
         givy
-        herdr-gpui
         kagiana
         mdhq
         oneaws
         proton-drive-cli
         roots
+        sheprd
         symbol-desktop-wallet
         ;
       tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {

@@ -37,7 +37,7 @@
   ghostty = "tokyonight_storm";
 
   # Sheprd (compiled-in theme name shown in its Settings)
-  herdr-gpui = "TokyoNight Storm";
+  sheprd = "TokyoNight Storm";
 
   gtk = "Tokyonight-Dark-Storm";
   gtkIcon = "Tokyonight-Dark";

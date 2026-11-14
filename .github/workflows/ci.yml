@@ -14,7 +14,7 @@ on:
       - "LICENSE"
 
 # Cancel superseded PR runs. On main, let in-progress runs finish so that
-# long uncached builds (e.g. herdr-gpui) complete and reach cachix.
+# long uncached builds (e.g. sheprd) complete and reach cachix.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}

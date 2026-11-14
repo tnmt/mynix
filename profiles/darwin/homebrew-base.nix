@@ -10,7 +10,7 @@ _: {
         trusted = true;
       }
       {
-        name = "penso/tap";
+        name = "sheprd-labs/tap";
         trusted = true;
       }
       {
@@ -40,7 +40,7 @@ _: {
       "karabiner-elements"
       "logi-options+"
       "obsidian"
-      "penso/tap/herdr-gpui"
+      "sheprd-labs/tap/sheprd"
       "raycast"
       "slack"
       "vimr"

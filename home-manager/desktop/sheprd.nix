@@ -18,8 +18,8 @@ let
   lineHeight = if isLinux then 1.1 else 1.43;
 in
 {
-  # darwin は herdr-gpui cask（homebrew 側）で入れる。
-  home.packages = lib.optionals isLinux [ pkgs.herdr-gpui ];
+  # darwin は sheprd cask（homebrew 側）で入れる。
+  home.packages = lib.optionals isLinux [ pkgs.sheprd ];
 
   # Sheprd は GUI から設定を保存すると config-gpui.local.toml を書き換える。
   # Nix 管理にすると symlink で読み取り専用になるため、GUI 側の変更は反映されない。
@@ -27,7 +27,7 @@ in
   xdg.configFile."herdr/config-gpui.local.toml".text = ''
     layout = "comfortable-rounded"
     remove_merged_worktrees = true
-    theme = "${theme.herdr-gpui}"
+    theme = "${theme.sheprd}"
     # 淡い補助文字（ブランチ名など）を背景から 4.5:1 まで離す。
     contrast = "high"
 
