@@ -8,9 +8,9 @@
 let
   fonts = import ./fonts.nix;
   inherit (pkgs.stdenv.hostPlatform) isLinux;
-  # Herdr UI は fallback の日本語を等倍で描くので、半角 0.5em・全角 1em の
+  # Sheprd は fallback の日本語を等倍で描くので、半角 0.5em・全角 1em の
   # PlemolJP を使い、2 セルを全角幅に揃える。
-  # font-size は Ghostty が pt、Herdr UI が論理 px で、PlemolJP の半角は
+  # font-size は Ghostty が pt、Sheprd が論理 px で、PlemolJP の半角は
   # Meslo (0.6em) より細い。dahlia で読みやすい大きさを実測して係数にしている
   # （係数は HackGen 時のもの）。
   family = "PlemolJP Console NF";
@@ -21,7 +21,7 @@ in
   # darwin は herdr-gpui cask（homebrew 側）で入れる。
   home.packages = lib.optionals isLinux [ pkgs.herdr-gpui ];
 
-  # herdr UI は GUI から設定を保存すると config-gpui.local.toml を書き換える。
+  # Sheprd は GUI から設定を保存すると config-gpui.local.toml を書き換える。
   # Nix 管理にすると symlink で読み取り専用になるため、GUI 側の変更は反映されない。
   # 変えたい値はここに書くこと。terminal のフォントは Ghostty と揃える。
   xdg.configFile."herdr/config-gpui.local.toml".text = ''
@@ -39,7 +39,7 @@ in
     # 主フォントが Nerd Font 入りなのでアイコンは出る。
     fallback = [ "${fonts.sans}" ]
 
-    # blur は Hyprland のウィンドウ blur に任せる。Herdr UI 側の blur は KDE の
+    # blur は Hyprland のウィンドウ blur に任せる。Sheprd 側の blur は KDE の
     # blur protocol 経由でしか効かないので指定しない。
     [backdrop]
     opacity = ${toString terminal.background.opacity}

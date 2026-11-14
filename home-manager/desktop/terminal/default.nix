@@ -8,7 +8,7 @@ let
       name = fonts.monospace;
       size = if pkgs.stdenv.hostPlatform.isDarwin then 16 else 13;
     };
-    # Ghostty と Herdr UI で背景の透け具合を揃える。
+    # Ghostty と Sheprd で背景の透け具合を揃える。
     background = {
       opacity = 0.95;
       blur = 20;
