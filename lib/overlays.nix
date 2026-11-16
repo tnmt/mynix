@@ -45,9 +45,7 @@
       inherit (nurPackages)
         ccpocket-bridge
         givy
-        kagiana
         mdhq
-        oneaws
         proton-drive-cli
         roots
         sheprd
