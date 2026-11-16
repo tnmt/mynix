@@ -462,11 +462,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794810252,
+        "lastModified": 1794810716,
         "narHash": "sha256-scxZa8mWrXv8JNPOdbM+UbNFOxm9AXN0H420aLUh+2s=",
         "owner": "tnmt",
         "repo": "nur-packages",
-        "rev": "47bb6928e69bfd8fc3dca6d6f6aff7c52f49523d",
+        "rev": "a00cb5fba19df62f37987f8629616bf36c019149",
         "type": "github"
       },
       "original": {
