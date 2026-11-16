@@ -46,6 +46,7 @@
         ccpocket-bridge
         givy
         mdhq
+        plannotator
         proton-drive-cli
         roots
         sheprd

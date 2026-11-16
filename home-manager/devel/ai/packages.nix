@@ -5,6 +5,7 @@
     ccusage
     claude-code
     codex
+    plannotator
     rtk
   ];
 }
