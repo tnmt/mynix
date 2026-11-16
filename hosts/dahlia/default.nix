@@ -45,6 +45,7 @@ in
     userTemplates = {
       enable = true;
       typesafe = true;
+      aikido = true;
       voiceInput = true;
       sshPrivate = {
         role = "client";

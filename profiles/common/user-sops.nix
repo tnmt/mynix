@@ -57,6 +57,16 @@ in
       '';
     };
 
+    aikido = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = ''
+        Render ~/.config/aikido/env with AIKIDO_API_KEY for the Aikido MCP
+        server. keytar cannot load on NixOS, so the key is passed by env
+        var. Requires aikido_api_key in secrets/common.yaml.
+      '';
+    };
+
     kiseki = lib.mkEnableOption ''
       ~/.config/kiseki/server with the kiseki server URL (kiseki_server_url
       in secrets/common.yaml), read by the kiseki agent so that the mesh
@@ -128,6 +138,11 @@ in
           sopsFile = commonSopsFile;
         };
       })
+      // (lib.optionalAttrs cfg.aikido {
+        aikido_api_key = {
+          sopsFile = commonSopsFile;
+        };
+      })
       // (lib.optionalAttrs cfg.kiseki {
         kiseki_server_url = {
           sopsFile = commonSopsFile;
@@ -173,6 +188,14 @@ in
           owner = username;
           content = ''
             export TYPESAFE_API_KEY=${config.sops.placeholder.typesafe_api_key}
+          '';
+        };
+      })
+      // (lib.optionalAttrs cfg.aikido {
+        aikidoEnv = {
+          owner = username;
+          content = ''
+            export AIKIDO_API_KEY=${config.sops.placeholder.aikido_api_key}
           '';
         };
       })

@@ -10,5 +10,8 @@ _: {
     if [ -r "$HOME/.config/typesafe/env" ]; then
       . "$HOME/.config/typesafe/env"
     fi
+    if [ -r "$HOME/.config/aikido/env" ]; then
+      . "$HOME/.config/aikido/env"
+    fi
   '';
 }

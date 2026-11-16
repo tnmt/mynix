@@ -43,6 +43,12 @@ let
         link = "${homeDir}/.config/typesafe/env";
       }
     ])
+    ++ (lib.optionals cfg.aikido [
+      {
+        target = config.sops.templates.aikidoEnv.path;
+        link = "${homeDir}/.config/aikido/env";
+      }
+    ])
     ++ (lib.optionals cfg.kiseki [
       {
         target = config.sops.secrets.kiseki_server_url.path;

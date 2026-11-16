@@ -32,6 +32,7 @@ in
 
   mynix.profiles.userTemplates = {
     typesafe = true;
+    aikido = true;
     tnmtInfo = true;
     kiseki = true;
   };
