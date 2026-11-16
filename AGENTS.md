@@ -46,9 +46,9 @@ git config core.hooksPath .githooks  # 未設定の場合
 
 | ファイル | 責務 |
 | --- | --- |
-| `packages.nix` | CLI 本体 (ax / rtk / codex / claude-code / ccusage) |
+| `packages.nix` | CLI 本体 (ax / rtk / codex / claude-code / ccusage / plannotator) |
 | `skills.nix` | Agent Skill の配置 |
-| `integrations.nix` | agent 固有の hook / instructions 生成 (RTK) |
+| `integrations.nix` | agent 固有の hook / instructions 生成 (RTK)、agent 設定を書き換えるツールの抑止 (Plannotator) |
 | `secrets.nix` | skill から分離した API key の読み込み |
 
 - Agent Skill の共通配置先は `~/.agents/skills/<name>`。まだ `~/.agents` を読まない agent には、同じ Nix store path への symlink を agent 固有ディレクトリ (`~/.claude/skills/<name>`) にも張る。skill の実体は store 上に 1 つだけ。
@@ -56,4 +56,5 @@ git config core.hooksPath .githooks  # 未設定の場合
 - skill を追加する前に、その repository がベンダー自身の org かを確認する。ベンダーのドメインに似た第三者サイトが、自前の課金プロキシへ API key を送らせる skill を配布している例がある（`codaaiteam/jev-skill` → `jevtypesafeai.com`）。公式は `typesafe-ai/skills`。
 - プロジェクト固有の skill はここに入れず、各 repository の `.agents/skills` で管理する。
 - RTK のように agent の hook/instructions を書き換える installer を持つツールは、生成物を Nix にコピーせず activation から pin した本体を idempotent に実行する。生成先のパス (`$CODEX_HOME/AGENTS.md` 等) を `home.file` で管理すると衝突するので管理しないこと。
+- Plannotator は agent 設定への MCP 自動登録・注記追加・自己更新を環境変数で止めている (`integrations.nix`)。自動登録はバイナリの store path を書き込むため、MCP 登録は `plannotator` を PATH から引く形で手動で行う。
 - API key は skill definition に入れない。system layer の sops で復号し `~/.config/<app>/env` へ symlink したものを shell から source する。

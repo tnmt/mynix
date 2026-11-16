@@ -22,24 +22,43 @@
 # 手動実行して答えれば config.toml に永続化される。
 { lib, pkgs, ... }:
 {
-  home.activation.rtkCodexInit = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    $DRY_RUN_CMD ${pkgs.rtk}/bin/rtk init -g --codex < /dev/null
-  '';
-
-  # Codex 自身が trust / plugin / MCP 等の状態を config.toml に追記するため、
-  # programs.codex.settings でファイル全体を read-only symlink にはしない。
-  # 自律動作に必要な permission 設定だけを宣言的に収束させる。
-  home.activation.codexApprovalDefaults =
-    lib.hm.dag.entryAfter
-      [
-        "rtkCodexInit"
-        "writeBoundary"
-      ]
-      ''
-        $DRY_RUN_CMD mkdir -p "$HOME/.codex"
-        $DRY_RUN_CMD touch "$HOME/.codex/config.toml"
-        $DRY_RUN_CMD ${pkgs.yq-go}/bin/yq -p toml -o toml -i \
-          '.approval_policy = "on-request" | .approvals_reviewer = "auto_review" | .sandbox_mode = "workspace-write"' \
-          "$HOME/.codex/config.toml"
+  home = {
+    activation = {
+      rtkCodexInit = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD ${pkgs.rtk}/bin/rtk init -g --codex < /dev/null
       '';
+
+      # Codex 自身が trust / plugin / MCP 等の状態を config.toml に追記するため、
+      # programs.codex.settings でファイル全体を read-only symlink にはしない。
+      # 自律動作に必要な permission 設定だけを宣言的に収束させる。
+      codexApprovalDefaults =
+        lib.hm.dag.entryAfter
+          [
+            "rtkCodexInit"
+            "writeBoundary"
+          ]
+          ''
+            $DRY_RUN_CMD mkdir -p "$HOME/.codex"
+            $DRY_RUN_CMD touch "$HOME/.codex/config.toml"
+            $DRY_RUN_CMD ${pkgs.yq-go}/bin/yq -p toml -o toml -i \
+              '.approval_policy = "on-request" | .approvals_reviewer = "auto_review" | .sandbox_mode = "workspace-write"' \
+              "$HOME/.codex/config.toml"
+          '';
+    };
+
+    # Plannotator は `plannotator inbox` の起動時に、見つけた agent へ MCP 登録
+    # (~/.claude.json、$CODEX_HOME/config.toml 等) と instructions への注記
+    # (~/.claude/rules/plannotator-inbox.md 等) を確認なしで書き込む。登録される
+    # command は実行中バイナリの絶対パスなので、Nix では /nix/store のパスが
+    # agent 設定に残り、plannotator の更新や GC で切れる。どちらも止め、
+    # Inbox の MCP は `plannotator` を PATH から引く形で手動登録する
+    # (`claude mcp add --scope user plannotator-inbox -- plannotator inbox mcp`)。
+    # アプリ内の更新は上流の install.sh で ~/.local/bin に別のバイナリを入れ、
+    # Nix 管理の版と二重になるため、更新通知も止める。
+    sessionVariables = {
+      PLANNOTATOR_INBOX_CONNECT = "0";
+      PLANNOTATOR_INBOX_NOTES = "0";
+      PLANNOTATOR_UPDATE_CHECK = "0";
+    };
+  };
 }
