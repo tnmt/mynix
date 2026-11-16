@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "bootvine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794730498,
+        "narHash": "sha256-pwzcPy/J/zeOVRfUZgcPgBWFaSnnH7GQlGoOfBfX3eQ=",
+        "ref": "refs/heads/main",
+        "rev": "91b7cd28c25d339d79f83956ba7d6ba99fdbe0d3",
+        "revCount": 135,
+        "type": "git",
+        "url": "https://codeberg.org/wvhulle/bootvine"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/wvhulle/bootvine"
+      }
+    },
     "bun2nix": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -478,6 +494,7 @@
     "root": {
       "inputs": {
         "ax": "ax",
+        "bootvine": "bootvine",
         "bun2nix": "bun2nix",
         "darwin": "darwin",
         "disko": "disko",

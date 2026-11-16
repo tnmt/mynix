@@ -110,6 +110,14 @@
       url = "github:tnmt/kiseki";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Boot console tree of systemd jobs. Imported as a plain source so the
+    # module builds bootvine with the host pkgs and rustPlatform; the flake
+    # outputs would add crane and rust-overlay to the lock for nothing.
+    bootvine = {
+      url = "git+https://codeberg.org/wvhulle/bootvine";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, ... }: import ./flake/outputs.nix { inherit inputs self; };
