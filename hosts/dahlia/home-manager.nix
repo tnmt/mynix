@@ -39,7 +39,7 @@
       paths = [ pkgs.chatgpt ];
       nativeBuildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
-        wrapProgram $out/bin/chatgpt --add-flags "--force-device-scale-factor=1.75"
+        wrapProgram $out/bin/chatgpt --add-flags "--force-device-scale-factor=1.4"
       '';
     })
     pkgs.msgvault
