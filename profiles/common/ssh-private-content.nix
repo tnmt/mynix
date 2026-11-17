@@ -22,6 +22,7 @@
 {
   lanPrefix,
   vps01Host,
+  myPrivateGitServer,
   tier,
 }:
 let
@@ -36,6 +37,14 @@ let
     # VPS (always on)
     Host vps01
         HostName ${vps01Host}
+
+    # Private git server. Host, port and user come from sops so that none
+    # of them appear in this repository. The block exists because
+    # `claude plugin marketplace add` accepts scp-style URLs only, which
+    # cannot carry a port.
+    Host ${myPrivateGitServer.host}
+        Port ${myPrivateGitServer.port}
+        User ${myPrivateGitServer.user}
   '';
 
   sunflowerBlocks = ''

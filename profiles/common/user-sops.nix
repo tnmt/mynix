@@ -214,6 +214,11 @@ in
           content = sopsShared.mkSshPrivateTemplate {
             lanPrefixPlaceholder = config.sops.placeholder.lan_prefix;
             vps01HostPlaceholder = config.sops.placeholder.vps01_host;
+            myPrivateGitServer = {
+              host = config.sops.placeholder.my_private_git_server_host;
+              port = config.sops.placeholder.my_private_git_server_port;
+              user = config.sops.placeholder.my_private_git_server_user;
+            };
             inherit (cfg.sshPrivate) tier;
           };
         };

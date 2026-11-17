@@ -56,6 +56,18 @@ let
         sopsFile = personalSopsFile;
         key = "vps01_host";
       };
+      my_private_git_server_host = {
+        sopsFile = personalSopsFile;
+        key = "my_private_git_server_host";
+      };
+      my_private_git_server_port = {
+        sopsFile = personalSopsFile;
+        key = "my_private_git_server_port";
+      };
+      my_private_git_server_user = {
+        sopsFile = personalSopsFile;
+        key = "my_private_git_server_user";
+      };
     };
 
   mkGitIdentityTemplate =
@@ -87,11 +99,13 @@ let
     {
       lanPrefixPlaceholder,
       vps01HostPlaceholder,
+      myPrivateGitServer,
       tier,
     }:
     import ./ssh-private-content.nix {
       lanPrefix = lanPrefixPlaceholder;
       vps01Host = vps01HostPlaceholder;
+      inherit myPrivateGitServer;
       inherit tier;
     };
 in
