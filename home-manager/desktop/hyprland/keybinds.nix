@@ -21,6 +21,18 @@ let
   bm =
     keys: desc: disp:
     ''hl.bind("${keys}", ${disp}, { description = "${desc}", mouse = true })'';
+  # send_shortcut inside a bind forwards only the key press and defers the release
+  # to the physical key release, so clients key-repeat the shortcut while it is held
+  # (and forever if SUPER is let go first, since the release no longer matches the
+  # bind). Sending down+up in one callback makes it a single tap.
+  tapShortcut =
+    mods: key:
+    let
+      send =
+        state:
+        ''hl.dispatch(hl.dsp.send_key_state({ mods = "${mods}", key = "${key}", state = "${state}" }))'';
+    in
+    "function() ${send "down"} ${send "up"} end";
 
   workspaceBinds = lib.concatMap (
     workspace:
@@ -161,9 +173,9 @@ let
   ++ [
 
     # Copy / Paste
-    (b "SUPER + C" "Universal copy" ''hl.dsp.send_shortcut({ mods = "CTRL", key = "Insert" })'')
-    (b "SUPER + V" "Universal paste" ''hl.dsp.send_shortcut({ mods = "SHIFT", key = "Insert" })'')
-    (b "SUPER + X" "Universal cut" ''hl.dsp.send_shortcut({ mods = "CTRL", key = "X" })'')
+    (b "SUPER + C" "Universal copy" (tapShortcut "CTRL" "Insert"))
+    (b "SUPER + V" "Universal paste" (tapShortcut "SHIFT" "Insert"))
+    (b "SUPER + X" "Universal cut" (tapShortcut "CTRL" "X"))
     (b "SUPER + SHIFT + C" "Clipboard manager"
       ''hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard")''
     )
