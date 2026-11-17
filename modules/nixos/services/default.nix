@@ -1,4 +1,5 @@
 {
+  bootvine = ./bootvine.nix;
   ccpocket-bridge = ./ccpocket-bridge.nix;
   kiseki-agent = ./kiseki-agent.nix;
   local-https-proxy = ./local-https-proxy.nix;

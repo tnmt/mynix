@@ -14,6 +14,7 @@ in
     ./network.nix
 
     ../../modules/nixos/core
+    services.bootvine
     services.openssh
     services.ccpocket-bridge
     services.wayvnc
