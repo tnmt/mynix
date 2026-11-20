@@ -52,11 +52,6 @@
         sheprd
         symbol-desktop-wallet
         ;
-      tokyonight-gtk-theme = prev.tokyonight-gtk-theme.override {
-        tweakVariants = [ "storm" ];
-        colorVariants = [ "dark" ];
-        iconVariants = [ "Dark" ];
-      };
       # 外部プロバイダによる Artist メタデータ取得が MusicBrainz Artist ID
       # (MUSICBRAINZ_ARTISTID タグ) 必須になっており、タグ無しのライブラリでは
       # 一度も取得されない。Last.fm 側は MBID 無しなら名前で引く実装なので、

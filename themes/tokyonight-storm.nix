@@ -39,7 +39,7 @@
   # Sheprd (compiled-in theme name shown in its Settings)
   sheprd = "TokyoNight Storm";
 
-  gtk = "Tokyonight-Dark-Storm";
+  gtk = "adw-gtk3-dark";
   gtkIcon = "Tokyonight-Dark";
 
   bat = {

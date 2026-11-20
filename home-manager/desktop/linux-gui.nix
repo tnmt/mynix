@@ -6,7 +6,7 @@
 }:
 let
   fonts = import ./fonts.nix;
-  tokyonightGtkTheme = import ../../packages/tokyonight-gtk-theme.nix { inherit lib pkgs; };
+  tokyonightIconTheme = import ../../packages/tokyonight-icon-theme.nix { inherit lib pkgs; };
   chromiumFlags = ''
     --enable-wayland-ime
     --wayland-text-input-version=3
@@ -126,6 +126,8 @@ in
     package = pkgs.chromium.override { enableWideVine = true; };
   };
 
+  # adw-gtk3 は libadwaita の名前付き色 (window_bg_color 等) を読むので、
+  # Noctalia の gtk3 テンプレートが生成する noctalia.css の Tokyo Night Storm が配色になる。
   gtk = {
     enable = true;
     font = {
@@ -134,12 +136,12 @@ in
     };
     theme = {
       name = theme.gtk;
-      package = tokyonightGtkTheme;
+      package = pkgs.adw-gtk3;
     };
     gtk4.theme = null;
     iconTheme = {
       name = theme.gtkIcon;
-      package = tokyonightGtkTheme;
+      package = tokyonightIconTheme;
     };
   };
 
