@@ -7,6 +7,26 @@
 let
   fonts = import ./fonts.nix;
   tokyonightIconTheme = import ../../packages/tokyonight-icon-theme.nix { inherit lib pkgs; };
+  # adw-gtk3 の GTK3 テーマは、ファイルマネージャ等のリストで選択行の文字が
+  # 背景の accent と近い明るさになり(コントラスト比 約1.9:1)、列見出しも
+  # 本文と背景の中間色で暗い(約3:1)。noctalia が管理する gtk.css とは別に、
+  # テーマ側へ追記して補正する。
+  adwGtk3 = pkgs.adw-gtk3.overrideAttrs (old: {
+    postInstall = (old.postInstall or "") + ''
+      cat >> $out/share/themes/adw-gtk3-dark/gtk-3.0/gtk.css <<'EOF'
+      treeview.view:selected,
+      treeview.view:selected:focus,
+      treeview.view:selected:backdrop,
+      iconview:selected,
+      iconview:selected:focus {
+        color: @accent_fg_color;
+      }
+      treeview.view header button {
+        color: mix(@view_fg_color, @view_bg_color, 0.2);
+      }
+      EOF
+    '';
+  });
   chromiumFlags = ''
     --enable-wayland-ime
     --wayland-text-input-version=3
@@ -136,7 +156,7 @@ in
     };
     theme = {
       name = theme.gtk;
-      package = pkgs.adw-gtk3;
+      package = adwGtk3;
     };
     gtk4.theme = null;
     iconTheme = {
