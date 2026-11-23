@@ -56,6 +56,10 @@
     # アプリ内の更新は上流の install.sh で ~/.local/bin に別のバイナリを入れ、
     # Nix 管理の版と二重になるため、更新通知も止める。
     sessionVariables = {
+      # Claude Code の Bash ツールは CLAUDE_CODE_SHELL、SHELL の順に、パスに
+      # "bash" か "zsh" を含むものを採用する。ログインシェルは zsh のまま
+      # 変えず、Claude Code だけ bash にする。
+      CLAUDE_CODE_SHELL = lib.getExe pkgs.bashInteractive;
       PLANNOTATOR_INBOX_CONNECT = "0";
       PLANNOTATOR_INBOX_NOTES = "0";
       PLANNOTATOR_UPDATE_CHECK = "0";
