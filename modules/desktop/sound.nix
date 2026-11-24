@@ -5,7 +5,6 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    jack.enable = true;
     pulse.enable = true;
     # デフォルトの48kHz固定クロックだと44.1kHz系ソース(CD由来のFLAC等)が
     # 毎回48kHzにリサンプリングされる。allowed-ratesで候補を持たせることで
