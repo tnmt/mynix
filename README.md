@@ -98,6 +98,14 @@ nix run .#switch -- --dry
 nix run .#switch -- -H sunflower
 ```
 
+### Update flake inputs
+
+`nix run .#update` runs `nix flake update`, switches the current host, and commits & pushes `flake.lock` only if the switch succeeds. It refuses to run with uncommitted changes and does nothing when `flake.lock` is unchanged.
+
+```bash
+nix run .#update
+```
+
 ### NixOS
 
 ```bash
