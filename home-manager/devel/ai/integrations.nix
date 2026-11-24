@@ -32,7 +32,7 @@
 let
   # rtk の履歴 DB / recall store の置き場所 (Rust の dirs::data_dir 準拠)。
   rtkDataDir =
-    if pkgs.stdenv.isDarwin then
+    if pkgs.stdenv.hostPlatform.isDarwin then
       "${config.home.homeDirectory}/Library/Application Support/rtk"
     else
       "${config.xdg.dataHome}/rtk";
