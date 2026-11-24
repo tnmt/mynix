@@ -100,6 +100,9 @@ in
           "HOME=/home/${username}"
           "PATH=${keychainSsh}/bin:/etc/profiles/per-user/${username}/bin:/run/current-system/sw/bin"
           "GIT_SSH_COMMAND=${keychainSsh}/bin/ssh"
+          "T3CODE_TELEMETRY_ENABLED=false"
+          "T3CODE_OTEL_SDK_DISABLED=true"
+          "T3CODE_POSTHOG_HOST=http://127.0.0.1:1"
         ];
       };
     };
