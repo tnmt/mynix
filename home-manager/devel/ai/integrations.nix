@@ -11,16 +11,29 @@
 # home.file で $CODEX_HOME/AGENTS.md を管理すると rtk の書き込みと衝突するため、
 # これらのパスは home-manager では管理しないこと。
 #
-# 注意: rtk 0.47.0 (nixpkgs) の --codex は AGENTS.md + RTK.md のみを生成する。
-# Codex の PreToolUse hook ($CODEX_HOME/hooks.json / `rtk hook codex`) は
-# この版には存在しない。
+# rtk 1.x の --codex は AGENTS.md / RTK.md に加えて $CODEX_HOME/hooks.json の
+# PreToolUse hook (`rtk hook codex`) も upsert する。hooks.json は他ツールの
+# hook も同居するため、これも home-manager では管理しない。
 #
 # stdin を /dev/null にするのは、初回実行時の telemetry 同意プロンプト
 # (Enable anonymous telemetry? [y/N]) 対策。stdin が TTY だと入力待ちで
 # activation ごと固まる。非 TTY ならプロンプト自体が出ず exit 0 で完走する
 # (rtk 0.47.0 で検証済み)。telemetry の同意は各ユーザーが一度 `rtk init` を
 # 手動実行して答えれば config.toml に永続化される。
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  # rtk の履歴 DB / recall store の置き場所 (Rust の dirs::data_dir 準拠)。
+  rtkDataDir =
+    if pkgs.stdenv.isDarwin then
+      "${config.home.homeDirectory}/Library/Application Support/rtk"
+    else
+      "${config.xdg.dataHome}/rtk";
+in
 {
   home = {
     activation = {
@@ -31,6 +44,9 @@
       # Codex 自身が trust / plugin / MCP 等の状態を config.toml に追記するため、
       # programs.codex.settings でファイル全体を read-only symlink にはしない。
       # 自律動作に必要な permission 設定だけを宣言的に収束させる。
+      # workspace-write sandbox 内で書き換え後の `rtk <cmd>` が履歴 DB を開けず
+      # SQLITE_CANTOPEN になるため、rtk の data dir だけ writable_roots に足す。
+      # 既存の writable_roots は残し、unique で重複追加を防ぐ。
       codexApprovalDefaults =
         lib.hm.dag.entryAfter
           [
@@ -40,8 +56,9 @@
           ''
             $DRY_RUN_CMD mkdir -p "$HOME/.codex"
             $DRY_RUN_CMD touch "$HOME/.codex/config.toml"
-            $DRY_RUN_CMD ${pkgs.yq-go}/bin/yq -p toml -o toml -i \
-              '.approval_policy = "on-request" | .approvals_reviewer = "auto_review" | .sandbox_mode = "workspace-write"' \
+            $DRY_RUN_CMD env RTK_DATA_DIR=${lib.escapeShellArg rtkDataDir} \
+              ${pkgs.yq-go}/bin/yq -p toml -o toml -i \
+              '.approval_policy = "on-request" | .approvals_reviewer = "auto_review" | .sandbox_mode = "workspace-write" | .sandbox_workspace_write.writable_roots = ((.sandbox_workspace_write.writable_roots // []) + [strenv(RTK_DATA_DIR)] | unique)' \
               "$HOME/.codex/config.toml"
           '';
     };
