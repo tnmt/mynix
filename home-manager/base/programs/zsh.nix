@@ -19,6 +19,21 @@ in
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
     enableCompletion = true;
+    # compaudit による fpath の権限チェックが毎回約30ms かかるため、通常は -C で
+    # dump をそのまま読む。新しい補完関数を拾えるよう、dump が 24 時間より古ければ
+    # 通常の compinit で検査・再生成する。compinit は内容が変わらないと dump を
+    # 書き換えないので、touch で mtime を進めて次の 24 時間は -C に戻す。
+    completionInit = ''
+      autoload -U compinit
+      () {
+        if (( $# )); then
+          compinit
+          touch "$1"
+        else
+          compinit -C
+        fi
+      } ''${ZDOTDIR:-$HOME}/.zcompdump(N.mh+24)
+    '';
     historySubstringSearch.enable = true;
 
     history = {
