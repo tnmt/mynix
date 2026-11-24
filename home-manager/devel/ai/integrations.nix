@@ -5,11 +5,14 @@
 # RTK ブロック) は rtk のバージョンに紐づく成果物なので、Nix 側にコピーして
 # 宣言管理すると rtk を更新するたびに手で追従する二重管理になる。
 # そのため Nix が持つのは「どの rtk で init するか」だけにし、生成は pin した
-# rtk 自身に任せる。`rtk init -g --codex` は write-if-changed と
-# AGENTS.md のブロック upsert なので、activation ごとに再実行しても差分は出ない。
+# rtk 自身に任せる。`rtk init -g` (Claude Code) と `rtk init -g --codex` は
+# write-if-changed と instructions のブロック upsert なので、activation ごとに
+# 再実行しても差分は出ない。rtk を更新すると旧形式の hook は init 時に移行される
+# ため、activation で毎回流しておけば「Hook outdated」状態が残らない。
 #
-# home.file で $CODEX_HOME/AGENTS.md を管理すると rtk の書き込みと衝突するため、
-# これらのパスは home-manager では管理しないこと。
+# home.file で ~/.claude/{settings.json,CLAUDE.md,RTK.md} や $CODEX_HOME/AGENTS.md
+# を管理すると rtk の書き込みと衝突するため、これらのパスは home-manager では
+# 管理しないこと。
 #
 # rtk 1.x の --codex は AGENTS.md / RTK.md に加えて $CODEX_HOME/hooks.json の
 # PreToolUse hook (`rtk hook codex`) も upsert する。hooks.json は他ツールの
@@ -37,6 +40,12 @@ in
 {
   home = {
     activation = {
+      # --auto-patch がないと非 TTY では settings.json への hook 登録が
+      # 確認待ちの扱いでスキップされる。
+      rtkClaudeInit = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        $DRY_RUN_CMD ${pkgs.rtk}/bin/rtk init -g --auto-patch < /dev/null
+      '';
+
       rtkCodexInit = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         $DRY_RUN_CMD ${pkgs.rtk}/bin/rtk init -g --codex < /dev/null
       '';
