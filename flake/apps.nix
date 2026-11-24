@@ -30,17 +30,27 @@ forAllSystems (
           exit 1
         fi
 
-        nix flake update
+        # nix の更新一覧を commit 本文に残す。rev は --commit-lock-file と同じ
+        # 7 桁に詰め、narHash は落とす。
+        log=$(nix flake update 2>&1 | tee /dev/stderr)
 
         if git diff --quiet -- flake.lock; then
           echo "update: flake.lock unchanged; nothing to switch or commit"
           exit 0
         fi
 
+        summary=$(
+          printf '%s\n' "$log" |
+            grep -E '^(• |  )' |
+            sed -E "s/[?&]narHash=[^'&]*//; s/([0-9a-f]{7})[0-9a-f]{33}/\1/g" ||
+            true
+        )
+
         ${switch}/bin/switch "$@"
 
         git add flake.lock
-        git commit -m "chore: flake update $(date '+%Y-%m-%d %H:%M')"
+        git commit -m "chore: flake update $(date '+%Y-%m-%d %H:%M')" \
+          -m "Flake lock file updates:" -m "$summary"
         git push
       '';
     };
