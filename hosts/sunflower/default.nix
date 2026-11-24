@@ -11,6 +11,7 @@ in
     ../../modules/nixos/core
     services.openssh
     services.ccpocket-bridge
+    services.t3code
     ../../profiles/nixos/wsl.nix
     ../../modules/nixos/remotebuild/builder.nix
   ];
@@ -28,6 +29,13 @@ in
   nix.settings.secret-key-files = "/etc/remotebuild/cache-priv-key.pem";
 
   services.openssh.ports = [ 2222 ];
+
+  # WSL2 は mirrored ネットワークで、Windows 側の NetBird (eth5, 100.67.0.0/16)
+  # が見える。そのアドレスだけに bind して LAN 側からの接続を防ぐ。
+  mynix.services.t3code = {
+    enable = true;
+    host = "100.67.213.214";
+  };
 
   mynix.profiles.userTemplates = {
     typesafe = true;
