@@ -4,5 +4,6 @@
   local-https-proxy = ./local-https-proxy.nix;
   mackerel-agent = ./mackerel-agent.nix;
   openssh = ./openssh.nix;
+  t3code = ./t3code.nix;
   wayvnc = ./wayvnc.nix;
 }
